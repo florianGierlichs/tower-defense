@@ -31,7 +31,7 @@ const drawPath = () => {
 const drawCircle = () => {
   ctx.beginPath();
   ctx.arc(circle.x, circle.y, 10, 0, Math.PI * 2);
-  ctx.fillStyle = "yellow";
+  ctx.fillStyle = circle.color.alive;
   ctx.fill();
 };
 
@@ -39,11 +39,24 @@ const drawTower = (color: string) => {
   ctx.beginPath();
   ctx.lineWidth = 5;
   ctx.fillStyle = color;
-  ctx.fillRect(438, 240, 24, 24);
+  ctx.fillRect(tower.x, tower.y, tower.width, tower.height);
+  ctx.stroke();
+};
+
+const drawProjectile = () => {
+  ctx.beginPath();
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "red";
+  ctx.moveTo(tower.x + tower.width / 2, tower.y + tower.height / 2);
+  ctx.lineTo(circle.x, circle.y);
   ctx.stroke();
 };
 
 const tower = {
+  x: 438,
+  y: 240,
+  width: 24,
+  height: 24,
   distance: 100,
   color: {
     active: "red",
@@ -54,15 +67,31 @@ const tower = {
 const circle = {
   x: 20,
   y: 100,
+  color: {
+    alive: "yellow",
+    dead: "purple",
+  },
+};
+
+const projectile = {
+  x: tower.x,
+  y: tower.y,
+  width: 5,
+  height: 5,
+  color: "red",
 };
 
 let time = 0;
 let nodeIndex = 0;
 
 const detectDistance = () => {
-  const distance = Math.hypot(circle.x - 440, circle.y - 240);
+  const distance = Math.hypot(circle.x - tower.x, circle.y - tower.y);
   if (distance < tower.distance) {
     drawTower(tower.color.active);
+
+    if (time % 40 === 0) {
+      drawProjectile();
+    }
   } else {
     drawTower(tower.color.passive);
   }
