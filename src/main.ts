@@ -20,20 +20,35 @@ const pathNodes = [
 const drawPath = () => {
   ctx.beginPath();
   ctx.lineWidth = 20;
+  ctx.strokeStyle = "black";
   ctx.moveTo(0, 100);
   pathNodes.forEach((node) => {
     ctx.lineTo(node[0], node[1]);
   });
   ctx.stroke();
-  ctx.closePath();
 };
 
 const drawCircle = () => {
   ctx.beginPath();
   ctx.arc(circle.x, circle.y, 10, 0, Math.PI * 2);
-  ctx.fillStyle = "red";
+  ctx.fillStyle = "yellow";
   ctx.fill();
-  ctx.closePath();
+};
+
+const drawTower = (color: string) => {
+  ctx.beginPath();
+  ctx.lineWidth = 5;
+  ctx.fillStyle = color;
+  ctx.fillRect(438, 240, 24, 24);
+  ctx.stroke();
+};
+
+const tower = {
+  distance: 100,
+  color: {
+    active: "red",
+    passive: "green",
+  },
 };
 
 const circle = {
@@ -44,7 +59,16 @@ const circle = {
 let time = 0;
 let nodeIndex = 0;
 
-const move = () => {
+const detectDistance = () => {
+  const distance = Math.hypot(circle.x - 440, circle.y - 240);
+  if (distance < tower.distance) {
+    drawTower(tower.color.active);
+  } else {
+    drawTower(tower.color.passive);
+  }
+};
+
+const update = () => {
   if (pathNodes.length === nodeIndex + 1) {
     console.log("end");
     return;
@@ -55,8 +79,6 @@ const move = () => {
     const nextNode = pathNodes[nodeIndex + 1];
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    drawPath();
 
     if (!currentNode) {
       return;
@@ -72,10 +94,12 @@ const move = () => {
       nodeIndex++;
     }
 
+    drawPath();
     drawCircle();
+    detectDistance();
   }
   time++;
-  requestAnimationFrame(move);
+  requestAnimationFrame(update);
 };
 
-move();
+update();
