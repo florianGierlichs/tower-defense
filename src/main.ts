@@ -17,6 +17,11 @@ const pathNodes = [
   [700, 0],
 ];
 
+let time = 0;
+let nodeIndex = 0;
+let angle: null | number = null;
+let projectileHit = false;
+
 const drawPath = () => {
   ctx.beginPath();
   ctx.lineWidth = 20;
@@ -78,12 +83,8 @@ const projectile = {
   destinationY: 0,
   width: 4,
   color: "red",
+  speed: 2,
 };
-
-let time = 0;
-let nodeIndex = 0;
-let angle: null | number = null;
-let projectileHit = false;
 
 const detectDistance = () => {
   const distance = Math.hypot(circle.x - tower.x, circle.y - tower.y);
@@ -101,11 +102,11 @@ const detectDistance = () => {
       drawCircle(circle.color.dead);
       projectileHit = true;
     }
-    drawCircle("green");
 
     if (!projectileHit) {
-      projectile.x += 2 * Math.cos((angle * Math.PI) / 180);
-      projectile.y += 2 * Math.sin((angle * Math.PI) / 180);
+      drawCircle(circle.color.alive);
+      projectile.x += projectile.speed * Math.cos((angle * Math.PI) / 180);
+      projectile.y += projectile.speed * Math.sin((angle * Math.PI) / 180);
     }
   } else {
     drawTower(tower.color.passive);
@@ -113,14 +114,14 @@ const detectDistance = () => {
   }
 };
 
-function getAngle(cx: number, cy: number, ex: number, ey: number) {
+const getAngle = (cx: number, cy: number, ex: number, ey: number) => {
   const dy = ey - cy;
   const dx = ex - cx;
   let theta = Math.atan2(dy, dx); // range (-PI, PI]
   theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
   //if (theta < 0) theta = 360 + theta; // range [0, 360)
   return theta;
-}
+};
 
 const update = () => {
   if (pathNodes.length === nodeIndex + 1) {
