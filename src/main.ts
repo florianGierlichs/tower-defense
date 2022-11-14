@@ -1,13 +1,13 @@
-import { drawEnemy } from "./draw/drawEnemy";
+import { Enemies } from "./classes/Enemies";
+import { Tower } from "./classes/Tower";
 import { drawPath } from "./draw/drawPath";
 import { drawProjectile } from "./draw/drawProjectile";
-import { drawTower } from "./draw/drawTower";
 import "./style.css";
 import { getAngle } from "./utils/getAngle";
 import { getDistance } from "./utils/getDistance";
 
 const canvas = document.querySelector<HTMLCanvasElement>("#myCanvas")!;
-const ctx = canvas.getContext("2d")!;
+export const ctx = canvas.getContext("2d")!;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -24,12 +24,15 @@ const pathNodes = [
 ];
 
 let time = 0;
-let nodeIndex = 0;
 let angle: null | number = null;
 
+const towers = [new Tower(438, 240), new Tower(210, 320)];
+
+export const enemies = new Enemies(pathNodes);
+
 const tower = {
-  x: 438,
-  y: 240,
+  x: 210,
+  y: 320,
   width: 24,
   height: 24,
   distance: 100,
@@ -54,58 +57,41 @@ const projectile = {
 };
 
 const update = () => {
-  if (pathNodes.length === nodeIndex + 1) {
+  if (time === 2000) {
     console.log("end");
     return;
   }
 
-  if (time % 2 === 0) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const currentNode = pathNodes[nodeIndex];
-    const nextNode = pathNodes[nodeIndex + 1];
-    const distance = getDistance(tower, circle);
+  const distance = getDistance(tower, circle);
 
-    if (!currentNode) {
-      return;
+  drawPath(ctx, pathNodes);
+  towers.forEach((tower) => tower.update());
+  enemies.update();
+
+  if (distance <= tower.distance) {
+    // set angle
+    if (!angle) {
+      projectile.destinationX = circle.x;
+      projectile.destinationY = circle.y;
+      angle = getAngle(tower.x, tower.y, circle.x, circle.y);
     }
 
-    drawPath(ctx, pathNodes);
-    drawTower(ctx, tower);
-    drawEnemy(ctx, circle);
+    // move projectile
+    if (!projectile.hasCollided) {
+      projectile.x += projectile.speed * Math.cos((angle * Math.PI) / 180);
+      projectile.y += projectile.speed * Math.sin((angle * Math.PI) / 180);
+    }
 
-    if (circle.x < currentNode[0]) {
-      circle.x++;
-    } else if (circle.y > nextNode[1]) {
-      circle.y--;
-    } else if (circle.y < nextNode[1]) {
-      circle.y++;
+    // detect collision
+    if (projectile.destinationX === Math.round(projectile.x)) {
+      projectile.hasCollided = true;
     } else {
-      nodeIndex++;
-    }
-
-    if (distance <= tower.distance) {
-      // set angle
-      if (!angle) {
-        projectile.destinationX = circle.x;
-        projectile.destinationY = circle.y;
-        angle = getAngle(tower.x, tower.y, circle.x, circle.y);
-      }
-
-      // move projectile
-      if (!projectile.hasCollided) {
-        projectile.x += projectile.speed * Math.cos((angle * Math.PI) / 180);
-        projectile.y += projectile.speed * Math.sin((angle * Math.PI) / 180);
-      }
-
-      // detect collision
-      if (projectile.destinationX === Math.round(projectile.x)) {
-        projectile.hasCollided = true;
-      } else {
-        drawProjectile(ctx, projectile);
-      }
+      drawProjectile(ctx, projectile);
     }
   }
+
   time++;
   requestAnimationFrame(update);
 };

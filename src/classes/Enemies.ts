@@ -1,0 +1,24 @@
+import { Enemy } from "./Enemy";
+
+export class Enemies {
+  enemies: Enemy[];
+
+  constructor(pathNodes: number[][]) {
+    this.enemies = [
+      new Enemy(1, 40, 100, pathNodes),
+      new Enemy(2, 0, 100, pathNodes),
+    ];
+  }
+
+  remove = (id: number) => {
+    this.enemies = this.enemies.filter((enemy) => enemy.id !== id);
+  };
+
+  private move = () => {
+    this.enemies.forEach((enemy) => enemy.update());
+  };
+
+  update = () => {
+    this.move();
+  };
+}
