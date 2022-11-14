@@ -1,4 +1,4 @@
-import { ctx, enemies } from "../main";
+import { ctx, game } from "../main";
 
 export class Enemy {
   id: number;
@@ -32,7 +32,7 @@ export class Enemy {
   private move = () => {
     // if path end for enemy
     if (this.pathNodes.length === this.nodeIndex + 1) {
-      enemies.remove(this.id);
+      game.enemies.remove(this.id);
       return;
     }
 

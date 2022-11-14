@@ -1,6 +1,4 @@
-import { Enemies } from "./classes/Enemies";
-import { Tower } from "./classes/Tower";
-import { drawPath } from "./draw/drawPath";
+import { Game } from "./classes/Game";
 import { drawProjectile } from "./draw/drawProjectile";
 import "./style.css";
 import { getAngle } from "./utils/getAngle";
@@ -12,23 +10,9 @@ export const ctx = canvas.getContext("2d")!;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const pathNodes = [
-  [150, 100],
-  [150, 400],
-  [400, 400],
-  [400, 200],
-  [500, 200],
-  [500, 500],
-  [700, 500],
-  [700, 0],
-];
+export const game = new Game();
 
-let time = 0;
 let angle: null | number = null;
-
-const towers = [new Tower(438, 240), new Tower(210, 320)];
-
-export const enemies = new Enemies(pathNodes);
 
 const tower = {
   x: 210,
@@ -57,7 +41,7 @@ const projectile = {
 };
 
 const update = () => {
-  if (time === 2000) {
+  if (game.time === 2000) {
     console.log("end");
     return;
   }
@@ -66,10 +50,12 @@ const update = () => {
 
   const distance = getDistance(tower, circle);
 
-  drawPath(ctx, pathNodes);
-  towers.forEach((tower) => tower.update());
-  enemies.update();
+  game.drawPath();
+  game.towers.update();
+  game.enemies.update();
 
+  //
+  //TODO move to game.tower?!
   if (distance <= tower.distance) {
     // set angle
     if (!angle) {
@@ -92,7 +78,7 @@ const update = () => {
     }
   }
 
-  time++;
+  game.time++;
   requestAnimationFrame(update);
 };
 

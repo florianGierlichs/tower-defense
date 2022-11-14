@@ -14,11 +14,11 @@ export class Enemies {
     this.enemies = this.enemies.filter((enemy) => enemy.id !== id);
   };
 
-  private move = () => {
+  private updateEnemies = () => {
     this.enemies.forEach((enemy) => enemy.update());
   };
 
   update = () => {
-    this.move();
+    this.updateEnemies();
   };
 }
