@@ -25,7 +25,7 @@ export class Tower {
     ctx.stroke();
   };
 
-  setClosestEnemyInRange = () => {
+  private setClosestEnemyInRange = () => {
     let distanceOfClosestEnemy = Infinity;
 
     game.enemies.getEnemies().forEach((enemy) => {
@@ -44,7 +44,7 @@ export class Tower {
     });
   };
 
-  checkCurrentTargetIsInRage = () => {
+  private checkCurrentTargetIsInRage = () => {
     if (this.currentTarget) {
       const currentTargetDistance = getDistance(
         { x: this.x, y: this.y },
