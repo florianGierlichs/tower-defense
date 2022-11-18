@@ -1,4 +1,6 @@
-import { ctx } from "../main";
+import { ctx, game } from "../main";
+import { getDistance } from "../utils/getDistance";
+import { Enemy } from "./Enemy";
 import { Projectile } from "./Projectile";
 
 export class Tower {
@@ -6,9 +8,10 @@ export class Tower {
   y: number;
   width: number = 24;
   height: number = 24;
-  distance: number = 100;
+  range: number = 100;
   color: string = "green";
   projectiles: Projectile[] = [];
+  currentTarget: Enemy | null = null;
 
   constructor(x: number, y: number) {
     this.x = x;
@@ -17,13 +20,50 @@ export class Tower {
 
   private draw = () => {
     ctx.beginPath();
-    ctx.lineWidth = 5;
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.stroke();
   };
 
+  setClosestEnemyInRange = () => {
+    let distanceOfClosestEnemy = Infinity;
+
+    game.enemies.getEnemies().forEach((enemy) => {
+      const enemyDistance = getDistance(
+        { x: this.x, y: this.y },
+        { x: enemy.x, y: enemy.y }
+      );
+
+      if (
+        enemyDistance <= this.range &&
+        enemyDistance <= distanceOfClosestEnemy
+      ) {
+        distanceOfClosestEnemy = enemyDistance;
+        this.currentTarget = enemy;
+      }
+    });
+  };
+
+  checkCurrentTargetIsInRage = () => {
+    if (this.currentTarget) {
+      const currentTargetDistance = getDistance(
+        { x: this.x, y: this.y },
+        { x: this.currentTarget.x, y: this.currentTarget.y }
+      );
+
+      if (currentTargetDistance > this.range) {
+        this.currentTarget = null;
+      }
+    }
+  };
+
   update = () => {
     this.draw();
+
+    if (this.currentTarget) {
+      this.checkCurrentTargetIsInRage();
+    } else {
+      this.setClosestEnemyInRange();
+    }
   };
 }

@@ -18,6 +18,8 @@ export class Enemies {
     this.enemies.forEach((enemy) => enemy.update());
   };
 
+  getEnemies = () => this.enemies;
+
   update = () => {
     this.updateEnemies();
   };
