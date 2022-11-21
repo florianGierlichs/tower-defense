@@ -7,6 +7,8 @@ export class Enemies {
     this.enemies = [
       new Enemy(1, 40, 100, pathNodes),
       new Enemy(2, 0, 100, pathNodes),
+      new Enemy(3, -40, 100, pathNodes),
+      new Enemy(4, -80, 100, pathNodes),
     ];
   }
 

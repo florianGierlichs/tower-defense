@@ -41,7 +41,7 @@ const projectile = {
 };
 
 const update = () => {
-  if (game.time === 2000) {
+  if (game.time === 5000) {
     console.log("end");
     return;
   }

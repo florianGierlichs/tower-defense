@@ -36,12 +36,13 @@ export class Enemy {
       return;
     }
 
+    // Remove magic numbers
     if (this.x < this.currentNodeTarget[0]) {
-      this.x++;
+      this.x += 0.5;
     } else if (this.y > this.nextNodeTarget[1]) {
-      this.y--;
+      this.y -= 0.5;
     } else if (this.y < this.nextNodeTarget[1]) {
-      this.y++;
+      this.y += 0.5;
     } else {
       this.nodeIndex++;
       this.currentNodeTarget = this.pathNodes[this.nodeIndex];

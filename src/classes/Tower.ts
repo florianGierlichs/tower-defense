@@ -53,12 +53,28 @@ export class Tower {
 
       if (currentTargetDistance > this.range) {
         this.currentTarget = null;
+      } else {
+        // throttle here
+        if (game.time % 50 === 0) {
+          this.createProjectile();
+        }
       }
     }
   };
 
+  private createProjectile = () => {
+    if (this.currentTarget) {
+      this.projectiles.push(new Projectile(this.x, this.y, this.currentTarget));
+    }
+  };
+
+  private updateProjectiles = () => {
+    this.projectiles.forEach((projectile) => projectile.update());
+  };
+
   update = () => {
     this.draw();
+    this.updateProjectiles();
 
     if (this.currentTarget) {
       this.checkCurrentTargetIsInRage();

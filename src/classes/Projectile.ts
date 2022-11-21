@@ -1,24 +1,42 @@
+import { ctx } from "../main";
+import { getAngle } from "../utils/getAngle";
+import { Enemy } from "./Enemy";
+
 export class Projectile {
   x: number;
   y: number;
-  destinationX: number;
-  destinationY: number;
   width: number = 4;
   color: string = "red";
   speed: number = 2;
   hasCollided: boolean = false;
+  targetEnemy: Enemy;
 
-  constructor(
-    x: number,
-    y: number,
-    destinationX: number,
-    destinationY: number
-  ) {
+  constructor(x: number, y: number, targetEnemy: Enemy) {
     this.x = x;
     this.y = y;
-    this.destinationX = destinationX;
-    this.destinationY = destinationY;
+    this.targetEnemy = targetEnemy;
   }
 
-  //draw()
+  private draw = () => {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
+    ctx.fillStyle = "pink";
+    ctx.fill();
+  };
+
+  private move = () => {
+    const angle = getAngle(
+      this.x,
+      this.y,
+      this.targetEnemy.x,
+      this.targetEnemy.y
+    );
+    this.x += this.speed * Math.cos((angle * Math.PI) / 180);
+    this.y += this.speed * Math.sin((angle * Math.PI) / 180);
+  };
+
+  update = () => {
+    this.draw();
+    this.move();
+  };
 }
