@@ -3,13 +3,13 @@ import { getAngle } from "../utils/getAngle";
 import { Enemy } from "./Enemy";
 
 export class Projectile {
-  x: number;
-  y: number;
+  x;
+  y;
+  targetEnemy;
   width: number = 4;
   color: string = "red";
-  speed: number = 2;
+  speed: number = 4;
   hasCollided: boolean = false;
-  targetEnemy: Enemy;
 
   constructor(x: number, y: number, targetEnemy: Enemy) {
     this.x = x;

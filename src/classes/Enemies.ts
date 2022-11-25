@@ -1,9 +1,10 @@
 import { Enemy } from "./Enemy";
+import { PathNodes } from "./Game";
 
 export class Enemies {
   enemies: Enemy[];
 
-  constructor(pathNodes: number[][]) {
+  constructor(pathNodes: PathNodes[]) {
     this.enemies = [
       new Enemy(1, 40, 100, pathNodes),
       new Enemy(2, 0, 100, pathNodes),

@@ -1,19 +1,20 @@
 import { ctx, game } from "../main";
+import { PathNodes } from "./Game";
 
 export class Enemy {
-  id: number;
-  x: number;
-  y: number;
+  id;
+  x;
+  y;
+  pathNodes;
   width: number = 20;
   height: number = 20;
   color: string = "yellow";
   health: number = 5;
   nodeIndex: number = 0;
-  pathNodes: number[][];
-  currentNodeTarget: number[];
-  nextNodeTarget: number[];
+  currentNodeTarget: PathNodes;
+  nextNodeTarget: PathNodes;
 
-  constructor(id: number, x: number, y: number, pathNodes: number[][]) {
+  constructor(id: number, x: number, y: number, pathNodes: PathNodes[]) {
     this.id = id;
     this.x = x;
     this.y = y;
@@ -37,12 +38,14 @@ export class Enemy {
     }
 
     // Remove magic numbers
-    if (this.x < this.currentNodeTarget[0]) {
-      this.x += 0.5;
-    } else if (this.y > this.nextNodeTarget[1]) {
-      this.y -= 0.5;
-    } else if (this.y < this.nextNodeTarget[1]) {
-      this.y += 0.5;
+    // maybe switch case here
+
+    if (this.x < this.currentNodeTarget.x) {
+      this.x += 1;
+    } else if (this.y > this.nextNodeTarget.y) {
+      this.y -= 1;
+    } else if (this.y < this.nextNodeTarget.y) {
+      this.y += 1;
     } else {
       this.nodeIndex++;
       this.currentNodeTarget = this.pathNodes[this.nodeIndex];

@@ -4,8 +4,8 @@ import { Enemy } from "./Enemy";
 import { Projectile } from "./Projectile";
 
 export class Tower {
-  x: number;
-  y: number;
+  x;
+  y;
   width: number = 24;
   height: number = 24;
   range: number = 100;
