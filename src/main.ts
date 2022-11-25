@@ -12,6 +12,11 @@ canvas.height = window.innerHeight;
 
 export const game = new Game();
 
+const startTime = performance.now();
+let lastAnimationTimestamp = startTime;
+const fps = 60;
+const intervalInMiliseconds = 1000 / fps;
+
 let angle: null | number = null;
 
 const tower = {
@@ -40,12 +45,30 @@ const projectile = {
   hasCollided: false,
 };
 
-const update = () => {
-  if (game.time === 5000) {
+const runGame = (timestamp?: number) => {
+  if (game.time === 4000) {
     console.log("end");
     return;
   }
 
+  if (timestamp) {
+    const elapsedTime = timestamp - lastAnimationTimestamp;
+
+    if (elapsedTime >= intervalInMiliseconds) {
+      lastAnimationTimestamp = timestamp;
+
+      update();
+    }
+  } else {
+    // initial run
+    update();
+  }
+
+  game.time++;
+  requestAnimationFrame(runGame);
+};
+
+const update = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const distance = getDistance(tower, circle);
@@ -77,9 +100,6 @@ const update = () => {
       drawProjectile(ctx, projectile);
     }
   }
-
-  game.time++;
-  requestAnimationFrame(update);
 };
 
-update();
+runGame();
