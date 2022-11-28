@@ -1,26 +1,28 @@
 import { ctx, game } from "../main";
-import { PathNodes } from "./Game";
+import { getAngle } from "../utils/getAngle";
+import { PathNode } from "./Game";
 
 export class Enemy {
   id;
   x;
   y;
+  nodeTarget;
   pathNodes;
+  angle;
   width: number = 20;
   height: number = 20;
   color: string = "yellow";
   health: number = 5;
-  nodeIndex: number = 0;
-  currentNodeTarget: PathNodes;
-  nextNodeTarget: PathNodes;
+  speed: number = 2;
+  nodesIndex: number = 0;
 
-  constructor(id: number, x: number, y: number, pathNodes: PathNodes[]) {
+  constructor(id: number, x: number, y: number, pathNodes: PathNode[]) {
     this.id = id;
     this.x = x;
     this.y = y;
     this.pathNodes = pathNodes;
-    this.currentNodeTarget = pathNodes[this.nodeIndex];
-    this.nextNodeTarget = pathNodes[this.nodeIndex + 1];
+    this.nodeTarget = pathNodes[this.nodesIndex];
+    this.angle = getAngle(this.x, this.y, this.nodeTarget.x, this.nodeTarget.y);
   }
 
   private draw = () => {
@@ -31,25 +33,38 @@ export class Enemy {
   };
 
   private move = () => {
-    // if path end for enemy
-    if (this.pathNodes.length === this.nodeIndex + 1) {
-      game.enemies.remove(this.id);
-      return;
+    // move x
+    const restDistanceX = Math.abs(this.nodeTarget.x - this.x);
+
+    if (restDistanceX - this.speed < 0) {
+      this.x += restDistanceX * Math.cos((this.angle * Math.PI) / 180);
+    } else {
+      this.x += this.speed * Math.cos((this.angle * Math.PI) / 180);
     }
 
-    // Remove magic numbers
-    // maybe switch case here
+    // move y
+    const restDistanceY = Math.abs(this.nodeTarget.y - this.y);
 
-    if (this.x < this.currentNodeTarget.x) {
-      this.x += 1;
-    } else if (this.y > this.nextNodeTarget.y) {
-      this.y -= 1;
-    } else if (this.y < this.nextNodeTarget.y) {
-      this.y += 1;
+    if (restDistanceY - this.speed < 0) {
+      this.y += restDistanceY * Math.sin((this.angle * Math.PI) / 180);
     } else {
-      this.nodeIndex++;
-      this.currentNodeTarget = this.pathNodes[this.nodeIndex];
-      this.nextNodeTarget = this.pathNodes[this.nodeIndex + 1];
+      this.y += this.speed * Math.sin((this.angle * Math.PI) / 180);
+    }
+
+    //reach path node
+    if (this.x === this.nodeTarget.x && this.y === this.nodeTarget.y) {
+      this.nodesIndex++;
+      if (this.pathNodes.length === this.nodesIndex) {
+        game.enemies.remove(this.id);
+        return;
+      }
+      this.nodeTarget = this.pathNodes[this.nodesIndex];
+      this.angle = getAngle(
+        this.x,
+        this.y,
+        this.nodeTarget.x,
+        this.nodeTarget.y
+      );
     }
   };
 
