@@ -9,6 +9,8 @@ export class Tower {
   width: number = 24;
   height: number = 24;
   range: number = 100;
+  attackSpeed: number = 1000; // Miliseconds
+  lastAttack: number | null = null;
   color: string = "green";
   projectiles: Projectile[] = [];
   currentTarget: Enemy | null = null;
@@ -54,9 +56,13 @@ export class Tower {
       if (currentTargetDistance > this.range) {
         this.currentTarget = null;
       } else {
-        // throttle here
-        if (game.time % 50 === 0) {
+        const timestamp = performance.now();
+        if (
+          !this.lastAttack ||
+          timestamp - this.lastAttack >= this.attackSpeed
+        ) {
           this.createProjectile();
+          this.lastAttack = performance.now();
         }
       }
     }
