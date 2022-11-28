@@ -1,3 +1,4 @@
+import shortUUID from "short-uuid";
 import { ctx, game } from "../main";
 import { getDistance } from "../utils/getDistance";
 import { Enemy } from "./Enemy";
@@ -70,12 +71,22 @@ export class Tower {
 
   private createProjectile = () => {
     if (this.currentTarget) {
-      this.projectiles.push(new Projectile(this.x, this.y, this.currentTarget));
+      this.projectiles.push(
+        new Projectile(shortUUID.generate(), this.x, this.y, this.currentTarget)
+      );
     }
   };
 
   private updateProjectiles = () => {
-    this.projectiles.forEach((projectile) => projectile.update());
+    this.projectiles.forEach((projectile) =>
+      projectile.update(this.removeProjectile)
+    );
+  };
+
+  private removeProjectile = (id: string) => {
+    this.projectiles = this.projectiles.filter(
+      (projectile) => projectile.id !== id
+    );
   };
 
   update = () => {
