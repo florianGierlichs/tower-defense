@@ -16,7 +16,7 @@ export class Enemy {
   speed: number = 2;
   nodesIndex: number = 0;
 
-  constructor(id: number, x: number, y: number, pathNodes: PathNode[]) {
+  constructor(id: string, x: number, y: number, pathNodes: PathNode[]) {
     this.id = id;
     this.x = x;
     this.y = y;
@@ -66,6 +66,10 @@ export class Enemy {
         this.nodeTarget.y
       );
     }
+  };
+
+  reduceHealth = () => {
+    this.health--;
   };
 
   update = () => {

@@ -1,3 +1,4 @@
+import shortUUID from "short-uuid";
 import { Enemy } from "./Enemy";
 import { PathNode } from "./Game";
 
@@ -6,14 +7,14 @@ export class Enemies {
 
   constructor(pathNodes: PathNode[]) {
     this.enemies = [
-      new Enemy(1, 40, 100, pathNodes),
-      new Enemy(2, 0, 100, pathNodes),
-      new Enemy(3, -40, 100, pathNodes),
-      new Enemy(4, -80, 100, pathNodes),
+      new Enemy(shortUUID.generate(), 40, 100, pathNodes),
+      new Enemy(shortUUID.generate(), 0, 100, pathNodes),
+      new Enemy(shortUUID.generate(), -40, 100, pathNodes),
+      new Enemy(shortUUID.generate(), -80, 100, pathNodes),
     ];
   }
 
-  remove = (id: number) => {
+  remove = (id: string) => {
     this.enemies = this.enemies.filter((enemy) => enemy.id !== id);
   };
 

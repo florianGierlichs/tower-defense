@@ -79,7 +79,10 @@ export class Tower {
 
   private updateProjectiles = () => {
     this.projectiles.forEach((projectile) =>
-      projectile.update(this.removeProjectile)
+      projectile.update({
+        removeProjectile: this.removeProjectile,
+        removeTowerTarget: this.removeTarget,
+      })
     );
   };
 
@@ -87,6 +90,10 @@ export class Tower {
     this.projectiles = this.projectiles.filter(
       (projectile) => projectile.id !== id
     );
+  };
+
+  private removeTarget = () => {
+    this.currentTarget = null;
   };
 
   update = () => {
