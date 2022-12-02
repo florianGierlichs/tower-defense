@@ -72,18 +72,19 @@ export class Tower {
   private createProjectile = () => {
     if (this.currentTarget) {
       this.projectiles.push(
-        new Projectile(shortUUID.generate(), this.x, this.y, this.currentTarget)
+        new Projectile(
+          shortUUID.generate(),
+          this.x,
+          this.y,
+          this.currentTarget,
+          this.removeProjectile
+        )
       );
     }
   };
 
   private updateProjectiles = () => {
-    this.projectiles.forEach((projectile) =>
-      projectile.update({
-        removeProjectile: this.removeProjectile,
-        removeTowerTarget: this.removeTarget,
-      })
-    );
+    this.projectiles.forEach((projectile) => projectile.update());
   };
 
   private removeProjectile = (id: string) => {
@@ -92,7 +93,7 @@ export class Tower {
     );
   };
 
-  private removeTarget = () => {
+  removeTarget = () => {
     this.currentTarget = null;
   };
 

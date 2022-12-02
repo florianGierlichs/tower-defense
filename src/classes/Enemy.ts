@@ -70,6 +70,11 @@ export class Enemy {
 
   reduceHealth = () => {
     this.health--;
+
+    if (this.health === 0) {
+      game.enemies.remove(this.id);
+      game.towers.resetTowerTarget(this.id);
+    }
   };
 
   update = () => {

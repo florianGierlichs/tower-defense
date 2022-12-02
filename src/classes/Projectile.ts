@@ -1,26 +1,29 @@
-import { ctx, game } from "../main";
+import { ctx } from "../main";
 import { getAngle } from "../utils/getAngle";
 import { Enemy } from "./Enemy";
-
-interface TowerCallbacks {
-  removeProjectile: (id: string) => void;
-  removeTowerTarget: () => void;
-}
 
 export class Projectile {
   id;
   x;
   y;
   targetEnemy;
+  removeProjectile;
   width: number = 4;
   color: string = "red";
   speed: number = 5;
 
-  constructor(id: string, x: number, y: number, targetEnemy: Enemy) {
+  constructor(
+    id: string,
+    x: number,
+    y: number,
+    targetEnemy: Enemy,
+    removeProjectile: (id: string) => void
+  ) {
     this.id = id;
     this.x = x;
     this.y = y;
     this.targetEnemy = targetEnemy;
+    this.removeProjectile = removeProjectile;
   }
 
   private draw = () => {
@@ -30,7 +33,7 @@ export class Projectile {
     ctx.fill();
   };
 
-  private move = ({ removeProjectile, removeTowerTarget }: TowerCallbacks) => {
+  private move = () => {
     const angle = getAngle(
       this.x,
       this.y,
@@ -62,28 +65,17 @@ export class Projectile {
         0 &&
       (this.y - this.targetEnemy.y - 1) * (this.y - this.targetEnemy.y + 1) <= 0
     ) {
-      this.collide({ removeProjectile, removeTowerTarget });
+      this.collide();
     }
   };
 
-  private collide = ({
-    removeProjectile,
-    removeTowerTarget,
-  }: TowerCallbacks) => {
-    removeProjectile(this.id);
+  private collide = () => {
+    this.removeProjectile(this.id);
     this.targetEnemy.reduceHealth();
-
-    if (this.targetEnemy.health === 0) {
-      game.enemies.remove(this.targetEnemy.id);
-      removeTowerTarget();
-    }
   };
 
-  update = ({ removeProjectile, removeTowerTarget }: TowerCallbacks) => {
+  update = () => {
     this.draw();
-    this.move({
-      removeProjectile,
-      removeTowerTarget,
-    });
+    this.move();
   };
 }
