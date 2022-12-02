@@ -14,7 +14,7 @@ export class Projectile {
   targetEnemy;
   width: number = 4;
   color: string = "red";
-  speed: number = 4;
+  speed: number = 5;
 
   constructor(id: string, x: number, y: number, targetEnemy: Enemy) {
     this.id = id;

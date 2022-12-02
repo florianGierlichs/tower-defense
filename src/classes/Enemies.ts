@@ -11,6 +11,11 @@ export class Enemies {
       new Enemy(shortUUID.generate(), 0, 100, pathNodes),
       new Enemy(shortUUID.generate(), -40, 100, pathNodes),
       new Enemy(shortUUID.generate(), -80, 100, pathNodes),
+      new Enemy(shortUUID.generate(), -120, 100, pathNodes),
+      new Enemy(shortUUID.generate(), -160, 100, pathNodes),
+      new Enemy(shortUUID.generate(), -200, 100, pathNodes),
+      new Enemy(shortUUID.generate(), -240, 100, pathNodes),
+      new Enemy(shortUUID.generate(), -280, 100, pathNodes),
     ];
   }
 

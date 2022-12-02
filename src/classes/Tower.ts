@@ -9,7 +9,7 @@ export class Tower {
   y;
   width: number = 24;
   height: number = 24;
-  range: number = 100;
+  range: number = 150;
   attackSpeed: number = 1000; // Miliseconds
   lastAttack: number | null = null;
   color: string = "green";
