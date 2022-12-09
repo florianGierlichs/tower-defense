@@ -1,5 +1,6 @@
 import { ctx } from "../main";
 import { Enemies } from "./Enemies";
+import { Tiles } from "./Tiles";
 import { Towers } from "./Towers";
 
 export interface PathNode {
@@ -22,6 +23,7 @@ export class Game {
     { x: 600, y: 0 },
   ];
 
+  tiles = new Tiles();
   towers = new Towers();
   enemies = new Enemies(this.pathNodes);
 
