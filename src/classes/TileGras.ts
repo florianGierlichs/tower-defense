@@ -4,6 +4,7 @@ import textures from "../assets/textures.png";
 
 export class TileGras extends Tile {
   image: HTMLImageElement;
+  hasTower: boolean = false;
 
   constructor(id: number, x: number, y: number) {
     super(id, x, y);
@@ -42,6 +43,8 @@ export class TileGras extends Tile {
       this.y + 50
     );
   };
+
+  setHasTower = () => (this.hasTower = true);
 
   update = () => {
     this.buildImg();

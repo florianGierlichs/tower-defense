@@ -1,14 +1,15 @@
-import { Tile } from "../classes/Tile";
+import { TileGras } from "../classes/TileGras";
+import { TilePath } from "../classes/TilePath";
 import { TileRow } from "../classes/Tiles";
 import { getClickCoordinates } from "./getClickCoordinates";
 
 export const getTileForClick = (
   rows: TileRow[],
   e: MouseEvent
-): null | Tile => {
+): TileGras | TilePath | null => {
   const { x: clickX, y: clickY } = getClickCoordinates(e);
 
-  let clickedTile: null | Tile = null;
+  let clickedTile = null;
 
   rows.forEach((row) => {
     row.forEach((tile) => {

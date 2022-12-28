@@ -1,12 +1,7 @@
 import { Tower } from "./Tower";
 
 export class Towers {
-  towers = [
-    new Tower(438, 240),
-    new Tower(210, 320),
-    new Tower(210, 240),
-    new Tower(438, 360),
-  ];
+  towers: Tower[] = [];
 
   constructor() {}
 
@@ -20,6 +15,10 @@ export class Towers {
         tower.removeTarget();
       }
     });
+  };
+
+  createTower = (x: number, y: number) => {
+    this.towers.push(new Tower(x, y));
   };
 
   update = () => {

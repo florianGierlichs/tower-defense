@@ -1,4 +1,5 @@
 import { Game } from "./classes/Game";
+import { TileGras } from "./classes/TileGras";
 import "./style.css";
 import { getTileForClick } from "./utils/getTileForClick";
 
@@ -54,6 +55,11 @@ const update = () => {
 canvasGame.addEventListener("click", (e) => {
   const tile = getTileForClick(game.tiles.getTileRows(), e);
   console.log("tile", tile);
+
+  if (tile instanceof TileGras && !tile.hasTower) {
+    game.towers.createTower(tile.x + 32, tile.y + 32);
+    tile.setHasTower();
+  }
 });
 
 runGame();
