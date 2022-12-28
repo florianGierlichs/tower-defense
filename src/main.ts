@@ -2,11 +2,17 @@ import { Game } from "./classes/Game";
 import "./style.css";
 import { getTileForClick } from "./utils/getTileForClick";
 
-export const canvas = document.querySelector<HTMLCanvasElement>("#myCanvas")!;
-export const ctx = canvas.getContext("2d")!;
+export const canvasBackground =
+  document.querySelector<HTMLCanvasElement>("#canvas-background")!;
+export const canvasGame =
+  document.querySelector<HTMLCanvasElement>("#canvas-game")!;
+export const ctxBackground = canvasBackground.getContext("2d")!;
+export const ctxGame = canvasGame.getContext("2d")!;
 
-canvas.width = 1300;
-canvas.height = 780;
+canvasBackground.width = 1300;
+canvasBackground.height = 780;
+canvasGame.width = 1300;
+canvasGame.height = 780;
 
 export const game = new Game();
 
@@ -31,7 +37,6 @@ const runGame = (timestamp?: number) => {
     }
   } else {
     // initial run
-    game.tiles.createTileGrid();
     update();
   }
 
@@ -40,17 +45,19 @@ const runGame = (timestamp?: number) => {
 };
 
 const update = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctxGame.clearRect(0, 0, canvasGame.width, canvasGame.height);
 
-  game.tiles.update();
-  game.drawPath();
   game.towers.update();
   game.enemies.update();
 };
 
-canvas.addEventListener("click", (e) => {
+canvasGame.addEventListener("click", (e) => {
   const tile = getTileForClick(game.tiles.getTileRows(), e);
   console.log("tile", tile);
 });
 
 runGame();
+
+// todo add buildable tower for tile
+// todo add show tower range on tile with tower
+// todo add tower blue print on tile and show tower range

@@ -1,5 +1,5 @@
 import shortUUID from "short-uuid";
-import { ctx, game } from "../main";
+import { ctxGame, game } from "../main";
 import { getDistance } from "../utils/getDistance";
 import { Enemy } from "./Enemy";
 import { Projectile } from "./Projectile";
@@ -22,10 +22,10 @@ export class Tower {
   }
 
   private draw = () => {
-    ctx.beginPath();
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-    ctx.stroke();
+    ctxGame.beginPath();
+    ctxGame.fillStyle = this.color;
+    ctxGame.fillRect(this.x, this.y, this.width, this.height);
+    ctxGame.stroke();
   };
 
   private setClosestEnemyInRange = () => {

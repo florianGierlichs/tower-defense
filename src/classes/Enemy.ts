@@ -1,5 +1,6 @@
-import { ctx, game } from "../main";
+import { ctxGame, game } from "../main";
 import { getAngle } from "../utils/getAngle";
+import { reachedTarget } from "../utils/reachedTarget";
 import { PathNode } from "./Game";
 
 export class Enemy {
@@ -20,16 +21,16 @@ export class Enemy {
     this.id = id;
     this.x = x;
     this.y = y;
-    this.pathNodes = pathNodes;
+    this.pathNodes = [...pathNodes, { x: 941, y: -32 }]; // todo make end node dynamic
     this.nodeTarget = pathNodes[this.nodesIndex];
     this.angle = getAngle(this.x, this.y, this.nodeTarget.x, this.nodeTarget.y);
   }
 
   private draw = () => {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.width / 2, 0, Math.PI * 2);
-    ctx.fillStyle = this.color;
-    ctx.fill();
+    ctxGame.beginPath();
+    ctxGame.arc(this.x, this.y, this.width / 2, 0, Math.PI * 2);
+    ctxGame.fillStyle = this.color;
+    ctxGame.fill();
   };
 
   private move = () => {
@@ -52,7 +53,12 @@ export class Enemy {
     }
 
     //reach path node
-    if (this.x === this.nodeTarget.x && this.y === this.nodeTarget.y) {
+    if (
+      reachedTarget(
+        { x: this.x, y: this.y },
+        { x: this.nodeTarget.x, y: this.nodeTarget.y }
+      )
+    ) {
       this.nodesIndex++;
       if (this.pathNodes.length === this.nodesIndex) {
         game.enemies.remove(this.id);

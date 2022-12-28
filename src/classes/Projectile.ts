@@ -1,5 +1,6 @@
-import { ctx } from "../main";
+import { ctxGame } from "../main";
 import { getAngle } from "../utils/getAngle";
+import { reachedTarget } from "../utils/reachedTarget";
 import { Enemy } from "./Enemy";
 
 export class Projectile {
@@ -27,10 +28,10 @@ export class Projectile {
   }
 
   private draw = () => {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
-    ctx.fillStyle = "pink";
-    ctx.fill();
+    ctxGame.beginPath();
+    ctxGame.arc(this.x, this.y, this.width, 0, Math.PI * 2);
+    ctxGame.fillStyle = "pink";
+    ctxGame.fill();
   };
 
   private move = () => {
@@ -61,9 +62,10 @@ export class Projectile {
 
     // check for collision
     if (
-      (this.x - this.targetEnemy.x - 1) * (this.x - this.targetEnemy.x + 1) <=
-        0 &&
-      (this.y - this.targetEnemy.y - 1) * (this.y - this.targetEnemy.y + 1) <= 0
+      reachedTarget(
+        { x: this.x, y: this.y },
+        { x: this.targetEnemy.x, y: this.targetEnemy.y }
+      )
     ) {
       this.collide();
     }

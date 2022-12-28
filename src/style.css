@@ -3,3 +3,21 @@ body {
   margin: 0;
   padding: 0;
 }
+
+#canvas-container {
+  position: relative;
+  width: 1300px;
+  height: 780px;
+}
+
+canvas {
+  position: absolute;
+}
+
+#canvas-background {
+  z-index: 1;
+}
+
+#canvas-game {
+  z-index: 2;
+}
