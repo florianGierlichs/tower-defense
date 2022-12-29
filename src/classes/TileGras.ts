@@ -1,52 +1,52 @@
 import { ctxBackground } from "../main";
-import { Tile } from "./Tile";
-import textures from "../assets/textures.png";
+import { Tile, TileCoords } from "./Tile";
+import { getRandomItemFromArray } from "../utils/getRandomItemFromArray";
 
 export class TileGras extends Tile {
-  image: HTMLImageElement;
   hasTower: boolean = false;
+
+  sX: number;
+  sY: number;
+
+  tileGrasCoords: TileCoords[] = [
+    { sx: 0 * this.sWidth, sy: 0 * this.sHeight },
+    { sx: 0 * this.sWidth, sy: 1 * this.sHeight },
+    { sx: 1 * this.sWidth, sy: 0 * this.sHeight },
+    { sx: 1 * this.sWidth, sy: 1 * this.sHeight },
+    { sx: 2 * this.sWidth, sy: 0 * this.sHeight },
+    { sx: 2 * this.sWidth, sy: 1 * this.sHeight },
+    { sx: 3 * this.sWidth, sy: 0 * this.sHeight },
+    { sx: 3 * this.sWidth, sy: 1 * this.sHeight },
+  ];
 
   constructor(id: number, x: number, y: number) {
     super(id, x, y);
 
-    this.image = new Image(64, 64);
+    this.sX = this.getImgConfig().sx;
+    this.sY = this.getImgConfig().sy;
   }
 
-  private buildImg = async () => {
-    this.image.src = textures;
-
-    await this.image.decode();
-    this.drawImg();
+  private getImgConfig = () => {
+    return getRandomItemFromArray(this.tileGrasCoords);
   };
 
-  // todo change to gras image
   private drawImg = () => {
-    ctxBackground.lineWidth = 1;
-    ctxBackground.beginPath();
-
-    const half = 0.5; // to make rect lines thin
-    ctxBackground.strokeRect(
-      this.x + half,
-      this.y + half,
-      this.width + half,
-      this.height + half
-    );
-    ctxBackground.strokeText(`${this.id}`, this.x + 10, this.y + 10);
-    ctxBackground.strokeText(
-      `${this.x}-${this.x + 64}`,
-      this.x + 10,
-      this.y + 30
-    );
-    ctxBackground.strokeText(
-      `${this.y} ${this.y + 64}`,
-      this.x + 10,
-      this.y + 50
+    ctxBackground.drawImage(
+      this.image,
+      this.sX,
+      this.sY,
+      this.sWidth,
+      this.sHeight,
+      this.dX,
+      this.dY,
+      this.dWidth,
+      this.dHeight
     );
   };
 
   setHasTower = () => (this.hasTower = true);
 
   update = () => {
-    this.buildImg();
+    this.buildImg(this.drawImg);
   };
 }

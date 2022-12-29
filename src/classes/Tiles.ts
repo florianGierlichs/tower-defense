@@ -63,17 +63,16 @@ export class Tiles {
   tileRows: TileRow[] = [];
   tilePaths: TilePath[] = [];
 
+  debug = false;
+
   constructor() {}
 
   private getTileX = (index: number) => {
-    return (index % this.rowLength) * this.tileWdith + (index % this.rowLength);
+    return (index % this.rowLength) * this.tileWdith;
   };
 
   private getTileY = () => {
-    return (
-      this.tileRows.length * this.tileWdith +
-      (this.tileRows.length % this.rowLength)
-    );
+    return this.tileRows.length * this.tileWdith;
   };
 
   createTileGrid = () => {
@@ -118,5 +117,22 @@ export class Tiles {
 
   getPathConfiguration = () => {
     return this.pathConfiguration;
+  };
+
+  toggleDebug = () => {
+    if (!this.debug) {
+      this.tileRows.forEach((row) => {
+        row.forEach((tile) => {
+          tile.drawDebug();
+        });
+      });
+    } else {
+      this.tileRows.forEach((row) => {
+        row.forEach((tile) => {
+          tile.update();
+        });
+      });
+    }
+    this.debug = !this.debug;
   };
 }

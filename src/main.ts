@@ -67,3 +67,8 @@ runGame();
 // todo add buildable tower for tile
 // todo add show tower range on tile with tower
 // todo add tower blue print on tile and show tower range
+
+const toggleTilesInfoButton =
+  document.querySelector<HTMLButtonElement>("#toggle-tiles-info")!;
+
+toggleTilesInfoButton.addEventListener("click", game.tiles.toggleDebug);
