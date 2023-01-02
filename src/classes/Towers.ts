@@ -1,7 +1,8 @@
-import { Tower } from "./Tower";
+import shortUUID from "short-uuid";
+import { TowerArcaneArcher } from "./TowerArcaneArcher";
 
 export class Towers {
-  towers: Tower[] = [];
+  towers: TowerArcaneArcher[] = [];
 
   constructor() {}
 
@@ -18,7 +19,7 @@ export class Towers {
   };
 
   createTower = (x: number, y: number) => {
-    this.towers.push(new Tower(x, y));
+    this.towers.push(new TowerArcaneArcher(shortUUID.generate(), x, y));
   };
 
   update = () => {

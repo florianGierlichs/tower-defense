@@ -1,10 +1,12 @@
 import shortUUID from "short-uuid";
-import { ctxGame, game } from "../main";
+import { game } from "../main";
 import { getDistance } from "../utils/getDistance";
+import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemy } from "./Enemy";
 import { Projectile } from "./Projectile";
 
 export class Tower {
+  id;
   x;
   y;
   width: number = 24;
@@ -16,17 +18,11 @@ export class Tower {
   projectiles: Projectile[] = [];
   currentTarget: Enemy | null = null;
 
-  constructor(x: number, y: number) {
+  constructor(id: string, x: number, y: number) {
+    this.id = id;
     this.x = x;
     this.y = y;
   }
-
-  private draw = () => {
-    ctxGame.beginPath();
-    ctxGame.fillStyle = this.color;
-    ctxGame.fillRect(this.x, this.y, this.width, this.height);
-    ctxGame.stroke();
-  };
 
   private setClosestEnemyInRange = () => {
     let distanceOfClosestEnemy = Infinity;
@@ -57,11 +53,7 @@ export class Tower {
       if (currentTargetDistance > this.range) {
         this.currentTarget = null;
       } else {
-        const timestamp = performance.now();
-        if (
-          !this.lastAttack ||
-          timestamp - this.lastAttack >= this.attackSpeed
-        ) {
+        if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
           this.createProjectile();
           this.lastAttack = performance.now();
         }
@@ -97,8 +89,7 @@ export class Tower {
     this.currentTarget = null;
   };
 
-  update = () => {
-    this.draw();
+  updateProperties = () => {
     this.updateProjectiles();
 
     if (this.currentTarget) {
