@@ -2,6 +2,7 @@ import { Game } from "./classes/Game";
 import { TileGras } from "./classes/TileGras";
 import "./style.css";
 import { getTileForClick } from "./utils/getTileForClick";
+import { timeHasPassed } from "./utils/timeHasPassed";
 
 export const canvasBackground =
   document.querySelector<HTMLCanvasElement>("#canvas-background")!;
@@ -17,8 +18,7 @@ canvasGame.height = 780;
 
 export const game = new Game();
 
-const startTime = performance.now();
-let lastAnimationTimestamp = startTime;
+let lastAnimationTimestamp: number | null = null;
 const fps = 60;
 const intervalInMiliseconds = 1000 / fps;
 
@@ -29,9 +29,7 @@ const runGame = (timestamp?: number) => {
   }
 
   if (timestamp) {
-    const elapsedTime = timestamp - lastAnimationTimestamp;
-
-    if (elapsedTime >= intervalInMiliseconds) {
+    if (timeHasPassed(lastAnimationTimestamp, intervalInMiliseconds)) {
       lastAnimationTimestamp = timestamp;
 
       update();
@@ -57,7 +55,7 @@ canvasGame.addEventListener("click", (e) => {
   console.log("tile", tile);
 
   if (tile instanceof TileGras && !tile.hasTower) {
-    game.towers.createTower(tile.x + 32, tile.y + 32);
+    game.towers.createTower(tile.x, tile.y);
     tile.setHasTower();
   }
 });

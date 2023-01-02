@@ -36,6 +36,8 @@ export class Tile {
 
     await this.image.decode();
     drawImg();
+
+    // todo decouple build from every render?! maybe only build once
   };
 
   drawDebug = () => {

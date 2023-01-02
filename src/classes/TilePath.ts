@@ -8,7 +8,6 @@ export class TilePath extends Tile {
   sX: number;
   sY: number;
 
-  tileSetLength: number = 4;
   horizontalTilePathsCoords: TileCoords[] = [
     { sx: 2 * this.sWidth, sy: 2 * this.sHeight },
     { sx: 3 * this.sWidth, sy: 2 * this.sHeight },
