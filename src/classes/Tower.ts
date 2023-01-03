@@ -1,28 +1,93 @@
 import shortUUID from "short-uuid";
-import { game } from "../main";
+import { ctxGame, game } from "../main";
 import { getDistance } from "../utils/getDistance";
 import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemy } from "./Enemy";
 import { Projectile } from "./Projectile";
 
+export type towerState = "idle" | "attack";
+
+export interface ImgConfig {
+  frames: number;
+  sx: number;
+  sy: number;
+}
+
+export type ImgConfigs = Record<towerState, ImgConfig>;
 export class Tower {
   id;
   x;
   y;
-  width: number = 24;
-  height: number = 24;
   range: number = 150;
   attackSpeed: number = 1000; // Miliseconds
   lastAttack: number | null = null;
-  color: string = "green";
   projectiles: Projectile[] = [];
   currentTarget: Enemy | null = null;
+
+  sWidth: number = 64;
+  sHeight: number = this.sWidth;
+  dWidth: number = 64;
+  dHeight: number = this.dWidth;
+  dX: number;
+  dY: number;
+
+  frameIteration: number = 0;
+  lastFrameIteration: number | null = null;
+  frameIterationThrottleTime: number = 100;
+  state: towerState = "idle";
 
   constructor(id: string, x: number, y: number) {
     this.id = id;
     this.x = x;
     this.y = y;
+
+    this.dX = x;
+    this.dY = y;
   }
+
+  getImgConfig = (config: ImgConfigs) => {
+    let imageConfig: ImgConfig;
+    switch (this.state) {
+      case "idle":
+        imageConfig = config.idle;
+        break;
+      default:
+        imageConfig = config.attack;
+    }
+    return imageConfig;
+  };
+
+  setFrame = (sX: number, frames: number) => {
+    let sx = sX;
+    if (
+      timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
+    ) {
+      sx = this.frameIteration * this.sWidth;
+
+      if (this.frameIteration < frames - 1) {
+        this.frameIteration++;
+      } else {
+        this.frameIteration = 0;
+      }
+
+      this.lastFrameIteration = performance.now();
+    }
+    return sx;
+  };
+
+  drawImg = (img: HTMLImageElement, sx: number, sy: number) => {
+    ctxGame.drawImage(
+      img,
+      sx,
+      sy,
+      this.sWidth,
+      this.sHeight,
+      this.dX,
+      this.dY,
+      this.dWidth,
+      this.dHeight
+    );
+  };
 
   private setClosestEnemyInRange = () => {
     let distanceOfClosestEnemy = Infinity;
