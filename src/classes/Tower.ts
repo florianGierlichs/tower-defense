@@ -24,25 +24,41 @@ export class Tower {
   projectiles: Projectile[] = [];
   currentTarget: Enemy | null = null;
 
+  image: HTMLImageElement;
   sWidth: number = 64;
   sHeight: number = this.sWidth;
+  sX: number;
+  sY: number;
   dWidth: number = 64;
   dHeight: number = this.dWidth;
   dX: number;
   dY: number;
+  frames: number;
 
   frameIteration: number = 0;
   lastFrameIteration: number | null = null;
   frameIterationThrottleTime: number = 100;
   state: towerState = "idle";
 
-  constructor(id: string, x: number, y: number) {
+  constructor(
+    id: string,
+    x: number,
+    y: number,
+    img: HTMLImageElement,
+    config: ImgConfigs
+  ) {
     this.id = id;
     this.x = x;
     this.y = y;
 
+    this.image = img;
     this.dX = x;
     this.dY = y;
+
+    const { sx, sy, frames } = this.getImgConfig(config);
+    this.sX = sx;
+    this.sY = sy;
+    this.frames = frames;
   }
 
   getImgConfig = (config: ImgConfigs) => {
@@ -57,14 +73,13 @@ export class Tower {
     return imageConfig;
   };
 
-  setFrame = (sX: number, frames: number) => {
-    let sx = sX;
+  setFrame = () => {
     if (
       timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
     ) {
-      sx = this.frameIteration * this.sWidth;
+      this.sX = this.frameIteration * this.sWidth;
 
-      if (this.frameIteration < frames - 1) {
+      if (this.frameIteration < this.frames - 1) {
         this.frameIteration++;
       } else {
         this.frameIteration = 0;
@@ -72,14 +87,13 @@ export class Tower {
 
       this.lastFrameIteration = performance.now();
     }
-    return sx;
   };
 
-  drawImg = (img: HTMLImageElement, sx: number, sy: number) => {
+  drawImg = () => {
     ctxGame.drawImage(
-      img,
-      sx,
-      sy,
+      this.image,
+      this.sX,
+      this.sY,
       this.sWidth,
       this.sHeight,
       this.dX,
@@ -87,6 +101,15 @@ export class Tower {
       this.dWidth,
       this.dHeight
     );
+  };
+
+  private setCurrentTarget = (target: Enemy | null) => {
+    if (target === null) {
+      this.state = "idle";
+    } else {
+      this.state = "attack";
+    }
+    this.currentTarget = target;
   };
 
   private setClosestEnemyInRange = () => {
@@ -103,7 +126,7 @@ export class Tower {
         enemyDistance <= distanceOfClosestEnemy
       ) {
         distanceOfClosestEnemy = enemyDistance;
-        this.currentTarget = enemy;
+        this.setCurrentTarget(enemy);
       }
     });
   };
@@ -116,7 +139,7 @@ export class Tower {
       );
 
       if (currentTargetDistance > this.range) {
-        this.currentTarget = null;
+        this.setCurrentTarget(null);
       } else {
         if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
           this.createProjectile();
@@ -151,10 +174,12 @@ export class Tower {
   };
 
   removeTarget = () => {
-    this.currentTarget = null;
+    this.setCurrentTarget(null);
   };
 
-  updateProperties = () => {
+  update = () => {
+    this.setFrame();
+    this.drawImg();
     this.updateProjectiles();
 
     if (this.currentTarget) {
