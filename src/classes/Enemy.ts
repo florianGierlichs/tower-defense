@@ -21,7 +21,7 @@ export class Enemy {
     this.id = id;
     this.x = x;
     this.y = y;
-    this.pathNodes = [...pathNodes, { x: 941, y: -32 }]; // todo make end node dynamic
+    this.pathNodes = [...pathNodes, { x: 928, y: -32 }]; // todo make end node dynamic
     this.nodeTarget = pathNodes[this.nodesIndex];
     this.angle = getAngle(this.x, this.y, this.nodeTarget.x, this.nodeTarget.y);
   }
