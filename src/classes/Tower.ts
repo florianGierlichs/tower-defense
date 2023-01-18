@@ -9,8 +9,16 @@ export type towerState = "idle" | "attack";
 
 export interface ImgConfig {
   frames: number;
-  sx: number;
-  sy: number;
+  animationIterationCircleTime: number;
+  flipOffsetFrames: number;
+  animationStartRight: {
+    sx: number;
+    sy: number;
+  };
+  animationStartLeft: {
+    sx: number;
+    sy: number;
+  };
 }
 
 export type ImgConfigs = Record<towerState, ImgConfig>;
@@ -18,101 +26,155 @@ export class Tower {
   id;
   x;
   y;
-  range: number = 150;
-  attackSpeed: number = 1000; // Miliseconds
+  range: number;
+  attackSpeed: number;
   lastAttack: number | null = null;
   projectiles: Projectile[] = [];
   currentTarget: Enemy | null = null;
+  attackAnimationIsRunning: boolean = false;
 
   image: HTMLImageElement;
   sWidth: number = 64;
   sHeight: number = this.sWidth;
-  sX: number;
-  sY: number;
+  sX: number | null = null;
+  sY: number | null = null;
   dWidth: number = 64;
   dHeight: number = this.dWidth;
   dX: number;
   dY: number;
-  frames: number;
+  frames: number | null = null;
+  flipOffsetFrames: number | null = null;
 
   frameIteration: number = 0;
   lastFrameIteration: number | null = null;
   frameIterationThrottleTime: number = 100;
   state: towerState = "idle";
+  imgConfig: ImgConfigs;
+  updateImgConfig = false;
+  animationDirection: "left" | "right" = "left";
 
   constructor(
     id: string,
     x: number,
     y: number,
     img: HTMLImageElement,
-    config: ImgConfigs
+    imgConfig: ImgConfigs,
+    range: number,
+    attackSpeed: number
   ) {
     this.id = id;
     this.x = x;
     this.y = y;
+    this.range = range;
+    this.attackSpeed = attackSpeed;
 
     this.image = img;
+    this.imgConfig = imgConfig;
     this.dX = x;
     this.dY = y;
 
-    const { sx, sy, frames } = this.getImgConfig(config);
-    this.sX = sx;
-    this.sY = sy;
-    this.frames = frames;
+    this.setImageConfig();
   }
 
-  getImgConfig = (config: ImgConfigs) => {
+  private getImgConfigForState = () => {
     let imageConfig: ImgConfig;
     switch (this.state) {
       case "idle":
-        imageConfig = config.idle;
+        imageConfig = this.imgConfig.idle;
         break;
       default:
-        imageConfig = config.attack;
+        imageConfig = this.imgConfig.attack;
     }
     return imageConfig;
   };
 
-  setFrame = () => {
-    if (
-      timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
-    ) {
-      this.sX = this.frameIteration * this.sWidth;
+  private setImageConfig = () => {
+    const {
+      animationStartRight,
+      animationStartLeft,
+      frames,
+      animationIterationCircleTime,
+      flipOffsetFrames,
+    } = this.getImgConfigForState();
+    this.sX =
+      this.animationDirection === "right"
+        ? animationStartRight.sx
+        : animationStartLeft.sx;
+    this.sY =
+      this.animationDirection === "right"
+        ? animationStartRight.sy
+        : animationStartLeft.sy;
+    this.frames = frames;
+    this.flipOffsetFrames = flipOffsetFrames;
+    this.frameIterationThrottleTime =
+      animationIterationCircleTime / this.frames;
+  };
 
+  private setFrame = () => {
+    if (this.frames !== null && this.flipOffsetFrames !== null) {
+      if (this.animationDirection === "right") {
+        this.sX = this.frameIteration * this.sWidth;
+      } else {
+        this.sX =
+          (this.frames + this.flipOffsetFrames) * this.sWidth -
+          (this.frameIteration + 1) * this.sWidth;
+      }
+
+      // prepare frame for next iteration
       if (this.frameIteration < this.frames - 1) {
         this.frameIteration++;
       } else {
         this.frameIteration = 0;
-      }
 
-      this.lastFrameIteration = performance.now();
+        // after full attack animation circle
+        if (this.attackAnimationIsRunning) {
+          this.createProjectile();
+          this.attackAnimationIsRunning = false;
+          this.state = "idle";
+          this.setImageConfig();
+        }
+      }
     }
   };
 
   drawImg = () => {
-    ctxGame.drawImage(
-      this.image,
-      this.sX,
-      this.sY,
-      this.sWidth,
-      this.sHeight,
-      this.dX,
-      this.dY,
-      this.dWidth,
-      this.dHeight
-    );
+    if (this.sX !== null && this.sY !== null) {
+      ctxGame.drawImage(
+        this.image,
+        this.sX,
+        this.sY,
+        this.sWidth,
+        this.sHeight,
+        this.dX,
+        this.dY,
+        this.dWidth,
+        this.dHeight
+      );
+    }
   };
 
-  private setCurrentTarget = (target: Enemy | null) => {
+  private idle = () => {
+    if (
+      timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
+    ) {
+      this.setFrame();
+      this.lastFrameIteration = performance.now();
+    }
+    this.drawImg();
+  };
+
+  private setStateAndCurrentTarget = (target: Enemy | null) => {
     if (target === null) {
       this.state = "idle";
+      this.setImageConfig();
     } else {
       this.state = "attack";
     }
     this.currentTarget = target;
+    this.frameIteration = 0;
   };
 
-  private setClosestEnemyInRange = () => {
+  private checkAndSetClosestEnemyInRange = () => {
     let distanceOfClosestEnemy = Infinity;
 
     game.enemies.getEnemies().forEach((enemy) => {
@@ -126,12 +188,12 @@ export class Tower {
         enemyDistance <= distanceOfClosestEnemy
       ) {
         distanceOfClosestEnemy = enemyDistance;
-        this.setCurrentTarget(enemy);
+        this.setStateAndCurrentTarget(enemy);
       }
     });
   };
 
-  private checkCurrentTargetIsInRage = () => {
+  private currentTargetIsInRage = () => {
     if (this.currentTarget) {
       const currentTargetDistance = getDistance(
         { x: this.x, y: this.y },
@@ -139,14 +201,45 @@ export class Tower {
       );
 
       if (currentTargetDistance > this.range) {
-        this.setCurrentTarget(null);
+        return false;
       } else {
-        if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
-          this.createProjectile();
-          this.lastAttack = performance.now();
+        return true;
+      }
+    }
+    return false;
+  };
+
+  private attack = () => {
+    this.lastAttack = performance.now();
+    this.attackAnimationIsRunning = true;
+    this.setAnimationDirection();
+    this.setImageConfig();
+  };
+
+  private setAnimationDirection = () => {
+    if (this.currentTarget) {
+      if (this.currentTarget.x <= this.x) {
+        if (this.animationDirection === "right") {
+          this.animationDirection = "left";
+          this.updateImgConfig = true;
+        }
+      } else {
+        if (this.animationDirection === "left") {
+          this.animationDirection = "right";
+          this.updateImgConfig = true;
         }
       }
     }
+  };
+
+  private shoot = () => {
+    if (
+      timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
+    ) {
+      this.setFrame();
+      this.lastFrameIteration = performance.now();
+    }
+    this.drawImg();
   };
 
   private createProjectile = () => {
@@ -174,18 +267,29 @@ export class Tower {
   };
 
   removeTarget = () => {
-    this.setCurrentTarget(null);
+    this.setStateAndCurrentTarget(null);
   };
 
   update = () => {
-    this.setFrame();
-    this.drawImg();
-    this.updateProjectiles();
-
-    if (this.currentTarget) {
-      this.checkCurrentTargetIsInRage();
+    if (this.attackAnimationIsRunning) {
+      this.shoot();
     } else {
-      this.setClosestEnemyInRange();
+      if (this.state === "idle") {
+        this.idle();
+        if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
+          this.checkAndSetClosestEnemyInRange();
+        }
+      } else {
+        if (this.currentTargetIsInRage()) {
+          this.attack();
+          this.shoot();
+        } else {
+          this.setStateAndCurrentTarget(null);
+          this.idle();
+        }
+      }
     }
+
+    this.updateProjectiles();
   };
 }
