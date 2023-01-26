@@ -46,8 +46,8 @@ const runGame = (timestamp?: number) => {
 const update = () => {
   ctxGame.clearRect(0, 0, canvasGame.width, canvasGame.height);
 
-  game.towers.update();
   game.enemies.update();
+  game.towers.update();
 };
 
 canvasGame.addEventListener("click", (e) => {

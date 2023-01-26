@@ -53,6 +53,10 @@ export class Tower {
   updateImgConfig = false;
   animationDirection: "left" | "right" = "left";
 
+  projectileImg;
+  projectileWidth;
+  projectileHeight;
+
   constructor(
     id: string,
     x: number,
@@ -60,7 +64,16 @@ export class Tower {
     img: HTMLImageElement,
     imgConfig: ImgConfigs,
     range: number,
-    attackSpeed: number
+    attackSpeed: number,
+    {
+      projectileImg,
+      projectileWidth,
+      projectileHeight,
+    }: {
+      projectileImg: HTMLImageElement;
+      projectileWidth: number;
+      projectileHeight: number;
+    }
   ) {
     this.id = id;
     this.x = x;
@@ -74,6 +87,10 @@ export class Tower {
     this.dY = y;
 
     this.setImageConfig();
+
+    this.projectileImg = projectileImg;
+    this.projectileWidth = projectileWidth;
+    this.projectileHeight = projectileHeight;
   }
 
   private getImgConfigForState = () => {
@@ -249,6 +266,11 @@ export class Tower {
           shortUUID.generate(),
           this.x,
           this.y,
+          {
+            img: this.projectileImg,
+            width: this.projectileWidth,
+            height: this.projectileHeight,
+          },
           this.currentTarget,
           this.removeProjectile
         )

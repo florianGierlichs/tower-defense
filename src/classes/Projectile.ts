@@ -9,29 +9,48 @@ export class Projectile {
   y;
   targetEnemy;
   removeProjectile;
-  width: number = 4;
   color: string = "red";
-  speed: number = 5;
+  speed: number = 10;
+
+  image: HTMLImageElement;
+  width: number;
+  height: number;
 
   constructor(
     id: string,
     x: number,
     y: number,
+    {
+      img,
+      width,
+      height,
+    }: { img: HTMLImageElement; width: number; height: number },
     targetEnemy: Enemy,
     removeProjectile: (id: string) => void
   ) {
     this.id = id;
     this.x = x;
     this.y = y;
+    this.image = img;
+    this.width = width;
+    this.height = height;
     this.targetEnemy = targetEnemy;
     this.removeProjectile = removeProjectile;
   }
 
   private draw = () => {
-    ctxGame.beginPath();
-    ctxGame.arc(this.x, this.y, this.width, 0, Math.PI * 2);
-    ctxGame.fillStyle = "pink";
-    ctxGame.fill();
+    const angle = getAngle(
+      this.x,
+      this.y,
+      this.targetEnemy.x,
+      this.targetEnemy.y
+    );
+
+    ctxGame.save();
+    ctxGame.translate(this.x, this.y);
+    ctxGame.rotate(angle * (Math.PI / 180)); // convert degrees to radians
+    ctxGame.drawImage(this.image, -this.width, -this.height);
+    ctxGame.restore();
   };
 
   private move = () => {
@@ -77,7 +96,7 @@ export class Projectile {
   };
 
   update = () => {
-    this.draw();
     this.move();
+    this.draw();
   };
 }
