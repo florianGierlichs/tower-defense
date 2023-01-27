@@ -54,6 +54,12 @@ canvasGame.addEventListener("click", (e) => {
   const tile = getTileForClick(game.tiles.getTileRows(), e);
   console.log("tile", tile);
 
+  game.towers.hideTowerRanger();
+  if (tile instanceof TileGras && tile.hasTower) {
+    const tower = game.towers.getTowerForTile(tile.x, tile.y);
+    tower?.setShowRange(true);
+  }
+
   if (tile instanceof TileGras && !tile.hasTower) {
     game.towers.createTower(tile.x, tile.y);
     tile.setHasTower();
@@ -62,8 +68,6 @@ canvasGame.addEventListener("click", (e) => {
 
 runGame();
 
-// todo add buildable tower for tile
-// todo add show tower range on tile with tower
 // todo add tower blue print on tile and show tower range
 
 const toggleTilesInfoButton =

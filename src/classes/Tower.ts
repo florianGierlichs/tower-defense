@@ -33,6 +33,7 @@ export class Tower {
   projectiles: Projectile[] = [];
   currentTarget: Enemy | null = null;
   attackAnimationIsRunning: boolean = false;
+  showRange: boolean = false;
 
   image: HTMLImageElement;
   sWidth: number = 64;
@@ -156,7 +157,7 @@ export class Tower {
     }
   };
 
-  drawImg = () => {
+  private drawImg = () => {
     if (this.sX !== null && this.sY !== null) {
       ctxGame.drawImage(
         this.image,
@@ -294,6 +295,23 @@ export class Tower {
     this.setStateAndCurrentTarget(null);
   };
 
+  private drawRange = () => {
+    ctxGame.beginPath();
+    ctxGame.arc(
+      this.tileMiddle.x,
+      this.tileMiddle.y,
+      this.range,
+      0,
+      Math.PI * 2
+    );
+    ctxGame.fillStyle = "rgba(225,225,225,0.1)";
+    ctxGame.fill();
+  };
+
+  setShowRange = (show: boolean) => {
+    this.showRange = show;
+  };
+
   update = () => {
     if (this.attackAnimationIsRunning) {
       this.shoot();
@@ -312,6 +330,10 @@ export class Tower {
           this.idle();
         }
       }
+    }
+
+    if (this.showRange) {
+      this.drawRange();
     }
 
     this.updateProjectiles();
