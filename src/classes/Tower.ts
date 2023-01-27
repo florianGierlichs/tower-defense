@@ -26,6 +26,7 @@ export class Tower {
   id;
   x;
   y;
+  tileMiddle;
   range: number;
   attackSpeed: number;
   lastAttack: number | null = null;
@@ -78,6 +79,7 @@ export class Tower {
     this.id = id;
     this.x = x;
     this.y = y;
+    this.tileMiddle = { x: x + 64 / 2, y: y + 64 / 2 };
     this.range = range;
     this.attackSpeed = attackSpeed;
 
@@ -195,10 +197,10 @@ export class Tower {
     let distanceOfClosestEnemy = Infinity;
 
     game.enemies.getEnemies().forEach((enemy) => {
-      const enemyDistance = getDistance(
-        { x: this.x, y: this.y },
-        { x: enemy.x, y: enemy.y }
-      );
+      const enemyDistance = getDistance(this.tileMiddle, {
+        x: enemy.x,
+        y: enemy.y,
+      });
 
       if (
         enemyDistance <= this.range &&
@@ -212,10 +214,10 @@ export class Tower {
 
   private currentTargetIsInRage = () => {
     if (this.currentTarget) {
-      const currentTargetDistance = getDistance(
-        { x: this.x, y: this.y },
-        { x: this.currentTarget.x, y: this.currentTarget.y }
-      );
+      const currentTargetDistance = getDistance(this.tileMiddle, {
+        x: this.currentTarget.x,
+        y: this.currentTarget.y,
+      });
 
       if (currentTargetDistance > this.range) {
         return false;
@@ -264,8 +266,8 @@ export class Tower {
       this.projectiles.push(
         new Projectile(
           shortUUID.generate(),
-          this.x,
-          this.y,
+          this.tileMiddle.x,
+          this.tileMiddle.y,
           {
             img: this.projectileImg,
             width: this.projectileWidth,
