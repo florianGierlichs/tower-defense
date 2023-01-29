@@ -11,10 +11,10 @@ export const canvasGame =
 export const ctxBackground = canvasBackground.getContext("2d")!;
 export const ctxGame = canvasGame.getContext("2d")!;
 
-canvasBackground.width = 1300;
-canvasBackground.height = 780;
-canvasGame.width = 1300;
-canvasGame.height = 780;
+canvasBackground.width = 1280;
+canvasBackground.height = 768;
+canvasGame.width = 1280;
+canvasGame.height = 768;
 
 export const game = new Game();
 

@@ -4,10 +4,28 @@ body {
   padding: 0;
 }
 
+#gui-container {
+  background-image: url("./assets/forrest.png");
+  width: 100%;
+  height: calc(100vh - 50px);
+  background-size: cover;
+  padding-top: 50px;
+}
+
+#canvas-border {
+  background-image: url("./assets/border.png");
+  width: 1344px;
+  height: 800px;
+  margin: 0 auto;
+  padding-top: 32px;
+  box-shadow: 6px 6px 6px 5px rgb(0 0 0 / 30%);
+}
+
 #canvas-container {
   position: relative;
-  width: 1300px;
-  height: 780px;
+  width: 1280px;
+  height: 768px;
+  margin: 0 auto;
 }
 
 canvas {
