@@ -195,22 +195,32 @@ export class Tower {
   };
 
   private checkAndSetClosestEnemyInRange = () => {
-    let distanceOfClosestEnemy = Infinity;
+    if (
+      this.currentTarget !== null &&
+      getDistance(this.tileMiddle, {
+        x: this.currentTarget.x,
+        y: this.currentTarget.y,
+      }) <= this.range
+    ) {
+      this.setStateAndCurrentTarget(this.currentTarget);
+    } else {
+      let distanceOfClosestEnemy = Infinity;
 
-    game.enemies.getEnemies().forEach((enemy) => {
-      const enemyDistance = getDistance(this.tileMiddle, {
-        x: enemy.x,
-        y: enemy.y,
+      game.enemies.getEnemies().forEach((enemy) => {
+        const enemyDistance = getDistance(this.tileMiddle, {
+          x: enemy.x,
+          y: enemy.y,
+        });
+
+        if (
+          enemyDistance <= this.range &&
+          enemyDistance <= distanceOfClosestEnemy
+        ) {
+          distanceOfClosestEnemy = enemyDistance;
+          this.setStateAndCurrentTarget(enemy);
+        }
       });
-
-      if (
-        enemyDistance <= this.range &&
-        enemyDistance <= distanceOfClosestEnemy
-      ) {
-        distanceOfClosestEnemy = enemyDistance;
-        this.setStateAndCurrentTarget(enemy);
-      }
-    });
+    }
   };
 
   private currentTargetIsInRage = () => {
