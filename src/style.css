@@ -7,9 +7,22 @@ body {
 #background {
   background-image: url("./assets/forrest.png");
   width: 100%;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 40px);
   background-size: cover;
-  padding-top: 200px;
+  padding-top: 40px;
+}
+
+#title-container {
+  margin: 0 0 50px 0;
+  color: white;
+  text-align: center;
+}
+
+#title {
+  background-image: url("./assets/titleContainer.png");
+  display: inline-block;
+  padding: 12px 20px;
+  background-size: contain;
 }
 
 #gui-container {
@@ -19,10 +32,9 @@ body {
 
 #canvas-border {
   background-image: url("./assets/border.png");
-  width: 1088px;
-  height: 544px;
-  padding-top: 32px;
-  box-shadow: 6px 6px 6px 5px rgb(0 0 0 / 30%);
+  width: 1056px;
+  height: 528px;
+  padding-top: 16px;
 }
 
 #canvas-container {
@@ -45,23 +57,24 @@ canvas {
 }
 
 #menu-border {
-  background-image: url("./assets/border.png");
+  background-image: url("./assets/borderDark.png");
   width: 192px;
-  height: 544px;
-  padding-top: 32px;
-  box-shadow: 6px 6px 6px 5px rgb(0 0 0 / 30%);
   margin-left: 50px;
 }
 
 #menu-container {
   height: 512px;
-  width: 128px;
-  margin-left: 32px;
+  width: 160px;
+  margin: 16px 0 0 16px;
   background-image: url("./assets/menuBackground.png");
-  background-size: auto;
+  background-size: cover;
 }
 
 #toggle-tiles-info {
   padding: 12px 8px;
   margin: 10px;
+}
+
+.box-shadow {
+  box-shadow: 6px 6px 6px 5px rgb(0 0 0 / 30%);
 }
