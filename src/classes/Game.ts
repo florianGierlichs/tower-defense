@@ -23,18 +23,21 @@ export class Game {
       .filter((tile) => tile.direction === "corner")
       .map((tile) => tile.id);
 
-    const pathNodes = this.tiles
-      .getTilePaths()
-      .filter((tile) => tile.direction === "corner")
-      .sort(
-        (a, b) =>
-          pathConfigurationCorners.indexOf(a.id) -
-          pathConfigurationCorners.indexOf(b.id)
-      )
-      .map((node) => ({
-        x: node.x + 32,
-        y: node.y + 32,
-      }));
+    const pathNodes = [
+      ...this.tiles
+        .getTilePaths()
+        .filter((tile) => tile.direction === "corner")
+        .sort(
+          (a, b) =>
+            pathConfigurationCorners.indexOf(a.id) -
+            pathConfigurationCorners.indexOf(b.id)
+        )
+        .map((node) => ({
+          x: node.x + 32,
+          y: node.y + 32,
+        })),
+      this.tiles.getPathEndPoint(),
+    ];
 
     this.enemies = new Enemies(pathNodes);
   }

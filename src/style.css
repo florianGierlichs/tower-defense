@@ -4,27 +4,31 @@ body {
   padding: 0;
 }
 
-#gui-container {
+#background {
   background-image: url("./assets/forrest.png");
   width: 100%;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 200px);
   background-size: cover;
-  padding-top: 50px;
+  padding-top: 200px;
+}
+
+#gui-container {
+  display: flex;
+  justify-content: center;
 }
 
 #canvas-border {
   background-image: url("./assets/border.png");
-  width: 1344px;
-  height: 800px;
-  margin: 0 auto;
+  width: 1088px;
+  height: 544px;
   padding-top: 32px;
   box-shadow: 6px 6px 6px 5px rgb(0 0 0 / 30%);
 }
 
 #canvas-container {
   position: relative;
-  width: 1280px;
-  height: 768px;
+  width: 1024px;
+  height: 512px;
   margin: 0 auto;
 }
 
@@ -38,6 +42,23 @@ canvas {
 
 #canvas-game {
   z-index: 2;
+}
+
+#menu-border {
+  background-image: url("./assets/border.png");
+  width: 192px;
+  height: 544px;
+  padding-top: 32px;
+  box-shadow: 6px 6px 6px 5px rgb(0 0 0 / 30%);
+  margin-left: 50px;
+}
+
+#menu-container {
+  height: 512px;
+  width: 128px;
+  margin-left: 32px;
+  background-image: url("./assets/menuBackground.png");
+  background-size: auto;
 }
 
 #toggle-tiles-info {
