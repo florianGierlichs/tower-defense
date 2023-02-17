@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  cursor: url("./assets/CursorBrown.png") 11 6, auto;
 }
 
 #background {
@@ -68,6 +69,31 @@ canvas {
   margin: 16px 0 0 16px;
   background-image: url("./assets/menuBackground.png");
   background-size: cover;
+  color: white;
+}
+
+.menu-row {
+  display: flex;
+}
+
+.menu-item {
+  height: 64px;
+  margin-bottom: 10px;
+  width: 80px;
+  height: 80px;
+}
+
+.menu-item:hover {
+  outline: 1px solid white;
+}
+
+.menu-item:active {
+  scale: 0.98;
+}
+
+#arcaneArcherMenu {
+  background-image: url("./assets/arcaneArcherMenu.png");
+  background-size: cover;
 }
 
 #toggle-tiles-info {
@@ -77,4 +103,8 @@ canvas {
 
 .box-shadow {
   box-shadow: 6px 6px 6px 5px rgb(0 0 0 / 30%);
+}
+
+.cursorArcaneArcher {
+  cursor: url("./assets/cursorArcaneArcher.png") 38 48, auto;
 }
