@@ -1,4 +1,5 @@
 import { Enemies } from "./Enemies";
+import { Menu } from "./Menu";
 import { Tiles } from "./Tiles";
 import { Towers } from "./Towers";
 
@@ -7,10 +8,20 @@ export interface PathNode {
   y: number;
 }
 
+export type TowerNames = typeof TOWERS_NAMES;
+export type TowerName = TowerNames[number];
+
+const TOWERS_NAMES = ["arcaneArcher"] as const;
+
 export class Game {
   time: number = 0;
 
+  appContainer = document.querySelector<HTMLDivElement>("#app")!;
+
+  towerNames = TOWERS_NAMES;
+
   tiles = new Tiles();
+  menu = new Menu(this.towerNames);
   towers = new Towers();
   enemies: Enemies;
 
@@ -41,4 +52,6 @@ export class Game {
 
     this.enemies = new Enemies(pathNodes);
   }
+
+  getAppContainer = () => this.appContainer;
 }

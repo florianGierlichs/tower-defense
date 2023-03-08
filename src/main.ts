@@ -74,12 +74,3 @@ const toggleTilesInfoButton =
   document.querySelector<HTMLButtonElement>("#toggle-tiles-info")!;
 
 toggleTilesInfoButton.addEventListener("click", game.tiles.toggleDebug);
-
-const app = document.querySelector<HTMLButtonElement>("#app")!;
-
-const arcaneArcherMenuItem =
-  document.querySelector<HTMLDivElement>("#arcaneArcherMenu")!;
-
-arcaneArcherMenuItem.addEventListener("click", () => {
-  app.classList.add("cursorArcaneArcher");
-});
