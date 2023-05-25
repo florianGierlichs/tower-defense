@@ -1,5 +1,8 @@
+import { canvasGame } from "../main";
+import { getTileForClick } from "../utils/getTileForClick";
 import { Enemies } from "./Enemies";
 import { Menu } from "./Menu";
+import { TileGras } from "./TileGras";
 import { Tiles } from "./Tiles";
 import { Towers } from "./Towers";
 
@@ -21,7 +24,7 @@ export class Game {
   towerNames = TOWERS_NAMES;
 
   tiles = new Tiles();
-  menu = new Menu(this.towerNames);
+  menu = new Menu(this.towerNames, this.appContainer); // todo try to not pass the element
   towers = new Towers();
   enemies: Enemies;
 
@@ -54,4 +57,29 @@ export class Game {
   }
 
   getAppContainer = () => this.appContainer;
+
+  placeTowerOnTile = (event: MouseEvent, tower: TowerName) => {
+    const tile = getTileForClick(this.tiles.getTileRows(), event);
+    console.log("tile", tile);
+
+    this.towers.hideTowerRanger();
+    if (tile instanceof TileGras && tile.hasTower) {
+      const tower = this.towers.getTowerForTile(tile.x, tile.y);
+      tower?.setShowRange(true);
+      // todo show range needs to be in other method
+    }
+
+    if (tile instanceof TileGras && !tile.hasTower) {
+      this.towers.createTower(tile.x, tile.y, tower);
+      tile.setHasTower();
+    }
+  };
+
+  addPlaceTowerOnTileClickEventForCanvasGame = (tower: TowerName) => {
+    const listener = (e: MouseEvent) => {
+      this.placeTowerOnTile(e, tower);
+      canvasGame.removeEventListener("click", listener);
+    };
+    canvasGame.addEventListener("click", listener);
+  };
 }

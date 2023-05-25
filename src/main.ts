@@ -1,9 +1,8 @@
 import { Game } from "./classes/Game";
-import { TileGras } from "./classes/TileGras";
 import "./style.css";
-import { getTileForClick } from "./utils/getTileForClick";
 import { timeHasPassed } from "./utils/timeHasPassed";
 
+// todo put stuff into App?! class, or Game?!
 export const canvasBackground =
   document.querySelector<HTMLCanvasElement>("#canvas-background")!;
 export const canvasGame =
@@ -48,23 +47,8 @@ const update = () => {
 
   game.enemies.update();
   game.towers.update();
+  game.menu.update();
 };
-
-canvasGame.addEventListener("click", (e) => {
-  const tile = getTileForClick(game.tiles.getTileRows(), e);
-  console.log("tile", tile);
-
-  game.towers.hideTowerRanger();
-  if (tile instanceof TileGras && tile.hasTower) {
-    const tower = game.towers.getTowerForTile(tile.x, tile.y);
-    tower?.setShowRange(true);
-  }
-
-  if (tile instanceof TileGras && !tile.hasTower) {
-    game.towers.createTower(tile.x, tile.y);
-    tile.setHasTower();
-  }
-});
 
 runGame();
 

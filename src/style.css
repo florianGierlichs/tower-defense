@@ -70,6 +70,7 @@ canvas {
   background-image: url("./assets/menuBackground.png");
   background-size: cover;
   color: white;
+  /* todo add different color for cursor on hover */
 }
 
 #menu-towers-container {
