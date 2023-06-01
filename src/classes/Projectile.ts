@@ -1,4 +1,4 @@
-import { ctxGame } from "../main";
+import { dom } from "../main";
 import { getAngle } from "../utils/getAngle";
 import { reachedTarget } from "../utils/reachedTarget";
 import { Enemy } from "./Enemy";
@@ -46,11 +46,11 @@ export class Projectile {
       this.targetEnemy.y
     );
 
-    ctxGame.save();
-    ctxGame.translate(this.x, this.y);
-    ctxGame.rotate(angle * (Math.PI / 180)); // convert degrees to radians
-    ctxGame.drawImage(this.image, -this.width, -this.height);
-    ctxGame.restore();
+    dom.ctxGame.save();
+    dom.ctxGame.translate(this.x, this.y);
+    dom.ctxGame.rotate(angle * (Math.PI / 180)); // convert degrees to radians
+    dom.ctxGame.drawImage(this.image, -this.width, -this.height);
+    dom.ctxGame.restore();
   };
 
   private move = () => {

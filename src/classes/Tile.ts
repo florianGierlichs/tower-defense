@@ -1,4 +1,4 @@
-import { ctxBackground } from "../main";
+import { dom } from "../main";
 import textures from "../assets/textures.png";
 
 export interface TileCoords {
@@ -41,19 +41,19 @@ export class Tile {
   };
 
   drawDebug = () => {
-    ctxBackground.lineWidth = 0.1;
-    ctxBackground.strokeStyle = "black";
-    ctxBackground.font = " 10px sans-serif";
-    ctxBackground.fillStyle = "white";
-    ctxBackground.beginPath();
-    ctxBackground.strokeRect(this.x, this.y, this.width, this.height);
-    ctxBackground.fillText(`${this.id}`, this.x + 5, this.y + 10);
-    ctxBackground.fillText(
+    dom.ctxBackground.lineWidth = 0.1;
+    dom.ctxBackground.strokeStyle = "black";
+    dom.ctxBackground.font = " 10px sans-serif";
+    dom.ctxBackground.fillStyle = "white";
+    dom.ctxBackground.beginPath();
+    dom.ctxBackground.strokeRect(this.x, this.y, this.width, this.height);
+    dom.ctxBackground.fillText(`${this.id}`, this.x + 5, this.y + 10);
+    dom.ctxBackground.fillText(
       `X:${this.x}-${this.x + 64}`,
       this.x + 5,
       this.y + 30
     );
-    ctxBackground.fillText(
+    dom.ctxBackground.fillText(
       `Y:${this.y} ${this.y + 64}`,
       this.x + 5,
       this.y + 50

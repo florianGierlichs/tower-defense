@@ -1,4 +1,4 @@
-import { canvasGame, game } from "../main";
+import { dom, game } from "../main";
 import { TowerName, TowerNames } from "./Game";
 import { MenuItemTower } from "./MenuItemTower";
 
@@ -33,11 +33,11 @@ export class Menu {
   };
 
   private addMouseMoveEvent = () => {
-    canvasGame.addEventListener("mousemove", test);
+    dom.canvasGame.addEventListener("mousemove", test);
   };
 
   private removeMouseMoveEvent = () => {
-    canvasGame.removeEventListener("mousemove", test);
+    dom.canvasGame.removeEventListener("mousemove", test);
   };
 
   private selectTower = (tower: TowerName) => {

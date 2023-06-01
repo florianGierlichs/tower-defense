@@ -29,7 +29,7 @@ export class Towers {
     return this.towers.find((tower) => tower.x === tileX && tower.y === tileY);
   };
 
-  hideTowerRanger = () => {
+  hideTowerRange = () => {
     this.towers.forEach((tower) => tower.setShowRange(false));
   };
 

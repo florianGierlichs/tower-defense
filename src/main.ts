@@ -1,20 +1,9 @@
+import { DomController } from "./classes/DomController";
 import { Game } from "./classes/Game";
 import "./style.css";
 import { timeHasPassed } from "./utils/timeHasPassed";
 
-// todo put stuff into App?! class, or Game?!
-export const canvasBackground =
-  document.querySelector<HTMLCanvasElement>("#canvas-background")!;
-export const canvasGame =
-  document.querySelector<HTMLCanvasElement>("#canvas-game")!;
-export const ctxBackground = canvasBackground.getContext("2d")!;
-export const ctxGame = canvasGame.getContext("2d")!;
-
-canvasBackground.width = 1024;
-canvasBackground.height = 512;
-canvasGame.width = 1024;
-canvasGame.height = 512;
-
+export const dom = new DomController();
 export const game = new Game();
 
 let lastAnimationTimestamp: number | null = null;
@@ -43,7 +32,7 @@ const runGame = (timestamp?: number) => {
 };
 
 const update = () => {
-  ctxGame.clearRect(0, 0, canvasGame.width, canvasGame.height);
+  dom.ctxGame.clearRect(0, 0, dom.canvasGame.width, dom.canvasGame.height);
 
   game.enemies.update();
   game.towers.update();
@@ -51,10 +40,3 @@ const update = () => {
 };
 
 runGame();
-
-// todo add tower blue print on tile and show tower range
-
-const toggleTilesInfoButton =
-  document.querySelector<HTMLButtonElement>("#toggle-tiles-info")!;
-
-toggleTilesInfoButton.addEventListener("click", game.tiles.toggleDebug);

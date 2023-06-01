@@ -1,4 +1,4 @@
-import { canvasGame } from "../main";
+import { dom } from "../main";
 import { getTileForClick } from "../utils/getTileForClick";
 import { Enemies } from "./Enemies";
 import { Menu } from "./Menu";
@@ -54,21 +54,17 @@ export class Game {
     ];
 
     this.enemies = new Enemies(pathNodes);
+
+    this.addShowTowerRangeClickEventForCanvasGame();
+    this.addHideTowerRangeClickEventForBody();
+
+    dom.toggleTilesInfoButton.addEventListener("click", this.tiles.toggleDebug);
   }
 
   getAppContainer = () => this.appContainer;
 
-  placeTowerOnTile = (event: MouseEvent, tower: TowerName) => {
+  private placeTowerOnTile = (event: MouseEvent, tower: TowerName) => {
     const tile = getTileForClick(this.tiles.getTileRows(), event);
-    console.log("tile", tile);
-
-    this.towers.hideTowerRanger();
-    if (tile instanceof TileGras && tile.hasTower) {
-      const tower = this.towers.getTowerForTile(tile.x, tile.y);
-      tower?.setShowRange(true);
-      // todo show range needs to be in other method
-    }
-
     if (tile instanceof TileGras && !tile.hasTower) {
       this.towers.createTower(tile.x, tile.y, tower);
       tile.setHasTower();
@@ -78,8 +74,34 @@ export class Game {
   addPlaceTowerOnTileClickEventForCanvasGame = (tower: TowerName) => {
     const listener = (e: MouseEvent) => {
       this.placeTowerOnTile(e, tower);
-      canvasGame.removeEventListener("click", listener);
+      dom.canvasGame.removeEventListener("click", listener);
     };
-    canvasGame.addEventListener("click", listener);
+    dom.canvasGame.addEventListener("click", listener);
+  };
+
+  private showTowerRange = (event: MouseEvent) => {
+    const tile = getTileForClick(this.tiles.getTileRows(), event);
+    if (tile instanceof TileGras && tile.hasTower) {
+      const tower = this.towers.getTowerForTile(tile.x, tile.y);
+      tower?.setShowRange(true);
+    }
+  };
+
+  private hideTowerRange = () => {
+    this.towers.hideTowerRange();
+  };
+
+  private addShowTowerRangeClickEventForCanvasGame = () => {
+    const showRangeListener = (e: MouseEvent) => {
+      this.showTowerRange(e);
+    };
+    dom.canvasGame.addEventListener("click", showRangeListener, false);
+  };
+
+  private addHideTowerRangeClickEventForBody = () => {
+    const hideRangeListener = () => {
+      this.hideTowerRange();
+    };
+    dom.body.addEventListener("click", hideRangeListener, true);
   };
 }

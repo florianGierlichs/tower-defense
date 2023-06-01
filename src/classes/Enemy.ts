@@ -1,4 +1,4 @@
-import { ctxGame, game } from "../main";
+import { dom, game } from "../main";
 import { getAngle } from "../utils/getAngle";
 import { reachedTarget } from "../utils/reachedTarget";
 import { PathNode } from "./Game";
@@ -27,10 +27,10 @@ export class Enemy {
   }
 
   private draw = () => {
-    ctxGame.beginPath();
-    ctxGame.arc(this.x, this.y, this.width / 2, 0, Math.PI * 2);
-    ctxGame.fillStyle = this.color;
-    ctxGame.fill();
+    dom.ctxGame.beginPath();
+    dom.ctxGame.arc(this.x, this.y, this.width / 2, 0, Math.PI * 2);
+    dom.ctxGame.fillStyle = this.color;
+    dom.ctxGame.fill();
   };
 
   private move = () => {

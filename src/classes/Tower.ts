@@ -1,5 +1,5 @@
 import shortUUID from "short-uuid";
-import { ctxGame, game } from "../main";
+import { dom, game } from "../main";
 import { getDistance } from "../utils/getDistance";
 import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemy } from "./Enemy";
@@ -159,7 +159,7 @@ export class Tower {
 
   private drawImg = () => {
     if (this.sX !== null && this.sY !== null) {
-      ctxGame.drawImage(
+      dom.ctxGame.drawImage(
         this.image,
         this.sX,
         this.sY,
@@ -306,16 +306,16 @@ export class Tower {
   };
 
   private drawRange = () => {
-    ctxGame.beginPath();
-    ctxGame.arc(
+    dom.ctxGame.beginPath();
+    dom.ctxGame.arc(
       this.tileMiddle.x,
       this.tileMiddle.y,
       this.range,
       0,
       Math.PI * 2
     );
-    ctxGame.fillStyle = "rgba(225,225,225,0.1)";
-    ctxGame.fill();
+    dom.ctxGame.fillStyle = "rgba(225,225,225,0.1)";
+    dom.ctxGame.fill();
   };
 
   setShowRange = (show: boolean) => {

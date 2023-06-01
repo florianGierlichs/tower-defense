@@ -1,4 +1,4 @@
-import { ctxBackground } from "../main";
+import { dom } from "../main";
 import { Tile, TileCoords } from "./Tile";
 import { getRandomItemFromArray } from "../utils/getRandomItemFromArray";
 
@@ -31,7 +31,7 @@ export class TileGras extends Tile {
   };
 
   private drawImg = () => {
-    ctxBackground.drawImage(
+    dom.ctxBackground.drawImage(
       this.image,
       this.sX,
       this.sY,
