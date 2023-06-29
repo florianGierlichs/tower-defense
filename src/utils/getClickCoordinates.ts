@@ -1,3 +1,3 @@
-export const getClickCoordinates = (clickEvent: MouseEvent) => {
-  return { x: clickEvent.offsetX, y: clickEvent.offsetY };
+export const getMouseCoordinates = (event: MouseEvent) => {
+  return { x: event.offsetX, y: event.offsetY };
 };

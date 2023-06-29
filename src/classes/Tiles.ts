@@ -60,6 +60,7 @@ export class Tiles {
 
   tileRows: TileRow[] = [];
   tilePaths: TilePath[] = [];
+  tileGras: TileGras[] = [];
 
   debug = false;
 
@@ -87,7 +88,9 @@ export class Tiles {
         row.push(tile);
         this.tilePaths.push(tile);
       } else {
-        row.push(new TileGras(i, this.getTileX(i), this.getTileY()));
+        const tile = new TileGras(i, this.getTileX(i), this.getTileY());
+        row.push(tile);
+        this.tileGras.push(tile);
       }
 
       if (row.length === this.rowLength) {
@@ -100,7 +103,7 @@ export class Tiles {
   buildTileImg = () => {
     this.tileRows.forEach((row) => {
       row.forEach((tile) => {
-        tile.update();
+        tile.updateBG();
       });
     });
   };
@@ -121,6 +124,14 @@ export class Tiles {
     return this.pathEndPoint;
   };
 
+  private updateTilesGras = () => {
+    this.tileGras.forEach((tile) => tile.update());
+  };
+
+  update = () => {
+    this.updateTilesGras();
+  };
+
   toggleDebug = () => {
     if (!this.debug) {
       this.tileRows.forEach((row) => {
@@ -131,7 +142,7 @@ export class Tiles {
     } else {
       this.tileRows.forEach((row) => {
         row.forEach((tile) => {
-          tile.update();
+          tile.updateBG();
         });
       });
     }

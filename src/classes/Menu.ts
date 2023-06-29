@@ -1,8 +1,11 @@
 import { dom, game } from "../main";
+import { getTileForHover } from "../utils/getTileForHover";
 import { TowerName, TowerNames } from "./Game";
 import { MenuItemTower } from "./MenuItemTower";
 
-const test = () => console.log("hallo welt"); // todo Add tower BP for tile on hover
+const test = (e: MouseEvent) => {
+  console.log("tile: ", getTileForHover(e));
+}; // todo Add tower BP for tile on hover
 
 export class Menu {
   selectedTower: TowerName | null = null;
@@ -32,12 +35,22 @@ export class Menu {
     }
   };
 
+  private showTowerBpForSelectedTower = (e: MouseEvent) => {
+    game.showTowerBb(e, this.selectedTower);
+  };
+
   private addMouseMoveEvent = () => {
-    dom.canvasGame.addEventListener("mousemove", test);
+    dom.canvasGame.addEventListener(
+      "mousemove",
+      this.showTowerBpForSelectedTower
+    );
   };
 
   private removeMouseMoveEvent = () => {
-    dom.canvasGame.removeEventListener("mousemove", test);
+    dom.canvasGame.removeEventListener(
+      "mousemove",
+      this.showTowerBpForSelectedTower
+    );
   };
 
   private selectTower = (tower: TowerName) => {

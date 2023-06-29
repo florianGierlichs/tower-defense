@@ -1,5 +1,4 @@
 import { dom } from "../main";
-import textures from "../assets/textures.png";
 
 export interface TileCoords {
   sx: number;
@@ -13,7 +12,6 @@ export class Tile {
   width: number = 64;
   height: number = 64;
 
-  image: HTMLImageElement;
   sWidth: number = 64;
   sHeight: number = this.sWidth;
   dWidth: number = 64;
@@ -26,19 +24,9 @@ export class Tile {
     this.x = x;
     this.y = y;
 
-    this.image = new Image(64, 64);
     this.dX = x;
     this.dY = y;
   }
-
-  buildImg = async (drawImg: () => void) => {
-    this.image.src = textures;
-
-    await this.image.decode();
-    drawImg();
-
-    // todo decouple build from every render?! maybe only build once
-  };
 
   drawDebug = () => {
     dom.ctxBackground.lineWidth = 0.1;

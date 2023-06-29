@@ -1,5 +1,6 @@
 import { dom } from "../main";
 import { getTileForClick } from "../utils/getTileForClick";
+import { getTileForHover } from "../utils/getTileForHover";
 import { Enemies } from "./Enemies";
 import { Menu } from "./Menu";
 import { TileGras } from "./TileGras";
@@ -64,7 +65,7 @@ export class Game {
   getAppContainer = () => this.appContainer;
 
   private placeTowerOnTile = (event: MouseEvent, tower: TowerName) => {
-    const tile = getTileForClick(this.tiles.getTileRows(), event);
+    const tile = getTileForClick(event);
     if (tile instanceof TileGras && !tile.hasTower) {
       this.towers.createTower(tile.x, tile.y, tower);
       tile.setHasTower();
@@ -80,7 +81,7 @@ export class Game {
   };
 
   private showTowerRange = (event: MouseEvent) => {
-    const tile = getTileForClick(this.tiles.getTileRows(), event);
+    const tile = getTileForClick(event);
     if (tile instanceof TileGras && tile.hasTower) {
       const tower = this.towers.getTowerForTile(tile.x, tile.y);
       tower?.setShowRange(true);
@@ -103,5 +104,17 @@ export class Game {
       this.hideTowerRange();
     };
     dom.body.addEventListener("click", hideRangeListener, true);
+  };
+
+  showTowerBb = (e: MouseEvent, selectedTower: TowerName | null) => {
+    const tile = getTileForHover(e);
+    console.log("tile", tile);
+
+    // prio todo BP on hover only works for some tiles. this seems to be always random
+
+    if (tile instanceof TileGras && !tile.hasTower) {
+      tile.setShowTowerBp(selectedTower);
+      tile.update();
+    }
   };
 }
