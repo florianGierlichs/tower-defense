@@ -4,10 +4,10 @@ import { ImageController } from "./classes/ImageController";
 import "./style.css";
 import { timeHasPassed } from "./utils/timeHasPassed";
 
+export const imageController = new ImageController();
+
 export let dom: DomController;
 export let game: Game;
-
-export const imageController = new ImageController();
 
 imageController.loadImages().then(() => {
   dom = new DomController();
@@ -43,7 +43,6 @@ imageController.loadImages().then(() => {
 
     game.enemies.update();
     game.towers.update();
-    game.menu.update();
     game.tiles.update();
   };
 

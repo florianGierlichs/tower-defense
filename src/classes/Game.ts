@@ -1,7 +1,7 @@
 import { dom } from "../main";
 import { getTileForClick } from "../utils/getTileForClick";
-import { getTileForHover } from "../utils/getTileForHover";
 import { Enemies } from "./Enemies";
+import { DomEvents } from "./DomEvents";
 import { Menu } from "./Menu";
 import { TileGras } from "./TileGras";
 import { Tiles } from "./Tiles";
@@ -20,12 +20,11 @@ const TOWERS_NAMES = ["arcaneArcher"] as const;
 export class Game {
   time: number = 0;
 
-  appContainer = document.querySelector<HTMLDivElement>("#app")!;
-
   towerNames = TOWERS_NAMES;
 
   tiles = new Tiles();
-  menu = new Menu(this.towerNames, this.appContainer); // todo try to not pass the element
+  menu = new Menu(this.towerNames); // todo does towerNames need to be passed?
+  events = new DomEvents();
   towers = new Towers();
   enemies: Enemies;
 
@@ -62,22 +61,14 @@ export class Game {
     dom.toggleTilesInfoButton.addEventListener("click", this.tiles.toggleDebug);
   }
 
-  getAppContainer = () => this.appContainer;
-
-  private placeTowerOnTile = (event: MouseEvent, tower: TowerName) => {
+  placeTowerOnTile = (event: MouseEvent, tower: TowerName) => {
     const tile = getTileForClick(event);
     if (tile instanceof TileGras && !tile.hasTower) {
       this.towers.createTower(tile.x, tile.y, tower);
       tile.setHasTower();
+      tile.setShowTowerBp(null);
+      tile.updateBG();
     }
-  };
-
-  addPlaceTowerOnTileClickEventForCanvasGame = (tower: TowerName) => {
-    const listener = (e: MouseEvent) => {
-      this.placeTowerOnTile(e, tower);
-      dom.canvasGame.removeEventListener("click", listener);
-    };
-    dom.canvasGame.addEventListener("click", listener);
   };
 
   private showTowerRange = (event: MouseEvent) => {
@@ -96,25 +87,13 @@ export class Game {
     const showRangeListener = (e: MouseEvent) => {
       this.showTowerRange(e);
     };
-    dom.canvasGame.addEventListener("click", showRangeListener, false);
+    dom.canvasGame.addEventListener("click", showRangeListener, false); // todo put this in DomEvents
   };
 
   private addHideTowerRangeClickEventForBody = () => {
     const hideRangeListener = () => {
       this.hideTowerRange();
     };
-    dom.body.addEventListener("click", hideRangeListener, true);
-  };
-
-  showTowerBb = (e: MouseEvent, selectedTower: TowerName | null) => {
-    const tile = getTileForHover(e);
-    console.log("tile", tile);
-
-    // prio todo BP on hover only works for some tiles. this seems to be always random
-
-    if (tile instanceof TileGras && !tile.hasTower) {
-      tile.setShowTowerBp(selectedTower);
-      tile.update();
-    }
+    dom.body.addEventListener("click", hideRangeListener, true); // todo put this in DomEvents
   };
 }
