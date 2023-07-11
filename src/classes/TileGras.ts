@@ -64,17 +64,7 @@ export class TileGras extends Tile {
     if (this.showTowerBP !== null) {
       const image = imageController.getImage(this.showTowerBP);
       if (image !== null) {
-        dom.ctxGame.drawImage(
-          image,
-          this.sX,
-          this.sY,
-          this.sWidth,
-          this.sHeight,
-          this.dX,
-          this.dY,
-          this.dWidth,
-          this.dHeight
-        );
+        dom.ctxGame.drawImage(image, this.dX, this.dY);
       }
     }
     dom.ctxGame.restore();
