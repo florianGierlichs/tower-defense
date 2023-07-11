@@ -1,7 +1,7 @@
 import { TileGras } from "../classes/TileGras";
 import { TilePath } from "../classes/TilePath";
 import { game } from "../main";
-import { getMouseCoordinates } from "./getClickCoordinates";
+import { getMouseCoordinates } from "./getMouseCoordinates";
 
 export const getTileForClick = (e: MouseEvent): TileGras | TilePath | null => {
   const rows = game.tiles.getTileRows();
