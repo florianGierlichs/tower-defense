@@ -18,11 +18,11 @@ export class Menu {
     });
   }
 
-  private setSelectedTower = (tower: TowerName | null) => {
+  setSelectedTower = (tower: TowerName | null) => {
     this.selectedTower = tower;
     dom.appContainer.className = "";
     if (tower !== null) {
-      dom.appContainer.classList.add(`${tower}Cursor`);
+      dom.appContainer.classList.add(`${tower}Cursor`); // todo put into methode in DomController
     }
   };
 
@@ -31,12 +31,11 @@ export class Menu {
     if (this.selectedTower === null) {
       throw new Error("selectedTower is null");
     }
-    game.events.addMouseMoveEvent(this.selectedTower);
-    game.events.addPlaceTowerClickEvent(tower);
-    game.events.addUnselectTowerClickEvent();
-  };
+    game.events.towerBluePrintEvent.addTowerBluePrintMouseMoveEvent(
+      this.selectedTower
+    );
+    game.events.placeTowerEvent.addPlaceTowerClickEvent(tower);
 
-  unselectTower = () => {
-    this.setSelectedTower(null);
+    game.events.cleanUpSelectTowerClickEvent.addCleanUpSelectTowerClickEvent();
   };
 }
