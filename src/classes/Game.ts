@@ -58,7 +58,7 @@ export class Game {
     this.addShowTowerRangeClickEventForCanvasGame();
     this.addHideTowerRangeClickEventForBody();
 
-    dom.toggleTilesInfoButton.addEventListener("click", this.tiles.toggleDebug);
+    dom.toggleTilesInfoButton.addEventListener("click", this.tiles.toggleDebug); // todo put this in DomEvents
   }
 
   placeTowerOnTile = (event: MouseEvent, tower: TowerName) => {

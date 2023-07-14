@@ -59,6 +59,7 @@ export class TileGras extends Tile {
   };
 
   private drawTowerBp = () => {
+    // todo prio show tower range with BP
     dom.ctxGame.save();
     dom.ctxGame.globalAlpha = 0.5;
     if (this.showTowerBP !== null) {

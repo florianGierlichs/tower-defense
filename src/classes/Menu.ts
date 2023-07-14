@@ -7,7 +7,7 @@ export class Menu {
   towersContainer;
 
   constructor(towerNames: TowerNames) {
-    this.towersContainer = document.querySelector<HTMLDivElement>(
+    this.towersContainer = document.querySelector<HTMLDivElement>( // todo put this in DomController
       "#menu-towers-container"
     )!;
 
