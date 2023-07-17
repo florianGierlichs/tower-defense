@@ -61,16 +61,6 @@ export class Game {
     dom.toggleTilesInfoButton.addEventListener("click", this.tiles.toggleDebug); // todo put this in DomEvents
   }
 
-  placeTowerOnTile = (event: MouseEvent, tower: TowerName) => {
-    const tile = getTileForClick(event);
-    if (tile instanceof TileGras && !tile.hasTower) {
-      this.towers.createTower(tile.x, tile.y, tower);
-      tile.setHasTower();
-      tile.setShowTowerBp(null);
-      tile.updateBG();
-    }
-  };
-
   private showTowerRange = (event: MouseEvent) => {
     const tile = getTileForClick(event);
     if (tile instanceof TileGras && tile.hasTower) {
@@ -84,6 +74,7 @@ export class Game {
   };
 
   private addShowTowerRangeClickEventForCanvasGame = () => {
+    // todo put this in its own event
     const showRangeListener = (e: MouseEvent) => {
       this.showTowerRange(e);
     };
