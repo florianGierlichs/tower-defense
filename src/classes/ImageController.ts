@@ -1,8 +1,9 @@
 import { loadImage } from "../utils/loadImage";
-import { TowerName } from "./Game";
-
 import arcaneArcherBp from "../assets/arcaneArcherMenu.png";
 import textures from "../assets/textures.png";
+import { TowerType } from "./Game";
+
+const texturesKey = "textures";
 
 export class ImageController {
   arcaneArcherBpImage: HTMLImageElement | null = null;
@@ -13,13 +14,12 @@ export class ImageController {
     this.textures = await loadImage(textures);
   };
 
-  getImage = (key: TowerName | "textures") => {
-    // PRIO TODO use ENUM, TowerName needs to be refactored
+  getImage = (key: TowerType | typeof texturesKey) => {
     switch (key) {
-      case "arcaneArcher":
+      case TowerType.arcaneArcher:
         return this.arcaneArcherBpImage;
 
-      case "textures":
+      case texturesKey:
         return this.textures;
 
       default:

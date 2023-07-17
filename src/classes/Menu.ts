@@ -1,9 +1,9 @@
 import { dom, game } from "../main";
-import { TowerName, TowerNames } from "./Game";
+import { TowerNames, TowerType } from "./Game";
 import { MenuItemTower } from "./MenuItemTower";
 
 export class Menu {
-  selectedTower: TowerName | null = null;
+  selectedTower: TowerType | null = null;
   towersContainer;
 
   constructor(towerNames: TowerNames) {
@@ -18,7 +18,7 @@ export class Menu {
     });
   }
 
-  setSelectedTower = (tower: TowerName | null) => {
+  setSelectedTower = (tower: TowerType | null) => {
     this.selectedTower = tower;
     dom.appContainer.className = "";
     if (tower !== null) {
@@ -26,7 +26,7 @@ export class Menu {
     }
   };
 
-  private selectTower = (tower: TowerName) => {
+  private selectTower = (tower: TowerType) => {
     this.setSelectedTower(tower);
     if (this.selectedTower === null) {
       throw new Error("selectedTower is null");

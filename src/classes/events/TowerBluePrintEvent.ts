@@ -1,6 +1,6 @@
 import { dom } from "../../main";
 import { getTileForHover } from "../../utils/getTileForHover";
-import { TowerName } from "../Game";
+import { TowerType } from "../Game";
 import { TileGras } from "../TileGras";
 import { TilePath } from "../TilePath";
 
@@ -10,7 +10,7 @@ export class TowerBluePrintEvent {
 
   constructor() {}
 
-  private showTowerBpOnTile = (e: MouseEvent, selectedTower: TowerName) => {
+  private showTowerBpOnTile = (e: MouseEvent, selectedTower: TowerType) => {
     // todo prio no mouse cursor image while PB is shown, not sure where to put this
     const tile = getTileForHover(e);
 
@@ -36,7 +36,7 @@ export class TowerBluePrintEvent {
     this.previousTileForHover = null;
   };
 
-  addTowerBluePrintMouseMoveEvent = (selectedTower: TowerName) => {
+  addTowerBluePrintMouseMoveEvent = (selectedTower: TowerType) => {
     this.mouseMoveCallback = (e: MouseEvent) => {
       this.showTowerBpOnTile(e, selectedTower);
     };

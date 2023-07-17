@@ -12,10 +12,13 @@ export interface PathNode {
   y: number;
 }
 
-export type TowerNames = typeof TOWERS_NAMES;
-export type TowerName = TowerNames[number];
+export enum TowerType {
+  arcaneArcher = "arcaneArcher",
+}
 
-const TOWERS_NAMES = ["arcaneArcher"] as const;
+const TOWERS_NAMES = Object.values(TowerType);
+
+export type TowerNames = typeof TOWERS_NAMES;
 
 export class Game {
   time: number = 0;
@@ -23,7 +26,7 @@ export class Game {
   towerNames = TOWERS_NAMES;
 
   tiles = new Tiles();
-  menu = new Menu(this.towerNames); // todo does towerNames need to be passed?
+  menu = new Menu(this.towerNames);
   events = new DomEvents();
   towers = new Towers();
   enemies: Enemies;

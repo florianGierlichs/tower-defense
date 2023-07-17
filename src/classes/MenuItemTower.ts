@@ -1,11 +1,11 @@
-import { TowerName } from "./Game";
+import { TowerType } from "./Game";
 
 export class MenuItemTower {
   element;
 
   constructor(
     containerNode: HTMLDivElement,
-    name: TowerName,
+    name: TowerType,
     clickHandler: () => void
   ) {
     this.element = document.createElement("div");
