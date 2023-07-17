@@ -1,4 +1,5 @@
 export class DomController {
+  appContainer;
   body;
 
   canvasBackground;
@@ -9,6 +10,7 @@ export class DomController {
   toggleTilesInfoButton;
 
   constructor() {
+    this.appContainer = document.querySelector<HTMLDivElement>("#app")!;
     this.body = document.querySelector<HTMLBodyElement>("body")!;
 
     this.canvasBackground =

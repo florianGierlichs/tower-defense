@@ -1,4 +1,4 @@
-import { dom } from "../main";
+import { dom, imageController } from "../main";
 import { Tile, TileCoords } from "./Tile";
 import { getRandomItemFromArray } from "../utils/getRandomItemFromArray";
 
@@ -47,20 +47,23 @@ export class TilePath extends Tile {
   };
 
   private drawImg = () => {
-    dom.ctxBackground.drawImage(
-      this.image,
-      this.sX,
-      this.sY,
-      this.sWidth,
-      this.sHeight,
-      this.dX,
-      this.dY,
-      this.dWidth,
-      this.dHeight
-    );
+    const image = imageController.getImage("textures");
+    if (image !== null) {
+      dom.ctxBackground.drawImage(
+        image,
+        this.sX,
+        this.sY,
+        this.sWidth,
+        this.sHeight,
+        this.dX,
+        this.dY,
+        this.dWidth,
+        this.dHeight
+      );
+    }
   };
 
-  update = () => {
-    this.buildImg(this.drawImg);
+  updateBG = () => {
+    this.drawImg();
   };
 }

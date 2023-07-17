@@ -1,14 +1,11 @@
 import { TileGras } from "../classes/TileGras";
 import { TilePath } from "../classes/TilePath";
-import { TileRow } from "../classes/Tiles";
-import { getClickCoordinates } from "./getClickCoordinates";
+import { game } from "../main";
+import { getMouseCoordinates } from "./getMouseCoordinates";
 
-export const getTileForClick = (
-  rows: TileRow[],
-  e: MouseEvent
-): TileGras | TilePath | null => {
-  const { x: clickX, y: clickY } = getClickCoordinates(e);
-
+export const getTileForClick = (e: MouseEvent): TileGras | TilePath | null => {
+  const rows = game.tiles.getTileRows();
+  const { x: clickX, y: clickY } = getMouseCoordinates(e);
   let clickedTile = null;
 
   rows.forEach((row) => {

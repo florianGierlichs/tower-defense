@@ -2,19 +2,14 @@ import { dom, game } from "../main";
 import { TowerName, TowerNames } from "./Game";
 import { MenuItemTower } from "./MenuItemTower";
 
-const test = () => console.log("hallo welt"); // todo Add tower BP for tile on hover
-
 export class Menu {
   selectedTower: TowerName | null = null;
   towersContainer;
-  appContainer;
 
-  constructor(towerNames: TowerNames, appContainer: HTMLDivElement) {
-    this.towersContainer = document.querySelector<HTMLDivElement>(
+  constructor(towerNames: TowerNames) {
+    this.towersContainer = document.querySelector<HTMLDivElement>( // todo put this in DomController
       "#menu-towers-container"
     )!;
-
-    this.appContainer = appContainer;
 
     towerNames.forEach((tower) => {
       new MenuItemTower(this.towersContainer, tower, () =>
@@ -23,38 +18,24 @@ export class Menu {
     });
   }
 
-  private setSelectedTower = (tower: TowerName | null) => {
+  setSelectedTower = (tower: TowerName | null) => {
     this.selectedTower = tower;
-    const appContainer = this.appContainer;
-    appContainer.className = "";
+    dom.appContainer.className = "";
     if (tower !== null) {
-      appContainer.classList.add(`${tower}Cursor`);
+      dom.appContainer.classList.add(`${tower}Cursor`); // todo put into methode in DomController
     }
-  };
-
-  private addMouseMoveEvent = () => {
-    dom.canvasGame.addEventListener("mousemove", test);
-  };
-
-  private removeMouseMoveEvent = () => {
-    dom.canvasGame.removeEventListener("mousemove", test);
   };
 
   private selectTower = (tower: TowerName) => {
     this.setSelectedTower(tower);
-    this.addMouseMoveEvent();
-    game.addPlaceTowerOnTileClickEventForCanvasGame(tower);
-  };
-
-  private unselectTower = () => {
-    this.setSelectedTower(null);
-    this.removeMouseMoveEvent();
-    this.appContainer.removeEventListener("click", this.unselectTower);
-  };
-
-  update = () => {
-    if (this.selectedTower !== null) {
-      this.appContainer.addEventListener("click", this.unselectTower);
+    if (this.selectedTower === null) {
+      throw new Error("selectedTower is null");
     }
+    game.events.towerBluePrintEvent.addTowerBluePrintMouseMoveEvent(
+      this.selectedTower
+    );
+    game.events.placeTowerEvent.addPlaceTowerClickEvent(tower);
+
+    game.events.cleanUpSelectTowerClickEvent.addCleanUpSelectTowerClickEvent();
   };
 }
