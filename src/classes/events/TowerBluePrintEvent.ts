@@ -11,6 +11,7 @@ export class TowerBluePrintEvent {
   constructor() {}
 
   private showTowerBpOnTile = (e: MouseEvent, selectedTower: TowerName) => {
+    // todo prio no mouse cursor image while PB is shown, not sure where to put this
     const tile = getTileForHover(e);
 
     if (this.previousTileForHover !== tile) {
