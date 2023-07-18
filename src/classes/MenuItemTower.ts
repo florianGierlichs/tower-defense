@@ -1,17 +1,14 @@
+import { dom } from "../main";
 import { TowerType } from "./Game";
 
 export class MenuItemTower {
-  element;
-
   constructor(
-    containerNode: HTMLDivElement,
     name: TowerType,
-    clickHandler: () => void
+    selectTowerCallback: (tower: TowerType) => void
   ) {
-    this.element = document.createElement("div");
-    this.element.classList.add("menu-item");
-    this.element.id = name;
-    this.element.addEventListener("click", clickHandler);
-    containerNode.appendChild(this.element);
+    const clickHandler = () => {
+      selectTowerCallback(name);
+    };
+    dom.createMenuItemTower(name, clickHandler);
   }
 }

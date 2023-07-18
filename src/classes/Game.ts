@@ -1,7 +1,6 @@
 import { dom } from "../main";
 import { getTileForClick } from "../utils/getTileForClick";
 import { Enemies } from "./Enemies";
-import { DomEvents } from "./DomEvents";
 import { Menu } from "./Menu";
 import { TileGras } from "./TileGras";
 import { Tiles } from "./Tiles";
@@ -27,7 +26,6 @@ export class Game {
 
   tiles = new Tiles();
   menu = new Menu(this.towerNames);
-  events = new DomEvents();
   towers = new Towers();
   enemies: Enemies;
 

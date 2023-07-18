@@ -1,4 +1,4 @@
-import { dom, game } from "../../main";
+import { dom, events, game } from "../../main";
 
 export class CleanUpSelectTowerClickEvent {
   constructor() {}
@@ -14,7 +14,7 @@ export class CleanUpSelectTowerClickEvent {
   private CleanUpSelectTowerClickEvent = () => {
     // todo add right mouse button to also cleanup
     game.menu.setSelectedTower(null);
-    game.events.towerBluePrintEvent.removeTowerBluePrintMouseMoveEvent();
+    events.towerBluePrintEvent.removeTowerBluePrintMouseMoveEvent();
     dom.appContainer.removeEventListener(
       "click",
       this.CleanUpSelectTowerClickEvent,
