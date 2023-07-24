@@ -1,7 +1,4 @@
-interface Coordinate {
-  x: number;
-  y: number;
-}
+import { Coordinate } from "./types";
 
 export const getDistance = <T extends Coordinate, E extends Coordinate>(
   objectOne: T,

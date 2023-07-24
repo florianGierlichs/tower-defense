@@ -4,6 +4,7 @@ import { getDistance } from "../utils/getDistance";
 import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemy } from "./Enemy";
 import { Projectile } from "./Projectile";
+import { getTileMiddle } from "../utils/getTileMiddle";
 
 export type towerState = "idle" | "attack";
 
@@ -80,7 +81,7 @@ export class Tower {
     this.id = id;
     this.x = x;
     this.y = y;
-    this.tileMiddle = { x: x + 64 / 2, y: y + 64 / 2 };
+    this.tileMiddle = getTileMiddle({ x, y });
     this.range = range;
     this.attackSpeed = attackSpeed;
 

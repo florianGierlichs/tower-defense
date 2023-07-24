@@ -7,7 +7,7 @@ export class Menu {
 
   constructor(towerNames: TowerNames) {
     towerNames.forEach((tower) => {
-      new MenuItemTower(tower, this.selectTower); // todo maybe just pass the methode and build the callback in the MenuItemTower class
+      new MenuItemTower(tower, this.selectTower);
     });
   }
 
