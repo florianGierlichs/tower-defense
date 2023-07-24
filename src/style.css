@@ -106,6 +106,6 @@ canvas {
   box-shadow: 6px 6px 6px 5px rgb(0 0 0 / 30%);
 }
 
-.arcaneArcherCursor {
+.arcaneArcher {
   cursor: url("./assets/cursorArcaneArcher.png") 38 48, auto;
 }

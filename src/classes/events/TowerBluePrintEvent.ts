@@ -7,11 +7,11 @@ import { TilePath } from "../TilePath";
 export class TowerBluePrintEvent {
   previousTileForHover: TileGras | TilePath | null = null;
   mouseMoveCallback: ((e: MouseEvent) => void) | null = null;
+  mouseLeaveCallback: ((e: MouseEvent) => void) | null = null;
 
   constructor() {}
 
   private showTowerBpOnTile = (e: MouseEvent, selectedTower: TowerType) => {
-    // todo prio no mouse cursor image while PB is shown, not sure where to put this
     const tile = getTileForHover(e);
 
     if (this.previousTileForHover !== tile) {
@@ -21,7 +21,15 @@ export class TowerBluePrintEvent {
 
       if (tile instanceof TileGras && !tile.hasTower) {
         tile.setShowTowerBp(selectedTower);
+        dom.removeAllClassesFromAppContainer();
         tile.update();
+      }
+
+      if (
+        (tile instanceof TileGras && !tile.showTowerBP) ||
+        tile instanceof TilePath
+      ) {
+        dom.addTowerMouseCursor(selectedTower);
       }
 
       this.previousTileForHover = tile;
@@ -41,24 +49,24 @@ export class TowerBluePrintEvent {
       this.showTowerBpOnTile(e, selectedTower);
     };
 
-    dom.canvasGame.addEventListener("mousemove", this.mouseMoveCallback);
+    this.mouseLeaveCallback = (_e: MouseEvent) => {
+      this.resetPreviousTileForHover();
+      dom.addTowerMouseCursor(selectedTower);
+    };
 
-    dom.canvasGame.addEventListener(
-      "mouseleave",
-      this.resetPreviousTileForHover
-    );
+    dom.canvasGame.addEventListener("mousemove", this.mouseMoveCallback);
+    dom.canvasGame.addEventListener("mouseleave", this.mouseLeaveCallback);
   };
 
   removeTowerBluePrintMouseMoveEvent = () => {
     if (this.mouseMoveCallback === null) {
       throw new Error("mouseMoveCallback is null");
     }
+    if (this.mouseLeaveCallback === null) {
+      throw new Error("mouseLeaveCallback is null");
+    }
 
     dom.canvasGame.removeEventListener("mousemove", this.mouseMoveCallback);
-
-    dom.canvasGame.removeEventListener(
-      "mouseleave",
-      this.resetPreviousTileForHover
-    );
+    dom.canvasGame.removeEventListener("mouseleave", this.mouseLeaveCallback);
   };
 }

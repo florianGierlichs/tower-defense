@@ -15,7 +15,7 @@ export class Menu {
     this.selectedTower = tower;
     dom.removeAllClassesFromAppContainer();
     if (tower !== null) {
-      dom.addClassToAppContainer(`${tower}Cursor`);
+      dom.addTowerMouseCursor(tower);
     }
   };
 

@@ -39,8 +39,8 @@ export class DomController {
       document.querySelector<HTMLButtonElement>("#toggle-tiles-info")!;
   }
 
-  addClassToAppContainer = (className: string) => {
-    this.appContainer.classList.add(className);
+  addTowerMouseCursor = (tower: TowerType) => {
+    this.appContainer.classList.add(tower);
   };
 
   removeAllClassesFromAppContainer = () => {
@@ -57,7 +57,6 @@ export class DomController {
     element.id = name;
 
     events.selectedTowerEvent.addSelectedTowerEvent(element, clickHandler);
-    // element.addEventListener("click", listnerCallback);
     this.addChildToMenuTowersContainer(element);
   };
 }
