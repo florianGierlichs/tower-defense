@@ -7,25 +7,16 @@ import { Tiles } from "./Tiles";
 import { Towers } from "./Towers";
 
 export interface PathNode {
+  // TODO put to util/types
   x: number;
   y: number;
 }
 
-export enum TowerType {
-  arcaneArcher = "arcaneArcher",
-}
-
-const TOWERS_NAMES = Object.values(TowerType);
-
-export type TowerNames = typeof TOWERS_NAMES;
-
 export class Game {
   time: number = 0;
 
-  towerNames = TOWERS_NAMES;
-
   tiles = new Tiles();
-  menu = new Menu(this.towerNames);
+  menu = new Menu();
   towers = new Towers();
   enemies: Enemies;
 

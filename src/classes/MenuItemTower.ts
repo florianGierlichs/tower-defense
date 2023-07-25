@@ -1,14 +1,14 @@
+import { TowerConfig } from "../data/towerConfig";
 import { dom } from "../main";
-import { TowerType } from "./Game";
 
 export class MenuItemTower {
   constructor(
-    name: TowerType,
-    selectTowerCallback: (tower: TowerType) => void
+    tower: TowerConfig,
+    selectTowerCallback: (tower: TowerConfig) => void
   ) {
     const clickHandler = () => {
-      selectTowerCallback(name);
+      selectTowerCallback(tower);
     };
-    dom.createMenuItemTower(name, clickHandler);
+    dom.createMenuItemTower(tower, clickHandler);
   }
 }

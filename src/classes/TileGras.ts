@@ -1,12 +1,12 @@
 import { dom, imageController } from "../main";
 import { Tile, TileCoords } from "./Tile";
 import { getRandomItemFromArray } from "../utils/getRandomItemFromArray";
-import { TowerType } from "./Game";
 import { getTileMiddle } from "../utils/getTileMiddle";
+import { TowerConfig } from "../data/towerConfig";
 
 export class TileGras extends Tile {
   hasTower: boolean = false;
-  showTowerBP: TowerType | null = null;
+  showTowerBP: TowerConfig | null = null;
 
   image: HTMLImageElement | null = null;
   sX: number;
@@ -55,7 +55,7 @@ export class TileGras extends Tile {
 
   setHasTower = () => (this.hasTower = true);
 
-  setShowTowerBp = (tower: TowerType | null) => {
+  setShowTowerBp = (tower: TowerConfig | null) => {
     this.showTowerBP = tower;
   };
 

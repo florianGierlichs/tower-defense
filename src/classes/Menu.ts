@@ -1,17 +1,17 @@
+import { TOWER_CONFIGS, TowerConfig } from "../data/towerConfig";
 import { dom, events } from "../main";
-import { TowerNames, TowerType } from "./Game";
 import { MenuItemTower } from "./MenuItemTower";
 
 export class Menu {
-  selectedTower: TowerType | null = null;
+  selectedTower: TowerConfig | null = null;
 
-  constructor(towerNames: TowerNames) {
-    towerNames.forEach((tower) => {
+  constructor() {
+    Object.values(TOWER_CONFIGS).forEach((tower) => {
       new MenuItemTower(tower, this.selectTower);
     });
   }
 
-  setSelectedTower = (tower: TowerType | null) => {
+  setSelectedTower = (tower: TowerConfig | null) => {
     this.selectedTower = tower;
     dom.removeAllClassesFromAppContainer();
     if (tower !== null) {
@@ -19,7 +19,7 @@ export class Menu {
     }
   };
 
-  private selectTower = (tower: TowerType) => {
+  private selectTower = (tower: TowerConfig) => {
     this.setSelectedTower(tower);
     if (this.selectedTower === null) {
       throw new Error("selectedTower is null");

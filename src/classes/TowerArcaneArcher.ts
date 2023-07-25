@@ -1,5 +1,6 @@
 import arcaneArcher from "../assets/arcaneArcher.png";
 import arcaneArcherProjectile from "../assets/arcaneArcherProjectile.png";
+import { TOWER_CONFIGS } from "../data/towerConfig";
 import { loadImage } from "../utils/loadImage";
 import { ImgConfigs, Tower } from "./Tower";
 
@@ -32,16 +33,14 @@ const imageConfigs: ImgConfigs = {
   },
 };
 
-let arcaneArcherImage: HTMLImageElement; // todo potentiell race condition problem, because async
+let arcaneArcherImage: HTMLImageElement; // todo potentiell race condition problem, because async, NEW use from imageController
 let projectileImg: HTMLImageElement;
 (async () => {
   arcaneArcherImage = await loadImage(arcaneArcher);
   projectileImg = await loadImage(arcaneArcherProjectile);
 })();
 
-const arcaneArcherRange = 250;
-const arcaneArcherAttackSpeed = 1000;
-const projectileWidth = 40;
+const projectileWidth = 40; // TODO maybe in imageConfigs?
 const projectileHeight = 5;
 
 export class TowerArcaneArcher extends Tower {
@@ -52,8 +51,8 @@ export class TowerArcaneArcher extends Tower {
       y,
       arcaneArcherImage,
       imageConfigs,
-      arcaneArcherRange,
-      arcaneArcherAttackSpeed,
+      TOWER_CONFIGS.arcaneArcher.range,
+      TOWER_CONFIGS.arcaneArcher.attackSpeed,
       { projectileImg, projectileWidth, projectileHeight }
     );
   }

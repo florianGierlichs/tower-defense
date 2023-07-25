@@ -1,6 +1,6 @@
 import shortUUID from "short-uuid";
 import { TowerArcaneArcher } from "./TowerArcaneArcher";
-import { TowerType } from "./Game";
+import { TowerConfig } from "../data/towerConfig";
 
 export class Towers {
   towers: TowerArcaneArcher[] = [];
@@ -19,7 +19,7 @@ export class Towers {
     });
   };
 
-  createTower = (x: number, y: number, tower: TowerType) => {
+  createTower = (x: number, y: number, tower: TowerConfig) => {
     // todo use tower to determine which tower needs to be pushed
     console.log(tower);
     this.towers.push(new TowerArcaneArcher(shortUUID.generate(), x, y));

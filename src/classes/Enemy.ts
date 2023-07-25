@@ -75,9 +75,11 @@ export class Enemy {
   };
 
   reduceHealth = () => {
+    // TODO include dmg value of tower
     this.health--;
 
     if (this.health === 0) {
+      // TODO can be less than 0 if dmg is higher than remaning health
       game.enemies.remove(this.id);
       game.towers.resetTowerTarget(this.id);
     }
