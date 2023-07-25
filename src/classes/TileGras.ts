@@ -2,6 +2,7 @@ import { dom, imageController } from "../main";
 import { Tile, TileCoords } from "./Tile";
 import { getRandomItemFromArray } from "../utils/getRandomItemFromArray";
 import { TowerType } from "./Game";
+import { getTileMiddle } from "../utils/getTileMiddle";
 
 export class TileGras extends Tile {
   hasTower: boolean = false;
@@ -59,16 +60,18 @@ export class TileGras extends Tile {
   };
 
   private drawTowerBp = () => {
-    // todo prio show tower range with BP
-    dom.ctxGame.save();
-    dom.ctxGame.globalAlpha = 0.5;
     if (this.showTowerBP !== null) {
       const image = imageController.getImage(this.showTowerBP);
       if (image !== null) {
         dom.ctxGame.drawImage(image, this.dX, this.dY);
+
+        const tileMiddle = getTileMiddle({ x: this.x, y: this.y });
+        dom.ctxGame.beginPath();
+        dom.ctxGame.arc(tileMiddle.x, tileMiddle.y, 250, 0, Math.PI * 2); // TODO PRIO change 250 range value to dynamic
+        dom.ctxGame.fillStyle = "rgba(225,225,225,0.1)";
+        dom.ctxGame.fill();
       }
     }
-    dom.ctxGame.restore();
   };
 
   updateBG = () => {
