@@ -67,7 +67,13 @@ export class TileGras extends Tile {
 
         const tileMiddle = getTileMiddle({ x: this.x, y: this.y });
         dom.ctxGame.beginPath();
-        dom.ctxGame.arc(tileMiddle.x, tileMiddle.y, 250, 0, Math.PI * 2); // TODO PRIO change 250 range value to dynamic
+        dom.ctxGame.arc(
+          tileMiddle.x,
+          tileMiddle.y,
+          this.showTowerBP.range,
+          0,
+          Math.PI * 2
+        );
         dom.ctxGame.fillStyle = "rgba(225,225,225,0.1)";
         dom.ctxGame.fill();
       }
