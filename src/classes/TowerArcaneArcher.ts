@@ -5,6 +5,8 @@ import { loadImage } from "../utils/loadImage";
 import { ImgConfigs, Tower } from "./Tower";
 
 const imageConfigs: ImgConfigs = {
+  // todo rename type and put to utils/types
+  // todo put to data
   idle: {
     frames: 4,
     animationIterationCircleTime: 500,

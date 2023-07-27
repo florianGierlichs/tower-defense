@@ -5,24 +5,11 @@ import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemy } from "./Enemy";
 import { Projectile } from "./Projectile";
 import { getTileMiddle } from "../utils/getTileMiddle";
+import { FrameConfig } from "../utils/types";
 
 export type towerState = "idle" | "attack";
 
-export interface ImgConfig {
-  frames: number;
-  animationIterationCircleTime: number;
-  flipOffsetFrames: number;
-  animationStartRight: {
-    sx: number;
-    sy: number;
-  };
-  animationStartLeft: {
-    sx: number;
-    sy: number;
-  };
-}
-
-export type ImgConfigs = Record<towerState, ImgConfig>;
+export type ImgConfigs = Record<towerState, FrameConfig>;
 export class Tower {
   id;
   x;
@@ -98,7 +85,7 @@ export class Tower {
   }
 
   private getImgConfigForState = () => {
-    let imageConfig: ImgConfig;
+    let imageConfig: FrameConfig;
     switch (this.state) {
       case "idle":
         imageConfig = this.imgConfig.idle;
