@@ -168,7 +168,7 @@ export class Tower {
         this.sHeight,
         this.dX,
         this.dY,
-        this.dWidth,
+        this.dWidth, // TODO Add scale factor for individual towers
         this.dHeight
       );
     }
