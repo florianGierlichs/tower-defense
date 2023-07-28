@@ -1,5 +1,5 @@
 import shortUUID from "short-uuid";
-import { Enemy } from "./Enemy";
+import { Enemy } from "./enemies/Enemy";
 import { PathNode } from "./Game";
 
 export class Enemies {

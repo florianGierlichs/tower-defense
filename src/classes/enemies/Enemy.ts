@@ -1,7 +1,7 @@
-import { dom, game } from "../main";
-import { getAngle } from "../utils/getAngle";
-import { reachedTarget } from "../utils/reachedTarget";
-import { PathNode } from "./Game";
+import { dom, game, imageController } from "../../main";
+import { getAngle } from "../../utils/getAngle";
+import { reachedTarget } from "../../utils/reachedTarget";
+import { PathNode } from "../Game";
 
 export class Enemy {
   id;
@@ -18,19 +18,32 @@ export class Enemy {
   nodesIndex: number = 0;
 
   constructor(id: string, x: number, y: number, pathNodes: PathNode[]) {
+    // TODO use random walk frame as start frame, for "individual" movement
     this.id = id;
     this.x = x;
     this.y = y;
-    this.pathNodes = [...pathNodes, { x: 928, y: -32 }]; // todo make end node dynamic
+    this.pathNodes = [...pathNodes, { x: 864, y: -32 }]; // todo make end node dynamic
     this.nodeTarget = pathNodes[this.nodesIndex];
     this.angle = getAngle(this.x, this.y, this.nodeTarget.x, this.nodeTarget.y);
   }
 
   private draw = () => {
-    dom.ctxGame.beginPath();
-    dom.ctxGame.arc(this.x, this.y, this.width / 2, 0, Math.PI * 2);
-    dom.ctxGame.fillStyle = this.color;
-    dom.ctxGame.fill();
+    // dom.ctxGame.beginPath();
+    // dom.ctxGame.arc(this.x, this.y, this.width / 2, 0, Math.PI * 2);
+    // dom.ctxGame.fillStyle = this.color;
+    // dom.ctxGame.fill();
+
+    dom.ctxGame.drawImage(
+      imageController.getImage("skeleton")!,
+      0,
+      192,
+      64,
+      64,
+      this.x - 32,
+      this.y - 32,
+      51.2,
+      51.2
+    );
   };
 
   private move = () => {

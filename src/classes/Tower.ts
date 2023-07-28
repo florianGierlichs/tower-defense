@@ -2,7 +2,7 @@ import shortUUID from "short-uuid";
 import { dom, game } from "../main";
 import { getDistance } from "../utils/getDistance";
 import { timeHasPassed } from "../utils/timeHasPassed";
-import { Enemy } from "./Enemy";
+import { Enemy } from "./enemies/Enemy";
 import { Projectile } from "./Projectile";
 import { getTileMiddle } from "../utils/getTileMiddle";
 import { FrameConfig } from "../utils/types";
