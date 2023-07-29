@@ -22,28 +22,7 @@ export class Game {
     tiles.createTileGrid();
     tiles.buildTileImg();
 
-    const pathConfigurationCorners = tiles
-      .getPathConfiguration()
-      .filter((tile) => tile.direction === "corner")
-      .map((tile) => tile.id);
-
-    const pathNodes = [
-      ...tiles
-        .getTilePaths()
-        .filter((tile) => tile.direction === "corner")
-        .sort(
-          (a, b) =>
-            pathConfigurationCorners.indexOf(a.id) -
-            pathConfigurationCorners.indexOf(b.id)
-        )
-        .map((node) => ({
-          x: node.x + 32,
-          y: node.y + 32,
-        })),
-      tiles.getPathEndPoint(),
-    ];
-
-    this.enemies = new Enemies(pathNodes);
+    this.enemies = new Enemies();
 
     this.addShowTowerRangeClickEventForCanvasGame();
     this.addHideTowerRangeClickEventForBody();

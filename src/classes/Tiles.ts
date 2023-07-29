@@ -112,16 +112,39 @@ export class Tiles {
     return this.tileRows;
   };
 
-  getTilePaths = () => {
+  private getTilePaths = () => {
     return this.tilePaths;
   };
 
-  getPathConfiguration = () => {
+  private getPathConfiguration = () => {
     return this.pathConfiguration;
   };
 
-  getPathEndPoint = () => {
+  private getPathConfigurationCorners = () => {
+    return this.getPathConfiguration()
+      .filter((tile) => tile.direction === "corner")
+      .map((tile) => tile.id);
+  };
+
+  private getPathEndPoint = () => {
     return this.pathEndPoint;
+  };
+
+  getPathNodes = () => {
+    return [
+      ...this.getTilePaths()
+        .filter((tile) => tile.direction === "corner")
+        .sort(
+          (a, b) =>
+            this.getPathConfigurationCorners().indexOf(a.id) -
+            this.getPathConfigurationCorners().indexOf(b.id)
+        )
+        .map((node) => ({
+          x: node.x + 32,
+          y: node.y + 32,
+        })),
+      this.getPathEndPoint(),
+    ];
   };
 
   private updateTilesGras = () => {
