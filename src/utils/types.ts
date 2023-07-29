@@ -22,7 +22,17 @@ export interface EnemyConfig {
   health: number;
   speed: number;
   imageScale: number;
-  imageConfig: {
+  frameConfig: {
     move: FrameConfig;
   };
+}
+
+export enum EnemyState {
+  IDLE = "idle",
+  MOVE = "move",
+}
+
+export enum AnimationDirection {
+  LEFT = "left",
+  RIGHT = "right",
 }
