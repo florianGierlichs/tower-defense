@@ -2,17 +2,20 @@ import { DomController } from "./classes/DomController";
 import { DomEvents } from "./classes/DomEvents";
 import { Game } from "./classes/Game";
 import { ImageController } from "./classes/ImageController";
+import { Tiles } from "./classes/Tiles";
 import "./style.css";
 import { timeHasPassed } from "./utils/timeHasPassed";
 
 export const imageController = new ImageController();
 
 export let dom: DomController;
+export let tiles: Tiles;
 export let events: DomEvents;
 export let game: Game;
 
 imageController.loadImages().then(() => {
   dom = new DomController();
+  tiles = new Tiles();
   events = new DomEvents();
   game = new Game();
 
@@ -46,7 +49,7 @@ imageController.loadImages().then(() => {
 
     game.enemies.update();
     game.towers.update();
-    game.tiles.update();
+    tiles.update();
   };
 
   runGame();

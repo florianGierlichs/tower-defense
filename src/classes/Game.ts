@@ -1,9 +1,8 @@
-import { dom } from "../main";
+import { dom, tiles } from "../main";
 import { getTileForClick } from "../utils/getTileForClick";
 import { Enemies } from "./Enemies";
 import { Menu } from "./Menu";
 import { TileGras } from "./TileGras";
-import { Tiles } from "./Tiles";
 import { Towers } from "./Towers";
 
 export interface PathNode {
@@ -15,22 +14,21 @@ export interface PathNode {
 export class Game {
   time: number = 0;
 
-  tiles = new Tiles();
   menu = new Menu();
   towers = new Towers();
   enemies: Enemies;
 
   constructor() {
-    this.tiles.createTileGrid();
-    this.tiles.buildTileImg();
+    tiles.createTileGrid();
+    tiles.buildTileImg();
 
-    const pathConfigurationCorners = this.tiles
+    const pathConfigurationCorners = tiles
       .getPathConfiguration()
       .filter((tile) => tile.direction === "corner")
       .map((tile) => tile.id);
 
     const pathNodes = [
-      ...this.tiles
+      ...tiles
         .getTilePaths()
         .filter((tile) => tile.direction === "corner")
         .sort(
@@ -42,7 +40,7 @@ export class Game {
           x: node.x + 32,
           y: node.y + 32,
         })),
-      this.tiles.getPathEndPoint(),
+      tiles.getPathEndPoint(),
     ];
 
     this.enemies = new Enemies(pathNodes);
@@ -50,7 +48,7 @@ export class Game {
     this.addShowTowerRangeClickEventForCanvasGame();
     this.addHideTowerRangeClickEventForBody();
 
-    dom.toggleTilesInfoButton.addEventListener("click", this.tiles.toggleDebug); // todo put this in DomEvents
+    dom.toggleTilesInfoButton.addEventListener("click", tiles.toggleDebug); // todo put this in DomEvents
   }
 
   private showTowerRange = (event: MouseEvent) => {

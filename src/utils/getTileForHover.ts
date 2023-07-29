@@ -1,10 +1,10 @@
 import { TileGras } from "../classes/TileGras";
 import { TilePath } from "../classes/TilePath";
-import { game } from "../main";
+import { tiles } from "../main";
 import { getMouseCoordinates } from "./getMouseCoordinates";
 
 export const getTileForHover = (e: MouseEvent): TileGras | TilePath | null => {
-  const rows = game.tiles.getTileRows();
+  const rows = tiles.getTileRows();
   const { x: mouseX, y: mouseY } = getMouseCoordinates(e);
   let hoveredTile = null;
 
