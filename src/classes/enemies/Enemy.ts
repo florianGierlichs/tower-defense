@@ -1,48 +1,143 @@
-import { dom, game, imageController } from "../../main";
+import { dom, game, tiles } from "../../main";
 import { getAngle } from "../../utils/getAngle";
+import { getRandomFrameIteration } from "../../utils/getRandomFrameIteration";
 import { reachedTarget } from "../../utils/reachedTarget";
-import { PathNode } from "../Game";
+import { timeHasPassed } from "../../utils/timeHasPassed";
+import { AnimationDirection, EnemyConfig, EnemyState } from "../../utils/types";
 
 export class Enemy {
+  // initial values
   id;
   x;
   y;
+  image;
+  frameConfig;
+  sWidth = 64;
+  sHeight = 64;
+  imageTranslateX = this.sWidth / 2;
+  imageTranslateY = this.sHeight / 2;
+  dWidth;
+  dHeight;
+  health;
+  speed;
+
+  // states
+  state = EnemyState.MOVE;
+  animationDirection = AnimationDirection.RIGHT;
+
+  // dynamic animation values
+  frameIteration: number | null = null;
+  frames: number | null = null;
+  flipOffsetFrames: number | null = null;
+  sX: number | null = null;
+  sY: number | null = null;
+  frameIterationThrottleTime: number | null = null;
+  lastFrameIteration: number | null = null;
+
+  // dynamic movement values
   nodeTarget;
   pathNodes;
   angle;
-  width: number = 20;
-  height: number = 20;
-  color: string = "yellow";
-  health: number = 5;
-  speed: number = 2;
-  nodesIndex: number = 0;
+  nodesIndex = 0;
 
-  constructor(id: string, x: number, y: number, pathNodes: PathNode[]) {
-    // TODO use random walk frame as start frame, for "individual" movement
+  constructor(
+    id: string,
+    x: number,
+    y: number,
+    image: HTMLImageElement,
+    config: EnemyConfig
+  ) {
     this.id = id;
     this.x = x;
     this.y = y;
-    this.pathNodes = [...pathNodes, { x: 864, y: -32 }]; // todo make end node dynamic
-    this.nodeTarget = pathNodes[this.nodesIndex];
+    this.image = image;
+    this.dWidth = config.imageScale * this.sWidth;
+    this.dHeight = config.imageScale * this.sHeight;
+    this.frameConfig = config.frameConfig;
+    this.health = config.health;
+    this.speed = config.speed;
+
+    this.setImageConfig();
+
+    this.pathNodes = tiles.getPathNodes();
+    this.nodeTarget = this.pathNodes[this.nodesIndex];
     this.angle = getAngle(this.x, this.y, this.nodeTarget.x, this.nodeTarget.y);
   }
 
-  private draw = () => {
-    // dom.ctxGame.beginPath();
-    // dom.ctxGame.arc(this.x, this.y, this.width / 2, 0, Math.PI * 2);
-    // dom.ctxGame.fillStyle = this.color;
-    // dom.ctxGame.fill();
+  private getImgConfigForState = () => {
+    switch (this.state) {
+      case EnemyState.MOVE:
+        return this.frameConfig.move;
+      default:
+        return this.frameConfig.move;
+    }
+  };
 
+  private setImageConfig = () => {
+    const {
+      animationStartRight,
+      animationStartLeft,
+      frames,
+      animationIterationCircleTime,
+      flipOffsetFrames,
+    } = this.getImgConfigForState();
+    this.sX =
+      this.animationDirection === AnimationDirection.RIGHT
+        ? animationStartRight.sx
+        : animationStartLeft.sx;
+    this.sY =
+      this.animationDirection === AnimationDirection.RIGHT
+        ? animationStartRight.sy
+        : animationStartLeft.sy;
+    this.frames = frames;
+    this.flipOffsetFrames = flipOffsetFrames;
+    this.frameIterationThrottleTime =
+      animationIterationCircleTime / this.frames;
+
+    this.frameIteration = getRandomFrameIteration(this.frames);
+  };
+
+  private setFrame = () => {
+    if (
+      this.frames === null ||
+      this.flipOffsetFrames === null ||
+      this.frameIteration === null
+    ) {
+      throw new Error("frames or flipOffsetFrames or frameIteration is null");
+    }
+
+    // set sX
+    if (this.animationDirection === AnimationDirection.RIGHT) {
+      this.sX = this.frameIteration * this.sWidth;
+    } else {
+      this.sX =
+        (this.frames + this.flipOffsetFrames) * this.sWidth -
+        (this.frameIteration + 1) * this.sWidth;
+    }
+
+    // prepare frame for next iteration
+    // -1 because frameIteration starts with 0 to get first sX value
+    if (this.frameIteration < this.frames - 1) {
+      this.frameIteration++;
+    } else {
+      this.frameIteration = 0;
+    }
+  };
+
+  private draw = () => {
+    if (this.sX === null || this.sY === null) {
+      throw new Error("sX or sY is null");
+    }
     dom.ctxGame.drawImage(
-      imageController.getImage("skeleton")!,
-      0,
-      192,
-      64,
-      64,
-      this.x - 32,
-      this.y - 32,
-      51.2,
-      51.2
+      this.image,
+      this.sX,
+      this.sY,
+      this.sWidth,
+      this.sHeight,
+      this.x - this.imageTranslateX,
+      this.y - this.imageTranslateY,
+      this.dWidth,
+      this.dHeight
     );
   };
 
@@ -87,6 +182,19 @@ export class Enemy {
     }
   };
 
+  private handleFrames = () => {
+    if (this.frameIterationThrottleTime === null) {
+      throw new Error("frameIterationThrottleTime is null");
+    }
+
+    if (
+      timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
+    ) {
+      this.setFrame();
+      this.lastFrameIteration = performance.now();
+    }
+  };
+
   reduceHealth = () => {
     // TODO include dmg value of tower
     this.health--;
@@ -99,7 +207,14 @@ export class Enemy {
   };
 
   update = () => {
-    this.draw();
     this.move();
+
+    if (this.lastFrameIteration === null) {
+      this.lastFrameIteration = performance.now();
+    } else {
+      this.handleFrames();
+    }
+
+    this.draw();
   };
 }
