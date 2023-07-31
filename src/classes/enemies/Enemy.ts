@@ -81,10 +81,8 @@ export class Enemy {
       animationIterationCircleTime,
       flipOffsetFrames,
     } = this.getImgConfigForState();
-    this.sX =
-      this.animationDirection === AnimationDirection.RIGHT
-        ? animationStartRight.sx
-        : animationStartLeft.sx;
+
+    // sX is set in setFrame
     this.sY =
       this.animationDirection === AnimationDirection.RIGHT
         ? animationStartRight.sy
@@ -106,6 +104,12 @@ export class Enemy {
       throw new Error("frames or flipOffsetFrames or frameIteration is null");
     }
 
+    if (this.frameIteration < this.frames - 1) {
+      this.frameIteration++;
+    } else {
+      this.frameIteration = 0;
+    }
+
     // set sX
     if (this.animationDirection === AnimationDirection.RIGHT) {
       this.sX = this.frameIteration * this.sWidth;
@@ -113,14 +117,6 @@ export class Enemy {
       this.sX =
         (this.frames + this.flipOffsetFrames) * this.sWidth -
         (this.frameIteration + 1) * this.sWidth;
-    }
-
-    // prepare frame for next iteration
-    // -1 because frameIteration starts with 0 to get first sX value
-    if (this.frameIteration < this.frames - 1) {
-      this.frameIteration++;
-    } else {
-      this.frameIteration = 0;
     }
   };
 
@@ -179,12 +175,20 @@ export class Enemy {
         this.nodeTarget.x,
         this.nodeTarget.y
       );
+
+      if (this.x <= this.nodeTarget.x) {
+        this.animationDirection = AnimationDirection.RIGHT;
+      } else {
+        this.animationDirection = AnimationDirection.LEFT;
+      }
+      this.setImageConfig();
     }
   };
 
   private updateFrames = () => {
     if (this.lastFrameIteration === null) {
       // initial run
+      this.setFrame();
       this.lastFrameIteration = performance.now();
     } else {
       if (this.frameIterationThrottleTime === null) {
