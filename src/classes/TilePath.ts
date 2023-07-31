@@ -48,19 +48,17 @@ export class TilePath extends Tile {
 
   private drawImg = () => {
     const image = imageController.getImage("textures");
-    if (image !== null) {
-      dom.ctxBackground.drawImage(
-        image,
-        this.sX,
-        this.sY,
-        this.sWidth,
-        this.sHeight,
-        this.dX,
-        this.dY,
-        this.dWidth,
-        this.dHeight
-      );
-    }
+    dom.ctxBackground.drawImage(
+      image,
+      this.sX,
+      this.sY,
+      this.sWidth,
+      this.sHeight,
+      this.dX,
+      this.dY,
+      this.dWidth,
+      this.dHeight
+    );
   };
 
   updateBG = () => {

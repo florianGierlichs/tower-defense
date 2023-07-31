@@ -8,7 +8,7 @@ export class TileGras extends Tile {
   hasTower: boolean = false;
   showTowerBP: TowerConfig | null = null;
 
-  image: HTMLImageElement | null = null;
+  image: HTMLImageElement;
   sX: number;
   sY: number;
 
@@ -62,21 +62,19 @@ export class TileGras extends Tile {
   private drawTowerBp = () => {
     if (this.showTowerBP !== null) {
       const image = imageController.getImage(this.showTowerBP);
-      if (image !== null) {
-        dom.ctxGame.drawImage(image, this.dX, this.dY);
+      dom.ctxGame.drawImage(image, this.dX, this.dY);
 
-        const tileMiddle = getTileMiddle({ x: this.x, y: this.y });
-        dom.ctxGame.beginPath();
-        dom.ctxGame.arc(
-          tileMiddle.x,
-          tileMiddle.y,
-          this.showTowerBP.range,
-          0,
-          Math.PI * 2
-        );
-        dom.ctxGame.fillStyle = "rgba(225,225,225,0.1)";
-        dom.ctxGame.fill();
-      }
+      const tileMiddle = getTileMiddle({ x: this.x, y: this.y });
+      dom.ctxGame.beginPath();
+      dom.ctxGame.arc(
+        tileMiddle.x,
+        tileMiddle.y,
+        this.showTowerBP.range,
+        0,
+        Math.PI * 2
+      );
+      dom.ctxGame.fillStyle = "rgba(225,225,225,0.1)";
+      dom.ctxGame.fill();
     }
   };
 
