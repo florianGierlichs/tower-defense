@@ -7,6 +7,7 @@
 - spawn mobs on death
 - destroy random tower on death
 - freeze the tower he got hit from by x seconds
+- skeleton shield that blocks projectiles every x seconds
 
 #### Add sound
 
