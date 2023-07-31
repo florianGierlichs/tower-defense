@@ -194,7 +194,7 @@ export class Tower {
     } else {
       let distanceOfClosestEnemy = Infinity;
 
-      game.enemies.getEnemies().forEach((enemy) => {
+      game.enemies.getCurrentEnemies().forEach((enemy) => {
         const enemyDistance = getDistance(this.tileMiddle, {
           x: enemy.x,
           y: enemy.y,

@@ -4,6 +4,7 @@ import { Enemies } from "./Enemies";
 import { Menu } from "./Menu";
 import { TileGras } from "./TileGras";
 import { Towers } from "./Towers";
+import { Waves } from "./Waves";
 
 export interface PathNode {
   // TODO put to util/types
@@ -17,12 +18,16 @@ export class Game {
   menu = new Menu();
   towers = new Towers();
   enemies: Enemies;
+  waves = new Waves();
 
   constructor() {
     tiles.createTileGrid();
     tiles.buildTileImg();
 
     this.enemies = new Enemies();
+
+    const currentEnemies = this.waves.spawnWave();
+    this.enemies.setCurrentEnemies(currentEnemies);
 
     this.addShowTowerRangeClickEventForCanvasGame();
     this.addHideTowerRangeClickEventForBody();

@@ -1,3 +1,5 @@
+import { EnemyNames } from "../classes/Waves";
+
 export interface Coordinate {
   x: number;
   y: number;
@@ -18,7 +20,7 @@ export interface FrameConfig {
 }
 
 export interface EnemyConfig {
-  name: string;
+  name: EnemyNames;
   health: number;
   speed: number;
   imageScale: number;
