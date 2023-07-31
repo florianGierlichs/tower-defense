@@ -20,3 +20,9 @@
 - tower which can shoot multiple projectiles at once
 - tower which can shoot through multiple enemies
 - tower which dont shot projectiles but cast a spell on the ground
+
+#### Name asset creators
+
+- https://astrobob.itch.io/arcane-archer
+- https://cainos.itch.io/pixel-art-top-down-basic
+- https://luizmelo.itch.io/monsters-creatures-fantasy
