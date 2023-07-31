@@ -163,25 +163,39 @@ export class Enemy {
         { x: this.nodeTarget.x, y: this.nodeTarget.y }
       )
     ) {
-      this.nodesIndex++;
-      if (this.pathNodes.length === this.nodesIndex) {
-        game.enemies.remove(this.id);
-        return;
-      }
-      this.nodeTarget = this.pathNodes[this.nodesIndex];
-      this.angle = getAngle(
-        this.x,
-        this.y,
-        this.nodeTarget.x,
-        this.nodeTarget.y
-      );
-
-      if (this.x <= this.nodeTarget.x) {
-        this.animationDirection = AnimationDirection.RIGHT;
-      } else {
-        this.animationDirection = AnimationDirection.LEFT;
-      }
+      this.updateNodeTarget();
+      this.updateAnimationDirection();
       this.setImageConfig();
+    }
+  };
+
+  private updateNodeTarget = () => {
+    this.nodesIndex++;
+    if (this.pathNodes.length === this.nodesIndex) {
+      game.enemies.remove(this.id);
+      return;
+    }
+    this.nodeTarget = this.pathNodes[this.nodesIndex];
+    this.angle = getAngle(this.x, this.y, this.nodeTarget.x, this.nodeTarget.y);
+  };
+
+  private updateAnimationDirection = () => {
+    // move up or down
+    if (this.x === this.nodeTarget.x) {
+      this.animationDirection =
+        Math.random() < 0.5
+          ? AnimationDirection.RIGHT
+          : AnimationDirection.LEFT;
+    }
+
+    // move right
+    if (this.x < this.nodeTarget.x) {
+      this.animationDirection = AnimationDirection.RIGHT;
+    }
+
+    // move left
+    if (this.x > this.nodeTarget.x) {
+      this.animationDirection = AnimationDirection.LEFT;
     }
   };
 
