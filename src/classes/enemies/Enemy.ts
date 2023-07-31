@@ -182,16 +182,21 @@ export class Enemy {
     }
   };
 
-  private handleFrames = () => {
-    if (this.frameIterationThrottleTime === null) {
-      throw new Error("frameIterationThrottleTime is null");
-    }
-
-    if (
-      timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
-    ) {
-      this.setFrame();
+  private updateFrames = () => {
+    if (this.lastFrameIteration === null) {
+      // initial run
       this.lastFrameIteration = performance.now();
+    } else {
+      if (this.frameIterationThrottleTime === null) {
+        throw new Error("frameIterationThrottleTime is null");
+      }
+
+      if (
+        timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
+      ) {
+        this.setFrame();
+        this.lastFrameIteration = performance.now();
+      }
     }
   };
 
@@ -209,11 +214,7 @@ export class Enemy {
   update = () => {
     this.move();
 
-    if (this.lastFrameIteration === null) {
-      this.lastFrameIteration = performance.now();
-    } else {
-      this.handleFrames();
-    }
+    this.updateFrames();
 
     this.draw();
   };
