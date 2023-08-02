@@ -1,8 +1,8 @@
-import { dom, imageController } from "../main";
+import { dom, imageController } from "../../main";
 import { Tile, TileCoords } from "./Tile";
-import { getRandomItemFromArray } from "../utils/getRandomItemFromArray";
-import { getTileMiddle } from "../utils/getTileMiddle";
-import { MenuTower } from "../utils/types";
+import { getRandomItemFromArray } from "../../utils/getRandomItemFromArray";
+import { getTileMiddle } from "../../utils/getTileMiddle";
+import { MenuTower } from "../../utils/types";
 
 export class TileGras extends Tile {
   hasTower: boolean = false;

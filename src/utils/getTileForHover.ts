@@ -1,5 +1,5 @@
-import { TileGras } from "../classes/TileGras";
-import { TilePath } from "../classes/TilePath";
+import { TileGras } from "../classes/tiles/TileGras";
+import { TilePath } from "../classes/tiles/TilePath";
 import { tiles } from "../main";
 import { getMouseCoordinates } from "./getMouseCoordinates";
 

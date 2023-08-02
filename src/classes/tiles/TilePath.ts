@@ -1,6 +1,6 @@
-import { dom, imageController } from "../main";
+import { dom, imageController } from "../../main";
 import { Tile, TileCoords } from "./Tile";
-import { getRandomItemFromArray } from "../utils/getRandomItemFromArray";
+import { getRandomItemFromArray } from "../../utils/getRandomItemFromArray";
 
 type Direction = "horizontal" | "vertical" | "corner";
 

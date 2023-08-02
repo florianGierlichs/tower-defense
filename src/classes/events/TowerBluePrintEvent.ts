@@ -1,8 +1,8 @@
 import { dom } from "../../main";
 import { getTileForHover } from "../../utils/getTileForHover";
 import { MenuTower } from "../../utils/types";
-import { TileGras } from "../TileGras";
-import { TilePath } from "../TilePath";
+import { TileGras } from "../tiles/TileGras";
+import { TilePath } from "../tiles/TilePath";
 
 export class TowerBluePrintEvent {
   previousTileForHover: TileGras | TilePath | null = null;

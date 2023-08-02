@@ -1,7 +1,7 @@
 import { dom, game } from "../../main";
 import { getTileForClick } from "../../utils/getTileForClick";
 import { MenuTower } from "../../utils/types";
-import { TileGras } from "../TileGras";
+import { TileGras } from "../tiles/TileGras";
 
 export class PlaceTowerEvent {
   placeTowerClickCallback: ((e: MouseEvent) => void) | null = null;

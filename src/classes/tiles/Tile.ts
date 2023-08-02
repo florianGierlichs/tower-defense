@@ -1,4 +1,4 @@
-import { dom } from "../main";
+import { dom } from "../../main";
 
 export interface TileCoords {
   sx: number;

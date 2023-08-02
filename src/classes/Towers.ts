@@ -1,5 +1,5 @@
 import shortUUID from "short-uuid";
-import { TowerArcaneArcher } from "./TowerArcaneArcher";
+import { TowerArcaneArcher } from "./towers/TowerArcaneArcher";
 import { MenuTower } from "../utils/types";
 
 export class Towers {

@@ -1,7 +1,7 @@
 import { dom, events } from "../main";
 import { MenuTower } from "../utils/types";
 import { MenuItemTower } from "./MenuItemTower";
-import { TowerArcaneArcher } from "./TowerArcaneArcher";
+import { TowerArcaneArcher } from "./towers/TowerArcaneArcher";
 
 export class Menu {
   static readonly towers = [

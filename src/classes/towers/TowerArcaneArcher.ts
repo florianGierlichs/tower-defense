@@ -1,4 +1,4 @@
-import { TowerConfig } from "../utils/types";
+import { TowerConfig } from "../../utils/types";
 import { Tower } from "./Tower";
 
 export class TowerArcaneArcher extends Tower {

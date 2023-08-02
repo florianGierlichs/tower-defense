@@ -1,17 +1,17 @@
 import shortUUID from "short-uuid";
-import { dom, game, imageController } from "../main";
-import { getDistance } from "../utils/getDistance";
-import { timeHasPassed } from "../utils/timeHasPassed";
-import { Enemy } from "./enemies/Enemy";
-import { Projectile } from "./Projectile";
-import { getTileMiddle } from "../utils/getTileMiddle";
+import { dom, game, imageController } from "../../main";
+import { getDistance } from "../../utils/getDistance";
+import { timeHasPassed } from "../../utils/timeHasPassed";
+import { Enemy } from "../enemies/Enemy";
+import { Projectile } from "../projectiles/Projectile";
+import { getTileMiddle } from "../../utils/getTileMiddle";
 import {
   AnimationDirection,
   FrameConfig,
   FrameConfigs,
   TowerConfig,
   TowerState,
-} from "../utils/types";
+} from "../../utils/types";
 
 export class Tower {
   id;

@@ -1,7 +1,7 @@
-import { dom } from "../main";
-import { getAngle } from "../utils/getAngle";
-import { reachedTarget } from "../utils/reachedTarget";
-import { Enemy } from "./enemies/Enemy";
+import { dom } from "../../main";
+import { getAngle } from "../../utils/getAngle";
+import { reachedTarget } from "../../utils/reachedTarget";
+import { Enemy } from "../enemies/Enemy";
 
 export class Projectile {
   id;

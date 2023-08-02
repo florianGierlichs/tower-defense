@@ -2,7 +2,7 @@ import { dom, tiles } from "../main";
 import { getTileForClick } from "../utils/getTileForClick";
 import { Enemies } from "./Enemies";
 import { Menu } from "./Menu";
-import { TileGras } from "./TileGras";
+import { TileGras } from "./tiles/TileGras";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
 

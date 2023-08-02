@@ -1,6 +1,6 @@
 import { PathNode } from "./Game";
-import { TileGras } from "./TileGras";
-import { TilePath } from "./TilePath";
+import { TileGras } from "./tiles/TileGras";
+import { TilePath } from "./tiles/TilePath";
 
 export type TileRow = (TileGras | TilePath)[];
 
