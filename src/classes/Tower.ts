@@ -6,6 +6,7 @@ import { Enemy } from "./enemies/Enemy";
 import { Projectile } from "./Projectile";
 import { getTileMiddle } from "../utils/getTileMiddle";
 import {
+  AnimationDirection,
   FrameConfig,
   FrameConfigs,
   TowerConfig,
@@ -43,19 +44,13 @@ export class Tower {
   state: TowerState = TowerState.IDLE;
   imgConfig: FrameConfigs;
   updateImgConfig = false;
-  animationDirection: "left" | "right" = "left";
+  animationDirection: AnimationDirection = AnimationDirection.LEFT;
 
   projectileImg;
   projectileWidth;
   projectileHeight;
 
-  constructor(
-    id: string,
-    x: number,
-    y: number,
-    img: HTMLImageElement,
-    config: TowerConfig
-  ) {
+  constructor(id: string, x: number, y: number, config: TowerConfig) {
     this.id = id;
     this.x = x;
     this.y = y;
@@ -63,7 +58,7 @@ export class Tower {
     this.range = config.range;
     this.attackSpeed = config.attackSpeed;
 
-    this.image = img;
+    this.image = imageController.getImage(config.name);
     this.imgConfig = config.frameConfig;
     this.dX = x;
     this.dY = y;
@@ -78,7 +73,7 @@ export class Tower {
   private getImgConfigForState = () => {
     let imageConfig: FrameConfig;
     switch (this.state) {
-      case "idle":
+      case TowerState.IDLE:
         imageConfig = this.imgConfig.idle;
         break;
       default:
@@ -96,11 +91,11 @@ export class Tower {
       flipOffsetFrames,
     } = this.getImgConfigForState();
     this.sX =
-      this.animationDirection === "right"
+      this.animationDirection === AnimationDirection.RIGHT
         ? animationStartRight.sx
         : animationStartLeft.sx;
     this.sY =
-      this.animationDirection === "right"
+      this.animationDirection === AnimationDirection.RIGHT
         ? animationStartRight.sy
         : animationStartLeft.sy;
     this.frames = frames;
@@ -111,7 +106,7 @@ export class Tower {
 
   private setFrame = () => {
     if (this.frames !== null && this.flipOffsetFrames !== null) {
-      if (this.animationDirection === "right") {
+      if (this.animationDirection === AnimationDirection.RIGHT) {
         this.sX = this.frameIteration * this.sWidth;
       } else {
         this.sX =
@@ -228,13 +223,13 @@ export class Tower {
   private setAnimationDirection = () => {
     if (this.currentTarget) {
       if (this.currentTarget.x <= this.x) {
-        if (this.animationDirection === "right") {
-          this.animationDirection = "left";
+        if (this.animationDirection === AnimationDirection.RIGHT) {
+          this.animationDirection = AnimationDirection.LEFT;
           this.updateImgConfig = true;
         }
       } else {
-        if (this.animationDirection === "left") {
-          this.animationDirection = "right";
+        if (this.animationDirection === AnimationDirection.LEFT) {
+          this.animationDirection = AnimationDirection.RIGHT;
           this.updateImgConfig = true;
         }
       }
@@ -305,7 +300,7 @@ export class Tower {
     if (this.attackAnimationIsRunning) {
       this.shoot();
     } else {
-      if (this.state === "idle") {
+      if (this.state === TowerState.IDLE) {
         this.idle();
         if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
           this.checkAndSetClosestEnemyInRange();

@@ -1,4 +1,4 @@
-import { dom, game, tiles } from "../../main";
+import { dom, game, imageController, tiles } from "../../main";
 import { getAngle } from "../../utils/getAngle";
 import { getRandomFrameIteration } from "../../utils/getRandomFrameIteration";
 import { reachedTarget } from "../../utils/reachedTarget";
@@ -40,17 +40,11 @@ export class Enemy {
   angle;
   nodesIndex = 0;
 
-  constructor(
-    id: string,
-    x: number,
-    y: number,
-    image: HTMLImageElement,
-    config: EnemyConfig
-  ) {
+  constructor(id: string, x: number, y: number, config: EnemyConfig) {
     this.id = id;
     this.x = x;
     this.y = y;
-    this.image = image;
+    this.image = imageController.getImage(config.name);
     this.dWidth = config.imageScale * this.sWidth;
     this.dHeight = config.imageScale * this.sHeight;
     this.frameConfig = config.frameConfig;

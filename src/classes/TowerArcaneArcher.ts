@@ -1,4 +1,3 @@
-import { imageController } from "../main";
 import { TowerConfig } from "../utils/types";
 import { Tower } from "./Tower";
 
@@ -44,12 +43,6 @@ export class TowerArcaneArcher extends Tower {
   };
 
   constructor(id: string, x: number, y: number) {
-    super(
-      id,
-      x,
-      y,
-      imageController.getImage(TowerArcaneArcher.config.name), // todo only config needed, can get image Enemy constructor
-      TowerArcaneArcher.config
-    );
+    super(id, x, y, TowerArcaneArcher.config);
   }
 }

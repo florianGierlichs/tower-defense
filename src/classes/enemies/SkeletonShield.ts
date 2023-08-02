@@ -1,4 +1,3 @@
-import { imageController } from "../../main";
 import { EnemyConfig } from "../../utils/types";
 import { Enemy } from "./Enemy";
 
@@ -26,12 +25,6 @@ export class SkeletonShield extends Enemy {
   };
 
   constructor(id: string, x: number, y: number) {
-    super(
-      id,
-      x,
-      y,
-      imageController.getImage(SkeletonShield.config.name), // todo only config needed, can get image Enemy constructor
-      SkeletonShield.config
-    );
+    super(id, x, y, SkeletonShield.config);
   }
 }
