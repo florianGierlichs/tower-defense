@@ -20,6 +20,7 @@
 - tower which can shoot multiple projectiles at once
 - tower which can shoot through multiple enemies
 - tower which dont shot projectiles but cast a spell on the ground
+- some towers could only available after a condition. e.g. after x waves or after x (Boss)kills
 
 #### Add more enemies
 
