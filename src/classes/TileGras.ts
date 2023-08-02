@@ -61,7 +61,7 @@ export class TileGras extends Tile {
 
   private drawTowerBp = () => {
     if (this.showTowerBP !== null) {
-      const image = imageController.getImage(this.showTowerBP.id);
+      const image = imageController.getImage(this.showTowerBP.blueprintId);
       dom.ctxGame.drawImage(image, this.dX, this.dY);
 
       const tileMiddle = getTileMiddle({ x: this.x, y: this.y });

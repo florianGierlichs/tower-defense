@@ -30,7 +30,7 @@ export class SkeletonShield extends Enemy {
       id,
       x,
       y,
-      imageController.getImage(SkeletonShield.config.name),
+      imageController.getImage(SkeletonShield.config.name), // todo only config needed, can get image Enemy constructor
       SkeletonShield.config
     );
   }

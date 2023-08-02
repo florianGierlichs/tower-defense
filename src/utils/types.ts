@@ -1,4 +1,9 @@
-import { TowerClasses, TowerName } from "../classes/Menu";
+import {
+  TowerBpName,
+  TowerClasses,
+  TowerName,
+  TowerProjectileName,
+} from "../classes/Menu";
 import { EnemyName } from "../classes/Waves";
 
 export interface Coordinate {
@@ -20,19 +25,39 @@ export interface FrameConfig {
   };
 }
 
+export interface FrameConfigs {
+  [key: string]: FrameConfig;
+}
+
 export interface EnemyConfig {
   name: EnemyName;
   health: number;
   speed: number;
   imageScale: number;
-  frameConfig: {
-    move: FrameConfig;
+  frameConfig: FrameConfigs;
+}
+
+export interface TowerConfig {
+  name: TowerName;
+  range: number;
+  attackSpeed: number;
+  imageScale: number;
+  frameConfig: FrameConfigs;
+  projectile: {
+    name: TowerProjectileName;
+    width: number;
+    height: number;
   };
 }
 
 export enum EnemyState {
   IDLE = "idle",
   MOVE = "move",
+}
+
+export enum TowerState {
+  IDLE = "idle",
+  ATTACK = "attack",
 }
 
 export enum AnimationDirection {
@@ -44,4 +69,6 @@ export interface MenuTower {
   readonly id: TowerName;
   readonly className: TowerClasses[number];
   readonly range: number;
+  readonly projectileId: TowerProjectileName;
+  readonly blueprintId: TowerBpName;
 }
