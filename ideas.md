@@ -21,6 +21,10 @@
 - tower which can shoot through multiple enemies
 - tower which dont shot projectiles but cast a spell on the ground
 
+#### Add more enemies
+
+- flying enemy which is not effected by ground effects or maybe slow effects
+
 #### Name asset creators
 
 - https://astrobob.itch.io/arcane-archer
