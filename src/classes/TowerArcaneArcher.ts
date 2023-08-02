@@ -1,61 +1,55 @@
-import arcaneArcher from "../assets/arcaneArcher.png";
-import arcaneArcherProjectile from "../assets/arcaneArcherProjectile.png";
-import { TOWER_CONFIGS } from "../data/towerConfig";
-import { loadImage } from "../utils/loadImage";
-import { ImgConfigs, Tower } from "./Tower";
-
-const imageConfigs: ImgConfigs = {
-  // todo rename type and put to utils/types
-  // todo put to data
-  idle: {
-    frames: 4,
-    animationIterationCircleTime: 500,
-    flipOffsetFrames: 4,
-    animationStartRight: {
-      sx: 0,
-      sy: 320,
-    },
-    animationStartLeft: {
-      sx: 448,
-      sy: 832,
-    },
-  },
-  attack: {
-    frames: 7,
-    animationIterationCircleTime: 500,
-    flipOffsetFrames: 1,
-    animationStartRight: {
-      sx: 0,
-      sy: 192,
-    },
-    animationStartLeft: {
-      sx: 448,
-      sy: 704,
-    },
-  },
-};
-
-let arcaneArcherImage: HTMLImageElement; // todo potentiell race condition problem, because async, NEW use from imageController
-let projectileImg: HTMLImageElement;
-(async () => {
-  arcaneArcherImage = await loadImage(arcaneArcher);
-  projectileImg = await loadImage(arcaneArcherProjectile);
-})();
-
-const projectileWidth = 40; // TODO maybe in imageConfigs?
-const projectileHeight = 5;
+import { imageController } from "../main";
+import { TowerConfig } from "../utils/types";
+import { Tower } from "./Tower";
 
 export class TowerArcaneArcher extends Tower {
+  static readonly config: TowerConfig = {
+    name: "arcaneArcher",
+    range: 250,
+    attackSpeed: 1000,
+    imageScale: 0.8,
+    frameConfig: {
+      idle: {
+        frames: 4,
+        animationIterationCircleTime: 500,
+        flipOffsetFrames: 4,
+        animationStartRight: {
+          sx: 0,
+          sy: 320,
+        },
+        animationStartLeft: {
+          sx: 448,
+          sy: 832,
+        },
+      },
+      attack: {
+        frames: 7,
+        animationIterationCircleTime: 500,
+        flipOffsetFrames: 1,
+        animationStartRight: {
+          sx: 0,
+          sy: 192,
+        },
+        animationStartLeft: {
+          sx: 448,
+          sy: 704,
+        },
+      },
+    },
+    projectile: {
+      name: "arcaneArcherProjectile",
+      width: 40,
+      height: 5,
+    },
+  };
+
   constructor(id: string, x: number, y: number) {
     super(
       id,
       x,
       y,
-      arcaneArcherImage,
-      imageConfigs,
-      TOWER_CONFIGS.arcaneArcher.range,
-      TOWER_CONFIGS.arcaneArcher.attackSpeed,
-      { projectileImg, projectileWidth, projectileHeight }
+      imageController.getImage(TowerArcaneArcher.config.name), // todo only config needed, can get image Enemy constructor
+      TowerArcaneArcher.config
     );
   }
 }

@@ -1,15 +1,17 @@
 import shortUUID from "short-uuid";
-import { dom, game } from "../main";
+import { dom, game, imageController } from "../main";
 import { getDistance } from "../utils/getDistance";
 import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemy } from "./enemies/Enemy";
 import { Projectile } from "./Projectile";
 import { getTileMiddle } from "../utils/getTileMiddle";
-import { FrameConfig } from "../utils/types";
+import {
+  FrameConfig,
+  FrameConfigs,
+  TowerConfig,
+  TowerState,
+} from "../utils/types";
 
-export type towerState = "idle" | "attack";
-
-export type ImgConfigs = Record<towerState, FrameConfig>;
 export class Tower {
   id;
   x;
@@ -38,8 +40,8 @@ export class Tower {
   frameIteration: number = 0;
   lastFrameIteration: number | null = null;
   frameIterationThrottleTime: number = 100;
-  state: towerState = "idle";
-  imgConfig: ImgConfigs;
+  state: TowerState = TowerState.IDLE;
+  imgConfig: FrameConfigs;
   updateImgConfig = false;
   animationDirection: "left" | "right" = "left";
 
@@ -52,36 +54,25 @@ export class Tower {
     x: number,
     y: number,
     img: HTMLImageElement,
-    imgConfig: ImgConfigs,
-    range: number,
-    attackSpeed: number,
-    {
-      projectileImg,
-      projectileWidth,
-      projectileHeight,
-    }: {
-      projectileImg: HTMLImageElement;
-      projectileWidth: number;
-      projectileHeight: number;
-    }
+    config: TowerConfig
   ) {
     this.id = id;
     this.x = x;
     this.y = y;
     this.tileMiddle = getTileMiddle({ x, y });
-    this.range = range;
-    this.attackSpeed = attackSpeed;
+    this.range = config.range;
+    this.attackSpeed = config.attackSpeed;
 
     this.image = img;
-    this.imgConfig = imgConfig;
+    this.imgConfig = config.frameConfig;
     this.dX = x;
     this.dY = y;
 
     this.setImageConfig();
 
-    this.projectileImg = projectileImg;
-    this.projectileWidth = projectileWidth;
-    this.projectileHeight = projectileHeight;
+    this.projectileImg = imageController.getImage(config.projectile.name);
+    this.projectileWidth = config.projectile.width;
+    this.projectileHeight = config.projectile.height;
   }
 
   private getImgConfigForState = () => {
@@ -138,7 +129,7 @@ export class Tower {
         if (this.attackAnimationIsRunning) {
           this.createProjectile();
           this.attackAnimationIsRunning = false;
-          this.state = "idle";
+          this.state = TowerState.IDLE;
           this.setImageConfig();
         }
       }
@@ -173,10 +164,10 @@ export class Tower {
 
   private setStateAndCurrentTarget = (target: Enemy | null) => {
     if (target === null) {
-      this.state = "idle";
+      this.state = TowerState.IDLE;
       this.setImageConfig();
     } else {
-      this.state = "attack";
+      this.state = TowerState.ATTACK;
     }
     this.currentTarget = target;
     this.frameIteration = 0;
