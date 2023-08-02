@@ -1,4 +1,5 @@
-import { EnemyNames } from "../classes/Waves";
+import { TowerClasses, TowerName } from "../classes/Menu";
+import { EnemyName } from "../classes/Waves";
 
 export interface Coordinate {
   x: number;
@@ -20,7 +21,7 @@ export interface FrameConfig {
 }
 
 export interface EnemyConfig {
-  name: EnemyNames;
+  name: EnemyName;
   health: number;
   speed: number;
   imageScale: number;
@@ -37,4 +38,10 @@ export enum EnemyState {
 export enum AnimationDirection {
   LEFT = "left",
   RIGHT = "right",
+}
+
+export interface MenuTower {
+  readonly id: TowerName;
+  readonly className: TowerClasses[number];
+  readonly range: number;
 }

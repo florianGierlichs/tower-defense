@@ -1,5 +1,5 @@
-import { TowerConfig } from "../data/towerConfig";
 import { events } from "../main";
+import { MenuTower } from "../utils/types";
 
 export class DomController {
   body;
@@ -39,8 +39,8 @@ export class DomController {
       document.querySelector<HTMLButtonElement>("#toggle-tiles-info")!;
   }
 
-  addTowerMouseCursor = (tower: TowerConfig) => {
-    this.appContainer.classList.add(tower.name);
+  addTowerMouseCursor = (tower: MenuTower) => {
+    this.appContainer.classList.add(tower.id);
   };
 
   removeAllClassesFromAppContainer = () => {
@@ -51,10 +51,10 @@ export class DomController {
     this.menuTowersContainer.appendChild(child);
   };
 
-  createMenuItemTower = (tower: TowerConfig, clickHandler: () => void) => {
+  createMenuItemTower = (tower: MenuTower, clickHandler: () => void) => {
     const element = document.createElement("div");
     element.classList.add("menu-item");
-    element.id = tower.name;
+    element.id = tower.id;
 
     events.selectedTowerEvent.addSelectedTowerEvent(element, clickHandler);
     this.addChildToMenuTowersContainer(element);

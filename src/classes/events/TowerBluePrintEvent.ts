@@ -1,6 +1,6 @@
-import { TowerConfig } from "../../data/towerConfig";
 import { dom } from "../../main";
 import { getTileForHover } from "../../utils/getTileForHover";
+import { MenuTower } from "../../utils/types";
 import { TileGras } from "../TileGras";
 import { TilePath } from "../TilePath";
 
@@ -11,7 +11,7 @@ export class TowerBluePrintEvent {
 
   constructor() {}
 
-  private showTowerBpOnTile = (e: MouseEvent, selectedTower: TowerConfig) => {
+  private showTowerBpOnTile = (e: MouseEvent, selectedTower: MenuTower) => {
     const tile = getTileForHover(e);
 
     if (this.previousTileForHover !== tile) {
@@ -44,7 +44,7 @@ export class TowerBluePrintEvent {
     this.previousTileForHover = null;
   };
 
-  addTowerBluePrintMouseMoveEvent = (selectedTower: TowerConfig) => {
+  addTowerBluePrintMouseMoveEvent = (selectedTower: MenuTower) => {
     this.mouseMoveCallback = (e: MouseEvent) => {
       this.showTowerBpOnTile(e, selectedTower);
     };

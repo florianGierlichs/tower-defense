@@ -2,11 +2,11 @@ import { dom, imageController } from "../main";
 import { Tile, TileCoords } from "./Tile";
 import { getRandomItemFromArray } from "../utils/getRandomItemFromArray";
 import { getTileMiddle } from "../utils/getTileMiddle";
-import { TowerConfig } from "../data/towerConfig";
+import { MenuTower } from "../utils/types";
 
 export class TileGras extends Tile {
   hasTower: boolean = false;
-  showTowerBP: TowerConfig | null = null;
+  showTowerBP: MenuTower | null = null; // todo change name to just towerBp
 
   image: HTMLImageElement;
   sX: number;
@@ -55,13 +55,13 @@ export class TileGras extends Tile {
 
   setHasTower = () => (this.hasTower = true);
 
-  setShowTowerBp = (tower: TowerConfig | null) => {
+  setShowTowerBp = (tower: MenuTower | null) => {
     this.showTowerBP = tower;
   };
 
   private drawTowerBp = () => {
     if (this.showTowerBP !== null) {
-      const image = imageController.getImage(this.showTowerBP);
+      const image = imageController.getImage(this.showTowerBP.id);
       dom.ctxGame.drawImage(image, this.dX, this.dY);
 
       const tileMiddle = getTileMiddle({ x: this.x, y: this.y });
