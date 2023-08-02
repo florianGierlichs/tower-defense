@@ -39,6 +39,6 @@ export class Waves {
 }
 
 const waveIds = Waves.waves.map((obj) => obj.id);
-export type EnemyNames = (typeof waveIds)[number];
+export type EnemyName = (typeof waveIds)[number];
 
 export type EnemyClasses = ReturnType<Waves["spawnWave"]>;
