@@ -125,7 +125,7 @@ export class Enemy {
       this.sWidth,
       this.sHeight,
       this.x - this.imageTranslateX,
-      this.y - this.imageTranslateY,
+      this.y - this.imageTranslateY, // todo need individual frame correction so that the image is centered on the path
       this.dWidth,
       this.dHeight
     );

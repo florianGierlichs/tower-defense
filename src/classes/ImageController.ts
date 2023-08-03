@@ -6,6 +6,7 @@ import arcaneArcherProjectileImg from "../assets/projectiles/arcaneArcherProject
 import arcaneArcherBpImg from "../assets/menu/arcaneArcherMenu.png";
 import texturesImg from "../assets/textures.png";
 import skeletonShieldImg from "../assets/enemy/skeletonShield.png";
+import mushroom from "../assets/enemy/mushroom.png";
 
 const texturesKey = "textures";
 
@@ -20,7 +21,7 @@ export class ImageController {
 
   // enemy
   skeletonShield: HTMLImageElement | null = null;
-  //someEnemy: HTMLImageElement | null = null;
+  mushroom: HTMLImageElement | null = null;
 
   loadImages = async () => {
     this.textures = await loadImage(texturesImg);
@@ -32,6 +33,7 @@ export class ImageController {
 
     // enemy
     this.skeletonShield = await loadImage(skeletonShieldImg);
+    this.mushroom = await loadImage(mushroom);
   };
 
   getImage = (

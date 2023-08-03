@@ -26,14 +26,23 @@ export class Game {
 
     this.enemies = new Enemies();
 
-    const currentEnemies = this.waves.spawnWave();
-    this.enemies.setCurrentEnemies(currentEnemies);
+    this.spawnEnemies();
+
+    // todo add logic for scheduling waves
+    setTimeout(() => {
+      this.spawnEnemies();
+    }, 25000);
 
     this.addShowTowerRangeClickEventForCanvasGame();
     this.addHideTowerRangeClickEventForBody();
 
     dom.toggleTilesInfoButton.addEventListener("click", tiles.toggleDebug); // todo put this in DomEvents
   }
+
+  private spawnEnemies = () => {
+    const currentEnemies = this.waves.createEnemyWave();
+    this.enemies.setCurrentEnemies(currentEnemies);
+  };
 
   private showTowerRange = (event: MouseEvent) => {
     const tile = getTileForClick(event);
