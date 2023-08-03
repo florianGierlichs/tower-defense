@@ -22,9 +22,10 @@
 - tower which dont shot projectiles but cast a spell on the ground
 - some towers could only available after a condition. e.g. after x waves or after x (Boss)kills
 
-#### Add more enemies
+#### enemies
 
-- flying enemy which is not effected by ground effects or maybe slow effects
+- add flying enemy which is not effected by ground effects or maybe slow effects
+- add lifebar to enemies
 
 #### Name asset creators
 
