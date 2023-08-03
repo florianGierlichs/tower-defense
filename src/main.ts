@@ -24,7 +24,7 @@ imageController.loadImages().then(() => {
   const intervalInMiliseconds = 1000 / fps;
 
   const runGame = (timestamp?: number) => {
-    if (game.time === 5000) {
+    if (game.time === 10000) {
       console.log("end");
       return;
     }

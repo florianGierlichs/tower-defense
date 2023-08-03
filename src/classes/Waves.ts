@@ -1,6 +1,7 @@
 import shortUUID from "short-uuid";
 import { SkeletonShield } from "./enemies/SkeletonShield";
 import { Mushroom } from "./enemies/Mushroom";
+import { Goblin } from "./enemies/Goblin";
 
 export class Waves {
   waveIndex = 0;
@@ -8,6 +9,7 @@ export class Waves {
   static readonly waves = [
     { id: "skeletonShield", className: SkeletonShield, unitCount: 9 },
     { id: "mushroom", className: Mushroom, unitCount: 12 },
+    { id: "goblin", className: Goblin, unitCount: 6 },
   ] as const;
 
   static readonly waveStartingPositions = [

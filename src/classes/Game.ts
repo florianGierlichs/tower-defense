@@ -33,6 +33,10 @@ export class Game {
       this.spawnEnemies();
     }, 25000);
 
+    setTimeout(() => {
+      this.spawnEnemies();
+    }, 50000);
+
     this.addShowTowerRangeClickEventForCanvasGame();
     this.addHideTowerRangeClickEventForBody();
 
