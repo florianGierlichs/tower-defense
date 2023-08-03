@@ -2,6 +2,7 @@ import { TowerConfig } from "../../utils/types";
 import { Tower } from "./Tower";
 
 export class TowerArcaneArcher extends Tower {
+  // todo rename to ArcaneArcher
   static readonly config: TowerConfig = {
     name: "arcaneArcher",
     range: 250,
