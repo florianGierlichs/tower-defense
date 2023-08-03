@@ -1,11 +1,11 @@
 import { loadImage } from "../utils/loadImage";
 import { EnemyName } from "./Waves";
 import { TowerBpName, TowerName, TowerProjectileName } from "./Menu";
-import arcaneArcherImg from "../assets/arcaneArcher.png";
-import arcaneArcherProjectileImg from "../assets/arcaneArcherProjectile.png";
-import arcaneArcherBpImg from "../assets/arcaneArcherMenu.png";
+import arcaneArcherImg from "../assets/tower/arcaneArcher.png";
+import arcaneArcherProjectileImg from "../assets/projectiles/arcaneArcherProjectile.png";
+import arcaneArcherBpImg from "../assets/menu/arcaneArcherMenu.png";
 import texturesImg from "../assets/textures.png";
-import skeletonShieldImg from "../assets/skeletonShield.png";
+import skeletonShieldImg from "../assets/enemy/skeletonShield.png";
 
 const texturesKey = "textures";
 

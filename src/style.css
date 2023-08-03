@@ -2,7 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  cursor: url("./assets/CursorBrown.png") 11 6, auto;
+  cursor: url("./assets/cursor/CursorBrown.png") 11 6, auto;
 }
 
 #background {
@@ -93,7 +93,7 @@ canvas {
 }
 
 #arcaneArcher {
-  background-image: url("./assets/arcaneArcherMenu.png");
+  background-image: url("./assets/menu/arcaneArcherMenu.png");
   background-size: cover;
 }
 
@@ -107,5 +107,5 @@ canvas {
 }
 
 .arcaneArcher {
-  cursor: url("./assets/cursorArcaneArcher.png") 38 48, auto;
+  cursor: url("./assets/cursor/cursorArcaneArcher.png") 38 48, auto;
 }
