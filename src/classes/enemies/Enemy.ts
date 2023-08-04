@@ -14,6 +14,7 @@ export class Enemy {
   frameConfig;
   sWidth = 64;
   sHeight = 64;
+  // center image to coordinate
   imageTranslateX = this.sWidth / 2;
   imageTranslateY = this.sHeight / 2;
   dWidth;
