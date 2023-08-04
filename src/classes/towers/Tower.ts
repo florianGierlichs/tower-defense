@@ -58,14 +58,14 @@ export class Tower {
     this.range = config.range;
     this.attackSpeed = config.attackSpeed;
 
-    this.image = imageController.getImage(config.name);
+    this.image = imageController.getImage(config.id);
     this.imgConfig = config.frameConfig;
     this.dX = x;
     this.dY = y;
 
     this.setImageConfig();
 
-    this.projectileImg = imageController.getImage(config.projectile.name);
+    this.projectileImg = imageController.getImage(config.projectile.id);
     this.projectileWidth = config.projectile.width;
     this.projectileHeight = config.projectile.height;
   }

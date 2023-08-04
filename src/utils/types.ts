@@ -1,9 +1,3 @@
-import {
-  TowerBpName,
-  TowerClasses,
-  TowerName,
-  TowerProjectileName,
-} from "../classes/Menu";
 import { EnemyName } from "../classes/Waves";
 
 export interface Coordinate {
@@ -38,15 +32,18 @@ export interface EnemyConfig {
 }
 
 export interface TowerConfig {
-  name: TowerName;
+  id: TowerId;
   range: number;
   attackSpeed: number;
   imageScale: number;
   frameConfig: FrameConfigs;
   projectile: {
-    name: TowerProjectileName;
+    id: ProjectileId;
     width: number;
     height: number;
+  };
+  bluePrint: {
+    id: BlueprintId;
   };
 }
 
@@ -66,9 +63,22 @@ export enum AnimationDirection {
 }
 
 export interface MenuTower {
-  readonly id: TowerName;
-  readonly className: TowerClasses[number];
+  readonly id: TowerId;
   readonly range: number;
-  readonly projectileId: TowerProjectileName;
-  readonly blueprintId: TowerBpName;
+  readonly blueprintId: BlueprintId;
+}
+
+export enum TowerId {
+  ARCANE_ARCHER = "arcaneArcher",
+  FIRE_MAGE = "fireMage",
+}
+
+export enum ProjectileId {
+  ARCANE_ARCHER = "arcaneArcherProjectile",
+  FIRE_MAGE = "fireMageProjectile",
+}
+
+export enum BlueprintId {
+  ARCANE_ARCHER = "arcaneArcherBp",
+  FIRE_MAGE = "fireMageBp",
 }
