@@ -8,47 +8,54 @@ import { getTileMiddle } from "../../utils/getTileMiddle";
 import {
   AnimationDirection,
   FrameConfig,
-  FrameConfigs,
   TowerConfig,
   TowerState,
 } from "../../utils/types";
 
 export class Tower {
+  // initial values
   id;
   x;
   y;
   tileMiddle;
-  range: number;
-  attackSpeed: number;
-  lastAttack: number | null = null;
-  projectiles: Projectile[] = [];
-  currentTarget: Enemy | null = null;
-  attackAnimationIsRunning: boolean = false;
-  showRange: boolean = false;
+  range;
+  attackSpeed;
+  image;
+  sWidth = 64;
+  sHeight = this.sWidth;
+  dWidth = 64;
+  dHeight = this.dWidth;
+  dX;
+  dY;
+  imgConfig;
+  frameIteration = 0;
+  frameIterationThrottleTime = 100;
 
-  image: HTMLImageElement;
-  sWidth: number = 64;
-  sHeight: number = this.sWidth;
-  sX: number | null = null;
-  sY: number | null = null;
-  dWidth: number = 64;
-  dHeight: number = this.dWidth;
-  dX: number;
-  dY: number;
-  frames: number | null = null;
-  flipOffsetFrames: number | null = null;
-
-  frameIteration: number = 0;
-  lastFrameIteration: number | null = null;
-  frameIterationThrottleTime: number = 100;
-  state: TowerState = TowerState.IDLE;
-  imgConfig: FrameConfigs;
-  updateImgConfig = false;
-  animationDirection: AnimationDirection = AnimationDirection.LEFT;
-
+  // projectile
   projectileImg;
   projectileWidth;
   projectileHeight;
+
+  // data
+  projectiles: Projectile[] = [];
+
+  // states
+  state = TowerState.IDLE;
+  animationDirection = AnimationDirection.LEFT;
+  showRange = false;
+  attackAnimationIsRunning = false;
+  updateImgConfig = false;
+
+  // dynamic animation values
+  sX: number | null = null;
+  sY: number | null = null;
+  frames: number | null = null;
+  flipOffsetFrames: number | null = null;
+  lastFrameIteration: number | null = null;
+
+  // dynamic attack values
+  lastAttack: number | null = null;
+  currentTarget: Enemy | null = null;
 
   constructor(id: string, x: number, y: number, config: TowerConfig) {
     this.id = id;
