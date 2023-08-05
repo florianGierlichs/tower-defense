@@ -1,5 +1,6 @@
 import { loadImage } from "../utils/loadImage";
 import { EnemyName } from "./Waves";
+import { BlueprintId, ProjectileId, TowerId } from "../utils/types";
 import arcaneArcherImg from "../assets/tower/arcaneArcher.png";
 import arcaneArcherProjectileImg from "../assets/projectiles/arcaneArcherProjectile.png";
 import arcaneArcherBpImg from "../assets/menu/arcaneArcherMenu.png";
@@ -8,7 +9,7 @@ import skeletonShieldImg from "../assets/enemy/skeletonShield.png";
 import mushroomImg from "../assets/enemy/mushroom.png";
 import goblinImg from "../assets/enemy/goblin.png";
 import fireMageImg from "../assets/tower/fireMage.png";
-import { BlueprintId, ProjectileId, TowerId } from "../utils/types";
+import fireMageProjectileImg from "../assets/projectiles/fireMageProjectile.png";
 
 const texturesKey = "textures";
 
@@ -38,7 +39,7 @@ export class ImageController {
     this.arcaneArcherBp = await loadImage(arcaneArcherBpImg);
 
     this.fireMage = await loadImage(fireMageImg);
-    this.fireMageProjectile = await loadImage(arcaneArcherProjectileImg);
+    this.fireMageProjectile = await loadImage(fireMageProjectileImg);
     this.fireMageBp = await loadImage(arcaneArcherBpImg);
 
     // enemy
