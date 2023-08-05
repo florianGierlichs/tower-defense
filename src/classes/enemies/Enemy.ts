@@ -100,6 +100,7 @@ export class Enemy {
     }
 
     if (this.frameIteration < this.frames - 1) {
+      // prio todo initial run should not increment frameIteration before setting sx
       this.frameIteration++;
     } else {
       this.frameIteration = 0;
