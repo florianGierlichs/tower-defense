@@ -11,6 +11,7 @@ import {
   TowerConfig,
   TowerState,
 } from "../../utils/types";
+// import { Flame } from "../projectiles/Flame";
 
 export class Tower {
   // initial values
@@ -19,7 +20,7 @@ export class Tower {
   y;
   tileMiddle;
   range;
-  attackSpeed;
+  attackSpeed; // todo is more throttletime than attackSpeed
   image;
   sWidth = 64;
   sHeight = this.sWidth;
@@ -37,13 +38,12 @@ export class Tower {
   projectileHeight;
 
   // data
-  projectiles: Projectile[] = [];
+  projectiles: any[] = [];
 
   // states
   state = TowerState.IDLE;
   animationDirection = AnimationDirection.LEFT;
   showRange = false;
-  attackAnimationIsRunning = false;
   updateImgConfig = false;
   newAnimationCycle = true;
 
@@ -127,9 +127,7 @@ export class Tower {
 
   private shoot = () => {
     this.createProjectile();
-    this.attackAnimationIsRunning = false;
-    this.state = TowerState.IDLE;
-    this.setImageConfig();
+    this.lastAttack = performance.now();
   };
 
   private setFrameIteration = () => {
@@ -141,10 +139,11 @@ export class Tower {
       this.frameIteration++;
     } else {
       this.frameIteration = 0;
+      this.newAnimationCycle = true;
 
-      // after full attack animation circle
-      if (this.attackAnimationIsRunning) {
-        this.shoot();
+      if (this.state === TowerState.ATTACK) {
+        this.state = TowerState.IDLE;
+        this.setImageConfig();
       }
     }
   };
@@ -165,7 +164,7 @@ export class Tower {
     }
   };
 
-  private idleAnimation = () => {
+  idleAnimation = () => {
     this.drawImg();
   };
 
@@ -179,7 +178,8 @@ export class Tower {
       this.setImageConfig();
     } else {
       this.state = TowerState.ATTACK;
-      this.attack();
+      this.setAnimationDirection();
+      this.setImageConfig();
     }
   };
 
@@ -203,7 +203,7 @@ export class Tower {
     return nextEnemy;
   };
 
-  private checkAndSetClosestEnemyInRange = () => {
+  checkAndSetClosestEnemyInRange = () => {
     if (this.currentTargetIsInRage()) {
       this.setStateAndCurrentTarget(this.currentTarget);
     } else {
@@ -230,13 +230,6 @@ export class Tower {
     return false;
   };
 
-  private attack = () => {
-    this.lastAttack = performance.now();
-    this.attackAnimationIsRunning = true;
-    this.setAnimationDirection();
-    this.setImageConfig();
-  };
-
   private setAnimationDirection = () => {
     if (this.currentTarget === null) {
       throw new Error("No current target");
@@ -255,7 +248,7 @@ export class Tower {
     }
   };
 
-  private attackAnimation = () => {
+  attackAnimation = () => {
     this.drawImg();
   };
 
@@ -274,11 +267,21 @@ export class Tower {
           this.currentTarget,
           this.removeProjectile
         )
+
+        // new Flame(
+        //   shortUUID.generate(),
+        //   this.tileMiddle.x,
+        //   this.tileMiddle.y,
+        //   this.projectileImg,
+        //   this.currentTarget,
+        //   this.animationDirection,
+        //   this.removeProjectile
+        // )
       );
     }
   };
 
-  private updateProjectiles = () => {
+  updateProjectiles = () => {
     this.projectiles.forEach((projectile) => projectile.update());
   };
 
@@ -292,7 +295,7 @@ export class Tower {
     this.setStateAndCurrentTarget(null);
   };
 
-  private drawRange = () => {
+  drawRange = () => {
     dom.ctxGame.beginPath();
     dom.ctxGame.arc(
       this.tileMiddle.x,
@@ -309,7 +312,37 @@ export class Tower {
     this.showRange = show;
   };
 
-  private updateFrames = () => {
+  private isLastAttackAnimationFrame = () => {
+    if (this.frames === null) {
+      throw new Error("Frames is null");
+    }
+    return this.frameIteration === this.frames - 1;
+  };
+
+  private isFirstAttackAnimationFrame = () => {
+    if (this.frames === null) {
+      throw new Error("Frames is null");
+    }
+    return this.frameIteration === 0;
+  };
+
+  shootAtStartAttackAnimation = () => {
+    if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
+      if (this.isFirstAttackAnimationFrame()) {
+        this.shoot();
+      }
+    }
+  };
+
+  shootAtEndAttackAnimation = () => {
+    if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
+      if (this.isLastAttackAnimationFrame()) {
+        this.shoot();
+      }
+    }
+  };
+
+  updateFrames = () => {
     if (this.newAnimationCycle === true) {
       this.setSxFrame();
       this.lastFrameIteration = performance.now();
@@ -323,27 +356,5 @@ export class Tower {
         this.lastFrameIteration = performance.now();
       }
     }
-  };
-
-  update = () => {
-    this.updateFrames();
-
-    if (this.state === TowerState.ATTACK) {
-      this.attackAnimation();
-    }
-
-    if (this.state === TowerState.IDLE) {
-      this.idleAnimation();
-
-      if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
-        this.checkAndSetClosestEnemyInRange();
-      }
-    }
-
-    if (this.showRange) {
-      this.drawRange();
-    }
-
-    this.updateProjectiles();
   };
 }

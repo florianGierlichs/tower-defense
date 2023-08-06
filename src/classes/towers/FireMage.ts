@@ -1,8 +1,10 @@
+import { timeHasPassed } from "../../utils/timeHasPassed";
 import {
   BlueprintId,
   ProjectileId,
   TowerConfig,
   TowerId,
+  TowerState,
 } from "../../utils/types";
 import { Tower } from "./Tower";
 
@@ -53,4 +55,28 @@ export class FireMage extends Tower {
   constructor(id: string, x: number, y: number) {
     super(id, x, y, FireMage.config);
   }
+
+  update = () => {
+    this.updateFrames();
+
+    if (this.state === TowerState.ATTACK) {
+      this.attackAnimation();
+
+      this.shootAtStartAttackAnimation();
+    }
+
+    if (this.state === TowerState.IDLE) {
+      this.idleAnimation();
+
+      if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
+        this.checkAndSetClosestEnemyInRange();
+      }
+    }
+
+    if (this.showRange) {
+      this.drawRange();
+    }
+
+    this.updateProjectiles();
+  };
 }

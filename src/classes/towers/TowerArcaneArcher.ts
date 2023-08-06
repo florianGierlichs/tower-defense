@@ -1,8 +1,10 @@
+import { timeHasPassed } from "../../utils/timeHasPassed";
 import {
   BlueprintId,
   ProjectileId,
   TowerConfig,
   TowerId,
+  TowerState,
 } from "../../utils/types";
 import { Tower } from "./Tower";
 
@@ -16,7 +18,7 @@ export class TowerArcaneArcher extends Tower {
     frameConfig: {
       idle: {
         frames: 4,
-        animationIterationCircleTime: 500,
+        animationIterationCircleTime: 600,
         flipOffsetFrames: 4,
         animationStartRight: {
           sx: 0,
@@ -29,7 +31,7 @@ export class TowerArcaneArcher extends Tower {
       },
       attack: {
         frames: 7,
-        animationIterationCircleTime: 500,
+        animationIterationCircleTime: 400,
         flipOffsetFrames: 1,
         animationStartRight: {
           sx: 0,
@@ -54,4 +56,28 @@ export class TowerArcaneArcher extends Tower {
   constructor(id: string, x: number, y: number) {
     super(id, x, y, TowerArcaneArcher.config);
   }
+
+  update = () => {
+    this.updateFrames();
+
+    if (this.state === TowerState.ATTACK) {
+      this.attackAnimation();
+
+      this.shootAtEndAttackAnimation();
+    }
+
+    if (this.state === TowerState.IDLE) {
+      this.idleAnimation();
+
+      if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
+        this.checkAndSetClosestEnemyInRange();
+      }
+    }
+
+    if (this.showRange) {
+      this.drawRange();
+    }
+
+    this.updateProjectiles();
+  };
 }
