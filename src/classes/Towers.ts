@@ -1,9 +1,8 @@
-import { TowerArcaneArcher } from "./towers/TowerArcaneArcher";
-import { MenuTower } from "../utils/types";
+import { MenuTower, TowerInstance } from "../utils/types";
 import { getTowerInstance } from "../utils/getTowerInstance";
 
 export class Towers {
-  towers: TowerArcaneArcher[] = [];
+  towers: TowerInstance[] = [];
 
   constructor() {}
 

@@ -9,7 +9,6 @@ export class Projectile {
   y;
   targetEnemy;
   removeProjectile;
-  color: string = "red";
   speed: number = 10;
 
   image: HTMLImageElement;

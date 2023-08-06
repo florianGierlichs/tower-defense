@@ -1,4 +1,8 @@
 import { EnemyName } from "../classes/Waves";
+import { Flame } from "../classes/projectiles/Flame";
+import { Projectile } from "../classes/projectiles/Projectile";
+import { FireMage } from "../classes/towers/FireMage";
+import { TowerArcaneArcher } from "../classes/towers/TowerArcaneArcher";
 
 export interface Coordinate {
   x: number;
@@ -73,7 +77,7 @@ export enum TowerId {
   FIRE_MAGE = "fireMage",
 }
 
-export enum ProjectileId {
+export enum ProjectileId { // todo id does not match projectile class name, dont know if this is a problem
   ARCANE_ARCHER = "arcaneArcherProjectile",
   FIRE_MAGE = "fireMageProjectile",
 }
@@ -82,3 +86,7 @@ export enum BlueprintId {
   ARCANE_ARCHER = "arcaneArcherBp",
   FIRE_MAGE = "fireMageBp",
 }
+
+export type ProjectileInstance = Projectile | Flame;
+
+export type TowerInstance = TowerArcaneArcher | FireMage;

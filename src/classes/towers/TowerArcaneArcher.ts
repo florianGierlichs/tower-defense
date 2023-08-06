@@ -1,3 +1,4 @@
+import shortUUID from "short-uuid";
 import { timeHasPassed } from "../../utils/timeHasPassed";
 import {
   BlueprintId,
@@ -6,6 +7,7 @@ import {
   TowerId,
   TowerState,
 } from "../../utils/types";
+import { Projectile } from "../projectiles/Projectile";
 import { Tower } from "./Tower";
 
 export class TowerArcaneArcher extends Tower {
@@ -57,13 +59,32 @@ export class TowerArcaneArcher extends Tower {
     super(id, x, y, TowerArcaneArcher.config);
   }
 
+  getProjectile = () => {
+    if (this.currentTarget === null) {
+      throw new Error("No current target");
+    }
+
+    return new Projectile(
+      shortUUID.generate(),
+      this.tileMiddle.x,
+      this.tileMiddle.y,
+      {
+        img: this.projectileImg,
+        width: this.projectileWidth,
+        height: this.projectileHeight,
+      },
+      this.currentTarget,
+      this.removeProjectile
+    );
+  };
+
   update = () => {
     this.updateFrames();
 
     if (this.state === TowerState.ATTACK) {
       this.attackAnimation();
 
-      this.shootAtEndAttackAnimation();
+      this.shootAtEndAttackAnimation(this.getProjectile());
     }
 
     if (this.state === TowerState.IDLE) {

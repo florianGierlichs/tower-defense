@@ -1,3 +1,4 @@
+import shortUUID from "short-uuid";
 import { timeHasPassed } from "../../utils/timeHasPassed";
 import {
   BlueprintId,
@@ -7,6 +8,7 @@ import {
   TowerState,
 } from "../../utils/types";
 import { Tower } from "./Tower";
+import { Flame } from "../projectiles/Flame";
 
 export class FireMage extends Tower {
   static readonly config: TowerConfig = {
@@ -56,13 +58,29 @@ export class FireMage extends Tower {
     super(id, x, y, FireMage.config);
   }
 
+  getProjectile = () => {
+    if (this.currentTarget === null) {
+      throw new Error("No current target");
+    }
+
+    return new Flame(
+      shortUUID.generate(),
+      this.tileMiddle.x,
+      this.tileMiddle.y,
+      this.projectileImg,
+      this.currentTarget,
+      this.animationDirection,
+      this.removeProjectile
+    );
+  };
+
   update = () => {
     this.updateFrames();
 
     if (this.state === TowerState.ATTACK) {
       this.attackAnimation();
 
-      this.shootAtStartAttackAnimation();
+      this.shootAtStartAttackAnimation(this.getProjectile());
     }
 
     if (this.state === TowerState.IDLE) {

@@ -1,17 +1,15 @@
-import shortUUID from "short-uuid";
 import { dom, game, imageController } from "../../main";
 import { getDistance } from "../../utils/getDistance";
 import { timeHasPassed } from "../../utils/timeHasPassed";
 import { Enemy } from "../enemies/Enemy";
-import { Projectile } from "../projectiles/Projectile";
 import { getTileMiddle } from "../../utils/getTileMiddle";
 import {
   AnimationDirection,
   FrameConfig,
+  ProjectileInstance,
   TowerConfig,
   TowerState,
 } from "../../utils/types";
-// import { Flame } from "../projectiles/Flame";
 
 export class Tower {
   // initial values
@@ -38,7 +36,7 @@ export class Tower {
   projectileHeight;
 
   // data
-  projectiles: any[] = [];
+  projectiles: ProjectileInstance[] = [];
 
   // states
   state = TowerState.IDLE;
@@ -126,7 +124,6 @@ export class Tower {
   };
 
   private shoot = () => {
-    this.createProjectile();
     this.lastAttack = performance.now();
   };
 
@@ -252,40 +249,11 @@ export class Tower {
     this.drawImg();
   };
 
-  private createProjectile = () => {
-    if (this.currentTarget) {
-      this.projectiles.push(
-        new Projectile(
-          shortUUID.generate(),
-          this.tileMiddle.x,
-          this.tileMiddle.y,
-          {
-            img: this.projectileImg,
-            width: this.projectileWidth,
-            height: this.projectileHeight,
-          },
-          this.currentTarget,
-          this.removeProjectile
-        )
-
-        // new Flame(
-        //   shortUUID.generate(),
-        //   this.tileMiddle.x,
-        //   this.tileMiddle.y,
-        //   this.projectileImg,
-        //   this.currentTarget,
-        //   this.animationDirection,
-        //   this.removeProjectile
-        // )
-      );
-    }
-  };
-
   updateProjectiles = () => {
     this.projectiles.forEach((projectile) => projectile.update());
   };
 
-  private removeProjectile = (id: string) => {
+  removeProjectile = (id: string) => {
     this.projectiles = this.projectiles.filter(
       (projectile) => projectile.id !== id
     );
@@ -326,18 +294,20 @@ export class Tower {
     return this.frameIteration === 0;
   };
 
-  shootAtStartAttackAnimation = () => {
+  shootAtStartAttackAnimation = (projectile: ProjectileInstance) => {
     if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
       if (this.isFirstAttackAnimationFrame()) {
         this.shoot();
+        this.projectiles.push(projectile);
       }
     }
   };
 
-  shootAtEndAttackAnimation = () => {
+  shootAtEndAttackAnimation = (projectile: ProjectileInstance) => {
     if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
       if (this.isLastAttackAnimationFrame()) {
         this.shoot();
+        this.projectiles.push(projectile);
       }
     }
   };
