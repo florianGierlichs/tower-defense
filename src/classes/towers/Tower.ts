@@ -45,6 +45,7 @@ export class Tower {
   showRange = false;
   attackAnimationIsRunning = false;
   updateImgConfig = false;
+  newAnimationCycle = true;
 
   // dynamic animation values
   sX: number | null = null;
@@ -170,6 +171,7 @@ export class Tower {
 
   private setStateAndCurrentTarget = (target: Enemy | null) => {
     this.currentTarget = target;
+    this.newAnimationCycle = true;
     this.frameIteration = 0;
 
     if (target === null) {
@@ -308,10 +310,10 @@ export class Tower {
   };
 
   private updateFrames = () => {
-    if (this.lastFrameIteration === null) {
-      // initial run
+    if (this.newAnimationCycle === true) {
       this.setSxFrame();
       this.lastFrameIteration = performance.now();
+      this.newAnimationCycle = false;
     } else {
       if (
         timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
