@@ -111,29 +111,39 @@ export class Tower {
       animationIterationCircleTime / this.frames;
   };
 
-  private setFrame = () => {
-    if (this.frames !== null && this.flipOffsetFrames !== null) {
-      if (this.animationDirection === AnimationDirection.RIGHT) {
-        this.sX = this.frameIteration * this.sWidth;
-      } else {
-        this.sX =
-          (this.frames + this.flipOffsetFrames) * this.sWidth -
-          (this.frameIteration + 1) * this.sWidth;
-      }
+  private setSxFrame = () => {
+    if (this.frames === null || this.flipOffsetFrames === null) {
+      throw new Error("Frames or flipOffsetFrames is null");
+    }
+    if (this.animationDirection === AnimationDirection.RIGHT) {
+      this.sX = this.frameIteration * this.sWidth;
+    } else {
+      this.sX =
+        (this.frames + this.flipOffsetFrames) * this.sWidth -
+        (this.frameIteration + 1) * this.sWidth;
+    }
+  };
 
-      // prepare frame for next iteration
-      if (this.frameIteration < this.frames - 1) {
-        this.frameIteration++;
-      } else {
-        this.frameIteration = 0;
+  private shoot = () => {
+    this.createProjectile();
+    this.attackAnimationIsRunning = false;
+    this.state = TowerState.IDLE;
+    this.setImageConfig();
+  };
 
-        // after full attack animation circle
-        if (this.attackAnimationIsRunning) {
-          this.createProjectile();
-          this.attackAnimationIsRunning = false;
-          this.state = TowerState.IDLE;
-          this.setImageConfig();
-        }
+  private setFrameIteration = () => {
+    if (this.frames === null) {
+      throw new Error("Frames is null");
+    }
+
+    if (this.frameIteration < this.frames - 1) {
+      this.frameIteration++;
+    } else {
+      this.frameIteration = 0;
+
+      // after full attack animation circle
+      if (this.attackAnimationIsRunning) {
+        this.shoot();
       }
     }
   };
@@ -155,12 +165,6 @@ export class Tower {
   };
 
   private idleAnimation = () => {
-    if (
-      timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
-    ) {
-      this.setFrame();
-      this.lastFrameIteration = performance.now();
-    }
     this.drawImg();
   };
 
@@ -250,12 +254,6 @@ export class Tower {
   };
 
   private attackAnimation = () => {
-    if (
-      timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
-    ) {
-      this.setFrame();
-      this.lastFrameIteration = performance.now();
-    }
     this.drawImg();
   };
 
@@ -309,7 +307,25 @@ export class Tower {
     this.showRange = show;
   };
 
+  private updateFrames = () => {
+    if (this.lastFrameIteration === null) {
+      // initial run
+      this.setSxFrame();
+      this.lastFrameIteration = performance.now();
+    } else {
+      if (
+        timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
+      ) {
+        this.setFrameIteration();
+        this.setSxFrame();
+        this.lastFrameIteration = performance.now();
+      }
+    }
+  };
+
   update = () => {
+    this.updateFrames();
+
     if (this.state === TowerState.ATTACK) {
       this.attackAnimation();
     }
