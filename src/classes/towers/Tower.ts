@@ -154,7 +154,7 @@ export class Tower {
     }
   };
 
-  private idle = () => {
+  private idleAnimation = () => {
     if (
       timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
     ) {
@@ -165,42 +165,46 @@ export class Tower {
   };
 
   private setStateAndCurrentTarget = (target: Enemy | null) => {
+    this.currentTarget = target;
+    this.frameIteration = 0;
+
     if (target === null) {
       this.state = TowerState.IDLE;
       this.setImageConfig();
     } else {
       this.state = TowerState.ATTACK;
+      this.attack();
     }
-    this.currentTarget = target;
-    this.frameIteration = 0;
+  };
+
+  private findNextTarget = (): Enemy | null => {
+    let nextEnemy: Enemy | null = null;
+    let distanceOfClosestEnemy = Infinity;
+    game.enemies.getCurrentEnemies().forEach((enemy) => {
+      const enemyDistance = getDistance(this.tileMiddle, {
+        x: enemy.x,
+        y: enemy.y,
+      });
+
+      if (
+        enemyDistance <= this.range &&
+        enemyDistance <= distanceOfClosestEnemy
+      ) {
+        distanceOfClosestEnemy = enemyDistance;
+        nextEnemy = enemy;
+      }
+    });
+    return nextEnemy;
   };
 
   private checkAndSetClosestEnemyInRange = () => {
-    if (
-      this.currentTarget !== null &&
-      getDistance(this.tileMiddle, {
-        x: this.currentTarget.x,
-        y: this.currentTarget.y,
-      }) <= this.range
-    ) {
+    if (this.currentTargetIsInRage()) {
       this.setStateAndCurrentTarget(this.currentTarget);
     } else {
-      let distanceOfClosestEnemy = Infinity;
-
-      game.enemies.getCurrentEnemies().forEach((enemy) => {
-        const enemyDistance = getDistance(this.tileMiddle, {
-          x: enemy.x,
-          y: enemy.y,
-        });
-
-        if (
-          enemyDistance <= this.range &&
-          enemyDistance <= distanceOfClosestEnemy
-        ) {
-          distanceOfClosestEnemy = enemyDistance;
-          this.setStateAndCurrentTarget(enemy);
-        }
-      });
+      const nextEnemy = this.findNextTarget();
+      if (nextEnemy !== null) {
+        this.setStateAndCurrentTarget(nextEnemy);
+      }
     }
   };
 
@@ -228,22 +232,24 @@ export class Tower {
   };
 
   private setAnimationDirection = () => {
-    if (this.currentTarget) {
-      if (this.currentTarget.x <= this.x) {
-        if (this.animationDirection === AnimationDirection.RIGHT) {
-          this.animationDirection = AnimationDirection.LEFT;
-          this.updateImgConfig = true;
-        }
-      } else {
-        if (this.animationDirection === AnimationDirection.LEFT) {
-          this.animationDirection = AnimationDirection.RIGHT;
-          this.updateImgConfig = true;
-        }
+    if (this.currentTarget === null) {
+      throw new Error("No current target");
+    }
+
+    if (this.currentTarget.x <= this.x) {
+      if (this.animationDirection === AnimationDirection.RIGHT) {
+        this.animationDirection = AnimationDirection.LEFT;
+        this.updateImgConfig = true;
+      }
+    } else {
+      if (this.animationDirection === AnimationDirection.LEFT) {
+        this.animationDirection = AnimationDirection.RIGHT;
+        this.updateImgConfig = true;
       }
     }
   };
 
-  private shoot = () => {
+  private attackAnimation = () => {
     if (
       timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
     ) {
@@ -304,22 +310,15 @@ export class Tower {
   };
 
   update = () => {
-    if (this.attackAnimationIsRunning) {
-      this.shoot();
-    } else {
-      if (this.state === TowerState.IDLE) {
-        this.idle();
-        if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
-          this.checkAndSetClosestEnemyInRange();
-        }
-      } else {
-        if (this.currentTargetIsInRage()) {
-          this.attack();
-          this.shoot();
-        } else {
-          this.setStateAndCurrentTarget(null);
-          this.idle();
-        }
+    if (this.state === TowerState.ATTACK) {
+      this.attackAnimation();
+    }
+
+    if (this.state === TowerState.IDLE) {
+      this.idleAnimation();
+
+      if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
+        this.checkAndSetClosestEnemyInRange();
       }
     }
 
