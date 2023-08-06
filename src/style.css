@@ -92,8 +92,14 @@ canvas {
   scale: 0.98;
 }
 
+/* ID for menu items */
 #arcaneArcher {
   background-image: url("./assets/menu/arcaneArcherMenu.png");
+  background-size: cover;
+}
+
+#fireMage {
+  background-image: url("./assets/menu/fireMageMenu.png");
   background-size: cover;
 }
 
@@ -106,6 +112,11 @@ canvas {
   box-shadow: 6px 6px 6px 5px rgb(0 0 0 / 30%);
 }
 
+/* class for cursor items */
 .arcaneArcher {
   cursor: url("./assets/cursor/cursorArcaneArcher.png") 38 48, auto;
+}
+
+.fireMage {
+  cursor: url("./assets/cursor/cursorFireMage.png") 38 48, auto;
 }
