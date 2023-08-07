@@ -11,10 +11,11 @@ export class Flame {
   x;
   y;
   image;
-  sWidth = 64;
-  sHeight = 64;
-  dWidth = 64;
-  dHeight = 64;
+  sWidth = 74;
+  sHeight = 44;
+  dWidth = 74;
+  dHeight = 44;
+  sY = 0;
   target;
   animationDirection;
   angle;
@@ -23,19 +24,10 @@ export class Flame {
   // frames
   frameIteration = 0;
   frames = 8;
-  animationIterationCircleTime = 500;
+  animationIterationCircleTime = 800;
   sX: number | null = null;
-  sY: number | null = null;
   frameIterationThrottleTime = this.animationIterationCircleTime / this.frames;
   lastFrameIteration: number | null = null;
-  animationStartRight = {
-    sx: 0,
-    sy: 0,
-  };
-  animationStartLeft = {
-    sx: 448,
-    sy: 64,
-  };
 
   constructor(
     id: string,
@@ -52,28 +44,9 @@ export class Flame {
     this.image = img;
     this.target = target;
     this.animationDirection = animationDirection;
-    this.angle = this.getAngleForDirection();
+    this.angle = getAngle(this.x, this.y, this.target.x, this.target.y);
     this.removeProjectile = removeProjectile;
-
-    this.setSyFrame();
   }
-
-  private getAngleForDirection = () => {
-    const angle = getAngle(this.x, this.y, this.target.x, this.target.y);
-    if (this.animationDirection === AnimationDirection.RIGHT) {
-      return angle;
-    } else {
-      // compansate for the fact that the image is flipped
-      return angle + 180;
-    }
-  };
-
-  private setSyFrame = () => {
-    this.sY =
-      this.animationDirection === AnimationDirection.RIGHT
-        ? this.animationStartRight.sy
-        : this.animationStartLeft.sy;
-  };
 
   private setFrameIteration = () => {
     if (this.frameIteration < this.frames - 1) {
@@ -92,13 +65,22 @@ export class Flame {
     }
   };
 
+  private getHandPosition = (): [number, number] => {
+    if (this.animationDirection === AnimationDirection.RIGHT) {
+      return [this.x + 15, this.y - 5];
+    } else {
+      return [this.x - 15, this.y - 5];
+    }
+  };
+
   private draw = () => {
     if (this.sX === null || this.sY === null) {
       throw new Error("sX or sY is null");
     }
 
     dom.ctxGame.save();
-    dom.ctxGame.translate(this.x, this.y);
+
+    dom.ctxGame.translate(...this.getHandPosition());
     dom.ctxGame.rotate(this.angle * (Math.PI / 180)); // convert degrees to radians
 
     dom.ctxGame.drawImage(
@@ -107,8 +89,8 @@ export class Flame {
       this.sY,
       this.sWidth,
       this.sHeight,
-      this.dWidth - 32, // prio todo find correction for left and right
-      -this.dHeight / 2,
+      0,
+      -25, // position in the image where the flame starts
       this.dWidth,
       this.dHeight
     );

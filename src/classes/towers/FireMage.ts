@@ -14,7 +14,7 @@ export class FireMage extends Tower {
   static readonly config: TowerConfig = {
     id: TowerId.FIRE_MAGE,
     range: 100,
-    attackSpeed: 1000,
+    attackSpeed: 1500,
     imageScale: 0.8,
     frameConfig: {
       idle: {
@@ -32,7 +32,7 @@ export class FireMage extends Tower {
       },
       attack: {
         frames: 4,
-        animationIterationCircleTime: 500,
+        animationIterationCircleTime: 800,
         flipOffsetFrames: 0,
         animationStartRight: {
           sx: 0,
