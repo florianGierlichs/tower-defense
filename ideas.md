@@ -26,6 +26,7 @@
 
 - add flying enemy which is not effected by ground effects or maybe slow effects
 - add lifebar to enemies
+- add hit animation to enemies, with Aoe towers it can be hard to see if you hit an enemy
 
 #### Name asset creators
 
