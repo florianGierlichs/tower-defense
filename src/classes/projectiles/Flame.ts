@@ -1,11 +1,11 @@
+import shortUUID from "short-uuid";
 import { dom } from "../../main";
 import { getAngle } from "../../utils/getAngle";
 import { timeHasPassed } from "../../utils/timeHasPassed";
 import { AnimationDirection } from "../../utils/types";
+import { DamageOverTimeArea } from "../effects/DamageOverTimeArea";
 
 export class Flame {
-  // prio todo add damage hitbox
-
   // initial values
   id;
   x;
@@ -20,6 +20,9 @@ export class Flame {
   animationDirection;
   angle;
   removeProjectile;
+  damageOverTimeArea: DamageOverTimeArea;
+  damageOverTimeThrottleTime = 400;
+  damageOverTimeRadius = 20;
 
   // frames
   frameIteration = 0;
@@ -37,6 +40,7 @@ export class Flame {
     target: { x: number; y: number },
     animationDirection: AnimationDirection,
     removeProjectile: (id: string) => void
+    // TODO add damage value
   ) {
     this.id = id;
     this.x = x;
@@ -46,14 +50,19 @@ export class Flame {
     this.animationDirection = animationDirection;
     this.angle = getAngle(this.x, this.y, this.target.x, this.target.y);
     this.removeProjectile = removeProjectile;
+
+    this.damageOverTimeArea = new DamageOverTimeArea(
+      shortUUID.generate(),
+      this.target.x,
+      this.target.y,
+      this.damageOverTimeRadius,
+      1, // todo this.damage
+      this.damageOverTimeThrottleTime
+    );
   }
 
   private setFrameIteration = () => {
-    if (this.frameIteration < this.frames - 1) {
-      this.frameIteration++;
-    } else {
-      this.removeProjectile(this.id);
-    }
+    this.frameIteration++;
   };
 
   private setSxFrame = () => {
@@ -67,15 +76,19 @@ export class Flame {
 
   private getHandPosition = (): [number, number] => {
     if (this.animationDirection === AnimationDirection.RIGHT) {
-      return [this.x + 15, this.y - 5];
+      return [this.x + 20, this.y - 5];
     } else {
-      return [this.x - 15, this.y - 5];
+      return [this.x - 20, this.y - 5];
     }
   };
 
   private draw = () => {
     if (this.sX === null || this.sY === null) {
       throw new Error("sX or sY is null");
+    }
+
+    if (this.frameIteration === this.frames) {
+      throw new Error("frameIteration is equal to frames");
     }
 
     dom.ctxGame.save();
@@ -98,6 +111,10 @@ export class Flame {
     dom.ctxGame.restore();
   };
 
+  private updatedamageOverTimeArea = () => {
+    this.damageOverTimeArea.update();
+  };
+
   private updateFrames = () => {
     if (this.lastFrameIteration === null) {
       // initial run
@@ -108,14 +125,22 @@ export class Flame {
         timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
       ) {
         this.setFrameIteration();
+        if (this.frameIteration === this.frames) {
+          this.removeProjectile(this.id);
+          return false;
+        }
         this.setSxFrame();
         this.lastFrameIteration = performance.now();
       }
     }
+    return true;
   };
 
   update = () => {
-    this.updateFrames();
+    if (this.updateFrames() === false) return;
+
     this.draw();
+
+    this.updatedamageOverTimeArea();
   };
 }
