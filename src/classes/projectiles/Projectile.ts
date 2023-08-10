@@ -9,7 +9,7 @@ export class Projectile {
   y;
   targetEnemy;
   removeProjectile;
-  speed: number = 10;
+  speed: number = 20;
 
   image: HTMLImageElement;
   width: number;
