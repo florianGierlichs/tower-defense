@@ -1,7 +1,7 @@
 import { EnemyClasses } from "./Waves";
 
 export class Enemies {
-  currentEnemies: EnemyClasses = [];
+  private currentEnemies: EnemyClasses = [];
 
   constructor() {}
 
