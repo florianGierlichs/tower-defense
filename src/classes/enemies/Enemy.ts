@@ -90,7 +90,18 @@ export class Enemy {
     this.frameIteration = getRandomFrameIteration(this.frames);
   };
 
-  private setFrame = () => {
+  private setFrameIteration = () => {
+    if (this.frames === null || this.frameIteration === null) {
+      throw new Error("frames or frameIteration is null");
+    }
+    if (this.frameIteration < this.frames - 1) {
+      this.frameIteration++;
+    } else {
+      this.frameIteration = 0;
+    }
+  };
+
+  private setSxFrame = () => {
     if (
       this.frames === null ||
       this.flipOffsetFrames === null ||
@@ -98,15 +109,6 @@ export class Enemy {
     ) {
       throw new Error("frames or flipOffsetFrames or frameIteration is null");
     }
-
-    if (this.frameIteration < this.frames - 1) {
-      // prio todo initial run should not increment frameIteration before setting sx
-      this.frameIteration++;
-    } else {
-      this.frameIteration = 0;
-    }
-
-    // set sX
     if (this.animationDirection === AnimationDirection.RIGHT) {
       this.sX = this.frameIteration * this.sWidth;
     } else {
@@ -119,6 +121,9 @@ export class Enemy {
   private draw = () => {
     if (this.sX === null || this.sY === null) {
       throw new Error("sX or sY is null");
+    }
+    if (this.frameIteration === this.frames) {
+      throw new Error("frameIteration is equal to frames");
     }
     dom.ctxGame.drawImage(
       this.image,
@@ -198,7 +203,8 @@ export class Enemy {
   private updateFrames = () => {
     if (this.lastFrameIteration === null) {
       // initial run
-      this.setFrame();
+      //this.setFrame();
+      this.setSxFrame();
       this.lastFrameIteration = performance.now();
     } else {
       if (this.frameIterationThrottleTime === null) {
@@ -208,7 +214,9 @@ export class Enemy {
       if (
         timeHasPassed(this.lastFrameIteration, this.frameIterationThrottleTime)
       ) {
-        this.setFrame();
+        this.setFrameIteration();
+        this.setSxFrame();
+        //this.setFrame();
         this.lastFrameIteration = performance.now();
       }
     }
@@ -226,10 +234,8 @@ export class Enemy {
   };
 
   update = () => {
-    this.move();
-
     this.updateFrames();
-
+    this.move();
     this.draw();
   };
 }
