@@ -1,10 +1,9 @@
 import { dom, game, tiles } from "../main";
-import { getTileForHover } from "../utils/getTileForHover";
+import { DomBody } from "./DomBody";
 import { Enemies } from "./Enemies";
 import { Menu } from "./Menu";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
-import { TileGras } from "./tiles/TileGras";
 
 export interface PathNode {
   // TODO put to util/types
@@ -19,6 +18,7 @@ export class Game {
   towers = new Towers();
   enemies: Enemies;
   waves = new Waves();
+  dom = new DomBody(); // todo maybe put to DomController if DomController can be put to Game
 
   constructor() {
     tiles.createTileGrid();
@@ -37,42 +37,12 @@ export class Game {
       this.spawnEnemies();
     }, 50000);
 
-    dom.body.addEventListener("contextmenu", this.contextmenuCallback);
-    dom.body.addEventListener("click", this.clickCallback, true);
-    dom.body.addEventListener("mousemove", this.mouseMoveCallback);
-
     dom.toggleTilesInfoButton.addEventListener("click", tiles.toggleDebug); // todo put this to own class
   }
 
   private spawnEnemies = () => {
     const currentEnemies = this.waves.createEnemyWave();
     this.enemies.setCurrentEnemies(currentEnemies);
-  };
-
-  private contextmenuCallback = (event: MouseEvent) => {
-    event.preventDefault();
-    this.resetEventListeners();
-  };
-
-  private clickCallback = (_event: MouseEvent) => {
-    this.towers.hideTowerRange();
-  };
-
-  private mouseMoveCallback = (event: MouseEvent) => {
-    this.showTowerMouseCursor(event);
-  };
-
-  private showTowerMouseCursor = (event: MouseEvent) => {
-    const selectedTower = game.menu.getSelectedTower();
-    const tile = getTileForHover(event);
-    if (selectedTower !== null) {
-      if (
-        (tile instanceof TileGras && tile.showTowerBP === null) ||
-        tile === null
-      ) {
-        dom.addTowerMouseCursor(selectedTower);
-      }
-    }
   };
 
   resetEventListeners = () => {

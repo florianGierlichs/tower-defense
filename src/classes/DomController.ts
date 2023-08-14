@@ -2,7 +2,6 @@ import { MenuTower } from "../utils/types";
 import { CanvasGame } from "./CanvasGame";
 
 export class DomController {
-  body;
   appContainer;
 
   menuTowersContainer;
@@ -15,7 +14,6 @@ export class DomController {
   toggleTilesInfoButton;
 
   constructor() {
-    this.body = document.querySelector<HTMLBodyElement>("body")!;
     this.appContainer = document.querySelector<HTMLDivElement>("#app")!;
 
     this.menuTowersContainer = document.querySelector<HTMLDivElement>(

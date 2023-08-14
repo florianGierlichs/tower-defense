@@ -13,7 +13,7 @@ export let tiles: Tiles;
 export let game: Game;
 
 imageController.loadImages().then(() => {
-  dom = new DomController();
+  dom = new DomController(); // todo maybe put to Game if runGame gets to Game
   tiles = new Tiles();
   game = new Game();
 
