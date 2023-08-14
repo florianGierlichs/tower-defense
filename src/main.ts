@@ -1,5 +1,4 @@
 import { DomController } from "./classes/DomController";
-import { DomEvents } from "./classes/DomEvents";
 import { Game } from "./classes/Game";
 import { ImageController } from "./classes/ImageController";
 import { Tiles } from "./classes/Tiles";
@@ -10,13 +9,11 @@ export const imageController = new ImageController();
 
 export let dom: DomController;
 export let tiles: Tiles;
-export let events: DomEvents;
 export let game: Game;
 
 imageController.loadImages().then(() => {
   dom = new DomController();
   tiles = new Tiles();
-  events = new DomEvents();
   game = new Game();
 
   let lastAnimationTimestamp: number | null = null;

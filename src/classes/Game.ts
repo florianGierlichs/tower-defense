@@ -1,10 +1,10 @@
-import { dom, tiles } from "../main";
-import { getTileForClick } from "../utils/getTileForClick";
+import { dom, game, tiles } from "../main";
+import { getTileForHover } from "../utils/getTileForHover";
 import { Enemies } from "./Enemies";
 import { Menu } from "./Menu";
-import { TileGras } from "./tiles/TileGras";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
+import { TileGras } from "./tiles/TileGras";
 
 export interface PathNode {
   // TODO put to util/types
@@ -37,10 +37,11 @@ export class Game {
       this.spawnEnemies();
     }, 50000);
 
-    this.addShowTowerRangeClickEventForCanvasGame();
-    this.addHideTowerRangeClickEventForBody();
+    dom.body.addEventListener("contextmenu", this.contextmenuCallback);
+    dom.body.addEventListener("click", this.clickCallback, true);
+    dom.body.addEventListener("mousemove", this.mouseMoveCallback);
 
-    dom.toggleTilesInfoButton.addEventListener("click", tiles.toggleDebug); // todo put this in DomEvents
+    dom.toggleTilesInfoButton.addEventListener("click", tiles.toggleDebug); // todo put this to own class
   }
 
   private spawnEnemies = () => {
@@ -48,30 +49,39 @@ export class Game {
     this.enemies.setCurrentEnemies(currentEnemies);
   };
 
-  private showTowerRange = (event: MouseEvent) => {
-    const tile = getTileForClick(event);
-    if (tile instanceof TileGras && tile.hasTower) {
-      const tower = this.towers.getTowerForTile(tile.x, tile.y);
-      tower?.setShowRange(true);
-    }
+  private contextmenuCallback = (event: MouseEvent) => {
+    event.preventDefault();
+    this.resetEventListeners();
   };
 
-  private hideTowerRange = () => {
+  private clickCallback = (_event: MouseEvent) => {
     this.towers.hideTowerRange();
   };
 
-  private addShowTowerRangeClickEventForCanvasGame = () => {
-    // todo put this in its own event
-    const showRangeListener = (e: MouseEvent) => {
-      this.showTowerRange(e);
-    };
-    dom.canvasGame.addEventListener("click", showRangeListener, false); // todo put this in DomEvents
+  private mouseMoveCallback = (event: MouseEvent) => {
+    this.showTowerMouseCursor(event);
   };
 
-  private addHideTowerRangeClickEventForBody = () => {
-    const hideRangeListener = () => {
-      this.hideTowerRange();
-    };
-    dom.body.addEventListener("click", hideRangeListener, true); // todo put this in DomEvents
+  private showTowerMouseCursor = (event: MouseEvent) => {
+    const selectedTower = game.menu.getSelectedTower();
+    const tile = getTileForHover(event);
+    if (selectedTower !== null) {
+      if (
+        (tile instanceof TileGras && tile.showTowerBP === null) ||
+        tile === null
+      ) {
+        dom.addTowerMouseCursor(selectedTower);
+      }
+    }
+  };
+
+  resetEventListeners = () => {
+    tiles.tileGras.forEach((tile) => {
+      tile.setShowTowerBp(null);
+      tile.updateBG();
+    });
+    this.towers.hideTowerRange();
+    game.menu.setSelectedTower(null);
+    dom.removeAllClassesFromAppContainer();
   };
 }

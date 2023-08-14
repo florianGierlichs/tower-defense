@@ -1,5 +1,5 @@
-import { events } from "../main";
 import { MenuTower } from "../utils/types";
+import { CanvasGame } from "./CanvasGame";
 
 export class DomController {
   body;
@@ -23,17 +23,16 @@ export class DomController {
     )!;
 
     this.canvasBackground =
-      document.querySelector<HTMLCanvasElement>("#canvas-background")!;
-    this.canvasGame =
-      document.querySelector<HTMLCanvasElement>("#canvas-game")!;
+      document.querySelector<HTMLCanvasElement>("#canvas-background")!; // todo add CanvasBackground class
 
     this.ctxBackground = this.canvasBackground.getContext("2d")!;
-    this.ctxGame = this.canvasGame.getContext("2d")!;
 
     this.canvasBackground.width = 1024;
     this.canvasBackground.height = 512;
-    this.canvasGame.width = 1024;
-    this.canvasGame.height = 512;
+
+    const canvasGame = new CanvasGame();
+    this.canvasGame = canvasGame.getCanvas();
+    this.ctxGame = canvasGame.getCtx();
 
     this.toggleTilesInfoButton =
       document.querySelector<HTMLButtonElement>("#toggle-tiles-info")!;
@@ -47,16 +46,7 @@ export class DomController {
     this.appContainer.className = "";
   };
 
-  private addChildToMenuTowersContainer = (child: HTMLElement) => {
+  addChildToMenuTowersContainer = (child: HTMLElement) => {
     this.menuTowersContainer.appendChild(child);
-  };
-
-  createMenuItemTower = (tower: MenuTower, clickHandler: () => void) => {
-    const element = document.createElement("div");
-    element.classList.add("menu-item");
-    element.id = tower.id;
-
-    events.selectedTowerEvent.addSelectedTowerEvent(element, clickHandler);
-    this.addChildToMenuTowersContainer(element);
   };
 }

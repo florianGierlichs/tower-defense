@@ -1,4 +1,4 @@
-import { dom, events } from "../main";
+import { dom } from "../main";
 import { MenuTower } from "../utils/types";
 import { MenuItemTower } from "./MenuItemTower";
 import { FireMage } from "./towers/FireMage";
@@ -26,24 +26,20 @@ export class Menu {
     });
   }
 
+  getSelectedTower = () => {
+    return this.selectedTower;
+  };
+
   setSelectedTower = (tower: MenuTower | null) => {
     this.selectedTower = tower;
-    dom.removeAllClassesFromAppContainer();
-    if (tower !== null) {
-      dom.addTowerMouseCursor(tower);
-    }
   };
 
   private selectTower = (tower: MenuTower) => {
     this.setSelectedTower(tower);
-    if (this.selectedTower === null) {
-      throw new Error("selectedTower is null");
-    }
-    events.towerBluePrintEvent.addTowerBluePrintMouseMoveEvent(
-      this.selectedTower
-    );
-    events.placeTowerEvent.addPlaceTowerClickEvent(tower);
 
-    events.cleanUpSelectTowerClickEvent.addCleanUpSelectTowerClickEvent();
+    dom.removeAllClassesFromAppContainer();
+    if (tower !== null) {
+      dom.addTowerMouseCursor(tower);
+    }
   };
 }
