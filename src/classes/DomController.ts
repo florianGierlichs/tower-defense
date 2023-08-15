@@ -1,10 +1,7 @@
-import { MenuTower } from "../utils/types";
 import { CanvasBackground } from "./CanvasBackground";
 import { CanvasGame } from "./CanvasGame";
 
 export class DomController {
-  appContainer;
-
   canvasBackground;
   canvasGame;
   ctxBackground;
@@ -13,8 +10,6 @@ export class DomController {
   toggleTilesInfoButton;
 
   constructor() {
-    this.appContainer = document.querySelector<HTMLDivElement>("#app")!;
-
     // canvas Background
     const canvasBackground = new CanvasBackground();
     this.canvasBackground = canvasBackground.getCanvas();
@@ -28,12 +23,4 @@ export class DomController {
     this.toggleTilesInfoButton =
       document.querySelector<HTMLButtonElement>("#toggle-tiles-info")!;
   }
-
-  addTowerMouseCursor = (tower: MenuTower) => {
-    this.appContainer.classList.add(tower.id);
-  };
-
-  removeAllClassesFromAppContainer = () => {
-    this.appContainer.className = "";
-  };
 }

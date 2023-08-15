@@ -1,5 +1,6 @@
-import { dom, game } from "../main";
+import { game } from "../main";
 import { getTileForHover } from "../utils/getTileForHover";
+import { MenuTower } from "../utils/types";
 import { TileGras } from "./tiles/TileGras";
 
 export class DomBody {
@@ -36,8 +37,16 @@ export class DomBody {
         (tile instanceof TileGras && tile.showTowerBP === null) ||
         tile === null
       ) {
-        dom.addTowerMouseCursor(selectedTower);
+        this.addTowerMouseCursor(selectedTower);
       }
     }
+  };
+
+  addTowerMouseCursor = (tower: MenuTower) => {
+    this.body.classList.add(tower.id);
+  };
+
+  removeAllClassesFromBody = () => {
+    this.body.className = "";
   };
 }

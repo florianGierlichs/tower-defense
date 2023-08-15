@@ -46,6 +46,6 @@ export class Game {
     });
     this.towers.hideTowerRange();
     game.menu.setSelectedTower(null);
-    dom.removeAllClassesFromAppContainer();
+    this.dom.removeAllClassesFromBody();
   };
 }
