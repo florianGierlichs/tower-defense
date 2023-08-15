@@ -1,8 +1,8 @@
-import { dom, game } from "../main";
-import { getTileForClick } from "../utils/getTileForClick";
-import { getTileForHover } from "../utils/getTileForHover";
-import { TileGras } from "./tiles/TileGras";
-import { TilePath } from "./tiles/TilePath";
+import { dom, game } from "../../main";
+import { getTileForClick } from "../../utils/getTileForClick";
+import { getTileForHover } from "../../utils/getTileForHover";
+import { TileGras } from "../tiles/TileGras";
+import { TilePath } from "../tiles/TilePath";
 
 export class CanvasGame {
   width = 1024;

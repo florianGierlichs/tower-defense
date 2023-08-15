@@ -1,7 +1,7 @@
 import { dom, tiles } from "../main";
 import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemies } from "./Enemies";
-import { Menu } from "./Menu";
+import { Menu } from "./gui/Menu";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
 

@@ -1,4 +1,4 @@
-import { tiles } from "../main";
+import { tiles } from "../../main";
 
 export class ToggleGrid {
   toggleTilesInfoButton;

@@ -1,5 +1,5 @@
-import { dom } from "../main";
-import { MenuTower } from "../utils/types";
+import { dom } from "../../main";
+import { MenuTower } from "../../utils/types";
 
 export class MenuItemTower {
   tower;

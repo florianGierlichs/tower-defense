@@ -1,10 +1,10 @@
-import { DomController } from "./classes/DomController";
+import { DomController } from "./classes/gui/DomController";
 import { Game } from "./classes/Game";
 import { ImageController } from "./classes/ImageController";
 import { Tiles } from "./classes/Tiles";
 import "./style.css";
 import "./font-animation.css";
-import { LoadingScreen } from "./classes/LoadingScreen";
+import { LoadingScreen } from "./classes/gui/LoadingScreen";
 
 export let dom: DomController;
 export let tiles: Tiles;

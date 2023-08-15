@@ -1,7 +1,7 @@
-import { game } from "../main";
-import { getTileForHover } from "../utils/getTileForHover";
-import { MenuTower } from "../utils/types";
-import { TileGras } from "./tiles/TileGras";
+import { game } from "../../main";
+import { getTileForHover } from "../../utils/getTileForHover";
+import { MenuTower } from "../../utils/types";
+import { TileGras } from "../tiles/TileGras";
 
 export class DomBody {
   body;
