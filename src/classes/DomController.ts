@@ -1,13 +1,12 @@
 import { CanvasBackground } from "./CanvasBackground";
 import { CanvasGame } from "./CanvasGame";
+import { ToggleGrid } from "./ToggleGrid";
 
 export class DomController {
   canvasBackground;
   canvasGame;
   ctxBackground;
   ctxGame;
-
-  toggleTilesInfoButton;
 
   constructor() {
     // canvas Background
@@ -20,7 +19,7 @@ export class DomController {
     this.canvasGame = canvasGame.getCanvas();
     this.ctxGame = canvasGame.getCtx();
 
-    this.toggleTilesInfoButton =
-      document.querySelector<HTMLButtonElement>("#toggle-tiles-info")!;
+    // toggle Grid
+    new ToggleGrid();
   }
 }

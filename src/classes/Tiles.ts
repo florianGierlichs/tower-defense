@@ -155,11 +155,11 @@ export class Tiles {
     this.updateTilesGras();
   };
 
-  toggleDebug = () => {
+  drawGrid = () => {
     if (!this.debug) {
       this.tileRows.forEach((row) => {
         row.forEach((tile) => {
-          tile.drawDebug();
+          tile.drawGrid();
         });
       });
     } else {

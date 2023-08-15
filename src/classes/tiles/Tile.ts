@@ -28,7 +28,7 @@ export class Tile {
     this.dY = y;
   }
 
-  drawDebug = () => {
+  drawGrid = () => {
     dom.ctxBackground.lineWidth = 0.1;
     dom.ctxBackground.strokeStyle = "black";
     dom.ctxBackground.font = " 10px sans-serif";

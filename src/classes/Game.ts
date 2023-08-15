@@ -1,4 +1,4 @@
-import { dom, game, tiles } from "../main";
+import { game, tiles } from "../main";
 import { DomBody } from "./DomBody";
 import { Enemies } from "./Enemies";
 import { Menu } from "./Menu";
@@ -30,8 +30,6 @@ export class Game {
     setTimeout(() => {
       this.spawnEnemies();
     }, 50000);
-
-    dom.toggleTilesInfoButton.addEventListener("click", tiles.toggleDebug); // todo put this to own class
   }
 
   private spawnEnemies = () => {
