@@ -90,3 +90,8 @@ export enum BlueprintId {
 export type ProjectileInstance = Projectile | Flame;
 
 export type TowerInstance = TowerArcaneArcher | FireMage;
+
+export interface PathNode {
+  x: number;
+  y: number;
+}

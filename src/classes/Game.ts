@@ -5,12 +5,6 @@ import { Menu } from "./Menu";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
 
-export interface PathNode {
-  // TODO put to util/types
-  x: number;
-  y: number;
-}
-
 export class Game {
   time: number = 0;
 

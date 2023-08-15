@@ -1,4 +1,4 @@
-import { PathNode } from "./Game";
+import { PathNode } from "../utils/types";
 import { TileGras } from "./tiles/TileGras";
 import { TilePath } from "./tiles/TilePath";
 
