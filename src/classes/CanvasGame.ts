@@ -12,10 +12,9 @@ export class CanvasGame {
 
   previousTileForHover: TileGras | TilePath | null = null;
 
-  constructor() {
-    const canvas = document.querySelector<HTMLCanvasElement>("#canvas-game");
-    if (canvas === null) throw new Error("Canvas not found");
-    this.canvas = canvas;
+  constructor(container: HTMLElement) {
+    this.canvas = document.createElement("canvas");
+    this.canvas.id = "canvas-game";
     const ctx = this.canvas.getContext("2d");
     if (ctx === null) throw new Error("Context not found");
     this.ctx = ctx;
@@ -25,6 +24,8 @@ export class CanvasGame {
     this.canvas.addEventListener("mousemove", this.mouseMoveCallback);
     this.canvas.addEventListener("mouseleave", this.mouseLeaveCallback);
     this.canvas.addEventListener("click", this.clickCallback);
+
+    container.appendChild(this.canvas);
   }
 
   getCanvas = () => {

@@ -4,16 +4,16 @@ export class CanvasBackground {
   canvas;
   ctx;
 
-  constructor() {
-    const canvas =
-      document.querySelector<HTMLCanvasElement>("#canvas-background");
-    if (canvas === null) throw new Error("Canvas not found");
-    this.canvas = canvas;
+  constructor(container: HTMLElement) {
+    this.canvas = document.createElement("canvas");
+    this.canvas.id = "canvas-background";
     const ctx = this.canvas.getContext("2d");
     if (ctx === null) throw new Error("Context not found");
     this.ctx = ctx;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
+
+    container.appendChild(this.canvas);
   }
 
   getCanvas = () => {

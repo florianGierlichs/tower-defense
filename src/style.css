@@ -88,7 +88,7 @@ canvas {
 #menu-container {
   height: 512px;
   width: 160px;
-  margin: 16px 0 0 16px;
+  margin: 16px;
   background-image: url("./assets/menuBackground.png");
   background-size: cover;
   color: white;
