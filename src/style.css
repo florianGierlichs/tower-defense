@@ -125,6 +125,13 @@ body {
   font-family: diablo-light;
 }
 
+#game-container {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #gui-container {
   display: flex;
   justify-content: center;

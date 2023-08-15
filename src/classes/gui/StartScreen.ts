@@ -2,6 +2,11 @@ export class StartScreen {
   startScreen;
   startButton;
   buttonCallback;
+  scaleInTransform = [
+    { transform: "translate(-50%, -50%) scale(1)" },
+    { transform: "translate(-50%, -50%) scale(0.9)" },
+  ];
+  scaleInTiming = 100;
 
   constructor(buttonCallback: () => void) {
     this.buttonCallback = buttonCallback;
@@ -16,7 +21,6 @@ export class StartScreen {
     this.startButton.innerHTML = "START";
     this.startButton.addEventListener("click", () => {
       this.removeStartScreen();
-      this.buttonCallback();
     });
 
     this.startScreen.appendChild(this.startButton);
@@ -25,6 +29,10 @@ export class StartScreen {
   }
 
   private removeStartScreen() {
-    document.body.removeChild(this.startScreen);
+    this.startScreen.animate(this.scaleInTransform, this.scaleInTiming);
+    setTimeout(() => {
+      this.startScreen.remove();
+      this.buttonCallback();
+    }, this.scaleInTiming);
   }
 }

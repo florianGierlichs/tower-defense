@@ -14,6 +14,7 @@ export class MenuContainer {
 
     this.goldPlaceholder = document.createElement("div");
     this.goldPlaceholder.classList.add("menu-item");
+    this.goldPlaceholder.innerHTML = "Gold: 999";
 
     this.menuTowersContainer = document.createElement("div");
     this.menuTowersContainer.id = "menu-towers-container";
