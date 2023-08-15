@@ -5,8 +5,6 @@ import { CanvasGame } from "./CanvasGame";
 export class DomController {
   appContainer;
 
-  menuTowersContainer;
-
   canvasBackground;
   canvasGame;
   ctxBackground;
@@ -16,10 +14,6 @@ export class DomController {
 
   constructor() {
     this.appContainer = document.querySelector<HTMLDivElement>("#app")!;
-
-    this.menuTowersContainer = document.querySelector<HTMLDivElement>(
-      "#menu-towers-container"
-    )!;
 
     // canvas Background
     const canvasBackground = new CanvasBackground();
@@ -41,9 +35,5 @@ export class DomController {
 
   removeAllClassesFromAppContainer = () => {
     this.appContainer.className = "";
-  };
-
-  addChildToMenuTowersContainer = (child: HTMLElement) => {
-    this.menuTowersContainer.appendChild(child);
   };
 }
