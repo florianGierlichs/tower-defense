@@ -18,22 +18,11 @@ export class Menu {
     },
   ] as const;
 
-  container;
   selectedTower: MenuTower | null = null;
 
   constructor() {
-    const container = document.querySelector<HTMLDivElement>(
-      "#menu-towers-container"
-    );
-    if (container === null) throw new Error("Menu container not found");
-    this.container = container;
-
     Menu.towers.forEach((tower) => {
-      new MenuItemTower(
-        tower,
-        this.selectTower,
-        this.addChildToMenuTowersContainer
-      );
+      new MenuItemTower(tower, this.selectTower);
     });
   }
 
@@ -52,9 +41,5 @@ export class Menu {
     if (tower !== null) {
       dom.body.addTowerMouseCursor(tower);
     }
-  };
-
-  private addChildToMenuTowersContainer = (child: HTMLElement) => {
-    this.container.appendChild(child);
   };
 }

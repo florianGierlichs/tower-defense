@@ -3,6 +3,7 @@ import { CanvasContainer } from "./CanvasContainer";
 import { CanvasGame } from "./CanvasGame";
 import { DomBody } from "./DomBody";
 import { GuiContainer } from "./GuiContainer";
+import { MenuContainer } from "./MenuContainer";
 import { ToggleGrid } from "./ToggleGrid";
 
 export class DomController {
@@ -12,6 +13,7 @@ export class DomController {
   canvasGame;
   ctxBackground;
   ctxGame;
+  menuContainer;
   body;
 
   constructor() {
@@ -34,6 +36,9 @@ export class DomController {
     );
     this.canvasGame = canvasGame.getCanvas();
     this.ctxGame = canvasGame.getCtx();
+
+    // menu container
+    this.menuContainer = new MenuContainer(this.guiContainer.getGuiContainer());
 
     // toggle Grid
     new ToggleGrid();
