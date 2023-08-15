@@ -1,5 +1,6 @@
 import { CanvasBackground } from "./CanvasBackground";
 import { CanvasGame } from "./CanvasGame";
+import { DomBody } from "./DomBody";
 import { ToggleGrid } from "./ToggleGrid";
 
 export class DomController {
@@ -7,6 +8,7 @@ export class DomController {
   canvasGame;
   ctxBackground;
   ctxGame;
+  body;
 
   constructor() {
     // canvas Background
@@ -21,5 +23,8 @@ export class DomController {
 
     // toggle Grid
     new ToggleGrid();
+
+    // body
+    this.body = new DomBody();
   }
 }

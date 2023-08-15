@@ -1,4 +1,4 @@
-import { game } from "../main";
+import { dom, game } from "../main";
 import { getTileForClick } from "../utils/getTileForClick";
 import { getTileForHover } from "../utils/getTileForHover";
 import { TileGras } from "./tiles/TileGras";
@@ -61,7 +61,7 @@ export class CanvasGame {
       if (tile instanceof TileGras && !tile.hasTower) {
         // show the tower blue print on the current tile and remove the mouse cursor image
         tile.setShowTowerBp(selectedTower);
-        game.dom.removeAllClassesFromBody();
+        dom.body.removeAllClassesFromBody();
         tile.update();
       }
       if (
@@ -69,7 +69,7 @@ export class CanvasGame {
         tile instanceof TilePath
       ) {
         // add the mouse cursor image
-        game.dom.addTowerMouseCursor(selectedTower);
+        dom.body.addTowerMouseCursor(selectedTower);
       }
       this.previousTileForHover = tile;
     }
@@ -95,7 +95,7 @@ export class CanvasGame {
       tile.updateBG();
 
       game.menu.setSelectedTower(null);
-      game.dom.removeAllClassesFromBody();
+      dom.body.removeAllClassesFromBody();
     }
   };
 

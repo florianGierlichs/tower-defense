@@ -1,4 +1,4 @@
-import { game } from "../main";
+import { dom } from "../main";
 import { MenuTower } from "../utils/types";
 import { MenuItemTower } from "./MenuItemTower";
 import { FireMage } from "./towers/FireMage";
@@ -48,9 +48,9 @@ export class Menu {
   private selectTower = (tower: MenuTower) => {
     this.setSelectedTower(tower);
 
-    game.dom.removeAllClassesFromBody();
+    dom.body.removeAllClassesFromBody();
     if (tower !== null) {
-      game.dom.addTowerMouseCursor(tower);
+      dom.body.addTowerMouseCursor(tower);
     }
   };
 

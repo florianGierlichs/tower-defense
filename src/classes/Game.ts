@@ -1,5 +1,5 @@
-import { game, tiles } from "../main";
-import { DomBody } from "./DomBody";
+import { dom, tiles } from "../main";
+import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemies } from "./Enemies";
 import { Menu } from "./Menu";
 import { Towers } from "./Towers";
@@ -7,18 +7,23 @@ import { Waves } from "./Waves";
 
 export class Game {
   time: number = 0;
+  lastAnimationTimestamp: number | null = null;
+  fps = 60;
+  intervalInMiliseconds = 1000 / this.fps;
 
-  menu = new Menu();
-  towers = new Towers();
-  enemies: Enemies;
-  waves = new Waves();
-  dom = new DomBody(); // todo maybe put to DomController if DomController can be put to Game
+  menu;
+  towers;
+  enemies;
+  waves;
 
   constructor() {
+    this.menu = new Menu();
+    this.towers = new Towers();
+    this.enemies = new Enemies();
+    this.waves = new Waves();
+
     tiles.createTileGrid();
     tiles.buildTileImg();
-
-    this.enemies = new Enemies();
 
     this.spawnEnemies();
 
@@ -30,6 +35,8 @@ export class Game {
     setTimeout(() => {
       this.spawnEnemies();
     }, 50000);
+
+    this.runGame();
   }
 
   private spawnEnemies = () => {
@@ -43,7 +50,38 @@ export class Game {
       tile.updateBG();
     });
     this.towers.hideTowerRange();
-    game.menu.setSelectedTower(null);
-    this.dom.removeAllClassesFromBody();
+    this.menu.setSelectedTower(null);
+    dom.body.removeAllClassesFromBody();
+  };
+
+  private runGame = (timestamp?: number) => {
+    if (this.time === 10000) {
+      console.log("end");
+      return;
+    }
+
+    if (timestamp) {
+      if (
+        timeHasPassed(this.lastAnimationTimestamp, this.intervalInMiliseconds)
+      ) {
+        this.lastAnimationTimestamp = timestamp;
+
+        this.update();
+      }
+    } else {
+      // initial run
+      this.update();
+    }
+
+    this.time++;
+    requestAnimationFrame(this.runGame);
+  };
+
+  private update = () => {
+    dom.ctxGame.clearRect(0, 0, dom.canvasGame.width, dom.canvasGame.height);
+
+    this.enemies.update();
+    this.towers.update();
+    tiles.update();
   };
 }
