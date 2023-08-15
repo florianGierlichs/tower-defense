@@ -1,4 +1,4 @@
-import { dom, imageController } from "../../main";
+import { dom, main } from "../../main";
 import { Tile, TileCoords } from "./Tile";
 import { getRandomItemFromArray } from "../../utils/getRandomItemFromArray";
 import { getTileMiddle } from "../../utils/getTileMiddle";
@@ -28,7 +28,7 @@ export class TileGras extends Tile {
   constructor(id: number, x: number, y: number) {
     super(id, x, y);
 
-    this.image = imageController.getImage("textures");
+    this.image = main.imageController.getImage("textures");
     this.sX = this.getImgConfig().sx;
     this.sY = this.getImgConfig().sy;
   }
@@ -61,7 +61,7 @@ export class TileGras extends Tile {
 
   private drawTowerBp = () => {
     if (this.showTowerBP !== null) {
-      const image = imageController.getImage(this.showTowerBP.blueprintId);
+      const image = main.imageController.getImage(this.showTowerBP.blueprintId);
       dom.ctxGame.drawImage(image, this.dX, this.dY);
 
       const tileMiddle = getTileMiddle({ x: this.x, y: this.y });

@@ -1,4 +1,4 @@
-import { dom, imageController } from "../../main";
+import { dom, main } from "../../main";
 import { Tile, TileCoords } from "./Tile";
 import { getRandomItemFromArray } from "../../utils/getRandomItemFromArray";
 
@@ -47,7 +47,7 @@ export class TilePath extends Tile {
   };
 
   private drawImg = () => {
-    const image = imageController.getImage("textures");
+    const image = main.imageController.getImage("textures");
     dom.ctxBackground.drawImage(
       image,
       this.sX,

@@ -1,4 +1,4 @@
-import { dom, game, imageController } from "../../main";
+import { dom, game, main } from "../../main";
 import { getDistance } from "../../utils/getDistance";
 import { timeHasPassed } from "../../utils/timeHasPassed";
 import { Enemy } from "../enemies/Enemy";
@@ -64,14 +64,14 @@ export class Tower {
     this.range = config.range;
     this.attackSpeed = config.attackSpeed;
 
-    this.image = imageController.getImage(config.id);
+    this.image = main.imageController.getImage(config.id);
     this.imgConfig = config.frameConfig;
     this.dX = x;
     this.dY = y;
 
     this.setImageConfig();
 
-    this.projectileImg = imageController.getImage(config.projectile.id);
+    this.projectileImg = main.imageController.getImage(config.projectile.id);
     this.projectileWidth = config.projectile.width;
     this.projectileHeight = config.projectile.height;
   }

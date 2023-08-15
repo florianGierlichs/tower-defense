@@ -4,21 +4,39 @@ import { ImageController } from "./classes/ImageController";
 import { Tiles } from "./classes/Tiles";
 import "./style.css";
 import "./font-animation.css";
-
-export const imageController = new ImageController();
+import { LoadingScreen } from "./classes/LoadingScreen";
 
 export let dom: DomController;
 export let tiles: Tiles;
 export let game: Game;
 
-imageController.loadImages().then(() => {
-  initiateGame();
-});
+class Main {
+  loadingScreen;
+  imageController;
 
-const initiateGame = () => {
-  // needed instances for Game
-  dom = new DomController();
-  tiles = new Tiles();
+  constructor() {
+    // loading screen
+    this.loadingScreen = new LoadingScreen();
 
-  game = new Game();
-};
+    // load images
+    this.imageController = new ImageController();
+    this.imageController.loadImages().then(() => {
+      this.loadingScreen.removeLoadingScreen();
+
+      // show Start Screen/Menu with button to start game
+      this.initiateGame();
+    });
+  }
+
+  private initiateGame = () => {
+    // needed instances for Game
+    dom = new DomController();
+    tiles = new Tiles();
+
+    game = new Game();
+  };
+}
+
+const main = new Main();
+
+export { main };
