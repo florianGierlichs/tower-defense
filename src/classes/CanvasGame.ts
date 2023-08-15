@@ -17,7 +17,7 @@ export class CanvasGame {
     if (canvas === null) throw new Error("Canvas not found");
     this.canvas = canvas;
     const ctx = this.canvas.getContext("2d");
-    if (ctx === null) throw new Error("Canvas not found");
+    if (ctx === null) throw new Error("Context not found");
     this.ctx = ctx;
     this.canvas.width = this.width;
     this.canvas.height = this.height;

@@ -1,4 +1,5 @@
 import { MenuTower } from "../utils/types";
+import { CanvasBackground } from "./CanvasBackground";
 import { CanvasGame } from "./CanvasGame";
 
 export class DomController {
@@ -20,14 +21,12 @@ export class DomController {
       "#menu-towers-container"
     )!;
 
-    this.canvasBackground =
-      document.querySelector<HTMLCanvasElement>("#canvas-background")!; // todo add CanvasBackground class
+    // canvas Background
+    const canvasBackground = new CanvasBackground();
+    this.canvasBackground = canvasBackground.getCanvas();
+    this.ctxBackground = canvasBackground.getCtx();
 
-    this.ctxBackground = this.canvasBackground.getContext("2d")!;
-
-    this.canvasBackground.width = 1024;
-    this.canvasBackground.height = 512;
-
+    // canvas Game
     const canvasGame = new CanvasGame();
     this.canvasGame = canvasGame.getCanvas();
     this.ctxGame = canvasGame.getCtx();
