@@ -1,7 +1,6 @@
 export class MenuContainer {
   menuBorder;
   menuContainer;
-  goldPlaceholder;
   menuTowersContainer;
 
   constructor(container: HTMLElement) {
@@ -12,15 +11,10 @@ export class MenuContainer {
     this.menuContainer = document.createElement("div");
     this.menuContainer.id = "menu-container";
 
-    this.goldPlaceholder = document.createElement("div");
-    this.goldPlaceholder.classList.add("menu-item");
-    this.goldPlaceholder.innerHTML = "Gold: 999";
-
     this.menuTowersContainer = document.createElement("div");
     this.menuTowersContainer.id = "menu-towers-container";
 
     this.menuBorder.appendChild(this.menuContainer);
-    this.menuContainer.appendChild(this.goldPlaceholder);
     this.menuContainer.appendChild(this.menuTowersContainer);
 
     container.appendChild(this.menuBorder);
@@ -36,5 +30,9 @@ export class MenuContainer {
 
   addChildToMenuTowersContainer = (child: HTMLElement) => {
     this.menuTowersContainer.appendChild(child);
+  };
+
+  addMenuItemGold = (goldElement: HTMLElement) => {
+    this.menuContainer.insertBefore(goldElement, this.menuTowersContainer);
   };
 }

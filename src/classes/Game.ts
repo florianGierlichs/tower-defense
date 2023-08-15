@@ -1,6 +1,7 @@
 import { dom, tiles } from "../main";
 import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemies } from "./Enemies";
+import { Gold } from "./Gold";
 import { Menu } from "./gui/Menu";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
@@ -15,19 +16,26 @@ export class Game {
   towers;
   enemies;
   waves;
+  gold;
 
   constructor() {
     this.menu = new Menu();
     this.towers = new Towers();
     this.enemies = new Enemies();
     this.waves = new Waves();
+    this.gold = new Gold();
 
     tiles.createTileGrid();
     tiles.buildTileImg();
 
     this.spawnEnemies();
 
-    // todo add logic for scheduling waves
+    // prio todo add logic for scheduling waves
+    // prio todo add logic for gold increase after each wave
+    // => + static gold value + % of curent golf
+    // prio todo add bounty for killing enemies
+    // => gold bounty gets decreased by time need to kill enemy
+
     setTimeout(() => {
       this.spawnEnemies();
     }, 25000);
