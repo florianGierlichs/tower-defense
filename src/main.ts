@@ -5,6 +5,7 @@ import { Tiles } from "./classes/Tiles";
 import "./style.css";
 import "./font-animation.css";
 import { LoadingScreen } from "./classes/gui/LoadingScreen";
+import { StartScreen } from "./classes/gui/StartScreen";
 
 export let dom: DomController;
 export let tiles: Tiles;
@@ -23,8 +24,8 @@ class Main {
     this.imageController.loadImages().then(() => {
       this.loadingScreen.removeLoadingScreen();
 
-      // show Start Screen/Menu with button to start game
-      this.initiateGame();
+      // show start screen
+      new StartScreen(this.initiateGame);
     });
   }
 
