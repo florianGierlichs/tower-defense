@@ -100,3 +100,10 @@ export interface PathNode {
   x: number;
   y: number;
 }
+
+export enum ResultType {
+  WON,
+  LOST,
+}
+
+export type Result = ResultType;

@@ -173,6 +173,7 @@ export class Enemy {
   private updateNodeTarget = () => {
     this.nodesIndex++;
     if (this.pathNodes.length === this.nodesIndex) {
+      game.playerHealth.reduceHealth();
       game.enemies.remove(this.id);
       return;
     }

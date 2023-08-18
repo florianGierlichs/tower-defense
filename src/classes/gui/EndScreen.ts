@@ -1,6 +1,9 @@
+import { Result, ResultType } from "../../utils/types";
+
 export class EndScreen {
   endScreen;
   headline;
+  resultElement;
   result;
 
   wonText = "You won!";
@@ -12,7 +15,9 @@ export class EndScreen {
   ];
   scaleInTiming = 100;
 
-  constructor() {
+  constructor(result: Result) {
+    this.result = result;
+
     this.endScreen = document.createElement("div");
     this.endScreen.id = "end-screen";
     this.endScreen.classList.add("box-shadow");
@@ -21,12 +26,13 @@ export class EndScreen {
     this.headline.id = "end-screen-headline";
     this.headline.innerHTML = "GAME OVER";
 
-    this.result = document.createElement("h2");
-    this.result.id = "end-screen-result";
-    this.result.innerHTML = this.wonText; // todo add condition if lost or won
+    this.resultElement = document.createElement("h2");
+    this.resultElement.id = "end-screen-result";
+    this.resultElement.innerHTML =
+      this.result === ResultType.WON ? this.wonText : this.lostText;
 
     this.endScreen.appendChild(this.headline);
-    this.endScreen.appendChild(this.result);
+    this.endScreen.appendChild(this.resultElement);
 
     document.body.appendChild(this.endScreen);
 

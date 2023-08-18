@@ -35,4 +35,8 @@ export class MenuContainer {
   addMenuItemGold = (goldElement: HTMLElement) => {
     this.menuContainer.insertBefore(goldElement, this.menuTowersContainer);
   };
+
+  addMenuItemPlayerHealth = (livesElement: HTMLElement) => {
+    this.menuContainer.insertBefore(livesElement, this.menuTowersContainer);
+  };
 }

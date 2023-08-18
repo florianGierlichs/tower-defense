@@ -1,15 +1,18 @@
 import { dom, tiles } from "../main";
 import { timeHasPassed } from "../utils/timeHasPassed";
+import { Result, ResultType } from "../utils/types";
 import { Enemies } from "./Enemies";
 import { Gold } from "./Gold";
 import { EndScreen } from "./gui/EndScreen";
 import { Menu } from "./gui/Menu";
 import { SpawnEnemiesInformation } from "./gui/SpawnEnemiesInformation";
+import { PlayerHealth } from "./PlayerHealth";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
 
 export class Game {
   stop = false;
+  result: Result | null = null;
   lastAnimationTimestamp: number | null = null;
   fps = 60;
   intervalInMiliseconds = 1000 / this.fps;
@@ -21,6 +24,7 @@ export class Game {
   enemies;
   waves;
   gold;
+  playerHealth;
 
   constructor() {
     this.menu = new Menu();
@@ -28,6 +32,7 @@ export class Game {
     this.enemies = new Enemies();
     this.waves = new Waves();
     this.gold = new Gold();
+    this.playerHealth = new PlayerHealth();
 
     tiles.createTileGrid();
     tiles.buildTileImg();
@@ -91,10 +96,20 @@ export class Game {
     this.towers.update();
     tiles.update();
 
+    if (this.playerHealth.getCurrentHealth() <= 0) {
+      this.stop = true;
+      this.result = ResultType.LOST;
+      new EndScreen(this.result);
+      return;
+    }
+
     if (!this.waveIsScheduled && this.enemies.allEnemiesRemoved) {
+      // defeated current wave
+
       if (this.waves.wasLastWave) {
+        this.result = ResultType.WON;
         this.stop = true;
-        new EndScreen();
+        new EndScreen(this.result);
         return;
       }
       this.spawnEnemies();
