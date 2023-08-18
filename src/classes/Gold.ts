@@ -7,9 +7,9 @@ export class Gold {
 
   constructor() {
     this.menuItem = document.createElement("div");
-    this.menuItem.classList.add("menu-item");
+    this.menuItem.classList.add("menu-item", "menu-item-stats");
     this.menuItem.id = "menu-item-gold";
-    this.menuItem.innerHTML = `Gold: ${this.gold}`;
+    this.menuItem.innerHTML = `Gold: <br>${this.gold}`;
 
     dom.menuContainer.addMenuItemGold(this.menuItem);
   }
@@ -20,6 +20,6 @@ export class Gold {
 
   update(gold: number) {
     this.gold = gold;
-    this.menuItem.innerHTML = `Gold: ${this.gold}`;
+    this.menuItem.innerHTML = `Gold: <br>${this.gold}`;
   }
 }

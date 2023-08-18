@@ -179,9 +179,22 @@ canvas {
   /* todo add different color for cursor on hover */
 }
 
+#menu-game-stats-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 #menu-towers-container {
   display: flex;
   flex-wrap: wrap;
+}
+
+.menu-item-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  border-bottom: 1px solid white;
 }
 
 .menu-item {

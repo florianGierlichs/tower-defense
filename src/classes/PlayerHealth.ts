@@ -7,9 +7,9 @@ export class PlayerHealth {
 
   constructor() {
     this.menuItem = document.createElement("div");
-    this.menuItem.classList.add("menu-item");
+    this.menuItem.classList.add("menu-item", "menu-item-stats");
     this.menuItem.id = "menu-item-health";
-    this.menuItem.innerHTML = `Health: ${this.currentHealth}`;
+    this.menuItem.innerHTML = `Health: <br>${this.currentHealth}`;
 
     dom.menuContainer.addMenuItemPlayerHealth(this.menuItem);
   }
@@ -25,6 +25,6 @@ export class PlayerHealth {
   };
 
   private update = () => {
-    this.menuItem.innerHTML = `Health: ${this.currentHealth}`;
+    this.menuItem.innerHTML = `Health: <br>${this.currentHealth}`;
   };
 }
