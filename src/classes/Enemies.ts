@@ -2,6 +2,7 @@ import { EnemyInstance } from "../utils/types";
 
 export class Enemies {
   private currentEnemies: EnemyInstance[] = [];
+  allEnemiesRemoved = true;
 
   constructor() {}
 
@@ -19,9 +20,14 @@ export class Enemies {
 
   setCurrentEnemies = (enemies: EnemyInstance[]) => {
     this.currentEnemies = enemies;
+    this.allEnemiesRemoved = false;
   };
 
   update = () => {
     this.updateEnemies();
+
+    if (this.currentEnemies.length === 0) {
+      this.allEnemiesRemoved = true;
+    }
   };
 }

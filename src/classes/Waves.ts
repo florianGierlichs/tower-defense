@@ -42,6 +42,9 @@ export class Waves {
   constructor() {}
 
   createEnemyWave = () => {
+    if (this.waveIndex >= Waves.waves.length) {
+      throw new Error("No more waves available");
+    }
     const { className, unitCount, name } = Waves.waves[this.waveIndex];
 
     const currentEnemies = [];

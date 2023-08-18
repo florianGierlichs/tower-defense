@@ -5,7 +5,7 @@ export class SpawnEnemiesInformation {
   headlineEl;
   countdownEl;
   countdownCurrent;
-  countdownStart = 3;
+  countdownStart = 5;
   interval;
   scaleInTransformRemove = [
     { transform: "translateX(0)" },
@@ -66,7 +66,9 @@ export class SpawnEnemiesInformation {
       return;
     }
 
-    this.countdownEl.innerHTML = this.countdownCurrent.toString();
+    if (this.countdownCurrent > 0 && this.countdownCurrent < 4) {
+      this.countdownEl.innerHTML = this.countdownCurrent.toString();
+    }
     this.countdownCurrent--;
   };
 }

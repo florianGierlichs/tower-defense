@@ -8,10 +8,12 @@ import { Towers } from "./Towers";
 import { Waves } from "./Waves";
 
 export class Game {
-  time: number = 0;
+  time = 0;
   lastAnimationTimestamp: number | null = null;
   fps = 60;
   intervalInMiliseconds = 1000 / this.fps;
+
+  waveIsScheduled = false;
 
   menu;
   towers;
@@ -29,23 +31,11 @@ export class Game {
     tiles.createTileGrid();
     tiles.buildTileImg();
 
-    setTimeout(() => {
-      this.spawnEnemies();
-    }, 500);
-
-    // prio todo add logic for scheduling waves
+    // prio todo add end screen after all waves are done
     // prio todo add logic for gold increase after each wave
     // => + static gold value + % of curent golf
     // prio todo add bounty for killing enemies
     // => gold bounty gets decreased by time need to kill enemy
-
-    setTimeout(() => {
-      this.spawnEnemies();
-    }, 25000);
-
-    setTimeout(() => {
-      this.spawnEnemies();
-    }, 50000);
 
     this.runGame();
   }
@@ -54,9 +44,11 @@ export class Game {
     const { currentEnemies, name } = this.waves.createEnemyWave();
     const startWave = () => {
       this.enemies.setCurrentEnemies(currentEnemies);
+      this.waveIsScheduled = false;
     };
-
-    new SpawnEnemiesInformation(name, startWave);
+    setTimeout(() => {
+      new SpawnEnemiesInformation(name, startWave);
+    }, 1000);
   };
 
   resetEventListeners = () => {
@@ -98,5 +90,10 @@ export class Game {
     this.enemies.update();
     this.towers.update();
     tiles.update();
+
+    if (!this.waveIsScheduled && this.enemies.allEnemiesRemoved) {
+      this.spawnEnemies();
+      this.waveIsScheduled = true;
+    }
   };
 }
