@@ -246,3 +246,14 @@ h2 {
   height: 28px;
   margin: 10px 0;
 }
+
+#end-screen {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("./assets/titleContainer.png");
+  background-size: cover;
+  padding: 100px 200px;
+  color: white;
+}

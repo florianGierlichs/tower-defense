@@ -2,13 +2,14 @@ import { dom, tiles } from "../main";
 import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemies } from "./Enemies";
 import { Gold } from "./Gold";
+import { EndScreen } from "./gui/EndScreen";
 import { Menu } from "./gui/Menu";
 import { SpawnEnemiesInformation } from "./gui/SpawnEnemiesInformation";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
 
 export class Game {
-  time = 0;
+  stop = false;
   lastAnimationTimestamp: number | null = null;
   fps = 60;
   intervalInMiliseconds = 1000 / this.fps;
@@ -31,7 +32,7 @@ export class Game {
     tiles.createTileGrid();
     tiles.buildTileImg();
 
-    // prio todo add end screen after all waves are done
+    // prio todo add player health and game over lost
     // prio todo add logic for gold increase after each wave
     // => + static gold value + % of curent golf
     // prio todo add bounty for killing enemies
@@ -62,7 +63,7 @@ export class Game {
   };
 
   private runGame = (timestamp?: number) => {
-    if (this.time === 10000) {
+    if (this.stop) {
       console.log("end");
       return;
     }
@@ -80,7 +81,6 @@ export class Game {
       this.update();
     }
 
-    this.time++;
     requestAnimationFrame(this.runGame);
   };
 
@@ -92,6 +92,11 @@ export class Game {
     tiles.update();
 
     if (!this.waveIsScheduled && this.enemies.allEnemiesRemoved) {
+      if (this.waves.wasLastWave) {
+        this.stop = true;
+        new EndScreen();
+        return;
+      }
       this.spawnEnemies();
       this.waveIsScheduled = true;
     }

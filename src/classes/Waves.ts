@@ -5,6 +5,7 @@ import { Goblin } from "./enemies/Goblin";
 
 export class Waves {
   waveIndex = 0;
+  wasLastWave = false;
 
   static readonly waves = [
     {
@@ -54,6 +55,10 @@ export class Waves {
       currentEnemies.push(new className(shortUUID.generate(), x, y));
     }
     this.waveIndex++;
+
+    if (this.waveIndex >= Waves.waves.length) {
+      this.wasLastWave = true;
+    }
 
     return { currentEnemies, name };
   };
