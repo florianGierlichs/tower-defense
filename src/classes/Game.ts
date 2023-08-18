@@ -3,6 +3,7 @@ import { timeHasPassed } from "../utils/timeHasPassed";
 import { Enemies } from "./Enemies";
 import { Gold } from "./Gold";
 import { Menu } from "./gui/Menu";
+import { SpawnEnemiesInformation } from "./gui/SpawnEnemiesInformation";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
 
@@ -28,7 +29,9 @@ export class Game {
     tiles.createTileGrid();
     tiles.buildTileImg();
 
-    this.spawnEnemies();
+    setTimeout(() => {
+      this.spawnEnemies();
+    }, 500);
 
     // prio todo add logic for scheduling waves
     // prio todo add logic for gold increase after each wave
@@ -48,8 +51,12 @@ export class Game {
   }
 
   private spawnEnemies = () => {
-    const currentEnemies = this.waves.createEnemyWave();
-    this.enemies.setCurrentEnemies(currentEnemies);
+    const { currentEnemies, name } = this.waves.createEnemyWave();
+    const startWave = () => {
+      this.enemies.setCurrentEnemies(currentEnemies);
+    };
+
+    new SpawnEnemiesInformation(name, startWave);
   };
 
   resetEventListeners = () => {

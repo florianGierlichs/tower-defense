@@ -1,7 +1,7 @@
-import { EnemyClasses } from "./Waves";
+import { EnemyInstance } from "../utils/types";
 
 export class Enemies {
-  private currentEnemies: EnemyClasses = [];
+  private currentEnemies: EnemyInstance[] = [];
 
   constructor() {}
 
@@ -17,7 +17,7 @@ export class Enemies {
 
   getCurrentEnemies = () => this.currentEnemies;
 
-  setCurrentEnemies = (enemies: EnemyClasses) => {
+  setCurrentEnemies = (enemies: EnemyInstance[]) => {
     this.currentEnemies = enemies;
   };
 

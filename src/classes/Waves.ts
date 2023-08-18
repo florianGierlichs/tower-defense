@@ -7,9 +7,19 @@ export class Waves {
   waveIndex = 0;
 
   static readonly waves = [
-    { id: "skeletonShield", className: SkeletonShield, unitCount: 9 },
-    { id: "mushroom", className: Mushroom, unitCount: 12 },
-    { id: "goblin", className: Goblin, unitCount: 6 },
+    {
+      id: "skeletonShield",
+      name: "Shielded Skeleton",
+      className: SkeletonShield,
+      unitCount: 9,
+    },
+    {
+      id: "mushroom",
+      name: "Mad Mushroom",
+      className: Mushroom,
+      unitCount: 12,
+    },
+    { id: "goblin", name: "Greedy Goblin", className: Goblin, unitCount: 6 },
   ] as const;
 
   static readonly waveStartingPositions = [
@@ -32,21 +42,22 @@ export class Waves {
   constructor() {}
 
   createEnemyWave = () => {
-    const { className, unitCount } = Waves.waves[this.waveIndex];
+    const { className, unitCount, name } = Waves.waves[this.waveIndex];
 
-    const current = [];
+    const currentEnemies = [];
 
     for (let i = 0; i < unitCount; i++) {
       const { x, y } = Waves.waveStartingPositions[i];
-      current.push(new className(shortUUID.generate(), x, y));
+      currentEnemies.push(new className(shortUUID.generate(), x, y));
     }
     this.waveIndex++;
 
-    return current;
+    return { currentEnemies, name };
   };
 }
 
 const waveIds = Waves.waves.map((obj) => obj.id);
-export type EnemyName = (typeof waveIds)[number];
+export type EnemyId = (typeof waveIds)[number];
 
-export type EnemyClasses = ReturnType<Waves["createEnemyWave"]>;
+const waveNames = Waves.waves.map((obj) => obj.name);
+export type EnemyNames = (typeof waveNames)[number];

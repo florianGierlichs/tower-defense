@@ -1,5 +1,5 @@
 import { loadImage } from "../utils/loadImage";
-import { EnemyName } from "./Waves";
+import { EnemyId } from "./Waves";
 import { BlueprintId, ProjectileId, TowerId } from "../utils/types";
 import arcaneArcherImg from "../assets/tower/arcaneArcher.png";
 import arcaneArcherProjectileImg from "../assets/projectiles/arcaneArcherProjectile.png";
@@ -50,7 +50,7 @@ export class ImageController {
   };
 
   getImage = (
-    key: typeof texturesKey | TowerId | ProjectileId | BlueprintId | EnemyName
+    key: typeof texturesKey | TowerId | ProjectileId | BlueprintId | EnemyId
   ): HTMLImageElement => {
     const image = this[key];
     if (image === null) {
