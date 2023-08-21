@@ -35,6 +35,7 @@ export class SpawnEnemiesInformation {
     this.countdownCurrent = this.countdownStart;
     this.countdownEl = document.createElement("h2");
     this.countdownEl.id = "spawn-enemies-countdown";
+    this.countdownEl.innerHTML = "&nbsp;";
 
     this.interval = setInterval(this.countdown, 1000);
 
@@ -64,6 +65,10 @@ export class SpawnEnemiesInformation {
       this.countdownCurrent--;
       this.startWave();
       return;
+    }
+
+    if (this.countdownCurrent >= 4) {
+      this.countdownEl.innerHTML = "&nbsp;";
     }
 
     if (this.countdownCurrent > 0 && this.countdownCurrent < 4) {

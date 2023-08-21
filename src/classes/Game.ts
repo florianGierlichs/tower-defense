@@ -36,11 +36,6 @@ export class Game {
     tiles.createTileGrid();
     tiles.buildTileImg();
 
-    // prio todo add logic for gold increase after each wave
-    // => + static gold value + % of curent golf
-    // prio todo add bounty for killing enemies
-    // => gold bounty gets decreased by time need to kill enemy
-
     this.runGame();
   }
 

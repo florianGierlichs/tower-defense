@@ -239,7 +239,6 @@ export class Enemy {
       // TODO can be less than 0 if dmg is higher than remaning health
       game.enemies.remove(this.id);
       game.gold.increaseGoldAfterKillEnemy(this.bountyGold);
-      // todo prio show gold increase somehow
       game.towers.resetTowerTarget(this.id);
     }
   };

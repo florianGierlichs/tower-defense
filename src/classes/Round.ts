@@ -1,6 +1,7 @@
 import { ResultType } from "../utils/types";
 import { Game } from "./Game";
 import { EndScreen } from "./gui/EndScreen";
+import { WaveDefeatedScreen } from "./gui/WaveDefeatedScreen";
 import { SpawnEnemiesInformation } from "./gui/SpawnEnemiesInformation";
 
 export class Round {
@@ -17,10 +18,9 @@ export class Round {
     const startWave = () => {
       this.game.enemies.setCurrentEnemies(currentEnemies);
       this.waveIsScheduled = false;
+      this.game.gold.resetDynamicGoldIncreasePerRound();
     };
-    setTimeout(() => {
-      new SpawnEnemiesInformation(name, startWave);
-    }, 1000);
+    new SpawnEnemiesInformation(name, startWave);
   };
 
   update = () => {
@@ -35,14 +35,18 @@ export class Round {
 
       if (this.initialWave) {
         this.initialWave = false;
-        this.spawnEnemies();
+        setTimeout(() => {
+          this.spawnEnemies();
+        }, 1000);
         this.waveIsScheduled = true;
         return;
       }
 
       this.game.gold.increaseGoldAfterRound();
-      // todo prio show gold increase somehow
-      this.spawnEnemies();
+      new WaveDefeatedScreen(this.game);
+      setTimeout(() => {
+        this.spawnEnemies();
+      }, 6000);
       this.waveIsScheduled = true;
     }
   };

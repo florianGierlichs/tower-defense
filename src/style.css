@@ -256,11 +256,11 @@ canvas {
 }
 
 h2 {
-  height: 28px;
   margin: 10px 0;
 }
 
-#end-screen {
+#end-screen,
+#round-complete-container {
   position: absolute;
   top: 48%;
   left: 50%;
@@ -269,8 +269,33 @@ h2 {
   background-size: cover;
   padding: 100px 200px;
   color: white;
+  text-align: center;
 }
 
-#end-screen-headline {
+#round-complete-container {
+  padding: 40px 100px;
+  text-align: left;
+}
+
+#end-screen-headline,
+#round-complete-headline {
   font-family: diablo-heavy;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.round-complete-text span {
+  color: white;
+  font-size: 22px;
+}
+
+.round-complete-text-key {
+  display: inline-block;
+  width: 300px;
+}
+
+.round-complete-text-value {
+  width: 80px;
+  display: inline-block;
+  text-align: end;
 }
