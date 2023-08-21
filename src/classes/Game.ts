@@ -1,23 +1,20 @@
 import { dom, tiles } from "../main";
 import { timeHasPassed } from "../utils/timeHasPassed";
-import { Result, ResultType } from "../utils/types";
+import { ResultType } from "../utils/types";
 import { Enemies } from "./Enemies";
 import { Gold } from "./Gold";
 import { EndScreen } from "./gui/EndScreen";
 import { Menu } from "./gui/Menu";
-import { SpawnEnemiesInformation } from "./gui/SpawnEnemiesInformation";
 import { PlayerHealth } from "./PlayerHealth";
+import { Round } from "./Round";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
 
 export class Game {
-  stop = false;
-  result: Result | null = null;
+  private stop = false;
   lastAnimationTimestamp: number | null = null;
   fps = 60;
   intervalInMiliseconds = 1000 / this.fps;
-
-  waveIsScheduled = false;
 
   menu;
   towers;
@@ -25,6 +22,7 @@ export class Game {
   waves;
   gold;
   playerHealth;
+  round;
 
   constructor() {
     this.menu = new Menu();
@@ -33,11 +31,11 @@ export class Game {
     this.waves = new Waves();
     this.gold = new Gold();
     this.playerHealth = new PlayerHealth();
+    this.round = new Round(this);
 
     tiles.createTileGrid();
     tiles.buildTileImg();
 
-    // prio todo add player health and game over lost
     // prio todo add logic for gold increase after each wave
     // => + static gold value + % of curent golf
     // prio todo add bounty for killing enemies
@@ -45,17 +43,6 @@ export class Game {
 
     this.runGame();
   }
-
-  private spawnEnemies = () => {
-    const { currentEnemies, name } = this.waves.createEnemyWave();
-    const startWave = () => {
-      this.enemies.setCurrentEnemies(currentEnemies);
-      this.waveIsScheduled = false;
-    };
-    setTimeout(() => {
-      new SpawnEnemiesInformation(name, startWave);
-    }, 1000);
-  };
 
   resetEventListeners = () => {
     tiles.tileGras.forEach((tile) => {
@@ -89,31 +76,22 @@ export class Game {
     requestAnimationFrame(this.runGame);
   };
 
+  stopGame = () => {
+    this.stop = true;
+  };
+
   private update = () => {
+    if (this.playerHealth.getCurrentHealth() <= 0) {
+      this.stopGame();
+      new EndScreen(ResultType.LOST);
+      return;
+    }
+
     dom.ctxGame.clearRect(0, 0, dom.canvasGame.width, dom.canvasGame.height);
 
     this.enemies.update();
     this.towers.update();
     tiles.update();
-
-    if (this.playerHealth.getCurrentHealth() <= 0) {
-      this.stop = true;
-      this.result = ResultType.LOST;
-      new EndScreen(this.result);
-      return;
-    }
-
-    if (!this.waveIsScheduled && this.enemies.allEnemiesRemoved) {
-      // defeated current wave
-
-      if (this.waves.wasLastWave) {
-        this.result = ResultType.WON;
-        this.stop = true;
-        new EndScreen(this.result);
-        return;
-      }
-      this.spawnEnemies();
-      this.waveIsScheduled = true;
-    }
+    this.round.update();
   };
 }
