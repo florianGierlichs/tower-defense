@@ -21,6 +21,7 @@ export class Enemy {
   dHeight;
   health;
   speed;
+  bountyGold;
 
   // states
   state = EnemyState.MOVE;
@@ -51,6 +52,7 @@ export class Enemy {
     this.frameConfig = config.frameConfig;
     this.health = config.health;
     this.speed = config.speed;
+    this.bountyGold = config.bountyGold;
 
     this.setImageConfig();
 
@@ -167,6 +169,7 @@ export class Enemy {
       this.updateNodeTarget();
       this.updateAnimationDirection();
       this.setImageConfig();
+      this.reduceBountyGold();
     }
   };
 
@@ -223,6 +226,11 @@ export class Enemy {
     }
   };
 
+  private reduceBountyGold = () => {
+    // reduce bounty gold by 10%
+    this.bountyGold = Math.round(this.bountyGold * 0.9);
+  };
+
   reduceHealth = () => {
     // TODO include dmg value of tower
     this.health--;
@@ -230,6 +238,8 @@ export class Enemy {
     if (this.health === 0) {
       // TODO can be less than 0 if dmg is higher than remaning health
       game.enemies.remove(this.id);
+      game.gold.increaseGoldAfterKillEnemy(this.bountyGold);
+      // todo prio show gold increase somehow
       game.towers.resetTowerTarget(this.id);
     }
   };

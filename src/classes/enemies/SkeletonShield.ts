@@ -22,6 +22,7 @@ export class SkeletonShield extends Enemy {
         },
       },
     },
+    bountyGold: 10,
   };
 
   constructor(id: string, x: number, y: number) {

@@ -41,6 +41,7 @@ export class Round {
       }
 
       this.game.gold.increaseGoldAfterRound();
+      // todo prio show gold increase somehow
       this.spawnEnemies();
       this.waveIsScheduled = true;
     }

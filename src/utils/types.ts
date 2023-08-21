@@ -36,6 +36,7 @@ export interface EnemyConfig {
   speed: number;
   imageScale: number;
   frameConfig: FrameConfigs;
+  bountyGold: number;
 }
 
 export interface TowerConfig {

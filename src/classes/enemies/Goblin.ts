@@ -22,6 +22,7 @@ export class Goblin extends Enemy {
         },
       },
     },
+    bountyGold: 30,
   };
 
   constructor(id: string, x: number, y: number) {
