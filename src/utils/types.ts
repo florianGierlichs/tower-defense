@@ -73,6 +73,7 @@ export interface MenuTower {
   readonly id: TowerId;
   readonly range: number;
   readonly blueprintId: BlueprintId;
+  readonly price: number;
 }
 
 export enum TowerId {

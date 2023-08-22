@@ -302,3 +302,11 @@ h2 {
   display: inline-block;
   text-align: end;
 }
+
+#info-message {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+}

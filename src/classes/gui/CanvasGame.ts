@@ -3,6 +3,7 @@ import { getTileForClick } from "../../utils/getTileForClick";
 import { getTileForHover } from "../../utils/getTileForHover";
 import { TileGras } from "../tiles/TileGras";
 import { TilePath } from "../tiles/TilePath";
+import { InfoMessage } from "./InfoMessage";
 
 export class CanvasGame {
   width = 1024;
@@ -88,9 +89,16 @@ export class CanvasGame {
     const selectedTower = game.menu.getSelectedTower();
     if (selectedTower === null) return;
 
+    const currentGold = game.gold.getCurrentGold();
+    if (currentGold < selectedTower.price) {
+      new InfoMessage("Not enough Gold!");
+      return;
+    }
+
     const tile = getTileForClick(event);
     if (tile instanceof TileGras && !tile.hasTower) {
       game.towers.createTower(tile.x, tile.y, selectedTower);
+      game.gold.reduceGold(selectedTower.price);
       tile.setHasTower();
       tile.setShowTowerBp(null);
       tile.updateBG();
