@@ -40,4 +40,8 @@
 
 #### Font
 
-- use font from diablo for lulz
+- use font from diablo for lulz :heavy_check_mark:
+
+#### Start screen
+
+- add description of gold increase and bounty decrease
