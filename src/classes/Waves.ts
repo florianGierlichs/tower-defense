@@ -13,14 +13,22 @@ export class Waves {
       name: "Shielded Skeleton",
       className: SkeletonShield,
       unitCount: 9,
+      bountyGold: SkeletonShield.config.bountyGold,
     },
     {
       id: "mushroom",
       name: "Mad Mushroom",
       className: Mushroom,
       unitCount: 12,
+      bountyGold: Mushroom.config.bountyGold,
     },
-    { id: "goblin", name: "Greedy Goblin", className: Goblin, unitCount: 6 },
+    {
+      id: "goblin",
+      name: "Greedy Goblin",
+      className: Goblin,
+      unitCount: 6,
+      bountyGold: Goblin.config.bountyGold,
+    },
   ] as const;
 
   static readonly waveStartingPositions = [
@@ -46,7 +54,8 @@ export class Waves {
     if (this.waveIndex >= Waves.waves.length) {
       throw new Error("No more waves available");
     }
-    const { className, unitCount, name } = Waves.waves[this.waveIndex];
+    const { className, unitCount, name, bountyGold } =
+      Waves.waves[this.waveIndex];
 
     const currentEnemies = [];
 
@@ -60,7 +69,7 @@ export class Waves {
       this.wasLastWave = true;
     }
 
-    return { currentEnemies, name };
+    return { currentEnemies, name, bountyGold };
   };
 }
 

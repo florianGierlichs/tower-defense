@@ -242,14 +242,13 @@ canvas {
 
 #spawn-enemies-container {
   text-align: center;
-  padding: 0 30px;
+  padding: 20px 40px;
   position: absolute;
   top: 20px;
   left: 0;
   background-image: url("./assets/titleContainer.png");
   background-size: cover;
   color: white;
-  height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -257,6 +256,10 @@ canvas {
 
 h2 {
   margin: 10px 0;
+}
+
+#spawn-enemies-bounty-gold {
+  margin: 0 0 20px 0;
 }
 
 #end-screen,

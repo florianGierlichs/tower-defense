@@ -3,6 +3,7 @@ import { EnemyNames } from "../Waves";
 export class SpawnEnemiesInformation {
   container;
   headlineEl;
+  bountyGoldEl;
   countdownEl;
   countdownCurrent;
   countdownStart = 5;
@@ -21,7 +22,11 @@ export class SpawnEnemiesInformation {
 
   startWave;
 
-  constructor(enemyName: EnemyNames, startWave: () => void) {
+  constructor(
+    enemyName: EnemyNames,
+    bountyGold: number,
+    startWave: () => void
+  ) {
     this.startWave = startWave;
 
     this.container = document.createElement("div");
@@ -32,6 +37,10 @@ export class SpawnEnemiesInformation {
     this.headlineEl.id = "spawn-enemies-headline";
     this.headlineEl.innerHTML = enemyName;
 
+    this.bountyGoldEl = document.createElement("h3");
+    this.bountyGoldEl.id = "spawn-enemies-bounty-gold";
+    this.bountyGoldEl.innerHTML = `Bounty Gold: ${bountyGold.toString()}`;
+
     this.countdownCurrent = this.countdownStart;
     this.countdownEl = document.createElement("h2");
     this.countdownEl.id = "spawn-enemies-countdown";
@@ -40,6 +49,7 @@ export class SpawnEnemiesInformation {
     this.interval = setInterval(this.countdown, 1000);
 
     this.container.appendChild(this.headlineEl);
+    this.container.appendChild(this.bountyGoldEl);
     this.container.appendChild(this.countdownEl);
 
     document.body.appendChild(this.container);
