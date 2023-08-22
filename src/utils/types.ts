@@ -1,4 +1,3 @@
-import { EnemyId } from "../classes/Waves";
 import { Goblin } from "../classes/enemies/Goblin";
 import { Mushroom } from "../classes/enemies/Mushroom";
 import { SkeletonShield } from "../classes/enemies/SkeletonShield";
@@ -31,7 +30,7 @@ export interface FrameConfigs {
 }
 
 export interface EnemyConfig {
-  name: EnemyId;
+  id: EnemyId;
   health: number;
   speed: number;
   imageScale: number;
@@ -96,6 +95,8 @@ export type ProjectileInstance = Projectile | Flame;
 export type TowerInstance = TowerArcaneArcher | FireMage;
 
 export type EnemyInstance = SkeletonShield | Mushroom | Goblin;
+
+export type EnemyId = "skeletonShield" | "mushroom" | "goblin";
 
 export interface PathNode {
   x: number;

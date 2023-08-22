@@ -1,6 +1,5 @@
 import { loadImage } from "../utils/loadImage";
-import { EnemyId } from "./Waves";
-import { BlueprintId, ProjectileId, TowerId } from "../utils/types";
+import { BlueprintId, EnemyId, ProjectileId, TowerId } from "../utils/types";
 import arcaneArcherImg from "../assets/tower/arcaneArcher.png";
 import arcaneArcherProjectileImg from "../assets/projectiles/arcaneArcherProjectile.png";
 import arcaneArcherBpImg from "../assets/menu/arcaneArcherMenu.png";

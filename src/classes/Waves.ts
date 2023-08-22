@@ -9,21 +9,21 @@ export class Waves {
 
   static readonly waves = [
     {
-      id: "skeletonShield",
+      id: SkeletonShield.config.id,
       name: "Shielded Skeleton",
       className: SkeletonShield,
       unitCount: 9,
       bountyGold: SkeletonShield.config.bountyGold,
     },
     {
-      id: "mushroom",
+      id: Mushroom.config.id,
       name: "Mad Mushroom",
       className: Mushroom,
       unitCount: 12,
       bountyGold: Mushroom.config.bountyGold,
     },
     {
-      id: "goblin",
+      id: Goblin.config.id,
       name: "Greedy Goblin",
       className: Goblin,
       unitCount: 6,
@@ -72,9 +72,6 @@ export class Waves {
     return { currentEnemies, name, bountyGold };
   };
 }
-
-const waveIds = Waves.waves.map((obj) => obj.id);
-export type EnemyId = (typeof waveIds)[number];
 
 const waveNames = Waves.waves.map((obj) => obj.name);
 export type EnemyNames = (typeof waveNames)[number];

@@ -3,7 +3,7 @@ import { Enemy } from "./Enemy";
 
 export class Goblin extends Enemy {
   static readonly config: EnemyConfig = {
-    name: "goblin",
+    id: "goblin",
     health: 3,
     speed: 3,
     imageScale: 1,
