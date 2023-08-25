@@ -41,9 +41,8 @@ export class Aoe {
   };
 
   private damageEnemiesInsideArea = () => {
-    // todo add damage to reduceHealth
     this.enemies.forEach((enemy) => {
-      enemy.reduceHealth();
+      enemy.reduceHealth(this.damage);
     });
   };
 

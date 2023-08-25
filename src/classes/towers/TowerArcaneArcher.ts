@@ -16,6 +16,7 @@ export class TowerArcaneArcher extends Tower {
     id: TowerId.ARCANE_ARCHER,
     range: 250,
     attackSpeed: 1000,
+    damage: 10,
     imageScale: 0.8,
     frameConfig: {
       idle: {
@@ -68,6 +69,7 @@ export class TowerArcaneArcher extends Tower {
       shortUUID.generate(),
       this.tileMiddle.x,
       this.tileMiddle.y,
+      TowerArcaneArcher.config.damage,
       {
         img: this.projectileImg,
         width: this.projectileWidth,

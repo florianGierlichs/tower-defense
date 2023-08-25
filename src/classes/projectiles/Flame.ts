@@ -10,6 +10,7 @@ export class Flame {
   id;
   x;
   y;
+  damage;
   image;
   sWidth = 74;
   sHeight = 44;
@@ -36,15 +37,16 @@ export class Flame {
     id: string,
     x: number,
     y: number,
+    damage: number,
     img: HTMLImageElement,
     target: { x: number; y: number },
     animationDirection: AnimationDirection,
     removeProjectile: (id: string) => void
-    // TODO add damage value
   ) {
     this.id = id;
     this.x = x;
     this.y = y;
+    this.damage = damage;
     this.image = img;
     this.target = target;
     this.animationDirection = animationDirection;
@@ -56,7 +58,7 @@ export class Flame {
       this.target.x,
       this.target.y,
       this.damageOverTimeRadius,
-      1, // todo this.damage
+      this.damage,
       this.damageOverTimeThrottleTime
     );
   }

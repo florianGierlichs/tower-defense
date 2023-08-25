@@ -7,9 +7,10 @@ export class Projectile {
   id;
   x;
   y;
+  damage;
   targetEnemy;
   removeProjectile;
-  speed: number = 20;
+  speed: number = 20; // todo needs to be dynamic to be reused by different tower types
 
   image: HTMLImageElement;
   width: number;
@@ -19,6 +20,7 @@ export class Projectile {
     id: string,
     x: number,
     y: number,
+    damage: number,
     {
       img,
       width,
@@ -30,6 +32,7 @@ export class Projectile {
     this.id = id;
     this.x = x;
     this.y = y;
+    this.damage = damage;
     this.image = img;
     this.width = width;
     this.height = height;
@@ -91,7 +94,7 @@ export class Projectile {
 
   private collide = () => {
     this.removeProjectile(this.id);
-    this.targetEnemy.reduceHealth();
+    this.targetEnemy.reduceHealth(this.damage);
   };
 
   update = () => {

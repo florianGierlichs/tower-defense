@@ -207,7 +207,6 @@ export class Enemy {
   private updateFrames = () => {
     if (this.lastFrameIteration === null) {
       // initial run
-      //this.setFrame();
       this.setSxFrame();
       this.lastFrameIteration = performance.now();
     } else {
@@ -220,7 +219,6 @@ export class Enemy {
       ) {
         this.setFrameIteration();
         this.setSxFrame();
-        //this.setFrame();
         this.lastFrameIteration = performance.now();
       }
     }
@@ -231,12 +229,9 @@ export class Enemy {
     this.bountyGold = Math.round(this.bountyGold * 0.9);
   };
 
-  reduceHealth = () => {
-    // TODO include dmg value of tower
-    this.health--;
-
-    if (this.health === 0) {
-      // TODO can be less than 0 if dmg is higher than remaning health
+  reduceHealth = (amount: number) => {
+    this.health -= amount;
+    if (this.health <= 0) {
       game.enemies.remove(this.id);
       game.gold.increaseGoldAfterKillEnemy(this.bountyGold);
       game.towers.resetTowerTarget(this.id);

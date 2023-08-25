@@ -15,6 +15,7 @@ export class FireMage extends Tower {
     id: TowerId.FIRE_MAGE,
     range: 100,
     attackSpeed: 1500,
+    damage: 30,
     imageScale: 0.8,
     frameConfig: {
       idle: {
@@ -67,6 +68,7 @@ export class FireMage extends Tower {
       shortUUID.generate(),
       this.tileMiddle.x,
       this.tileMiddle.y,
+      FireMage.config.damage,
       this.projectileImg,
       this.currentTarget,
       this.animationDirection,

@@ -63,6 +63,14 @@ export class DamageOverTimeArea {
         this.affectedEnemies.splice(index, 1);
       }
     });
+
+    // remove affected enemies that are not in the game anymore
+    this.affectedEnemies.forEach((affectedEnemy) => {
+      if (!game.enemies.getCurrentEnemies().includes(affectedEnemy.enemy)) {
+        const index = this.affectedEnemies.indexOf(affectedEnemy);
+        this.affectedEnemies.splice(index, 1);
+      }
+    });
   };
 
   private damageEnemies = () => {
@@ -74,8 +82,7 @@ export class DamageOverTimeArea {
           this.damageOverTimeThrottleTime
         )
       ) {
-        // todo add damage to reduceHealth
-        affectedEnemy.enemy.reduceHealth();
+        affectedEnemy.enemy.reduceHealth(this.damage);
         affectedEnemy.damageHitTime = performance.now();
       }
     });

@@ -42,6 +42,7 @@ export interface TowerConfig {
   id: TowerId;
   range: number;
   attackSpeed: number;
+  damage: number;
   imageScale: number;
   frameConfig: FrameConfigs;
   projectile: {
