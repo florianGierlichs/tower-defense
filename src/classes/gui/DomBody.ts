@@ -26,6 +26,7 @@ export class DomBody {
   };
 
   private mouseMoveCallback = (event: MouseEvent) => {
+    // todo add throttle if performance is bad
     this.showTowerMouseCursor(event);
   };
 

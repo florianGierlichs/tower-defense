@@ -10,13 +10,13 @@ export class Menu {
       id: TowerArcaneArcher.config.id,
       range: TowerArcaneArcher.config.range,
       blueprintId: TowerArcaneArcher.config.bluePrint.id,
-      price: 100,
+      price: 50,
     },
     {
       id: FireMage.config.id,
       range: FireMage.config.range,
       blueprintId: FireMage.config.bluePrint.id,
-      price: 200,
+      price: 100,
     },
   ] as const;
 

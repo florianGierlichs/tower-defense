@@ -10,6 +10,8 @@ import { Round } from "./Round";
 import { Towers } from "./Towers";
 import { Waves } from "./Waves";
 
+// todo add tower damage
+// todo add menu tower hover and show stats
 export class Game {
   private stop = false;
   lastAnimationTimestamp: number | null = null;

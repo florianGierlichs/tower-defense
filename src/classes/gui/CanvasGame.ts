@@ -38,6 +38,7 @@ export class CanvasGame {
   };
 
   private mouseMoveCallback = (e: MouseEvent) => {
+    // todo add throttle if performance is bad
     this.showTowerBpOnTile(e);
   };
 
