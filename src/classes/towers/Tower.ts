@@ -18,7 +18,8 @@ export class Tower {
   y;
   tileMiddle;
   range;
-  attackSpeed; // todo is more throttletime than attackSpeed
+  attackSpeed; // attacks per minute
+  attackSpeedThrottleTime;
   image;
   sWidth = 64;
   sHeight = this.sWidth;
@@ -63,6 +64,7 @@ export class Tower {
     this.tileMiddle = getTileMiddle({ x, y });
     this.range = config.range;
     this.attackSpeed = config.attackSpeed;
+    this.attackSpeedThrottleTime = (60 / this.attackSpeed) * 1000;
 
     this.image = main.imageController.getImage(config.id);
     this.imgConfig = config.frameConfig;
@@ -295,7 +297,7 @@ export class Tower {
   };
 
   shootAtStartAttackAnimation = (projectile: ProjectileInstance) => {
-    if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
+    if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
       if (this.isFirstAttackAnimationFrame()) {
         this.shoot();
         this.projectiles.push(projectile);
@@ -304,7 +306,7 @@ export class Tower {
   };
 
   shootAtEndAttackAnimation = (projectile: ProjectileInstance) => {
-    if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
+    if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
       if (this.isLastAttackAnimationFrame()) {
         this.shoot();
         this.projectiles.push(projectile);

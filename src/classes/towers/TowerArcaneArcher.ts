@@ -15,7 +15,7 @@ export class TowerArcaneArcher extends Tower {
   static readonly config: TowerConfig = {
     id: TowerId.ARCANE_ARCHER,
     range: 250,
-    attackSpeed: 1000,
+    attackSpeed: 60,
     damage: 10,
     imageScale: 0.8,
     frameConfig: {
@@ -92,7 +92,7 @@ export class TowerArcaneArcher extends Tower {
     if (this.state === TowerState.IDLE) {
       this.idleAnimation();
 
-      if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
+      if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
         this.checkAndSetClosestEnemyInRange();
       }
     }

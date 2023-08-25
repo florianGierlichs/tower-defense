@@ -14,7 +14,7 @@ export class FireMage extends Tower {
   static readonly config: TowerConfig = {
     id: TowerId.FIRE_MAGE,
     range: 100,
-    attackSpeed: 1500,
+    attackSpeed: 40,
     damage: 30,
     imageScale: 0.8,
     frameConfig: {
@@ -88,7 +88,7 @@ export class FireMage extends Tower {
     if (this.state === TowerState.IDLE) {
       this.idleAnimation();
 
-      if (timeHasPassed(this.lastAttack, this.attackSpeed)) {
+      if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
         this.checkAndSetClosestEnemyInRange();
       }
     }
