@@ -8,15 +8,21 @@ export class Menu {
   static readonly towers: readonly MenuTower[] = [
     {
       id: TowerArcaneArcher.config.id,
+      name: "Arcane Archer",
       range: TowerArcaneArcher.config.range,
       blueprintId: TowerArcaneArcher.config.bluePrint.id,
       price: 50,
+      damage: TowerArcaneArcher.config.damage,
+      attackSpeed: TowerArcaneArcher.config.attackSpeed,
     },
     {
       id: FireMage.config.id,
+      name: "Fire Mage",
       range: FireMage.config.range,
       blueprintId: FireMage.config.bluePrint.id,
       price: 100,
+      damage: FireMage.config.damage,
+      attackSpeed: FireMage.config.attackSpeed,
     },
   ] as const;
 

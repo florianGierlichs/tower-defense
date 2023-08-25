@@ -36,11 +36,11 @@
 
 #### Extend Menu
 
-- add tooltip to towers and show tower stats, like dmg, range, attack speed, etc.
+- [x] add tooltip to towers and show tower stats, like dmg, range, attack speed, etc. :heavy_check_mark:
 
 #### Font
 
-- use font from diablo for lulz :heavy_check_mark:
+- [x] use font from diablo for lulz :heavy_check_mark:
 
 #### Start screen
 
