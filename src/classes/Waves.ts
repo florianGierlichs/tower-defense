@@ -2,6 +2,7 @@ import shortUUID from "short-uuid";
 import { SkeletonShield } from "./enemies/SkeletonShield";
 import { Mushroom } from "./enemies/Mushroom";
 import { Goblin } from "./enemies/Goblin";
+import { FireWorm } from "./enemies/FireWorm";
 
 export class Waves {
   waveIndex = 0;
@@ -28,6 +29,13 @@ export class Waves {
       className: Goblin,
       unitCount: 6,
       bountyGold: Goblin.config.bountyGold,
+    },
+    {
+      id: FireWorm.config.id,
+      name: "Fire Worm",
+      className: FireWorm,
+      unitCount: 6,
+      bountyGold: FireWorm.config.bountyGold,
     },
   ] as const;
 

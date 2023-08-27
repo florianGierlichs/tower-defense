@@ -101,7 +101,7 @@ export type TowerInstance = TowerArcaneArcher | FireMage;
 
 export type EnemyInstance = SkeletonShield | Mushroom | Goblin;
 
-export type EnemyId = "skeletonShield" | "mushroom" | "goblin";
+export type EnemyId = "skeletonShield" | "mushroom" | "goblin" | "fireWorm";
 
 export interface PathNode {
   x: number;

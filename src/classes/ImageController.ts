@@ -10,6 +10,7 @@ import goblinImg from "../assets/enemy/goblin.png";
 import fireMageImg from "../assets/tower/fireMage.png";
 import fireMageProjectileImg from "../assets/projectiles/fireMageProjectile.png";
 import fireMageBpImg from "../assets/menu/fireMageMenu.png";
+import fireWorm from "../assets/enemy/fireWorm.png";
 
 const texturesKey = "textures";
 
@@ -29,6 +30,7 @@ export class ImageController {
   skeletonShield: HTMLImageElement | null = null;
   mushroom: HTMLImageElement | null = null;
   goblin: HTMLImageElement | null = null;
+  fireWorm: HTMLImageElement | null = null;
 
   loadImages = async () => {
     this.textures = await loadImage(texturesImg);
@@ -46,6 +48,7 @@ export class ImageController {
     this.skeletonShield = await loadImage(skeletonShieldImg);
     this.mushroom = await loadImage(mushroomImg);
     this.goblin = await loadImage(goblinImg);
+    this.fireWorm = await loadImage(fireWorm);
   };
 
   getImage = (
