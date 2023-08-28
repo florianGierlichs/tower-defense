@@ -3,6 +3,7 @@ import { SkeletonShield } from "./enemies/SkeletonShield";
 import { Mushroom } from "./enemies/Mushroom";
 import { Goblin } from "./enemies/Goblin";
 import { FireWorm } from "./enemies/FireWorm";
+import { Demon } from "./bosses/Demon";
 
 export class Waves {
   waveIndex = 0;
@@ -36,6 +37,13 @@ export class Waves {
       className: FireWorm,
       unitCount: 6,
       bountyGold: FireWorm.config.bountyGold,
+    },
+    {
+      id: Demon.config.id,
+      name: "Demon",
+      className: Demon,
+      unitCount: 1,
+      bountyGold: Demon.config.bountyGold,
     },
   ] as const;
 

@@ -6,6 +6,8 @@ export class SkeletonShield extends Enemy {
     id: "skeletonShield",
     health: 3,
     speed: 2,
+    sWidth: 64,
+    sHeight: 64,
     imageScale: 0.8,
     frameConfig: {
       move: {

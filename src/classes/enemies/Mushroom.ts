@@ -6,6 +6,8 @@ export class Mushroom extends Enemy {
     id: "mushroom",
     health: 3,
     speed: 2,
+    sWidth: 64,
+    sHeight: 64,
     imageScale: 1,
     frameConfig: {
       move: {

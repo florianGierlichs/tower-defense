@@ -1,7 +1,7 @@
-import { EnemyInstance } from "../utils/types";
+import { BossInstance, EnemyInstance } from "../utils/types";
 
 export class Enemies {
-  private currentEnemies: EnemyInstance[] = [];
+  private currentEnemies: (EnemyInstance | BossInstance)[] = [];
   allEnemiesRemoved = true;
 
   constructor() {}
@@ -18,7 +18,7 @@ export class Enemies {
 
   getCurrentEnemies = () => this.currentEnemies;
 
-  setCurrentEnemies = (enemies: EnemyInstance[]) => {
+  setCurrentEnemies = (enemies: (EnemyInstance | BossInstance)[]) => {
     this.currentEnemies = enemies;
     this.allEnemiesRemoved = false;
   };

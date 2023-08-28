@@ -1,3 +1,5 @@
+import { Demon } from "../classes/bosses/Demon";
+import { FireWorm } from "../classes/enemies/FireWorm";
 import { Goblin } from "../classes/enemies/Goblin";
 import { Mushroom } from "../classes/enemies/Mushroom";
 import { SkeletonShield } from "../classes/enemies/SkeletonShield";
@@ -30,9 +32,11 @@ export interface FrameConfigs {
 }
 
 export interface EnemyConfig {
-  id: EnemyId;
+  id: EnemyId | BossId;
   health: number;
   speed: number;
+  sWidth: number;
+  sHeight: number;
   imageScale: number;
   frameConfig: FrameConfigs;
   bountyGold: number;
@@ -99,9 +103,13 @@ export type ProjectileInstance = Projectile | Flame;
 
 export type TowerInstance = TowerArcaneArcher | FireMage;
 
-export type EnemyInstance = SkeletonShield | Mushroom | Goblin;
+export type EnemyInstance = SkeletonShield | Mushroom | Goblin | FireWorm;
+
+export type BossInstance = Demon;
 
 export type EnemyId = "skeletonShield" | "mushroom" | "goblin" | "fireWorm";
+
+export type BossId = "demon";
 
 export interface PathNode {
   x: number;

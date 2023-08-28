@@ -6,6 +6,8 @@ export class FireWorm extends Enemy {
     id: "fireWorm",
     health: 10,
     speed: 2,
+    sWidth: 64,
+    sHeight: 64,
     imageScale: 1,
     frameConfig: {
       move: {

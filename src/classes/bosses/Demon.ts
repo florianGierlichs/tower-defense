@@ -1,33 +1,33 @@
 import { EnemyConfig } from "../../utils/types";
-import { Enemy } from "./Enemy";
+import { Enemy } from "../enemies/Enemy";
 
-export class Goblin extends Enemy {
+export class Demon extends Enemy {
   static readonly config: EnemyConfig = {
-    id: "goblin",
-    health: 3,
-    speed: 3,
-    sWidth: 64,
-    sHeight: 64,
+    id: "demon",
+    health: 200,
+    speed: 1,
+    sWidth: 110,
+    sHeight: 110,
     imageScale: 1,
     frameConfig: {
       move: {
-        frames: 8,
-        animationIterationCircleTime: 500,
+        frames: 12,
+        animationIterationCircleTime: 1000,
         flipOffsetFrames: 0,
         animationStartRight: {
           sx: 0,
-          sy: 64,
+          sy: 0,
         },
         animationStartLeft: {
-          sx: 192,
-          sy: 320,
+          sx: 1210,
+          sy: 110,
         },
       },
     },
-    bountyGold: 30,
+    bountyGold: 100,
   };
 
   constructor(id: string, x: number, y: number) {
-    super(id, x, y, Goblin.config);
+    super(id, x, y, Demon.config);
   }
 }

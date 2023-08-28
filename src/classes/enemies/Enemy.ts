@@ -12,11 +12,11 @@ export class Enemy {
   y;
   image;
   frameConfig;
-  sWidth = 64;
-  sHeight = 64;
+  sWidth;
+  sHeight;
   // center image to coordinate
-  imageTranslateX = this.sWidth / 2;
-  imageTranslateY = this.sHeight / 2;
+  imageTranslateX;
+  imageTranslateY;
   dWidth;
   dHeight;
   health;
@@ -47,8 +47,12 @@ export class Enemy {
     this.x = x;
     this.y = y;
     this.image = main.imageController.getImage(config.id);
-    this.dWidth = config.imageScale * this.sWidth;
-    this.dHeight = config.imageScale * this.sHeight;
+    this.sWidth = config.sWidth;
+    this.sHeight = config.sHeight;
+    this.dWidth = config.imageScale * config.sWidth;
+    this.dHeight = config.imageScale * config.sHeight;
+    this.imageTranslateX = config.sWidth / 2;
+    this.imageTranslateY = config.sHeight / 2;
     this.frameConfig = config.frameConfig;
     this.health = config.health;
     this.speed = config.speed;

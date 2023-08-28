@@ -1,5 +1,11 @@
 import { loadImage } from "../utils/loadImage";
-import { BlueprintId, EnemyId, ProjectileId, TowerId } from "../utils/types";
+import {
+  BlueprintId,
+  BossId,
+  EnemyId,
+  ProjectileId,
+  TowerId,
+} from "../utils/types";
 import arcaneArcherImg from "../assets/tower/arcaneArcher.png";
 import arcaneArcherProjectileImg from "../assets/projectiles/arcaneArcherProjectile.png";
 import arcaneArcherBpImg from "../assets/menu/arcaneArcherMenu.png";
@@ -11,6 +17,7 @@ import fireMageImg from "../assets/tower/fireMage.png";
 import fireMageProjectileImg from "../assets/projectiles/fireMageProjectile.png";
 import fireMageBpImg from "../assets/menu/fireMageMenu.png";
 import fireWorm from "../assets/enemy/fireWorm.png";
+import demon from "../assets/boss/demon.png";
 
 const texturesKey = "textures";
 
@@ -32,6 +39,9 @@ export class ImageController {
   goblin: HTMLImageElement | null = null;
   fireWorm: HTMLImageElement | null = null;
 
+  // boss
+  demon: HTMLImageElement | null = null;
+
   loadImages = async () => {
     this.textures = await loadImage(texturesImg);
 
@@ -49,10 +59,19 @@ export class ImageController {
     this.mushroom = await loadImage(mushroomImg);
     this.goblin = await loadImage(goblinImg);
     this.fireWorm = await loadImage(fireWorm);
+
+    // boss
+    this.demon = await loadImage(demon);
   };
 
   getImage = (
-    key: typeof texturesKey | TowerId | ProjectileId | BlueprintId | EnemyId
+    key:
+      | typeof texturesKey
+      | TowerId
+      | ProjectileId
+      | BlueprintId
+      | EnemyId
+      | BossId
   ): HTMLImageElement => {
     const image = this[key];
     if (image === null) {
