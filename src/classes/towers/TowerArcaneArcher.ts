@@ -87,7 +87,7 @@ export class TowerArcaneArcher extends Tower {
     if (this.state === TowerState.ATTACK) {
       this.attackAnimation();
 
-      this.shootAtEndAttackAnimation(() => this.getProjectile());
+      this.shootAtAttackAnimationFrame(6, () => this.getProjectile());
     }
 
     if (this.state === TowerState.IDLE) {

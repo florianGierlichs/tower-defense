@@ -83,7 +83,7 @@ export class FireMage extends Tower {
     if (this.state === TowerState.ATTACK) {
       this.attackAnimation();
 
-      this.shootAtStartAttackAnimation(() => this.getProjectile());
+      this.shootAtAttackAnimationFrame(0, () => this.getProjectile());
     }
 
     if (this.state === TowerState.IDLE) {

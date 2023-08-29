@@ -291,32 +291,12 @@ export class Tower {
     this.showRange = show;
   };
 
-  private isLastAttackAnimationFrame = () => {
-    if (this.frames === null) {
-      throw new Error("Frames is null");
-    }
-    return this.frameIteration === this.frames - 1;
-  };
-
-  private isFirstAttackAnimationFrame = () => {
-    if (this.frames === null) {
-      throw new Error("Frames is null");
-    }
-    return this.frameIteration === 0;
-  };
-
-  shootAtStartAttackAnimation = (getProjectile: () => ProjectileInstance) => {
+  shootAtAttackAnimationFrame = (
+    frameToShotAt: number,
+    getProjectile: () => ProjectileInstance
+  ) => {
     if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
-      if (this.isFirstAttackAnimationFrame()) {
-        this.shoot();
-        this.projectiles.push(getProjectile());
-      }
-    }
-  };
-
-  shootAtEndAttackAnimation = (getProjectile: () => ProjectileInstance) => {
-    if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
-      if (this.isLastAttackAnimationFrame()) {
+      if (this.frameIteration === frameToShotAt) {
         this.shoot();
         this.projectiles.push(getProjectile());
       }
