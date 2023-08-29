@@ -171,17 +171,20 @@ export class Tower {
 
   private setStateAndCurrentTarget = (target: Enemy | null) => {
     this.currentTarget = target;
+
+    if (
+      target === null &&
+      this.state === TowerState.ATTACK &&
+      !this.cancelAttackAnimantionAllowed
+    ) {
+      // some tower should not cancel the attack animation if the target died in the meantime
+      return;
+    }
+
     this.newAnimationCycle = true;
     this.frameIteration = 0;
 
     if (target === null) {
-      if (
-        this.state === TowerState.ATTACK &&
-        !this.cancelAttackAnimantionAllowed
-      ) {
-        // some tower should not cancel the attack animation if the target died in the meantime
-        return;
-      }
       this.state = TowerState.IDLE;
       this.setImageConfig();
     } else {
