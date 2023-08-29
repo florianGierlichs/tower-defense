@@ -45,6 +45,7 @@ export class FireMage extends Tower {
         },
       },
     },
+    cancelAttackAnimantionAllowed: false,
     projectile: {
       id: ProjectileId.FIRE_MAGE,
       width: 40,
@@ -82,7 +83,7 @@ export class FireMage extends Tower {
     if (this.state === TowerState.ATTACK) {
       this.attackAnimation();
 
-      this.shootAtStartAttackAnimation(this.getProjectile());
+      this.shootAtStartAttackAnimation(() => this.getProjectile());
     }
 
     if (this.state === TowerState.IDLE) {

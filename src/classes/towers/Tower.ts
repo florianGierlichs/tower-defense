@@ -30,6 +30,7 @@ export class Tower {
   imgConfig;
   frameIteration = 0;
   frameIterationThrottleTime = 100;
+  cancelAttackAnimantionAllowed;
 
   // projectile
   projectileImg;
@@ -65,6 +66,7 @@ export class Tower {
     this.range = config.range;
     this.attackSpeed = config.attackSpeed;
     this.attackSpeedThrottleTime = (60 / this.attackSpeed) * 1000;
+    this.cancelAttackAnimantionAllowed = config.cancelAttackAnimantionAllowed;
 
     this.image = main.imageController.getImage(config.id);
     this.imgConfig = config.frameConfig;
@@ -173,6 +175,13 @@ export class Tower {
     this.frameIteration = 0;
 
     if (target === null) {
+      if (
+        this.state === TowerState.ATTACK &&
+        !this.cancelAttackAnimantionAllowed
+      ) {
+        // some tower should not cancel the attack animation if the target died in the meantime
+        return;
+      }
       this.state = TowerState.IDLE;
       this.setImageConfig();
     } else {
@@ -296,20 +305,20 @@ export class Tower {
     return this.frameIteration === 0;
   };
 
-  shootAtStartAttackAnimation = (projectile: ProjectileInstance) => {
+  shootAtStartAttackAnimation = (getProjectile: () => ProjectileInstance) => {
     if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
       if (this.isFirstAttackAnimationFrame()) {
         this.shoot();
-        this.projectiles.push(projectile);
+        this.projectiles.push(getProjectile());
       }
     }
   };
 
-  shootAtEndAttackAnimation = (projectile: ProjectileInstance) => {
+  shootAtEndAttackAnimation = (getProjectile: () => ProjectileInstance) => {
     if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
       if (this.isLastAttackAnimationFrame()) {
         this.shoot();
-        this.projectiles.push(projectile);
+        this.projectiles.push(getProjectile());
       }
     }
   };

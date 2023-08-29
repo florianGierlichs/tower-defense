@@ -46,6 +46,7 @@ export class TowerArcaneArcher extends Tower {
         },
       },
     },
+    cancelAttackAnimantionAllowed: true,
     projectile: {
       id: ProjectileId.ARCANE_ARCHER,
       width: 40,
@@ -86,7 +87,7 @@ export class TowerArcaneArcher extends Tower {
     if (this.state === TowerState.ATTACK) {
       this.attackAnimation();
 
-      this.shootAtEndAttackAnimation(this.getProjectile());
+      this.shootAtEndAttackAnimation(() => this.getProjectile());
     }
 
     if (this.state === TowerState.IDLE) {
