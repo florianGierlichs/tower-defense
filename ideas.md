@@ -33,6 +33,7 @@
 - https://astrobob.itch.io/arcane-archer
 - https://cainos.itch.io/pixel-art-top-down-basic
 - https://luizmelo.itch.io/monsters-creatures-fantasy
+- https://creativekind.itch.io/
 
 #### Extend Menu
 

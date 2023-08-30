@@ -4,8 +4,10 @@ import { Goblin } from "../classes/enemies/Goblin";
 import { Mushroom } from "../classes/enemies/Mushroom";
 import { SkeletonShield } from "../classes/enemies/SkeletonShield";
 import { Flame } from "../classes/projectiles/Flame";
+import { LightningBolt } from "../classes/projectiles/LightningBolt";
 import { Projectile } from "../classes/projectiles/Projectile";
 import { FireMage } from "../classes/towers/FireMage";
+import { LightningMage } from "../classes/towers/LightningMage";
 import { TowerArcaneArcher } from "../classes/towers/TowerArcaneArcher";
 
 export interface Coordinate {
@@ -49,6 +51,7 @@ export interface TowerConfig {
   damage: number;
   imageScale: number;
   frameConfig: FrameConfigs;
+  cancelAttackAnimantionAllowed: boolean;
   projectile: {
     id: ProjectileId;
     width: number;
@@ -87,21 +90,24 @@ export interface MenuTower {
 export enum TowerId {
   ARCANE_ARCHER = "arcaneArcher",
   FIRE_MAGE = "fireMage",
+  Lightning_MAGE = "lightningMage",
 }
 
 export enum ProjectileId { // todo id does not match projectile class name, dont know if this is a problem
   ARCANE_ARCHER = "arcaneArcherProjectile",
   FIRE_MAGE = "fireMageProjectile",
+  LIGHTNING_MAGE = "lightningMageProjectile",
 }
 
 export enum BlueprintId {
   ARCANE_ARCHER = "arcaneArcherBp",
   FIRE_MAGE = "fireMageBp",
+  LIGHTNING_MAGE = "lightningMageBp",
 }
 
-export type ProjectileInstance = Projectile | Flame;
+export type ProjectileInstance = Projectile | Flame | LightningBolt;
 
-export type TowerInstance = TowerArcaneArcher | FireMage;
+export type TowerInstance = TowerArcaneArcher | FireMage | LightningMage;
 
 export type EnemyInstance = SkeletonShield | Mushroom | Goblin | FireWorm;
 

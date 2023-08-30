@@ -228,6 +228,11 @@ canvas {
   background-size: cover;
 }
 
+#lightningMage {
+  background-image: url("./assets/menu/lightningMageMenu.png");
+  background-size: cover;
+}
+
 #toggle-tiles-info {
   padding: 12px 8px;
   margin: 10px;

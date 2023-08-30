@@ -10,7 +10,7 @@ export class Aoe {
   radius;
   damage;
 
-  enemies: Enemy[] = [];
+  enemiesInsideArea: Enemy[] = [];
 
   constructor(
     id: string,
@@ -31,7 +31,7 @@ export class Aoe {
   }
 
   private setEnemiesInsideArea = () => {
-    this.enemies = game.enemies.getCurrentEnemies().filter((enemy) =>
+    this.enemiesInsideArea = game.enemies.getCurrentEnemies().filter((enemy) =>
       isInsideArea({
         center: { x: this.x, y: this.y },
         radius: this.radius,
@@ -41,12 +41,12 @@ export class Aoe {
   };
 
   private damageEnemiesInsideArea = () => {
-    this.enemies.forEach((enemy) => {
+    this.enemiesInsideArea.forEach((enemy) => {
       enemy.reduceHealth(this.damage);
     });
   };
 
   getEnemiesInsideArea = () => {
-    return this.enemies;
+    return this.enemiesInsideArea;
   };
 }

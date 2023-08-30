@@ -22,6 +22,8 @@ export class MenuItemTower {
 
     this.element = document.createElement("div");
     this.element.id = tower.id;
+    // todo add inner element for image which can scale.
+    // for bigger images overflow hidden from this.element
     this.element.classList.add("menu-item-tower");
 
     this.element.addEventListener("click", this.clickHandler);

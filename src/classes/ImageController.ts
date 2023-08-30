@@ -18,6 +18,9 @@ import fireMageProjectileImg from "../assets/projectiles/fireMageProjectile.png"
 import fireMageBpImg from "../assets/menu/fireMageMenu.png";
 import fireWorm from "../assets/enemy/fireWorm.png";
 import demon from "../assets/boss/demon.png";
+import lightningMageImg from "../assets/tower/lightningMage.png";
+import lightningMageProjectileImg from "../assets/projectiles/lightningMageProjectile.png";
+import lightningMageBpImg from "../assets/menu/lightningMageMenu.png";
 
 const texturesKey = "textures";
 
@@ -32,6 +35,10 @@ export class ImageController {
   fireMage: HTMLImageElement | null = null;
   fireMageProjectile: HTMLImageElement | null = null;
   fireMageBp: HTMLImageElement | null = null;
+
+  lightningMage: HTMLImageElement | null = null;
+  lightningMageProjectile: HTMLImageElement | null = null;
+  lightningMageBp: HTMLImageElement | null = null;
 
   // enemy
   skeletonShield: HTMLImageElement | null = null;
@@ -53,6 +60,10 @@ export class ImageController {
     this.fireMage = await loadImage(fireMageImg);
     this.fireMageProjectile = await loadImage(fireMageProjectileImg);
     this.fireMageBp = await loadImage(fireMageBpImg);
+
+    this.lightningMage = await loadImage(lightningMageImg);
+    this.lightningMageProjectile = await loadImage(lightningMageProjectileImg);
+    this.lightningMageBp = await loadImage(lightningMageBpImg);
 
     // enemy
     this.skeletonShield = await loadImage(skeletonShieldImg);

@@ -3,6 +3,7 @@ import { MenuTower } from "../../utils/types";
 import { MenuItemTower } from "./MenuItemTower";
 import { FireMage } from "../towers/FireMage";
 import { TowerArcaneArcher } from "../towers/TowerArcaneArcher";
+import { LightningMage } from "../towers/LightningMage";
 
 export class Menu {
   static readonly towers: readonly MenuTower[] = [
@@ -23,6 +24,15 @@ export class Menu {
       price: 100,
       damage: FireMage.config.damage,
       attackSpeed: FireMage.config.attackSpeed,
+    },
+    {
+      id: LightningMage.config.id,
+      name: "Lightning Mage",
+      range: LightningMage.config.range,
+      blueprintId: LightningMage.config.bluePrint.id,
+      price: 100,
+      damage: LightningMage.config.damage,
+      attackSpeed: LightningMage.config.attackSpeed,
     },
   ] as const;
 
