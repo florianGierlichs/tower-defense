@@ -57,6 +57,7 @@ export class Tower {
   // dynamic attack values
   lastAttack: number | null = null;
   currentTarget: Enemy | null = null;
+  targetFallbackCoordinates: { x: number; y: number } | null = null;
 
   constructor(id: string, x: number, y: number, config: TowerConfig) {
     this.id = id;
@@ -145,6 +146,7 @@ export class Tower {
       if (this.state === TowerState.ATTACK) {
         this.state = TowerState.IDLE;
         this.setImageConfig();
+        this.targetFallbackCoordinates = null;
       }
     }
   };
@@ -298,6 +300,16 @@ export class Tower {
     frameToShotAt: number,
     getProjectile: () => ProjectileInstance
   ) => {
+    if (
+      this.targetFallbackCoordinates === null &&
+      this.currentTarget !== null
+    ) {
+      this.targetFallbackCoordinates = {
+        x: this.currentTarget.x,
+        y: this.currentTarget.y,
+      };
+    }
+
     if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
       if (this.frameIteration === frameToShotAt) {
         this.shoot();

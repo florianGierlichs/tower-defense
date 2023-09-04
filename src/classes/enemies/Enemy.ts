@@ -4,6 +4,7 @@ import { getRandomFrameIteration } from "../../utils/getRandomFrameIteration";
 import { reachedTarget } from "../../utils/reachedTarget";
 import { timeHasPassed } from "../../utils/timeHasPassed";
 import { AnimationDirection, EnemyConfig, EnemyState } from "../../utils/types";
+import { Slow } from "../effects/Slow";
 
 export class Enemy {
   // initial values
@@ -21,6 +22,7 @@ export class Enemy {
   dHeight;
   health;
   speed;
+  maxSlowPercentage;
   bountyGold;
 
   // states
@@ -42,6 +44,9 @@ export class Enemy {
   angle;
   nodesIndex = 0;
 
+  // data
+  slows: Slow[] = [];
+
   constructor(id: string, x: number, y: number, config: EnemyConfig) {
     this.id = id;
     this.x = x;
@@ -56,6 +61,7 @@ export class Enemy {
     this.frameConfig = config.frameConfig;
     this.health = config.health;
     this.speed = config.speed;
+    this.maxSlowPercentage = config.maxSlowPercentage;
     this.bountyGold = config.bountyGold;
 
     this.setImageConfig();
@@ -144,23 +150,56 @@ export class Enemy {
     );
   };
 
+  addSlow = (slow: Slow) => {
+    this.slows.push(slow);
+  };
+
+  private updateSlows = () => {
+    const now = performance.now();
+    this.slows.forEach((slow) => {
+      if (now - slow.slowStart >= slow.slowDuration) {
+        this.slows = this.slows.filter((s) => s.id !== slow.id);
+      }
+    });
+  };
+
+  private getCurrentSpeed = () => {
+    if (this.slows.length === 0) {
+      return this.speed;
+    }
+
+    const combinedSlowPercentage = this.slows.reduce(
+      (acc, slow) => acc + slow.slowPercentage,
+      0
+    );
+
+    const finalSlowPercentage =
+      combinedSlowPercentage > this.maxSlowPercentage
+        ? this.maxSlowPercentage
+        : combinedSlowPercentage;
+
+    return this.speed * ((100 - finalSlowPercentage) / 100);
+  };
+
   private move = () => {
+    const currentSpeed = this.getCurrentSpeed();
+
     // move x
     const restDistanceX = Math.abs(this.nodeTarget.x - this.x);
 
-    if (restDistanceX - this.speed < 0) {
+    if (restDistanceX - currentSpeed < 0) {
       this.x += restDistanceX * Math.cos((this.angle * Math.PI) / 180);
     } else {
-      this.x += this.speed * Math.cos((this.angle * Math.PI) / 180);
+      this.x += currentSpeed * Math.cos((this.angle * Math.PI) / 180);
     }
 
     // move y
     const restDistanceY = Math.abs(this.nodeTarget.y - this.y);
 
-    if (restDistanceY - this.speed < 0) {
+    if (restDistanceY - currentSpeed < 0) {
       this.y += restDistanceY * Math.sin((this.angle * Math.PI) / 180);
     } else {
-      this.y += this.speed * Math.sin((this.angle * Math.PI) / 180);
+      this.y += currentSpeed * Math.sin((this.angle * Math.PI) / 180);
     }
 
     //reach path node
@@ -244,6 +283,7 @@ export class Enemy {
 
   update = () => {
     this.updateFrames();
+    this.updateSlows();
     this.move();
     this.draw();
   };

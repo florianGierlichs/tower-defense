@@ -61,7 +61,7 @@ export class LightningMage extends Tower {
   }
 
   getProjectile = () => {
-    if (this.currentTarget === null) {
+    if (this.targetFallbackCoordinates === null) {
       throw new Error("No current target");
     }
 
@@ -71,7 +71,7 @@ export class LightningMage extends Tower {
       this.tileMiddle.y,
       LightningMage.config.damage,
       this.projectileImg,
-      this.currentTarget,
+      this.currentTarget || this.targetFallbackCoordinates,
       this.removeProjectile
     );
   };

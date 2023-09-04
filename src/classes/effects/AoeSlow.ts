@@ -1,4 +1,5 @@
 import { Aoe } from "./Aoe";
+import { Slow } from "./Slow";
 
 export class AoeSlow extends Aoe {
   constructor(
@@ -15,8 +16,7 @@ export class AoeSlow extends Aoe {
 
   private slowEnemiesInsideArea = () => {
     this.getEnemiesInsideArea().forEach((enemy) => {
-      //   console.log(enemy);
-      //enemy.slow();
+      enemy.addSlow(new Slow(30, 2000));
     });
   };
 }

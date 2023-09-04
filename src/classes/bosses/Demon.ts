@@ -6,6 +6,7 @@ export class Demon extends Enemy {
     id: "demon",
     health: 200,
     speed: 1,
+    maxSlowPercentage: 0,
     sWidth: 110,
     sHeight: 110,
     imageScale: 1,

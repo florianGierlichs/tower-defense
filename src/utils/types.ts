@@ -37,6 +37,7 @@ export interface EnemyConfig {
   id: EnemyId | BossId;
   health: number;
   speed: number;
+  maxSlowPercentage: number;
   sWidth: number;
   sHeight: number;
   imageScale: number;

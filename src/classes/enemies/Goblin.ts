@@ -6,6 +6,7 @@ export class Goblin extends Enemy {
     id: "goblin",
     health: 3,
     speed: 3,
+    maxSlowPercentage: 50,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1,
