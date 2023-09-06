@@ -56,8 +56,10 @@ export class Enemy {
     this.sHeight = config.sHeight;
     this.dWidth = config.imageScale * config.sWidth;
     this.dHeight = config.imageScale * config.sHeight;
-    this.imageTranslateX = config.sWidth / 2;
-    this.imageTranslateY = config.sHeight / 2;
+    this.imageTranslateX =
+      config.sWidth / 2 - config.imageTranslateCorrection.x;
+    this.imageTranslateY =
+      config.sHeight / 2 - config.imageTranslateCorrection.y;
     this.frameConfig = config.frameConfig;
     this.health = config.health;
     this.speed = config.speed;
@@ -144,7 +146,7 @@ export class Enemy {
       this.sWidth,
       this.sHeight,
       this.x - this.imageTranslateX,
-      this.y - this.imageTranslateY, // todo need individual frame correction so that the image is centered on the path
+      this.y - this.imageTranslateY,
       this.dWidth,
       this.dHeight
     );

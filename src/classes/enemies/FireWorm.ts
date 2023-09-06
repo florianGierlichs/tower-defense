@@ -10,6 +10,10 @@ export class FireWorm extends Enemy {
     sWidth: 64,
     sHeight: 64,
     imageScale: 1,
+    imageTranslateCorrection: {
+      x: 0,
+      y: -10,
+    },
     frameConfig: {
       move: {
         frames: 9,

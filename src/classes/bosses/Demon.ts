@@ -9,7 +9,11 @@ export class Demon extends Enemy {
     maxSlowPercentage: 0,
     sWidth: 110,
     sHeight: 110,
-    imageScale: 1,
+    imageScale: 0.8,
+    imageTranslateCorrection: {
+      x: 15,
+      y: -25,
+    },
     frameConfig: {
       move: {
         frames: 12,

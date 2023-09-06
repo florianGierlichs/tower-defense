@@ -9,7 +9,11 @@ export class Goblin extends Enemy {
     maxSlowPercentage: 50,
     sWidth: 64,
     sHeight: 64,
-    imageScale: 1,
+    imageScale: 1.1,
+    imageTranslateCorrection: {
+      x: -5,
+      y: -25,
+    },
     frameConfig: {
       move: {
         frames: 8,

@@ -41,6 +41,10 @@ export interface EnemyConfig {
   sWidth: number;
   sHeight: number;
   imageScale: number;
+  imageTranslateCorrection: {
+    x: number;
+    y: number;
+  };
   frameConfig: FrameConfigs;
   bountyGold: number;
 }

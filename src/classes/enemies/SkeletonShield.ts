@@ -10,6 +10,10 @@ export class SkeletonShield extends Enemy {
     sWidth: 64,
     sHeight: 64,
     imageScale: 0.8,
+    imageTranslateCorrection: {
+      x: 5,
+      y: -10,
+    },
     frameConfig: {
       move: {
         frames: 4,
