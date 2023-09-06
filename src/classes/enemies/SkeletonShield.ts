@@ -4,7 +4,7 @@ import { Enemy } from "./Enemy";
 export class SkeletonShield extends Enemy {
   static readonly config: EnemyConfig = {
     id: "skeletonShield",
-    health: 30,
+    health: 10,
     speed: 2,
     maxSlowPercentage: 50,
     sWidth: 64,
@@ -29,7 +29,7 @@ export class SkeletonShield extends Enemy {
         },
       },
     },
-    bountyGold: 10,
+    bountyGold: 5,
   };
 
   constructor(id: string, x: number, y: number) {

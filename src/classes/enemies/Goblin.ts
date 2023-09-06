@@ -4,7 +4,7 @@ import { Enemy } from "./Enemy";
 export class Goblin extends Enemy {
   static readonly config: EnemyConfig = {
     id: "goblin",
-    health: 3,
+    health: 40,
     speed: 3,
     maxSlowPercentage: 50,
     sWidth: 64,
@@ -29,7 +29,7 @@ export class Goblin extends Enemy {
         },
       },
     },
-    bountyGold: 30,
+    bountyGold: 10,
   };
 
   constructor(id: string, x: number, y: number) {

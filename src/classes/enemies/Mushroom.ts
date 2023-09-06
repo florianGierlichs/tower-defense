@@ -29,7 +29,7 @@ export class Mushroom extends Enemy {
         },
       },
     },
-    bountyGold: 20,
+    bountyGold: 5,
   };
 
   constructor(id: string, x: number, y: number) {

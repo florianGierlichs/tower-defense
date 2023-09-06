@@ -4,7 +4,7 @@ import { Enemy } from "./Enemy";
 export class FireWorm extends Enemy {
   static readonly config: EnemyConfig = {
     id: "fireWorm",
-    health: 30,
+    health: 100,
     speed: 2,
     maxSlowPercentage: 20,
     sWidth: 64,
@@ -29,7 +29,7 @@ export class FireWorm extends Enemy {
         },
       },
     },
-    bountyGold: 30,
+    bountyGold: 15,
   };
 
   constructor(id: string, x: number, y: number) {

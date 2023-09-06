@@ -15,7 +15,7 @@ export class FireMage extends Tower {
     id: TowerId.FIRE_MAGE,
     range: 100,
     attackSpeed: 40,
-    damage: 30,
+    damage: 20,
     imageScale: 0.8,
     frameConfig: {
       idle: {
@@ -61,7 +61,7 @@ export class FireMage extends Tower {
   }
 
   getProjectile = () => {
-    if (this.currentTarget === null) {
+    if (this.targetFallbackCoordinates === null) {
       throw new Error("No current target");
     }
 
@@ -71,7 +71,7 @@ export class FireMage extends Tower {
       this.tileMiddle.y,
       FireMage.config.damage,
       this.projectileImg,
-      this.currentTarget,
+      this.currentTarget || this.targetFallbackCoordinates,
       this.animationDirection,
       this.removeProjectile
     );

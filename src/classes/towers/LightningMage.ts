@@ -15,7 +15,7 @@ export class LightningMage extends Tower {
     id: TowerId.Lightning_MAGE,
     range: 200,
     attackSpeed: 30,
-    damage: 5,
+    damage: 10,
     imageScale: 1,
     frameConfig: {
       idle: {
