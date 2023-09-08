@@ -15,7 +15,7 @@ export class TowerArcaneArcher extends Tower {
   static readonly config: TowerConfig = {
     id: TowerId.ARCANE_ARCHER,
     range: 250,
-    attackSpeed: 60,
+    attackSpeed: 100,
     damage: 5,
     imageScale: 0.8,
     frameConfig: {
