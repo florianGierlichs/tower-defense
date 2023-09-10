@@ -21,6 +21,7 @@ export class Enemy {
   dWidth;
   dHeight;
   health;
+  currentHealth;
   speed;
   maxSlowPercentage;
   bountyGold;
@@ -62,6 +63,7 @@ export class Enemy {
       config.sHeight / 2 - config.imageTranslateCorrection.y;
     this.frameConfig = config.frameConfig;
     this.health = config.health;
+    this.currentHealth = this.health;
     this.speed = config.speed;
     this.maxSlowPercentage = config.maxSlowPercentage;
     this.bountyGold = config.bountyGold;
@@ -149,6 +151,24 @@ export class Enemy {
       this.y - this.imageTranslateY,
       this.dWidth,
       this.dHeight
+    );
+
+    // red
+    dom.ctxGame.fillStyle = "#7d0e0e";
+    dom.ctxGame.fillRect(
+      this.x - this.imageTranslateX,
+      this.y - this.imageTranslateY - 5,
+      this.dWidth,
+      3
+    );
+
+    // green
+    dom.ctxGame.fillStyle = "#0a5a0a";
+    dom.ctxGame.fillRect(
+      this.x - this.imageTranslateX,
+      this.y - this.imageTranslateY - 5,
+      this.dWidth * (this.currentHealth / this.health),
+      3
     );
   };
 
@@ -275,8 +295,8 @@ export class Enemy {
   };
 
   reduceHealth = (amount: number) => {
-    this.health -= amount;
-    if (this.health <= 0) {
+    this.currentHealth -= amount;
+    if (this.currentHealth <= 0) {
       game.enemies.remove(this.id);
       game.gold.increaseGoldAfterKillEnemy(this.bountyGold);
       game.towers.resetTowerTarget(this.id);

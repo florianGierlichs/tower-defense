@@ -50,18 +50,18 @@ export class Waves {
   static readonly waveStartingPositions = [
     // TODO find dynamic way to get starting positions
     // maybe use unitCount and individual "distance" (would be new) property to define x coordinate
-    { x: 40, y: 160 },
+    { x: 60, y: 160 },
     { x: 0, y: 160 },
-    { x: -40, y: 160 },
-    { x: -80, y: 160 },
+    { x: -60, y: 160 },
     { x: -120, y: 160 },
-    { x: -160, y: 160 },
-    { x: -200, y: 160 },
+    { x: -180, y: 160 },
     { x: -240, y: 160 },
-    { x: -280, y: 160 },
-    { x: -320, y: 160 },
+    { x: -300, y: 160 },
     { x: -360, y: 160 },
-    { x: -400, y: 160 },
+    { x: -420, y: 160 },
+    { x: -480, y: 160 },
+    { x: -540, y: 160 },
+    { x: -600, y: 160 },
   ] as const;
 
   constructor() {}
