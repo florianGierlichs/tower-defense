@@ -1,22 +1,41 @@
 import { dom } from "../main";
+import { GoldInfoScreen } from "./gui/GoldInfoScreen";
 
 export class Gold {
   private menuItem;
+  private text;
   private startGold = 100;
   private currentGold = this.startGold;
   private collectedBountyGoldPerRound = 0;
   private percentageGoldIncreasePerRound = 0;
+  private infoScreen;
+  private showInfoScreen = false;
 
   staticGoldIncrease = 50;
   percentageGoldIncrease = 10;
 
   constructor() {
     this.menuItem = document.createElement("div");
-    this.menuItem.classList.add("menu-item", "menu-item-stats");
+    this.menuItem.classList.add(
+      "menu-item",
+      "menu-item-stats",
+      "menu-item-container"
+    );
     this.menuItem.id = "menu-item-gold";
-    this.menuItem.innerHTML = `Gold: <br>${this.currentGold}`;
+
+    this.text = document.createElement("p");
+    this.text.innerHTML = `Gold: <br>${this.currentGold}`;
+    this.menuItem.appendChild(this.text);
 
     dom.menuContainer.addMenuItemGold(this.menuItem);
+
+    this.menuItem.addEventListener("mouseover", this.showInfo);
+    this.menuItem.addEventListener("mouseleave", this.removeInfo);
+
+    this.infoScreen = new GoldInfoScreen(
+      this.percentageGoldIncrease,
+      this.staticGoldIncrease
+    );
   }
 
   getCurrentGold() {
@@ -59,7 +78,19 @@ export class Gold {
     this.percentageGoldIncreasePerRound = 0;
   };
 
+  private showInfo = () => {
+    if (!this.showInfoScreen) {
+      this.menuItem.appendChild(this.infoScreen.getContainer());
+      this.showInfoScreen = true;
+    }
+  };
+
+  private removeInfo = () => {
+    this.menuItem.removeChild(this.infoScreen.getContainer());
+    this.showInfoScreen = false;
+  };
+
   private update() {
-    this.menuItem.innerHTML = `Gold: <br>${this.currentGold}`;
+    this.text.innerHTML = `Gold: <br>${this.currentGold}`;
   }
 }

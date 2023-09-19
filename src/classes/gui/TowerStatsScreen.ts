@@ -1,3 +1,4 @@
+import { createStatsText } from "../../utils/createStatsText";
 import { MenuTower } from "../../utils/types";
 
 export class TowerStatsScreen {
@@ -10,30 +11,16 @@ export class TowerStatsScreen {
     this.container = document.createElement("div");
     this.container.classList.add("tower-stats-container", "box-shadow");
 
-    this.createStatsText(tower.name);
-    this.createStatsText("Damage:", tower.damage.toString());
-    this.createStatsText("Range:", tower.range.toString());
-    this.createStatsText("Attack speed:", tower.attackSpeed.toString());
-    this.createStatsText("Price:", tower.price.toString());
+    createStatsText(this.container, tower.name);
+    createStatsText(this.container, "Damage:", tower.damage.toString());
+    createStatsText(this.container, "Range:", tower.range.toString());
+    createStatsText(
+      this.container,
+      "Attack speed:",
+      tower.attackSpeed.toString()
+    );
+    createStatsText(this.container, "Price:", tower.price.toString());
   }
-
-  private createStatsText = (key: string, value?: string) => {
-    const p = document.createElement("p");
-    p.classList.add("tower-stats-text");
-
-    const keyEl = document.createElement("span");
-    keyEl.classList.add("tower-stats-text-key");
-    keyEl.innerHTML = key;
-    p.appendChild(keyEl);
-
-    if (value !== undefined) {
-      const valueEl = document.createElement("span");
-      valueEl.classList.add("tower-stats-text-value");
-      valueEl.innerHTML = value;
-      p.appendChild(valueEl);
-    }
-    this.container.appendChild(p);
-  };
 
   getContainer = () => {
     return this.container;

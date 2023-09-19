@@ -344,3 +344,7 @@ h2 {
   display: inline-block;
   text-align: end;
 }
+
+.gold-info .tower-stats-text-key {
+  width: 200px;
+}
