@@ -190,6 +190,11 @@ export class Tower {
       this.state = TowerState.IDLE;
       this.setImageConfig();
     } else {
+      this.targetFallbackCoordinates = {
+        x: target.x,
+        y: target.y,
+      };
+
       this.state = TowerState.ATTACK;
       this.setAnimationDirection();
       this.setImageConfig();
@@ -300,16 +305,6 @@ export class Tower {
     frameToShotAt: number,
     getProjectile: () => ProjectileInstance
   ) => {
-    if (
-      this.targetFallbackCoordinates === null &&
-      this.currentTarget !== null
-    ) {
-      this.targetFallbackCoordinates = {
-        x: this.currentTarget.x,
-        y: this.currentTarget.y,
-      };
-    }
-
     if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
       if (this.frameIteration === frameToShotAt) {
         this.shoot();
