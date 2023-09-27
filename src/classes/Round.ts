@@ -1,13 +1,12 @@
 import { ResultType } from "../utils/types";
 import { Game } from "./Game";
 import { EndScreen } from "./gui/EndScreen";
-import { WaveDefeatedScreen } from "./gui/WaveDefeatedScreen";
 import { SpawnEnemiesInformation } from "./gui/SpawnEnemiesInformation";
+import { ModalPopIn } from "./gui/ModalPopIn";
 
 export class Round {
   game;
   waveIsScheduled = false;
-  initialWave = true;
 
   constructor(game: Game) {
     this.game = game;
@@ -21,12 +20,16 @@ export class Round {
       this.waveIsScheduled = false;
       this.game.gold.resetDynamicGoldIncreasePerRound();
     };
-    new SpawnEnemiesInformation(name, bountyGold, startWave);
+    const modalContent = new SpawnEnemiesInformation(
+      name,
+      bountyGold
+    ).getContainer();
+    new ModalPopIn(5000, modalContent, startWave);
   };
 
   update = () => {
     if (!this.waveIsScheduled && this.game.enemies.allEnemiesRemoved) {
-      // defeated current wave
+      // defeated current wave or initial wave
 
       if (this.game.waves.wasLastWave) {
         this.game.stopGame();
@@ -34,20 +37,14 @@ export class Round {
         return;
       }
 
-      if (this.initialWave) {
-        this.initialWave = false;
-        setTimeout(() => {
-          this.spawnEnemies();
-        }, 1000);
-        this.waveIsScheduled = true;
-        return;
+      if (this.game.waves.waveIndex > 0) {
+        // after initial wave
+        this.game.gold.increaseGoldAfterRound();
       }
 
-      this.game.gold.increaseGoldAfterRound();
-      new WaveDefeatedScreen(this.game);
       setTimeout(() => {
         this.spawnEnemies();
-      }, 6000);
+      }, 300);
       this.waveIsScheduled = true;
     }
   };

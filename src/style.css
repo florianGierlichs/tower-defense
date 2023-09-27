@@ -13,6 +13,7 @@ body {
   margin: 0;
   padding: 0;
   cursor: url("./assets/cursor/CursorBrown.png") 11 6, auto;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #loading-screen {
@@ -252,29 +253,18 @@ canvas {
 }
 
 #spawn-enemies-container {
-  text-align: center;
-  padding: 20px 40px;
-  position: absolute;
-  top: 20px;
-  left: 0;
-  background-image: url("./assets/titleContainer.png");
-  background-size: cover;
   color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+}
+
+#spawn-enemies-headline {
+  margin: 0 0 30px;
 }
 
 h2 {
   margin: 10px 0;
 }
 
-#spawn-enemies-bounty-gold {
-  margin: 0 0 20px 0;
-}
-
-#end-screen,
-#round-complete-container {
+#end-screen {
   position: absolute;
   top: 48%;
   left: 50%;
@@ -286,32 +276,36 @@ h2 {
   text-align: center;
 }
 
-#round-complete-container {
+#modal-pop-in-container {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("./assets/titleContainer.png");
+  background-size: cover;
   padding: 40px 100px;
+  color: white;
   text-align: left;
 }
 
-#end-screen-headline,
-#round-complete-headline {
+#modal-pop-in-container__close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-image: url("./assets/close.png");
+  background-size: cover;
+}
+
+#end-screen-headline {
   font-family: diablo-heavy;
   font-size: 40px;
   margin-bottom: 40px;
-}
-
-.round-complete-text span {
-  color: white;
-  font-size: 22px;
-}
-
-.round-complete-text-key {
-  display: inline-block;
-  width: 300px;
-}
-
-.round-complete-text-value {
-  width: 80px;
-  display: inline-block;
-  text-align: end;
 }
 
 #info-message {
