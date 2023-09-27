@@ -252,6 +252,10 @@ canvas {
   cursor: url("./assets/cursor/cursorFireMage.png") 38 48, auto;
 }
 
+.lightningMage {
+  cursor: url("./assets/cursor/cursorLightningMage.png") 38 48, auto;
+}
+
 #spawn-enemies-container {
   color: white;
 }
