@@ -37,6 +37,7 @@ body {
   background-image: url("./assets/titleContainer.png");
   background-size: cover;
   padding: 200px 400px;
+  cursor: url("./assets/cursor/CursorWhite.png") 11 6, auto;
 }
 
 #start-button {
@@ -306,6 +307,8 @@ h2 {
   padding: 100px 200px;
   color: white;
   text-align: center;
+  cursor: url("./assets/cursor/CursorWhite.png") 11 6, auto;
+  z-index: 99;
 }
 
 #modal-pop-in-container {

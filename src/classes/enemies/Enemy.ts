@@ -153,22 +153,28 @@ export class Enemy {
       this.dHeight
     );
 
+    const healthBarMultiplier = 0.6;
+    const healthBarHeight = 3;
+    const healthBarOffsetY = 5;
+    const healthBarOffsetX =
+      (this.dWidth - this.dWidth * healthBarMultiplier) / 2;
+
     // red
     dom.ctxGame.fillStyle = "#7d0e0e";
     dom.ctxGame.fillRect(
-      this.x - this.imageTranslateX,
-      this.y - this.imageTranslateY - 5,
-      this.dWidth,
-      3
+      this.x - this.imageTranslateX + healthBarOffsetX,
+      this.y - this.imageTranslateY - healthBarOffsetY,
+      this.dWidth * healthBarMultiplier,
+      healthBarHeight
     );
 
     // green
     dom.ctxGame.fillStyle = "#0a5a0a";
     dom.ctxGame.fillRect(
-      this.x - this.imageTranslateX,
-      this.y - this.imageTranslateY - 5,
-      this.dWidth * (this.currentHealth / this.health),
-      3
+      this.x - this.imageTranslateX + healthBarOffsetX,
+      this.y - this.imageTranslateY - healthBarOffsetY,
+      this.dWidth * (this.currentHealth / this.health) * healthBarMultiplier,
+      healthBarHeight
     );
   };
 
