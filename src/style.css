@@ -191,13 +191,29 @@ canvas {
 }
 
 .menu-item-stats {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
+  position: relative;
+  font-size: 18px;
+  font-weight: bold;
   border-bottom: 1px solid white;
   width: 80px;
   height: 80px;
+  background-repeat: no-repeat;
+  background-position: center 10px;
+}
+
+.menu-item-stats .menu-item-stats-content {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  top: 50px;
+}
+
+#menu-item-health {
+  background-image: url("./assets/menu/heart.png");
+}
+
+#menu-item-gold {
+  background-image: url("./assets/menu/gold.png");
 }
 
 .menu-item-container {
@@ -330,6 +346,11 @@ h2 {
   padding: 10px 30px;
   z-index: 2;
   width: max-content;
+}
+
+.tower-stats-text {
+  font-size: 16px;
+  font-weight: normal;
 }
 
 .tower-stats-text-key {

@@ -1,4 +1,4 @@
-import { dom } from "../main";
+import { MenuItemStats } from "./gui/MenuItemStats";
 
 export class PlayerHealth {
   private startHealth = 100;
@@ -6,12 +6,7 @@ export class PlayerHealth {
   private menuItem;
 
   constructor() {
-    this.menuItem = document.createElement("div");
-    this.menuItem.classList.add("menu-item", "menu-item-stats");
-    this.menuItem.id = "menu-item-health";
-    this.menuItem.innerHTML = `Health: <br>${this.currentHealth}`;
-
-    dom.menuContainer.addMenuItemPlayerHealth(this.menuItem);
+    this.menuItem = new MenuItemStats("health", this.currentHealth.toString());
   }
 
   getCurrentHealth = () => {
@@ -25,6 +20,6 @@ export class PlayerHealth {
   };
 
   private update = () => {
-    this.menuItem.innerHTML = `Health: <br>${this.currentHealth}`;
+    this.menuItem.update(this.currentHealth.toString());
   };
 }
