@@ -174,18 +174,25 @@ canvas {
   height: 512px;
   width: 160px;
   margin: 16px;
-  background-image: url("./assets/menuBackground.png");
-  background-size: cover;
   color: white;
-  /* todo add different color for cursor on hover */
+  cursor: url("./assets/cursor/CursorWhite.png") 11 6, auto;
 }
 
 #menu-game-stats-container {
   display: flex;
   flex-wrap: wrap;
+  background-image: url("./assets/menuBackground.png");
+  background-size: cover;
 }
 
 #menu-towers-container {
+  background-image: url("./assets/menuBackground.png");
+  background-size: cover;
+  margin-top: 15.5px;
+  height: calc(100% - 96px);
+}
+
+#menu-towers-container-inner {
   display: flex;
   flex-wrap: wrap;
 }
@@ -194,7 +201,6 @@ canvas {
   position: relative;
   font-size: 18px;
   font-weight: bold;
-  border-bottom: 1px solid white;
   width: 80px;
   height: 80px;
   background-repeat: no-repeat;
@@ -216,8 +222,11 @@ canvas {
   background-image: url("./assets/menu/gold.png");
 }
 
+#menu-item-gold:hover {
+  outline: 1px solid white;
+}
+
 .menu-item-container {
-  margin-bottom: 10px;
   position: relative;
 }
 
@@ -260,15 +269,18 @@ canvas {
 }
 
 /* class for cursor items */
-.arcaneArcher {
+.arcaneArcher,
+.arcaneArcher #menu-container {
   cursor: url("./assets/cursor/cursorArcaneArcher.png") 38 48, auto;
 }
 
-.fireMage {
+.fireMage,
+.fireMage #menu-container {
   cursor: url("./assets/cursor/cursorFireMage.png") 38 48, auto;
 }
 
-.lightningMage {
+.lightningMage,
+.lightningMage #menu-container {
   cursor: url("./assets/cursor/cursorLightningMage.png") 38 48, auto;
 }
 
@@ -306,6 +318,7 @@ h2 {
   padding: 40px 100px;
   color: white;
   text-align: left;
+  cursor: url("./assets/cursor/CursorWhite.png") 11 6, auto;
 }
 
 #modal-pop-in-container__close-button {

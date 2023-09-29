@@ -2,6 +2,7 @@ export class MenuContainer {
   menuBorder;
   menuContainer;
   menuTowersContainer;
+  menuTowersContainerInner;
   menuGameStatsContainer;
 
   constructor(container: HTMLElement) {
@@ -15,9 +16,13 @@ export class MenuContainer {
     this.menuTowersContainer = document.createElement("div");
     this.menuTowersContainer.id = "menu-towers-container";
 
+    this.menuTowersContainerInner = document.createElement("div");
+    this.menuTowersContainerInner.id = "menu-towers-container-inner";
+
     this.menuGameStatsContainer = document.createElement("div");
     this.menuGameStatsContainer.id = "menu-game-stats-container";
 
+    this.menuTowersContainer.appendChild(this.menuTowersContainerInner);
     this.menuBorder.appendChild(this.menuContainer);
     this.menuContainer.appendChild(this.menuGameStatsContainer);
     this.menuContainer.appendChild(this.menuTowersContainer);
@@ -34,7 +39,7 @@ export class MenuContainer {
   };
 
   addChildToMenuTowersContainer = (child: HTMLElement) => {
-    this.menuTowersContainer.appendChild(child);
+    this.menuTowersContainerInner.appendChild(child);
   };
 
   addMenuItemGold = (goldElement: HTMLElement) => {
