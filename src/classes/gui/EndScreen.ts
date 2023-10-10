@@ -10,7 +10,7 @@ export class EndScreen {
   playButton;
 
   wonText = "You won!";
-  lostText = "You lost all your lives!";
+  lostText = "You lost all your lifes!";
 
   scaleInTransform = [
     { transform: "translate(-50%, -50%) scale(0.5)" },
