@@ -3,10 +3,12 @@ import { Game } from "./Game";
 import { EndScreen } from "./gui/EndScreen";
 import { SpawnEnemiesInformation } from "./gui/SpawnEnemiesInformation";
 import { ModalPopIn } from "./gui/ModalPopIn";
+import { Countdown } from "./gui/Countdown";
 
 export class Round {
   game;
   waveIsScheduled = false;
+  modalLifeTime = 5000;
 
   constructor(game: Game) {
     this.game = game;
@@ -20,11 +22,14 @@ export class Round {
       this.waveIsScheduled = false;
       this.game.gold.resetDynamicGoldIncreasePerRound();
     };
-    const modalContent = new SpawnEnemiesInformation(
+    const spawnEnemyInfo = new SpawnEnemiesInformation(
       name,
       bountyGold
     ).getContainer();
-    new ModalPopIn(modalContent, startWave, 5000);
+    const countdown = new Countdown(this.modalLifeTime / 1000).getContainer();
+    spawnEnemyInfo.appendChild(countdown);
+
+    new ModalPopIn(spawnEnemyInfo, startWave, this.modalLifeTime);
   };
 
   update = () => {

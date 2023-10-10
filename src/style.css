@@ -296,6 +296,13 @@ canvas {
   margin: 0 0 30px;
 }
 
+#countdown {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
 h2 {
   margin: 10px 0;
 }
