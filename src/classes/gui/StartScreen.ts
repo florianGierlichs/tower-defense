@@ -17,7 +17,7 @@ export class StartScreen {
 
     this.startButton = document.createElement("button");
     this.startButton.id = "start-button";
-    this.startButton.classList.add("box-shadow");
+    this.startButton.classList.add("box-shadow", "play-button");
     this.startButton.innerHTML = "START";
     this.startButton.addEventListener("click", () => {
       this.removeStartScreen();

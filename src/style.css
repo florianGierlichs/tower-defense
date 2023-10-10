@@ -41,6 +41,10 @@ body {
 }
 
 #start-button {
+  font-size: 32px;
+}
+
+.play-button {
   padding: 12px 20px;
   font-family: diablo-heavy;
   background: linear-gradient(
@@ -52,10 +56,9 @@ body {
 
   border-radius: 10px;
   border: none;
-  font-size: 32px;
 }
 
-#start-button:hover {
+.play-button:hover {
   animation-duration: 0.85s;
   animation-name: start-button-effect;
   animation-iteration-count: infinite;
@@ -69,7 +72,7 @@ body {
   );
 }
 
-#start-button:active {
+.play-button:active {
   transform: scale(0.98);
 }
 
@@ -297,20 +300,6 @@ h2 {
   margin: 10px 0;
 }
 
-#end-screen {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-image: url("./assets/titleContainer.png");
-  background-size: cover;
-  padding: 100px 200px;
-  color: white;
-  text-align: center;
-  cursor: url("./assets/cursor/CursorWhite.png") 11 6, auto;
-  z-index: 99;
-}
-
 #modal-pop-in-container {
   position: absolute;
   top: 48%;
@@ -322,6 +311,7 @@ h2 {
   color: white;
   text-align: left;
   cursor: url("./assets/cursor/CursorWhite.png") 11 6, auto;
+  z-index: 99;
 }
 
 #modal-pop-in-container__close-button {
@@ -342,6 +332,15 @@ h2 {
   font-family: diablo-heavy;
   font-size: 40px;
   margin-bottom: 40px;
+}
+
+#end-screen-button-container {
+  text-align: center;
+  margin-top: 60px;
+}
+
+#play-again-button {
+  font-size: 24px;
 }
 
 #info-message {

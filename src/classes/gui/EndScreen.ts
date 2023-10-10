@@ -1,10 +1,13 @@
 import { Result, ResultType } from "../../utils/types";
+import { ModalPopIn } from "./ModalPopIn";
 
 export class EndScreen {
   endScreen;
   headline;
   resultElement;
   result;
+  buttonContainer;
+  playButton;
 
   wonText = "You won!";
   lostText = "You lost all your lives!";
@@ -19,8 +22,6 @@ export class EndScreen {
     this.result = result;
 
     this.endScreen = document.createElement("div");
-    this.endScreen.id = "end-screen";
-    this.endScreen.classList.add("box-shadow");
 
     this.headline = document.createElement("h2");
     this.headline.id = "end-screen-headline";
@@ -31,11 +32,21 @@ export class EndScreen {
     this.resultElement.innerHTML =
       this.result === ResultType.WON ? this.wonText : this.lostText;
 
+    this.buttonContainer = document.createElement("div");
+    this.buttonContainer.id = "end-screen-button-container";
+
+    this.playButton = document.createElement("button");
+    this.playButton.id = "play-again-button";
+    this.playButton.classList.add("box-shadow", "play-button");
+    this.playButton.innerText = "Play again";
+    this.playButton.addEventListener("click", () => location.reload());
+
+    this.buttonContainer.appendChild(this.playButton);
+
     this.endScreen.appendChild(this.headline);
     this.endScreen.appendChild(this.resultElement);
+    this.endScreen.appendChild(this.buttonContainer);
 
-    document.body.appendChild(this.endScreen);
-
-    this.endScreen.animate(this.scaleInTransform, this.scaleInTiming);
+    new ModalPopIn(this.endScreen, () => location.reload());
   }
 }

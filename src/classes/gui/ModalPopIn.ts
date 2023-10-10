@@ -17,7 +17,7 @@ export class ModalPopIn {
   ];
   scaleInTiming = 100;
 
-  constructor(lifeTime: number, children: HTMLElement, onClose: () => void) {
+  constructor(children: HTMLElement, onClose: () => void, lifeTime?: number) {
     this.lifeTime = lifeTime;
     this.onClose = onClose;
 
@@ -38,9 +38,11 @@ export class ModalPopIn {
     dom.body.body.appendChild(this.container);
     this.container.animate(this.scaleInTransformIn, this.scaleInTiming);
 
-    this.timeOutId = setTimeout(() => {
-      this.remove();
-    }, this.lifeTime);
+    if (lifeTime) {
+      this.timeOutId = setTimeout(() => {
+        this.remove();
+      }, this.lifeTime);
+    }
   }
 
   private remove = () => {

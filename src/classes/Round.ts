@@ -24,7 +24,7 @@ export class Round {
       name,
       bountyGold
     ).getContainer();
-    new ModalPopIn(5000, modalContent, startWave);
+    new ModalPopIn(modalContent, startWave, 5000);
   };
 
   update = () => {
