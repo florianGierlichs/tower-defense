@@ -4,6 +4,7 @@ import { Enemy } from "../enemies/Enemy";
 export class Demon extends Enemy {
   static readonly config: EnemyConfig = {
     id: "demon",
+    name: "Demon",
     health: 600,
     speed: 1,
     maxSlowPercentage: 0,

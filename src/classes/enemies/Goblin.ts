@@ -4,6 +4,7 @@ import { Enemy } from "./Enemy";
 export class Goblin extends Enemy {
   static readonly config: EnemyConfig = {
     id: "goblin",
+    name: "Greedy Goblin",
     health: 40,
     speed: 3,
     maxSlowPercentage: 50,

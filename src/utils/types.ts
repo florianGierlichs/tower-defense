@@ -35,6 +35,7 @@ export interface FrameConfigs {
 
 export interface EnemyConfig {
   id: EnemyId | BossId;
+  name: string;
   health: number;
   speed: number;
   maxSlowPercentage: number;

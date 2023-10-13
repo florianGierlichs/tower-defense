@@ -15,17 +15,13 @@ export class Round {
   }
 
   private spawnEnemies = () => {
-    const { currentEnemies, name, bountyGold } =
-      this.game.waves.createEnemyWave();
+    const { currentEnemies, config } = this.game.waves.createEnemyWave();
     const startWave = () => {
       this.game.enemies.setCurrentEnemies(currentEnemies);
       this.waveIsScheduled = false;
       this.game.gold.resetDynamicGoldIncreasePerRound();
     };
-    const spawnEnemyInfo = new SpawnEnemiesInformation(
-      name,
-      bountyGold
-    ).getContainer();
+    const spawnEnemyInfo = new SpawnEnemiesInformation(config).getContainer();
     const countdown = new Countdown(this.modalLifeTime / 1000).getContainer();
     spawnEnemyInfo.appendChild(countdown);
 

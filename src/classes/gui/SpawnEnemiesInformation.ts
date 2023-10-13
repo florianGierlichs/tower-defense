@@ -1,9 +1,9 @@
-import { EnemyNames } from "../Waves";
+import { EnemyConfig } from "../../utils/types";
 
 export class SpawnEnemiesInformation {
   private container;
 
-  constructor(enemyName: EnemyNames, bountyGold: number) {
+  constructor({ name, bountyGold }: EnemyConfig) {
     this.container = document.createElement("div");
     this.container.id = "spawn-enemies-container";
 
@@ -12,7 +12,7 @@ export class SpawnEnemiesInformation {
     headline.innerText = "Next Wave";
     this.container.appendChild(headline);
 
-    this.createInfo(enemyName);
+    this.createInfo(name);
     this.createInfo(`Bounty Gold: ${bountyGold.toString()}`);
   }
 

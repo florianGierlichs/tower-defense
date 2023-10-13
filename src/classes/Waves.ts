@@ -12,38 +12,33 @@ export class Waves {
   static readonly waves = [
     {
       id: SkeletonShield.config.id,
-      name: "Shielded Skeleton",
       className: SkeletonShield,
+      config: SkeletonShield.config,
       unitCount: 12,
-      bountyGold: SkeletonShield.config.bountyGold,
     },
     {
       id: Mushroom.config.id,
-      name: "Mad Mushroom",
       className: Mushroom,
+      config: Mushroom.config,
       unitCount: 12,
-      bountyGold: Mushroom.config.bountyGold,
     },
     {
       id: Goblin.config.id,
-      name: "Greedy Goblin",
       className: Goblin,
+      config: Goblin.config,
       unitCount: 12,
-      bountyGold: Goblin.config.bountyGold,
     },
     {
       id: FireWorm.config.id,
-      name: "Fire Worm",
       className: FireWorm,
+      config: FireWorm.config,
       unitCount: 12,
-      bountyGold: FireWorm.config.bountyGold,
     },
     {
       id: Demon.config.id,
-      name: "Demon",
       className: Demon,
+      config: Demon.config,
       unitCount: 1,
-      bountyGold: Demon.config.bountyGold,
     },
   ] as const;
 
@@ -70,8 +65,7 @@ export class Waves {
     if (this.waveIndex >= Waves.waves.length) {
       throw new Error("No more waves available");
     }
-    const { className, unitCount, name, bountyGold } =
-      Waves.waves[this.waveIndex];
+    const { className, unitCount, config } = Waves.waves[this.waveIndex];
 
     const currentEnemies = [];
 
@@ -85,9 +79,9 @@ export class Waves {
       this.wasLastWave = true;
     }
 
-    return { currentEnemies, name, bountyGold };
+    return { currentEnemies, config };
   };
 }
 
-const waveNames = Waves.waves.map((obj) => obj.name);
+const waveNames = Waves.waves.map((obj) => obj.config.name);
 export type EnemyNames = (typeof waveNames)[number];
