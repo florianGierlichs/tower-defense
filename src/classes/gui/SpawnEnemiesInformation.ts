@@ -10,19 +10,19 @@ export class SpawnEnemiesInformation {
     const headline = document.createElement("h2");
     headline.id = "spawn-enemies-headline";
     headline.innerText = "Next Wave";
-
-    const name = document.createElement("p");
-    name.innerText = enemyName;
-
-    const bounty = document.createElement("p");
-    bounty.innerText = `Bounty Gold: ${bountyGold.toString()}`;
-
     this.container.appendChild(headline);
-    this.container.appendChild(name);
-    this.container.appendChild(bounty);
+
+    this.createInfo(enemyName);
+    this.createInfo(`Bounty Gold: ${bountyGold.toString()}`);
   }
 
   getContainer = () => {
     return this.container;
+  };
+
+  private createInfo = (text: string) => {
+    const element = document.createElement("p");
+    element.innerText = text;
+    this.container.appendChild(element);
   };
 }
