@@ -70,6 +70,7 @@ export class FireMage extends Tower {
       this.tileMiddle.x,
       this.tileMiddle.y,
       FireMage.config.damage,
+      FireMage.config.frameConfig.attack.animationIterationCircleTime,
       this.projectileImg,
       this.currentTarget || this.targetFallbackCoordinates,
       this.animationDirection,

@@ -11,6 +11,7 @@ export class Flame {
   x;
   y;
   damage;
+  duration;
   image;
   sWidth = 74;
   sHeight = 44;
@@ -28,9 +29,8 @@ export class Flame {
   // frames
   frameIteration = 0;
   frames = 8;
-  animationIterationCircleTime = 800;
   sX: number | null = null;
-  frameIterationThrottleTime = this.animationIterationCircleTime / this.frames;
+  frameIterationThrottleTime;
   lastFrameIteration: number | null = null;
 
   constructor(
@@ -38,6 +38,7 @@ export class Flame {
     x: number,
     y: number,
     damage: number,
+    duration: number,
     img: HTMLImageElement,
     target: { x: number; y: number },
     animationDirection: AnimationDirection,
@@ -47,6 +48,8 @@ export class Flame {
     this.x = x;
     this.y = y;
     this.damage = damage;
+    this.duration = duration;
+    this.frameIterationThrottleTime = this.duration / this.frames;
     this.image = img;
     this.target = target;
     this.animationDirection = animationDirection;
