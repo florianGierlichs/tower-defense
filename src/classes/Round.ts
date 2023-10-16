@@ -8,7 +8,7 @@ import { Countdown } from "./gui/Countdown";
 export class Round {
   game;
   waveIsScheduled = false;
-  modalLifeTime = 5000;
+  modalLifeTime = 10000;
 
   constructor(game: Game) {
     this.game = game;

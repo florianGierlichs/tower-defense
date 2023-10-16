@@ -39,6 +39,7 @@ export interface EnemyConfig {
   health: number;
   speed: number;
   maxSlowPercentage: number;
+  special?: EnemySpecial;
   sWidth: number;
   sHeight: number;
   imageScale: number;
@@ -48,6 +49,10 @@ export interface EnemyConfig {
   };
   frameConfig: FrameConfigs;
   bountyGold: number;
+}
+
+export interface EnemySpecial {
+  description: string;
 }
 
 export interface TowerConfig {

@@ -296,6 +296,20 @@ canvas {
   margin: 0 0 30px;
 }
 
+.enemy-stats-text {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.enemy-stats-text ~ .enemy-stats-text {
+  margin-top: unset;
+}
+
+.enemy-stats-key {
+  min-width: 130px;
+}
+
 #countdown {
   font-size: 32px;
   font-weight: bold;

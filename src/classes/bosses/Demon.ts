@@ -8,6 +8,9 @@ export class Demon extends Enemy {
     health: 600,
     speed: 1,
     maxSlowPercentage: 0,
+    special: {
+      description: "Immune to slow effects",
+    },
     sWidth: 110,
     sHeight: 110,
     imageScale: 0.8,
