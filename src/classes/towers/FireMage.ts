@@ -10,9 +10,15 @@ import {
 import { Tower } from "./Tower";
 import { Flame } from "../projectiles/Flame";
 
+const attackAnimationIterationCircleTime = 800;
+
 export class FireMage extends Tower {
   static readonly config: TowerConfig = {
     id: TowerId.FIRE_MAGE,
+    name: "Fire Mage",
+    description: `Burns a small area for ${
+      attackAnimationIterationCircleTime / 1000
+    }sec. Slow enemies can get multiple damage ticks.`,
     range: 100,
     attackSpeed: 40,
     damage: 20,
@@ -33,7 +39,7 @@ export class FireMage extends Tower {
       },
       attack: {
         frames: 4,
-        animationIterationCircleTime: 800,
+        animationIterationCircleTime: attackAnimationIterationCircleTime,
         flipOffsetFrames: 0,
         animationStartRight: {
           sx: 0,

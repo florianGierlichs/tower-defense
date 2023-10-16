@@ -57,6 +57,8 @@ export interface EnemySpecial {
 
 export interface TowerConfig {
   id: TowerId;
+  name: string;
+  description: string;
   range: number;
   attackSpeed: number;
   damage: number;
@@ -90,12 +92,8 @@ export enum AnimationDirection {
 
 export interface MenuTower {
   readonly id: TowerId;
-  readonly name: string;
-  readonly range: number;
-  readonly blueprintId: BlueprintId;
+  readonly config: TowerConfig;
   readonly price: number;
-  readonly damage: number;
-  readonly attackSpeed: number;
 }
 
 export enum TowerId {

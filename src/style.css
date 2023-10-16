@@ -387,17 +387,12 @@ h2 {
 .tower-stats-text {
   font-size: 16px;
   font-weight: normal;
+  display: flex;
+  justify-content: space-between;
 }
 
-.tower-stats-text-key {
-  display: inline-block;
-  width: 120px;
-}
-
-.tower-stats-text-value {
-  width: 30px;
-  display: inline-block;
-  text-align: end;
+.tower-stats-description {
+  width: 180px;
 }
 
 .gold-info .tower-stats-text-key {

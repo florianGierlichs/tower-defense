@@ -14,6 +14,8 @@ export class TowerArcaneArcher extends Tower {
   // todo rename to ArcaneArcher
   static readonly config: TowerConfig = {
     id: TowerId.ARCANE_ARCHER,
+    name: "Arcane Archer",
+    description: "Shoots a magic arrow that deals damage to a single enemy.",
     range: 250,
     attackSpeed: 100,
     damage: 5,

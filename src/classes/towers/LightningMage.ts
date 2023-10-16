@@ -13,6 +13,9 @@ import { LightningBolt } from "../projectiles/LightningBolt";
 export class LightningMage extends Tower {
   static readonly config: TowerConfig = {
     id: TowerId.Lightning_MAGE,
+    name: "Lightning Mage",
+    description:
+      "Summons a lightning bolt to damage and slow enemies for 30% in an area.",
     range: 200,
     attackSpeed: 30,
     damage: 10,

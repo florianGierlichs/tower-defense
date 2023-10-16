@@ -61,7 +61,9 @@ export class TileGras extends Tile {
 
   private drawTowerBp = () => {
     if (this.showTowerBP !== null) {
-      const image = main.imageController.getImage(this.showTowerBP.blueprintId);
+      const image = main.imageController.getImage(
+        this.showTowerBP.config.bluePrint.id
+      );
       dom.ctxGame.drawImage(image, this.dX, this.dY);
 
       const tileMiddle = getTileMiddle({ x: this.x, y: this.y });
@@ -69,7 +71,7 @@ export class TileGras extends Tile {
       dom.ctxGame.arc(
         tileMiddle.x,
         tileMiddle.y,
-        this.showTowerBP.range,
+        this.showTowerBP.config.range,
         0,
         Math.PI * 2
       );
