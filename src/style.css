@@ -237,6 +237,9 @@ canvas {
 .menu-item-tower {
   width: 80px;
   height: 80px;
+  overflow: hidden;
+  position: relative;
+  outline: 0.5px solid black;
 }
 
 .menu-item-tower:hover {
@@ -247,20 +250,44 @@ canvas {
   scale: 0.98;
 }
 
+.menu-item-tower__inner {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
 /* ID for menu items */
 #arcaneArcher {
   background-image: url("./assets/menu/arcaneArcherMenu.png");
   background-size: cover;
-}
 
-#fireMage {
-  background-image: url("./assets/menu/fireMageMenu.png");
-  background-size: cover;
+  height: 95px;
+  width: 95px;
+  bottom: 0;
+  transform: translate(-40%, 0);
 }
 
 #lightningMage {
   background-image: url("./assets/menu/lightningMageMenu.png");
   background-size: cover;
+
+  height: 100px;
+  width: 100px;
+  bottom: 0;
+  transform: translate(-50%, 0);
+}
+
+#fireMage {
+  background-image: url("./assets/menu/fireMageMenu.png");
+  background-size: cover;
+
+  height: 75px;
+  width: 75px;
+  bottom: 0;
+  transform: translate(-50%, 0);
 }
 
 #toggle-tiles-info {

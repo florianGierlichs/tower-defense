@@ -6,6 +6,7 @@ export class MenuItemTower {
   tower;
   container;
   element;
+  innerElement;
   selectTowerCallback;
   showTowerStats = false;
   stats;
@@ -21,15 +22,17 @@ export class MenuItemTower {
     this.container.classList.add("menu-item-container");
 
     this.element = document.createElement("div");
-    this.element.id = tower.id;
-    // todo add inner element for image which can scale.
-    // for bigger images overflow hidden from this.element
     this.element.classList.add("menu-item-tower");
+
+    this.innerElement = document.createElement("div");
+    this.innerElement.classList.add("menu-item-tower__inner");
+    this.innerElement.id = tower.id;
 
     this.element.addEventListener("click", this.clickHandler);
     this.container.addEventListener("mouseover", this.showStats);
     this.container.addEventListener("mouseleave", this.removeStats);
 
+    this.element.appendChild(this.innerElement);
     this.container.appendChild(this.element);
     dom.menuContainer.addChildToMenuTowersContainer(this.container);
 
