@@ -19,7 +19,13 @@ export class LightningMage extends Tower {
     range: 200,
     attackSpeed: 30,
     damage: 10,
-    imageScale: 1,
+    sWidth: 64,
+    sHeight: 64,
+    imageScale: 1.2,
+    imageTranslateCorrection: {
+      x: 0,
+      y: -5,
+    },
     frameConfig: {
       idle: {
         frames: 8,

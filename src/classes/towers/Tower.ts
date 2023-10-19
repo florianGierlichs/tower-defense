@@ -10,6 +10,7 @@ import {
   TowerConfig,
   TowerState,
 } from "../../utils/types";
+import { getTranslatedCanvasDestination } from "../../utils/getTranslatedCanvasDestination";
 
 export class Tower {
   // initial values
@@ -21,12 +22,12 @@ export class Tower {
   attackSpeed; // attacks per minute
   attackSpeedThrottleTime;
   image;
-  sWidth = 64;
-  sHeight = this.sWidth;
-  dWidth = 64;
-  dHeight = this.dWidth;
-  dX;
-  dY;
+  sWidth;
+  sHeight;
+  dWidth;
+  dHeight;
+  imageTranslateX;
+  imageTranslateY;
   imgConfig;
   frameIteration = 0;
   frameIterationThrottleTime = 100;
@@ -70,9 +71,21 @@ export class Tower {
     this.cancelAttackAnimantionAllowed = config.cancelAttackAnimantionAllowed;
 
     this.image = main.imageController.getImage(config.id);
+    this.sWidth = config.sWidth;
+    this.sHeight = config.sHeight;
+    this.dWidth = config.imageScale * config.sWidth;
+    this.dHeight = config.imageScale * config.sHeight;
+    this.imageTranslateX = getTranslatedCanvasDestination({
+      imageScale: config.imageScale,
+      sourceSize: config.sWidth,
+      translateCorrection: config.imageTranslateCorrection.x,
+    });
+    this.imageTranslateY = getTranslatedCanvasDestination({
+      imageScale: config.imageScale,
+      sourceSize: config.sHeight,
+      translateCorrection: config.imageTranslateCorrection.y,
+    });
     this.imgConfig = config.frameConfig;
-    this.dX = x;
-    this.dY = y;
 
     this.setImageConfig();
 
@@ -159,9 +172,9 @@ export class Tower {
         this.sY,
         this.sWidth,
         this.sHeight,
-        this.dX,
-        this.dY,
-        this.dWidth, // TODO Add scale factor for individual towers
+        this.x + this.imageTranslateX,
+        this.y + this.imageTranslateY,
+        this.dWidth,
         this.dHeight
       );
     }

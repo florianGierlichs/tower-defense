@@ -19,7 +19,13 @@ export class TowerArcaneArcher extends Tower {
     range: 250,
     attackSpeed: 100,
     damage: 5,
-    imageScale: 0.8,
+    sWidth: 64,
+    sHeight: 64,
+    imageScale: 1.1,
+    imageTranslateCorrection: {
+      x: 0,
+      y: 5,
+    },
     frameConfig: {
       idle: {
         frames: 4,

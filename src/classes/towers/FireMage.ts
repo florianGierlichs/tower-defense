@@ -22,7 +22,13 @@ export class FireMage extends Tower {
     range: 100,
     attackSpeed: 40,
     damage: 20,
-    imageScale: 0.8,
+    sWidth: 64,
+    sHeight: 64,
+    imageScale: 1,
+    imageTranslateCorrection: {
+      x: 0,
+      y: 0,
+    },
     frameConfig: {
       idle: {
         frames: 4,

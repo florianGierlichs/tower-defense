@@ -3,6 +3,7 @@ import { Tile, TileCoords } from "./Tile";
 import { getRandomItemFromArray } from "../../utils/getRandomItemFromArray";
 import { getTileMiddle } from "../../utils/getTileMiddle";
 import { MenuTower } from "../../utils/types";
+import { getTranslatedCanvasDestination } from "../../utils/getTranslatedCanvasDestination";
 
 export class TileGras extends Tile {
   hasTower: boolean = false;
@@ -61,20 +62,29 @@ export class TileGras extends Tile {
 
   private drawTowerBp = () => {
     if (this.showTowerBP !== null) {
-      const image = main.imageController.getImage(
-        this.showTowerBP.config.bluePrint.id
+      const { config } = this.showTowerBP;
+      const image = main.imageController.getImage(config.bluePrint.id);
+      dom.ctxGame.drawImage(
+        image,
+        this.dX +
+          getTranslatedCanvasDestination({
+            imageScale: config.imageScale,
+            sourceSize: config.sWidth,
+            translateCorrection: config.imageTranslateCorrection.x,
+          }),
+        this.dY +
+          getTranslatedCanvasDestination({
+            imageScale: config.imageScale,
+            sourceSize: config.sHeight,
+            translateCorrection: config.imageTranslateCorrection.y,
+          }),
+        config.imageScale * config.sWidth,
+        config.imageScale * config.sHeight
       );
-      dom.ctxGame.drawImage(image, this.dX, this.dY);
 
       const tileMiddle = getTileMiddle({ x: this.x, y: this.y });
       dom.ctxGame.beginPath();
-      dom.ctxGame.arc(
-        tileMiddle.x,
-        tileMiddle.y,
-        this.showTowerBP.config.range,
-        0,
-        Math.PI * 2
-      );
+      dom.ctxGame.arc(tileMiddle.x, tileMiddle.y, config.range, 0, Math.PI * 2);
       dom.ctxGame.fillStyle = "rgba(225,225,225,0.1)";
       dom.ctxGame.fill();
     }

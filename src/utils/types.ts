@@ -62,7 +62,13 @@ export interface TowerConfig {
   range: number;
   attackSpeed: number;
   damage: number;
+  sWidth: number;
+  sHeight: number;
   imageScale: number;
+  imageTranslateCorrection: {
+    x: number;
+    y: number;
+  };
   frameConfig: FrameConfigs;
   cancelAttackAnimantionAllowed: boolean;
   projectile: {
