@@ -8,19 +8,19 @@ import {
 } from "../utils/types";
 import arcaneArcherImg from "../assets/tower/arcaneArcher.png";
 import arcaneArcherProjectileImg from "../assets/projectiles/arcaneArcherProjectile.png";
-import arcaneArcherBpImg from "../assets/menu/arcaneArcherMenu.png";
+import arcaneArcherBpImg from "../assets/towerBlueprint/arcaneArcherBp.png";
 import texturesImg from "../assets/textures.png";
 import skeletonShieldImg from "../assets/enemy/skeletonShield.png";
 import mushroomImg from "../assets/enemy/mushroom.png";
 import goblinImg from "../assets/enemy/goblin.png";
 import fireMageImg from "../assets/tower/fireMage.png";
 import fireMageProjectileImg from "../assets/projectiles/fireMageProjectile.png";
-import fireMageBpImg from "../assets/menu/fireMageMenu.png";
+import fireMageBpImg from "../assets/towerBlueprint/fireMageBp.png";
 import fireWorm from "../assets/enemy/fireWorm.png";
 import demon from "../assets/boss/demon.png";
 import lightningMageImg from "../assets/tower/lightningMage.png";
 import lightningMageProjectileImg from "../assets/projectiles/lightningMageProjectile.png";
-import lightningMageBpImg from "../assets/menu/lightningMageMenu.png";
+import lightningMageBpImg from "../assets/towerBlueprint/lightningMageBp.png";
 
 const texturesKey = "textures";
 
