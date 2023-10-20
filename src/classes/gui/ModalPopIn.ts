@@ -1,10 +1,18 @@
 import { dom } from "../../main";
 
+interface ModalPopInProps {
+  children: HTMLElement;
+  onTimeout: () => void;
+  onClose?: () => void;
+  lifeTime?: number;
+}
+
 export class ModalPopIn {
   container;
   closeButton;
   lifeTime;
   timeOutId;
+  onTimeout;
   onClose;
 
   scaleInTransformIn = [
@@ -17,8 +25,9 @@ export class ModalPopIn {
   ];
   scaleInTiming = 100;
 
-  constructor(children: HTMLElement, onClose: () => void, lifeTime?: number) {
+  constructor({ children, onTimeout, onClose, lifeTime }: ModalPopInProps) {
     this.lifeTime = lifeTime;
+    this.onTimeout = onTimeout;
     this.onClose = onClose;
 
     this.container = document.createElement("div");
@@ -30,6 +39,7 @@ export class ModalPopIn {
     this.closeButton.addEventListener("click", () => {
       clearTimeout(this.timeOutId);
       this.remove();
+      this.onClose ? this.onClose() : this.onTimeout();
     });
 
     this.container.appendChild(this.closeButton);
@@ -41,6 +51,7 @@ export class ModalPopIn {
     if (lifeTime) {
       this.timeOutId = setTimeout(() => {
         this.remove();
+        this.onTimeout();
       }, this.lifeTime);
     }
   }
@@ -50,6 +61,5 @@ export class ModalPopIn {
     setTimeout(() => {
       this.container.remove();
     }, this.scaleInTiming);
-    this.onClose();
   };
 }

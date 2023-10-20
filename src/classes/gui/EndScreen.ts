@@ -47,6 +47,9 @@ export class EndScreen {
     this.endScreen.appendChild(this.resultElement);
     this.endScreen.appendChild(this.buttonContainer);
 
-    new ModalPopIn(this.endScreen, () => location.reload());
+    new ModalPopIn({
+      children: this.endScreen,
+      onTimeout: () => location.reload(),
+    });
   }
 }

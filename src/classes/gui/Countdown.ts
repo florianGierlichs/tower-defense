@@ -16,6 +16,10 @@ export class Countdown {
     return this.countdownElement;
   };
 
+  getCountdownTime = () => {
+    return this.countdownTime;
+  };
+
   private startCountdown = () => {
     const countdownInterval = setInterval(() => {
       this.countdownTime--;

@@ -4,6 +4,7 @@ import { EndScreen } from "./gui/EndScreen";
 import { SpawnEnemiesInformation } from "./gui/SpawnEnemiesInformation";
 import { ModalPopIn } from "./gui/ModalPopIn";
 import { Countdown } from "./gui/Countdown";
+import { Toast } from "./gui/Toast";
 
 export class Round {
   game;
@@ -22,10 +23,26 @@ export class Round {
       this.game.gold.resetDynamicGoldIncreasePerRound();
     };
     const spawnEnemyInfo = new SpawnEnemiesInformation(config).getContainer();
-    const countdown = new Countdown(this.modalLifeTime / 1000).getContainer();
-    spawnEnemyInfo.appendChild(countdown);
+    const countdown = new Countdown(this.modalLifeTime / 1000);
+    spawnEnemyInfo.appendChild(countdown.getContainer());
 
-    new ModalPopIn(spawnEnemyInfo, startWave, this.modalLifeTime);
+    const handleManualClose = () => {
+      const toast = new Toast({ children: countdown.getContainer() });
+      const interval = setInterval(() => {
+        if (countdown.getCountdownTime() === 0) {
+          toast.close();
+          startWave();
+          clearInterval(interval);
+        }
+      }, 100);
+    };
+
+    new ModalPopIn({
+      children: spawnEnemyInfo,
+      onTimeout: startWave,
+      onClose: handleManualClose,
+      lifeTime: this.modalLifeTime,
+    });
   };
 
   update = () => {

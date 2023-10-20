@@ -425,3 +425,21 @@ h2 {
 .gold-info .tower-stats-text-key {
   width: 200px;
 }
+
+#toast {
+  text-align: center;
+  padding: 20px 40px;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  background-image: url("./assets/titleContainer.png");
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#toast #countdown {
+  margin: 0;
+}
