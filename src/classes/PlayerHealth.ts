@@ -13,7 +13,7 @@ export class PlayerHealth {
     return this.currentHealth;
   };
 
-  reduceHealth = (amount: number = 10) => {
+  reduceHealth = (amount: number = 5) => {
     // todo maybe different enemies can reduce different amounts of health
     this.currentHealth -= amount;
     this.update();
