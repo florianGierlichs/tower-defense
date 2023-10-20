@@ -10,8 +10,7 @@ import {
 import { Projectile } from "../projectiles/Projectile";
 import { Tower } from "./Tower";
 
-export class TowerArcaneArcher extends Tower {
-  // todo rename to ArcaneArcher
+export class ArcaneArcher extends Tower {
   static readonly config: TowerConfig = {
     id: TowerId.ARCANE_ARCHER,
     name: "Arcane Archer",
@@ -66,7 +65,7 @@ export class TowerArcaneArcher extends Tower {
   };
 
   constructor(id: string, x: number, y: number) {
-    super(id, x, y, TowerArcaneArcher.config);
+    super(id, x, y, ArcaneArcher.config);
   }
 
   getProjectile = () => {
@@ -78,7 +77,7 @@ export class TowerArcaneArcher extends Tower {
       shortUUID.generate(),
       this.tileMiddle.x,
       this.tileMiddle.y,
-      TowerArcaneArcher.config.damage,
+      ArcaneArcher.config.damage,
       {
         img: this.projectileImg,
         width: this.projectileWidth,

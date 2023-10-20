@@ -2,14 +2,14 @@ import { dom } from "../../main";
 import { MenuTower } from "../../utils/types";
 import { MenuItemTower } from "./MenuItemTower";
 import { FireMage } from "../towers/FireMage";
-import { TowerArcaneArcher } from "../towers/TowerArcaneArcher";
+import { ArcaneArcher } from "../towers/ArcaneArcher";
 import { LightningMage } from "../towers/LightningMage";
 
 export class Menu {
   static readonly towers: readonly MenuTower[] = [
     {
-      id: TowerArcaneArcher.config.id,
-      config: TowerArcaneArcher.config,
+      id: ArcaneArcher.config.id,
+      config: ArcaneArcher.config,
       price: 40,
     },
     {

@@ -8,7 +8,7 @@ import { LightningBolt } from "../classes/projectiles/LightningBolt";
 import { Projectile } from "../classes/projectiles/Projectile";
 import { FireMage } from "../classes/towers/FireMage";
 import { LightningMage } from "../classes/towers/LightningMage";
-import { TowerArcaneArcher } from "../classes/towers/TowerArcaneArcher";
+import { ArcaneArcher } from "../classes/towers/ArcaneArcher";
 
 export interface Coordinate {
   x: number;
@@ -122,7 +122,7 @@ export enum BlueprintId {
 
 export type ProjectileInstance = Projectile | Flame | LightningBolt;
 
-export type TowerInstance = TowerArcaneArcher | FireMage | LightningMage;
+export type TowerInstance = ArcaneArcher | FireMage | LightningMage;
 
 export type EnemyInstance = SkeletonShield | Mushroom | Goblin | FireWorm;
 
