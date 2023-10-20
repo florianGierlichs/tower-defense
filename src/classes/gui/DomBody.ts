@@ -35,7 +35,7 @@ export class DomBody {
     const tile = getTileForHover(event);
     if (selectedTower !== null) {
       if (
-        (tile instanceof TileGras && tile.showTowerBP === null) ||
+        (tile instanceof TileGras && tile.towerBp === null) ||
         tile === null
       ) {
         this.addTowerMouseCursor(selectedTower);

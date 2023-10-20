@@ -59,16 +59,16 @@ export class CanvasGame {
     if (this.previousTileForHover !== tile) {
       if (this.previousTileForHover instanceof TileGras) {
         // Remove the tower blue print from the previous tile
-        this.previousTileForHover.setShowTowerBp(null);
+        this.previousTileForHover.setTowerBp(null);
       }
       if (tile instanceof TileGras && !tile.hasTower) {
         // show the tower blue print on the current tile and remove the mouse cursor image
-        tile.setShowTowerBp(selectedTower);
+        tile.setTowerBp(selectedTower);
         dom.body.removeAllClassesFromBody();
         tile.update();
       }
       if (
-        (tile instanceof TileGras && !tile.showTowerBP) ||
+        (tile instanceof TileGras && !tile.towerBp) ||
         tile instanceof TilePath
       ) {
         // add the mouse cursor image
@@ -80,7 +80,7 @@ export class CanvasGame {
 
   private resetPreviousTileForHover = () => {
     if (this.previousTileForHover instanceof TileGras) {
-      this.previousTileForHover.setShowTowerBp(null);
+      this.previousTileForHover.setTowerBp(null);
       this.previousTileForHover.updateBG();
     }
     this.previousTileForHover = null;
@@ -101,7 +101,7 @@ export class CanvasGame {
       game.towers.createTower(tile.x, tile.y, selectedTower);
       game.gold.reduceGold(selectedTower.price);
       tile.setHasTower();
-      tile.setShowTowerBp(null);
+      tile.setTowerBp(null);
       tile.updateBG();
 
       game.menu.setSelectedTower(null);

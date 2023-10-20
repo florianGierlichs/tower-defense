@@ -7,7 +7,7 @@ import { getTranslatedCanvasDestination } from "../../utils/getTranslatedCanvasD
 
 export class TileGras extends Tile {
   hasTower: boolean = false;
-  showTowerBP: MenuTower | null = null; // todo change name to just towerBp
+  towerBp: MenuTower | null = null;
 
   image: HTMLImageElement;
   sX: number;
@@ -56,13 +56,13 @@ export class TileGras extends Tile {
 
   setHasTower = () => (this.hasTower = true);
 
-  setShowTowerBp = (tower: MenuTower | null) => {
-    this.showTowerBP = tower;
+  setTowerBp = (tower: MenuTower | null) => {
+    this.towerBp = tower;
   };
 
   private drawTowerBp = () => {
-    if (this.showTowerBP !== null) {
-      const { config } = this.showTowerBP;
+    if (this.towerBp !== null) {
+      const { config } = this.towerBp;
       const image = main.imageController.getImage(config.bluePrint.id);
       dom.ctxGame.drawImage(
         image,
@@ -95,7 +95,7 @@ export class TileGras extends Tile {
   };
 
   update = () => {
-    if (this.showTowerBP !== null) {
+    if (this.towerBp !== null) {
       this.drawTowerBp();
     }
   };

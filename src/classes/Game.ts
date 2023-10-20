@@ -41,7 +41,7 @@ export class Game {
 
   resetEventListeners = () => {
     tiles.tileGras.forEach((tile) => {
-      tile.setShowTowerBp(null);
+      tile.setTowerBp(null);
       tile.updateBG();
     });
     this.towers.hideTowerRange();
