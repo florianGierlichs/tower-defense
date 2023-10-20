@@ -42,22 +42,7 @@ export class Waves {
     },
   ] as const;
 
-  static readonly waveStartingPositions = [
-    // TODO find dynamic way to get starting positions
-    // maybe use unitCount and individual "distance" (would be new) property to define x coordinate
-    { x: 60, y: 160 },
-    { x: 0, y: 160 },
-    { x: -60, y: 160 },
-    { x: -120, y: 160 },
-    { x: -180, y: 160 },
-    { x: -240, y: 160 },
-    { x: -300, y: 160 },
-    { x: -360, y: 160 },
-    { x: -420, y: 160 },
-    { x: -480, y: 160 },
-    { x: -540, y: 160 },
-    { x: -600, y: 160 },
-  ] as const;
+  static readonly startingPosition = { x: -30, y: 160 };
 
   constructor() {}
 
@@ -69,9 +54,16 @@ export class Waves {
 
     const currentEnemies = [];
 
+    const enemyDistance = 60;
+
     for (let i = 0; i < unitCount; i++) {
-      const { x, y } = Waves.waveStartingPositions[i];
-      currentEnemies.push(new className(shortUUID.generate(), x, y));
+      const { x, y } = Waves.startingPosition;
+
+      const currentStartingPosition = x - i * enemyDistance;
+
+      currentEnemies.push(
+        new className(shortUUID.generate(), currentStartingPosition, y)
+      );
     }
     this.waveIndex++;
 
