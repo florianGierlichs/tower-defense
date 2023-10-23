@@ -9,6 +9,7 @@ import { Projectile } from "../classes/projectiles/Projectile";
 import { FireMage } from "../classes/towers/FireMage";
 import { LightningMage } from "../classes/towers/LightningMage";
 import { ArcaneArcher } from "../classes/towers/ArcaneArcher";
+import { SkeletonWarrior } from "../classes/enemies/SkeletonWarrior";
 
 export interface Coordinate {
   x: number;
@@ -124,11 +125,21 @@ export type ProjectileInstance = Projectile | Flame | LightningBolt;
 
 export type TowerInstance = ArcaneArcher | FireMage | LightningMage;
 
-export type EnemyInstance = SkeletonShield | Mushroom | Goblin | FireWorm;
+export type EnemyInstance =
+  | SkeletonShield
+  | Mushroom
+  | Goblin
+  | FireWorm
+  | SkeletonWarrior;
 
 export type BossInstance = Demon;
 
-export type EnemyId = "skeletonShield" | "mushroom" | "goblin" | "fireWorm";
+export type EnemyId =
+  | "skeletonShield"
+  | "mushroom"
+  | "goblin"
+  | "fireWorm"
+  | "skeletonWarrior";
 
 export type BossId = "demon";
 

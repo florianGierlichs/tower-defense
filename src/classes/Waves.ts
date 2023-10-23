@@ -4,6 +4,7 @@ import { Mushroom } from "./enemies/Mushroom";
 import { Goblin } from "./enemies/Goblin";
 import { FireWorm } from "./enemies/FireWorm";
 import { Demon } from "./bosses/Demon";
+import { SkeletonWarrior } from "./enemies/SkeletonWarrior";
 
 export class Waves {
   waveIndex = 0;
@@ -39,6 +40,12 @@ export class Waves {
       className: Demon,
       config: Demon.config,
       unitCount: 1,
+    },
+    {
+      id: SkeletonWarrior.config.id,
+      className: SkeletonWarrior,
+      config: SkeletonWarrior.config,
+      unitCount: 22,
     },
   ] as const;
 
