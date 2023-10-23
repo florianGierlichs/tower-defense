@@ -34,6 +34,7 @@
 - https://cainos.itch.io/pixel-art-top-down-basic
 - https://luizmelo.itch.io/monsters-creatures-fantasy
 - https://creativekind.itch.io/
+- https://jesse-m.itch.io/
 
 #### Extend Menu
 
