@@ -11,6 +11,7 @@ import terrorWolf from "../../assets/enemy/terrorWolf.png";
 import bloodyBat from "../../assets/enemy/blooyBat.png";
 import evilWitch from "../../assets/enemy/evilWitch.png";
 import fireWorm from "../../assets/enemy/fireWorm.png";
+import skeletonArcher from "../../assets/enemy/skeletonArcher.png";
 
 // Boss
 import demon from "../../assets/boss/demon.png";
@@ -30,6 +31,7 @@ export class EnemyAssets {
       bloodyBat: await loadImage(bloodyBat),
       evilWitch: await loadImage(evilWitch),
       fireWorm: await loadImage(fireWorm),
+      skeletonArcher: await loadImage(skeletonArcher),
 
       // Boss
       demon: await loadImage(demon),

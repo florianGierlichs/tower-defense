@@ -14,6 +14,7 @@ import { ChainedGolem } from "../classes/enemies/ChainedGolem";
 import { TerrorWolf } from "../classes/enemies/TerrorWolf";
 import { BloodyBat } from "../classes/enemies/BloodyBat";
 import { EvilWitch } from "../classes/enemies/EvilWitch";
+import { SkeletonArcher } from "../classes/enemies/SkeletonArcher";
 
 export interface Coordinate {
   x: number;
@@ -138,7 +139,8 @@ export type EnemyInstance =
   | ChainedGolem
   | TerrorWolf
   | BloodyBat
-  | EvilWitch;
+  | EvilWitch
+  | SkeletonArcher;
 
 export type BossInstance = Demon;
 
@@ -151,7 +153,8 @@ export type EnemyId =
   | "chainedGolem"
   | "terrorWolf"
   | "bloodyBat"
-  | "evilWitch";
+  | "evilWitch"
+  | "skeletonArcher";
 
 export type BossId = "demon";
 
