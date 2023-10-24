@@ -17,15 +17,15 @@ export class TerrorWolf extends Enemy {
     },
     frameConfig: {
       move: {
-        frames: 7,
-        animationIterationCircleTime: 800,
+        frames: 8,
+        animationIterationCircleTime: 500,
         flipOffsetFrames: 0,
         animationStartRight: {
           sx: 0,
           sy: 0,
         },
         animationStartLeft: {
-          sx: 384,
+          sx: 448,
           sy: 64,
         },
       },
