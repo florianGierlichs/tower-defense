@@ -9,7 +9,7 @@ import { Projectile } from "../classes/projectiles/Projectile";
 import { FireMage } from "../classes/towers/FireMage";
 import { LightningMage } from "../classes/towers/LightningMage";
 import { ArcaneArcher } from "../classes/towers/ArcaneArcher";
-import { SkeletonWarrior } from "../classes/enemies/SkeletonWarrior";
+import { SkeletonGuard } from "../classes/enemies/SkeletonGuard";
 import { ChainedGolem } from "../classes/enemies/ChainedGolem";
 import { TerrorWolf } from "../classes/enemies/TerrorWolf";
 import { BloodyBat } from "../classes/enemies/BloodyBat";
@@ -134,7 +134,7 @@ export type EnemyInstance =
   | Mushroom
   | Goblin
   | FireWorm
-  | SkeletonWarrior
+  | SkeletonGuard
   | ChainedGolem
   | TerrorWolf
   | BloodyBat
@@ -147,7 +147,7 @@ export type EnemyId =
   | "mushroom"
   | "goblin"
   | "fireWorm"
-  | "skeletonWarrior"
+  | "skeletonGuard"
   | "chainedGolem"
   | "terrorWolf"
   | "bloodyBat"

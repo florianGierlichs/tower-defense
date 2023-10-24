@@ -13,7 +13,7 @@ import texturesImg from "../assets/textures.png";
 import skeletonShieldImg from "../assets/enemy/skeletonShield.png";
 import mushroomImg from "../assets/enemy/mushroom.png";
 import goblinImg from "../assets/enemy/goblin.png";
-import skeletonWarrior from "../assets/enemy/SkeletonWarrior.png";
+import skeletonGuard from "../assets/enemy/skeletonGuard.png";
 import fireMageImg from "../assets/tower/fireMage.png";
 import fireMageProjectileImg from "../assets/projectiles/fireMageProjectile.png";
 import fireMageBpImg from "../assets/towerBlueprint/fireMageBp.png";
@@ -51,7 +51,7 @@ export class ImageController {
   mushroom: HTMLImageElement | null = null;
   goblin: HTMLImageElement | null = null;
   fireWorm: HTMLImageElement | null = null;
-  skeletonWarrior: HTMLImageElement | null = null;
+  skeletonGuard: HTMLImageElement | null = null;
   chainedGolem: HTMLImageElement | null = null;
   terrorWolf: HTMLImageElement | null = null;
   bloodyBat: HTMLImageElement | null = null;
@@ -81,7 +81,7 @@ export class ImageController {
     this.mushroom = await loadImage(mushroomImg);
     this.goblin = await loadImage(goblinImg);
     this.fireWorm = await loadImage(fireWorm);
-    this.skeletonWarrior = await loadImage(skeletonWarrior);
+    this.skeletonGuard = await loadImage(skeletonGuard);
     this.chainedGolem = await loadImage(chainedGolem);
     this.terrorWolf = await loadImage(terrorWolf);
     this.bloodyBat = await loadImage(bloodyBat);

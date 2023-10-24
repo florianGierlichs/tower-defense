@@ -1,10 +1,10 @@
 import { EnemyConfig } from "../../utils/types";
 import { Enemy } from "./Enemy";
 
-export class SkeletonWarrior extends Enemy {
+export class SkeletonGuard extends Enemy {
   static readonly config: EnemyConfig = {
-    id: "skeletonWarrior",
-    name: "Skeleton Warrior",
+    id: "skeletonGuard",
+    name: "Skeleton Guard",
     health: 100,
     speed: 2,
     maxSlowPercentage: 50,
@@ -34,6 +34,6 @@ export class SkeletonWarrior extends Enemy {
   };
 
   constructor(id: string, x: number, y: number) {
-    super(id, x, y, SkeletonWarrior.config);
+    super(id, x, y, SkeletonGuard.config);
   }
 }
