@@ -21,6 +21,7 @@ import fireWorm from "../assets/enemy/fireWorm.png";
 import chainedGolem from "../assets/enemy/chainedGolem.png";
 import terrorWolf from "../assets/enemy/terrorWolf.png";
 import bloodyBat from "../assets/enemy/blooyBat.png";
+import evilWitch from "../assets/enemy/evilWitch.png";
 import demon from "../assets/boss/demon.png";
 import lightningMageImg from "../assets/tower/lightningMage.png";
 import lightningMageProjectileImg from "../assets/projectiles/lightningMageProjectile.png";
@@ -54,6 +55,7 @@ export class ImageController {
   chainedGolem: HTMLImageElement | null = null;
   terrorWolf: HTMLImageElement | null = null;
   bloodyBat: HTMLImageElement | null = null;
+  evilWitch: HTMLImageElement | null = null;
 
   // boss
   demon: HTMLImageElement | null = null;
@@ -83,6 +85,7 @@ export class ImageController {
     this.chainedGolem = await loadImage(chainedGolem);
     this.terrorWolf = await loadImage(terrorWolf);
     this.bloodyBat = await loadImage(bloodyBat);
+    this.evilWitch = await loadImage(evilWitch);
 
     // boss
     this.demon = await loadImage(demon);
