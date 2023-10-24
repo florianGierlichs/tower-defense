@@ -5,6 +5,7 @@ import { Goblin } from "./enemies/Goblin";
 import { FireWorm } from "./enemies/FireWorm";
 import { Demon } from "./bosses/Demon";
 import { SkeletonWarrior } from "./enemies/SkeletonWarrior";
+import { ChainedGolem } from "./enemies/ChainedGolem";
 
 export class Waves {
   waveIndex = 0;
@@ -46,6 +47,12 @@ export class Waves {
       className: SkeletonWarrior,
       config: SkeletonWarrior.config,
       unitCount: 22,
+    },
+    {
+      id: ChainedGolem.config.id,
+      className: ChainedGolem,
+      config: ChainedGolem.config,
+      unitCount: 12,
     },
   ] as const;
 

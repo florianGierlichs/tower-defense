@@ -18,10 +18,12 @@ import fireMageImg from "../assets/tower/fireMage.png";
 import fireMageProjectileImg from "../assets/projectiles/fireMageProjectile.png";
 import fireMageBpImg from "../assets/towerBlueprint/fireMageBp.png";
 import fireWorm from "../assets/enemy/fireWorm.png";
+import chainedGolem from "../assets/enemy/chainedGolem.png";
 import demon from "../assets/boss/demon.png";
 import lightningMageImg from "../assets/tower/lightningMage.png";
 import lightningMageProjectileImg from "../assets/projectiles/lightningMageProjectile.png";
 import lightningMageBpImg from "../assets/towerBlueprint/lightningMageBp.png";
+// TODO add separat tower/enemy import files
 
 const texturesKey = "textures";
 
@@ -47,6 +49,7 @@ export class ImageController {
   goblin: HTMLImageElement | null = null;
   fireWorm: HTMLImageElement | null = null;
   skeletonWarrior: HTMLImageElement | null = null;
+  chainedGolem: HTMLImageElement | null = null;
 
   // boss
   demon: HTMLImageElement | null = null;
@@ -73,6 +76,7 @@ export class ImageController {
     this.goblin = await loadImage(goblinImg);
     this.fireWorm = await loadImage(fireWorm);
     this.skeletonWarrior = await loadImage(skeletonWarrior);
+    this.chainedGolem = await loadImage(chainedGolem);
 
     // boss
     this.demon = await loadImage(demon);

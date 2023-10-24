@@ -10,6 +10,7 @@ import { FireMage } from "../classes/towers/FireMage";
 import { LightningMage } from "../classes/towers/LightningMage";
 import { ArcaneArcher } from "../classes/towers/ArcaneArcher";
 import { SkeletonWarrior } from "../classes/enemies/SkeletonWarrior";
+import { ChainedGolem } from "../classes/enemies/ChainedGolem";
 
 export interface Coordinate {
   x: number;
@@ -130,7 +131,8 @@ export type EnemyInstance =
   | Mushroom
   | Goblin
   | FireWorm
-  | SkeletonWarrior;
+  | SkeletonWarrior
+  | ChainedGolem;
 
 export type BossInstance = Demon;
 
@@ -139,7 +141,8 @@ export type EnemyId =
   | "mushroom"
   | "goblin"
   | "fireWorm"
-  | "skeletonWarrior";
+  | "skeletonWarrior"
+  | "chainedGolem";
 
 export type BossId = "demon";
 
