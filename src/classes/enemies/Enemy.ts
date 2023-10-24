@@ -52,7 +52,7 @@ export class Enemy {
     this.id = id;
     this.x = x;
     this.y = y;
-    this.image = main.imageController.getImage(config.id);
+    this.image = main.imageController.getEnemyImage(config.id);
     this.sWidth = config.sWidth;
     this.sHeight = config.sHeight;
     this.dWidth = config.imageScale * config.sWidth;

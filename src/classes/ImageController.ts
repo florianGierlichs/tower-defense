@@ -10,23 +10,13 @@ import arcaneArcherImg from "../assets/tower/arcaneArcher.png";
 import arcaneArcherProjectileImg from "../assets/projectiles/arcaneArcherProjectile.png";
 import arcaneArcherBpImg from "../assets/towerBlueprint/arcaneArcherBp.png";
 import texturesImg from "../assets/textures.png";
-import skeletonShieldImg from "../assets/enemy/skeletonShield.png";
-import mushroomImg from "../assets/enemy/mushroom.png";
-import goblinImg from "../assets/enemy/goblin.png";
-import skeletonGuard from "../assets/enemy/skeletonGuard.png";
 import fireMageImg from "../assets/tower/fireMage.png";
 import fireMageProjectileImg from "../assets/projectiles/fireMageProjectile.png";
 import fireMageBpImg from "../assets/towerBlueprint/fireMageBp.png";
-import fireWorm from "../assets/enemy/fireWorm.png";
-import chainedGolem from "../assets/enemy/chainedGolem.png";
-import terrorWolf from "../assets/enemy/terrorWolf.png";
-import bloodyBat from "../assets/enemy/blooyBat.png";
-import evilWitch from "../assets/enemy/evilWitch.png";
-import demon from "../assets/boss/demon.png";
 import lightningMageImg from "../assets/tower/lightningMage.png";
 import lightningMageProjectileImg from "../assets/projectiles/lightningMageProjectile.png";
 import lightningMageBpImg from "../assets/towerBlueprint/lightningMageBp.png";
-// TODO add separat tower/enemy import files
+import { EnemyAssets } from "./enemies/EnemyAssets";
 
 const texturesKey = "textures";
 
@@ -47,18 +37,7 @@ export class ImageController {
   lightningMageBp: HTMLImageElement | null = null;
 
   // enemy
-  skeletonShield: HTMLImageElement | null = null;
-  mushroom: HTMLImageElement | null = null;
-  goblin: HTMLImageElement | null = null;
-  fireWorm: HTMLImageElement | null = null;
-  skeletonGuard: HTMLImageElement | null = null;
-  chainedGolem: HTMLImageElement | null = null;
-  terrorWolf: HTMLImageElement | null = null;
-  bloodyBat: HTMLImageElement | null = null;
-  evilWitch: HTMLImageElement | null = null;
-
-  // boss
-  demon: HTMLImageElement | null = null;
+  enemyAssets: Record<EnemyId | BossId, HTMLImageElement> | null = null;
 
   loadImages = async () => {
     this.textures = await loadImage(texturesImg);
@@ -77,34 +56,25 @@ export class ImageController {
     this.lightningMageBp = await loadImage(lightningMageBpImg);
 
     // enemy
-    this.skeletonShield = await loadImage(skeletonShieldImg);
-    this.mushroom = await loadImage(mushroomImg);
-    this.goblin = await loadImage(goblinImg);
-    this.fireWorm = await loadImage(fireWorm);
-    this.skeletonGuard = await loadImage(skeletonGuard);
-    this.chainedGolem = await loadImage(chainedGolem);
-    this.terrorWolf = await loadImage(terrorWolf);
-    this.bloodyBat = await loadImage(bloodyBat);
-    this.evilWitch = await loadImage(evilWitch);
-
-    // boss
-    this.demon = await loadImage(demon);
+    this.enemyAssets = await new EnemyAssets().getAssets();
   };
 
   getImage = (
-    key:
-      | typeof texturesKey
-      | TowerId
-      | ProjectileId
-      | BlueprintId
-      | EnemyId
-      | BossId
+    key: typeof texturesKey | TowerId | ProjectileId | BlueprintId
   ): HTMLImageElement => {
     const image = this[key];
     if (image === null) {
       throw new Error("Images not loaded yet");
     }
 
+    return image;
+  };
+
+  getEnemyImage = (id: EnemyId | BossId) => {
+    if (this.enemyAssets === null) {
+      throw new Error("Enemy assets not loaded yet");
+    }
+    const image = this.enemyAssets[id];
     return image;
   };
 }
