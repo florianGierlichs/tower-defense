@@ -65,8 +65,11 @@ export class LightningMage extends Tower {
     },
   };
 
+  id;
+
   constructor(id: string, x: number, y: number) {
     super(id, x, y, LightningMage.config);
+    this.id = id;
   }
 
   getProjectile = () => {

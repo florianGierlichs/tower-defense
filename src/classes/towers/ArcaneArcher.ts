@@ -64,8 +64,11 @@ export class ArcaneArcher extends Tower {
     },
   };
 
+  id;
+
   constructor(id: string, x: number, y: number) {
     super(id, x, y, ArcaneArcher.config);
+    this.id = id;
   }
 
   getProjectile = () => {
@@ -84,7 +87,8 @@ export class ArcaneArcher extends Tower {
         height: this.projectileHeight,
       },
       this.currentTarget,
-      this.removeProjectile
+      this.removeProjectile,
+      this.id
     );
   };
 

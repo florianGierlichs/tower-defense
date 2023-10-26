@@ -9,6 +9,7 @@ export class Aoe {
   y;
   radius;
   damage;
+  towerSourceId;
 
   enemiesInsideArea: Enemy[] = [];
 
@@ -17,13 +18,15 @@ export class Aoe {
     x: number,
     y: number,
     radius: number,
-    damage: number
+    damage: number,
+    towerSourceId: string
   ) {
     this.id = id;
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.damage = damage;
+    this.towerSourceId = towerSourceId;
 
     this.setEnemiesInsideArea();
 
@@ -42,7 +45,7 @@ export class Aoe {
 
   private damageEnemiesInsideArea = () => {
     this.enemiesInsideArea.forEach((enemy) => {
-      enemy.reduceHealth(this.damage);
+      enemy.reduceHealth(this.damage, this.towerSourceId);
     });
   };
 

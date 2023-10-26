@@ -300,7 +300,7 @@ export class Enemy {
     this.bountyGold = Math.round(this.bountyGold * 0.9);
   };
 
-  reduceHealth = (amount: number) => {
+  reduceHealth = (amount: number, _towerSourceId: string) => {
     this.currentHealth -= amount;
     if (this.currentHealth <= 0) {
       game.enemies.remove(this.id);

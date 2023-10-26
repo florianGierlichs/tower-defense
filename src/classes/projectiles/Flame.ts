@@ -22,6 +22,7 @@ export class Flame {
   animationDirection;
   angle;
   removeProjectile;
+  towerSourceId;
   damageOverTimeArea: DamageOverTimeArea;
   damageOverTimeThrottleTime = 400;
   damageOverTimeRadius = 20;
@@ -42,7 +43,8 @@ export class Flame {
     img: HTMLImageElement,
     target: { x: number; y: number },
     animationDirection: AnimationDirection,
-    removeProjectile: (id: string) => void
+    removeProjectile: (id: string) => void,
+    towerSourceId: string
   ) {
     this.id = id;
     this.x = x;
@@ -55,6 +57,7 @@ export class Flame {
     this.animationDirection = animationDirection;
     this.angle = getAngle(this.x, this.y, this.target.x, this.target.y);
     this.removeProjectile = removeProjectile;
+    this.towerSourceId = towerSourceId;
 
     this.damageOverTimeArea = new DamageOverTimeArea(
       shortUUID.generate(),
@@ -62,7 +65,8 @@ export class Flame {
       this.target.y,
       this.damageOverTimeRadius,
       this.damage,
-      this.damageOverTimeThrottleTime
+      this.damageOverTimeThrottleTime,
+      this.towerSourceId
     );
   }
 

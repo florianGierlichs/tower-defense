@@ -68,8 +68,11 @@ export class FireMage extends Tower {
     },
   };
 
+  id;
+
   constructor(id: string, x: number, y: number) {
     super(id, x, y, FireMage.config);
+    this.id = id;
   }
 
   getProjectile = () => {
@@ -86,7 +89,8 @@ export class FireMage extends Tower {
       this.projectileImg,
       this.currentTarget || this.targetFallbackCoordinates,
       this.animationDirection,
-      this.removeProjectile
+      this.removeProjectile,
+      this.id
     );
   };
 

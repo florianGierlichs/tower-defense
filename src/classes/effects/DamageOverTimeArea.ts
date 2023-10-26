@@ -11,6 +11,7 @@ export class DamageOverTimeArea {
   radius;
   damage;
   damageOverTimeThrottleTime;
+  towerSourceId;
 
   affectedEnemies: { enemy: Enemy; damageHitTime: number | null }[] = [];
 
@@ -20,7 +21,8 @@ export class DamageOverTimeArea {
     y: number,
     radius: number,
     damage: number,
-    damageOverTimeThrottleTime: number
+    damageOverTimeThrottleTime: number,
+    towerSourceId: string
   ) {
     this.id = id;
     this.x = x;
@@ -28,6 +30,7 @@ export class DamageOverTimeArea {
     this.radius = radius;
     this.damage = damage;
     this.damageOverTimeThrottleTime = damageOverTimeThrottleTime;
+    this.towerSourceId = towerSourceId;
   }
 
   private isAffectedEnemy = (enemy: Enemy) => {
@@ -82,7 +85,7 @@ export class DamageOverTimeArea {
           this.damageOverTimeThrottleTime
         )
       ) {
-        affectedEnemy.enemy.reduceHealth(this.damage);
+        affectedEnemy.enemy.reduceHealth(this.damage, this.towerSourceId);
         affectedEnemy.damageHitTime = performance.now();
       }
     });
