@@ -10,6 +10,7 @@ import { TerrorWolf } from "./enemies/TerrorWolf";
 import { BloodyBat } from "./enemies/BloodyBat";
 import { EvilWitch } from "./enemies/EvilWitch";
 import { SkeletonArcher } from "./enemies/SkeletonArcher";
+import { FrostGuardian } from "./bosses/FrostGuardian";
 
 export class Waves {
   waveIndex = 0;
@@ -70,7 +71,12 @@ export class Waves {
       config: BloodyBat.config,
       unitCount: 20,
     },
-    // boss
+    {
+      id: FrostGuardian.config.id,
+      className: FrostGuardian,
+      config: FrostGuardian.config,
+      unitCount: 1,
+    },
     {
       id: EvilWitch.config.id,
       className: EvilWitch,

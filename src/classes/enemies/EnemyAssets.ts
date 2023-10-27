@@ -15,6 +15,7 @@ import skeletonArcher from "../../assets/enemy/skeletonArcher.png";
 
 // Boss
 import demon from "../../assets/boss/demon.png";
+import frostGuardian from "../../assets/boss/frostGuardian.png";
 
 export class EnemyAssets {
   constructor() {}
@@ -35,6 +36,7 @@ export class EnemyAssets {
 
       // Boss
       demon: await loadImage(demon),
+      frostGuardian: await loadImage(frostGuardian),
     };
   };
 }
