@@ -3,6 +3,7 @@ import {
   BlueprintId,
   BossId,
   EnemyId,
+  EnemyProjectileId,
   ProjectileId,
   TowerId,
 } from "../utils/types";
@@ -17,6 +18,7 @@ import lightningMageImg from "../assets/tower/lightningMage.png";
 import lightningMageProjectileImg from "../assets/projectiles/lightningMageProjectile.png";
 import lightningMageBpImg from "../assets/towerBlueprint/lightningMageBp.png";
 import { EnemyAssets } from "./enemies/EnemyAssets";
+import icicleImg from "../assets/projectiles/icicle.png";
 
 const texturesKey = "textures";
 
@@ -39,6 +41,9 @@ export class ImageController {
   // enemy
   enemyAssets: Record<EnemyId | BossId, HTMLImageElement> | null = null;
 
+  // enemy projectiles
+  icicle: HTMLImageElement | null = null;
+
   loadImages = async () => {
     this.textures = await loadImage(texturesImg);
 
@@ -57,10 +62,18 @@ export class ImageController {
 
     // enemy
     this.enemyAssets = await new EnemyAssets().getAssets();
+
+    // enemy projectiles
+    this.icicle = await loadImage(icicleImg);
   };
 
   getImage = (
-    key: typeof texturesKey | TowerId | ProjectileId | BlueprintId
+    key:
+      | typeof texturesKey
+      | TowerId
+      | ProjectileId
+      | BlueprintId
+      | EnemyProjectileId
   ): HTMLImageElement => {
     const image = this[key];
     if (image === null) {

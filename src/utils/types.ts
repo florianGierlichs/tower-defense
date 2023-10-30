@@ -121,6 +121,10 @@ export enum ProjectileId { // todo id does not match projectile class name, dont
   LIGHTNING_MAGE = "lightningMageProjectile",
 }
 
+export enum EnemyProjectileId {
+  ICICLE = "icicle",
+}
+
 export enum BlueprintId {
   ARCANE_ARCHER = "arcaneArcherBp",
   FIRE_MAGE = "fireMageBp",
