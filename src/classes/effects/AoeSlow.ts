@@ -7,9 +7,10 @@ export class AoeSlow extends Aoe {
     x: number,
     y: number,
     radius: number,
-    damage: number
+    damage: number,
+    towerSourceId: string
   ) {
-    super(id, x, y, radius, damage);
+    super(id, x, y, radius, damage, towerSourceId);
 
     this.slowEnemiesInsideArea();
   }

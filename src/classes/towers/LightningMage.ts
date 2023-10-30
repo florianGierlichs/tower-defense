@@ -84,7 +84,8 @@ export class LightningMage extends Tower {
       LightningMage.config.damage,
       this.projectileImg,
       this.currentTarget || this.targetFallbackCoordinates,
-      this.removeProjectile
+      this.removeProjectile,
+      this.id
     );
   };
 

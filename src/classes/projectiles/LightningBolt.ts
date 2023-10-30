@@ -18,6 +18,7 @@ export class LightningBolt {
   dX;
   dY;
   removeProjectile;
+  towerSourceId;
   radius = 70;
 
   // frames
@@ -35,7 +36,8 @@ export class LightningBolt {
     damage: number,
     img: HTMLImageElement,
     target: { x: number; y: number },
-    removeProjectile: (id: string) => void
+    removeProjectile: (id: string) => void,
+    towerSourceId: string
   ) {
     this.id = id;
     this.x = x;
@@ -45,13 +47,15 @@ export class LightningBolt {
     this.dX = target.x;
     this.dY = target.y;
     this.removeProjectile = removeProjectile;
+    this.towerSourceId = towerSourceId;
 
     new AoeSlow(
       shortUUID.generate(),
       this.dX,
       this.dY,
       this.radius,
-      this.damage
+      this.damage,
+      this.towerSourceId
     );
   }
 
