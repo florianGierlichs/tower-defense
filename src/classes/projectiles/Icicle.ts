@@ -147,7 +147,7 @@ export class Icicle {
 
   private collide = () => {
     this.removeProjectile(this.id);
-    console.log("collide icicle");
+    console.log("collide icicle with ", this.target.id);
   };
 
   update = () => {

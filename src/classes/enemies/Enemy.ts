@@ -134,7 +134,7 @@ export class Enemy {
     }
   };
 
-  private draw = () => {
+  draw = () => {
     if (this.sX === null || this.sY === null) {
       throw new Error("sX or sY is null");
     }
@@ -182,7 +182,7 @@ export class Enemy {
     this.slows.push(slow);
   };
 
-  private updateSlows = () => {
+  updateSlows = () => {
     const now = performance.now();
     this.slows.forEach((slow) => {
       if (now - slow.slowStart >= slow.slowDuration) {
@@ -209,7 +209,7 @@ export class Enemy {
     return this.speed * ((100 - finalSlowPercentage) / 100);
   };
 
-  private move = () => {
+  move = () => {
     const currentSpeed = this.getCurrentSpeed();
 
     // move x
@@ -275,7 +275,7 @@ export class Enemy {
     }
   };
 
-  private updateFrames = () => {
+  updateFrames = () => {
     if (this.lastFrameIteration === null) {
       // initial run
       this.setSxFrame();

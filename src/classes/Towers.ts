@@ -26,6 +26,10 @@ export class Towers {
     return this.towers.find((tower) => tower.x === tileX && tower.y === tileY);
   };
 
+  getTowerById = (id: string) => {
+    return this.towers.find((tower) => tower.id === id);
+  };
+
   hideTowerRange = () => {
     this.towers.forEach((tower) => tower.setShowRange(false));
   };
