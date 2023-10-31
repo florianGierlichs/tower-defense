@@ -10,7 +10,7 @@ interface FreezeTowerProps {
 export class FreezeTower {
   id;
   private target;
-  duration = 2000;
+  duration = 2500;
   freezeStart;
 
   private image: HTMLImageElement;
@@ -35,6 +35,10 @@ export class FreezeTower {
     this.freezeStart = performance.now();
 
     this.image = main.imageController.getImage(EffectId.FREEZE_TOWER);
+
+    setTimeout(() => {
+      this.target.resetAfterStun();
+    }, this.duration);
   }
 
   private setFrameIteration = () => {
