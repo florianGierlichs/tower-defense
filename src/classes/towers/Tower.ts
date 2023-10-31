@@ -11,6 +11,7 @@ import {
   TowerState,
 } from "../../utils/types";
 import { getTranslatedCanvasDestination } from "../../utils/getTranslatedCanvasDestination";
+import { FreezeTower } from "../effects/FreezeTower";
 
 export class Tower {
   // initial values
@@ -40,6 +41,7 @@ export class Tower {
 
   // data
   projectiles: ProjectileInstance[] = [];
+  stunns: FreezeTower[] = [];
 
   // states
   state = TowerState.IDLE;
@@ -341,4 +343,50 @@ export class Tower {
       }
     }
   };
+
+  addStun = (stun: FreezeTower) => {
+    this.stunns.push(stun);
+  };
+
+  updateStunns = () => {
+    this.stunns.forEach((stunn) => stunn.update());
+
+    const now = performance.now();
+    this.stunns.forEach((stunn) => {
+      if (now - stunn.freezeStart >= stunn.duration) {
+        this.stunns = this.stunns.filter((s) => s.id !== stunn.id);
+      }
+    });
+  };
+
+  update({
+    shootAtFrame,
+    getProjectile,
+  }: {
+    shootAtFrame: number;
+    getProjectile: () => ProjectileInstance;
+  }) {
+    this.updateFrames();
+
+    if (this.state === TowerState.ATTACK) {
+      this.attackAnimation();
+
+      this.shootAtAttackAnimationFrame(shootAtFrame, getProjectile);
+    }
+
+    if (this.state === TowerState.IDLE) {
+      this.idleAnimation();
+
+      if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
+        this.checkAndSetClosestEnemyInRange();
+      }
+    }
+
+    if (this.showRange) {
+      this.drawRange();
+    }
+
+    this.updateProjectiles();
+    this.updateStunns();
+  }
 }

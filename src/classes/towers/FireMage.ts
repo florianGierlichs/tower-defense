@@ -1,11 +1,9 @@
 import shortUUID from "short-uuid";
-import { timeHasPassed } from "../../utils/timeHasPassed";
 import {
   BlueprintId,
   ProjectileId,
   TowerConfig,
   TowerId,
-  TowerState,
 } from "../../utils/types";
 import { Tower } from "./Tower";
 import { Flame } from "../projectiles/Flame";
@@ -95,26 +93,6 @@ export class FireMage extends Tower {
   };
 
   update = () => {
-    this.updateFrames();
-
-    if (this.state === TowerState.ATTACK) {
-      this.attackAnimation();
-
-      this.shootAtAttackAnimationFrame(0, () => this.getProjectile());
-    }
-
-    if (this.state === TowerState.IDLE) {
-      this.idleAnimation();
-
-      if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
-        this.checkAndSetClosestEnemyInRange();
-      }
-    }
-
-    if (this.showRange) {
-      this.drawRange();
-    }
-
-    this.updateProjectiles();
+    super.update({ shootAtFrame: 0, getProjectile: this.getProjectile });
   };
 }

@@ -1,11 +1,9 @@
 import shortUUID from "short-uuid";
-import { timeHasPassed } from "../../utils/timeHasPassed";
 import {
   BlueprintId,
   ProjectileId,
   TowerConfig,
   TowerId,
-  TowerState,
 } from "../../utils/types";
 import { Tower } from "./Tower";
 import { LightningBolt } from "../projectiles/LightningBolt";
@@ -90,25 +88,6 @@ export class LightningMage extends Tower {
   };
 
   update = () => {
-    this.updateFrames();
-
-    if (this.state === TowerState.ATTACK) {
-      this.attackAnimation();
-      this.shootAtAttackAnimationFrame(10, () => this.getProjectile());
-    }
-
-    if (this.state === TowerState.IDLE) {
-      this.idleAnimation();
-
-      if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
-        this.checkAndSetClosestEnemyInRange();
-      }
-    }
-
-    if (this.showRange) {
-      this.drawRange();
-    }
-
-    this.updateProjectiles();
+    super.update({ shootAtFrame: 10, getProjectile: this.getProjectile });
   };
 }

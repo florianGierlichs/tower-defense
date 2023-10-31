@@ -1,11 +1,9 @@
 import shortUUID from "short-uuid";
-import { timeHasPassed } from "../../utils/timeHasPassed";
 import {
   BlueprintId,
   ProjectileId,
   TowerConfig,
   TowerId,
-  TowerState,
 } from "../../utils/types";
 import { Projectile } from "../projectiles/Projectile";
 import { Tower } from "./Tower";
@@ -93,26 +91,6 @@ export class ArcaneArcher extends Tower {
   };
 
   update = () => {
-    this.updateFrames();
-
-    if (this.state === TowerState.ATTACK) {
-      this.attackAnimation();
-
-      this.shootAtAttackAnimationFrame(6, () => this.getProjectile());
-    }
-
-    if (this.state === TowerState.IDLE) {
-      this.idleAnimation();
-
-      if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
-        this.checkAndSetClosestEnemyInRange();
-      }
-    }
-
-    if (this.showRange) {
-      this.drawRange();
-    }
-
-    this.updateProjectiles();
+    super.update({ shootAtFrame: 6, getProjectile: this.getProjectile });
   };
 }
