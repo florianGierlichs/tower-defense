@@ -13,6 +13,7 @@ export class FrostGuardian extends Enemy {
     maxSlowPercentage: 50,
     special: {
       description: "Chance to freeze tower",
+      value: 40,
     },
     sWidth: 128,
     sHeight: 128,
@@ -46,11 +47,13 @@ export class FrostGuardian extends Enemy {
   }
 
   reduceHealth = (amount: number, towerSourceId: string) => {
-    // const probability = 40; // %
-    // if (Math.random() <= probability / 100) {
-    //   this.shootProjectile(towerSourceId);
-    // }
-    this.shootProjectile(towerSourceId);
+    if (FrostGuardian.config.special?.value === undefined) {
+      throw new Error("FrostGuardian.config.special.value is undefined");
+    }
+
+    if (Math.random() <= FrostGuardian.config.special.value / 100) {
+      this.shootProjectile(towerSourceId);
+    }
 
     this.currentHealth -= amount;
     if (this.currentHealth <= 0) {
@@ -77,7 +80,7 @@ export class FrostGuardian extends Enemy {
         x: this.x,
         y: this.y,
         target: target,
-        speed: 2,
+        speed: 5,
         removeProjectile: this.removeProjectile,
       })
     );
