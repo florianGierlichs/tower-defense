@@ -60,6 +60,7 @@ export interface EnemyConfig {
 
 export interface EnemySpecial {
   description: string;
+  value?: number;
 }
 
 export interface TowerConfig {
@@ -96,6 +97,7 @@ export enum EnemyState {
 export enum TowerState {
   IDLE = "idle",
   ATTACK = "attack",
+  STUNNED = "stunned",
 }
 
 export enum AnimationDirection {
@@ -123,6 +125,10 @@ export enum ProjectileId { // todo id does not match projectile class name, dont
 
 export enum EnemyProjectileId {
   ICICLE = "icicle",
+}
+
+export enum EffectId {
+  FREEZE_TOWER = "freezeTower",
 }
 
 export enum BlueprintId {

@@ -2,6 +2,7 @@ import { loadImage } from "../utils/loadImage";
 import {
   BlueprintId,
   BossId,
+  EffectId,
   EnemyId,
   EnemyProjectileId,
   ProjectileId,
@@ -19,6 +20,7 @@ import lightningMageProjectileImg from "../assets/projectiles/lightningMageProje
 import lightningMageBpImg from "../assets/towerBlueprint/lightningMageBp.png";
 import { EnemyAssets } from "./enemies/EnemyAssets";
 import icicleImg from "../assets/projectiles/icicle.png";
+import freezeTowerImg from "../assets/effect/freezeTower.png";
 
 const texturesKey = "textures";
 
@@ -44,6 +46,9 @@ export class ImageController {
   // enemy projectiles
   icicle: HTMLImageElement | null = null;
 
+  // effects
+  freezeTower: HTMLImageElement | null = null;
+
   loadImages = async () => {
     this.textures = await loadImage(texturesImg);
 
@@ -65,6 +70,9 @@ export class ImageController {
 
     // enemy projectiles
     this.icicle = await loadImage(icicleImg);
+
+    // effects
+    this.freezeTower = await loadImage(freezeTowerImg);
   };
 
   getImage = (
@@ -74,6 +82,7 @@ export class ImageController {
       | ProjectileId
       | BlueprintId
       | EnemyProjectileId
+      | EffectId
   ): HTMLImageElement => {
     const image = this[key];
     if (image === null) {

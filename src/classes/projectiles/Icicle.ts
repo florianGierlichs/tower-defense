@@ -1,9 +1,11 @@
+import shortUUID from "short-uuid";
 import { dom, main } from "../../main";
 import { getAngle } from "../../utils/getAngle";
 import { getTileMiddle } from "../../utils/getTileMiddle";
 import { reachedTarget } from "../../utils/reachedTarget";
 import { timeHasPassed } from "../../utils/timeHasPassed";
 import { EnemyProjectileId, TowerInstance } from "../../utils/types";
+import { FreezeTower } from "../effects/FreezeTower";
 
 interface IcicleProps {
   id: string;
@@ -147,7 +149,12 @@ export class Icicle {
 
   private collide = () => {
     this.removeProjectile(this.id);
-    console.log("collide icicle with ", this.target.id);
+    this.target.addStun(
+      new FreezeTower({
+        id: shortUUID.generate(),
+        target: this.target,
+      })
+    );
   };
 
   update = () => {
