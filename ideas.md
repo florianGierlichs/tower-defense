@@ -6,7 +6,7 @@
 - spawn mobs on every x seconds
 - spawn mobs on death
 - destroy random tower on death
-- freeze the tower he got hit from by x seconds
+- freeze the tower he got hit from by x seconds :heavy_check_mark:
 - skeleton shield that blocks projectiles every x seconds
 
 #### Add sound
@@ -36,6 +36,7 @@
 - https://creativekind.itch.io/
 - https://jesse-m.itch.io/
 - https://oco.itch.io/
+- https://pimen.itch.io/
 
 #### Extend Menu
 
