@@ -93,6 +93,10 @@ export class FireMage extends Tower {
   };
 
   update = () => {
-    super.update({ shootAtFrame: 0, getProjectile: this.getProjectile });
+    super.update({
+      shootAtFrame: 0,
+      getProjectile: this.getProjectile,
+      cancelProjectile: true,
+    });
   };
 }
