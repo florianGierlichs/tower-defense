@@ -16,6 +16,9 @@ import { BloodyBat } from "../classes/enemies/BloodyBat";
 import { EvilWitch } from "../classes/enemies/EvilWitch";
 import { SkeletonArcher } from "../classes/enemies/SkeletonArcher";
 import { FrostGuardian } from "../classes/bosses/FrostGuardian";
+import { Necromancer } from "../classes/enemies/Necromancer";
+import { SkeletonCat } from "../classes/enemies/SkeletonCat";
+import { SkeletonWarrior } from "../classes/enemies/SkeletonWarrior";
 
 export interface Coordinate {
   x: number;
@@ -151,6 +154,9 @@ export type EnemyInstance =
   | TerrorWolf
   | BloodyBat
   | EvilWitch
+  | Necromancer
+  | SkeletonCat
+  | SkeletonWarrior
   | SkeletonArcher;
 
 export type BossInstance = Demon | FrostGuardian;
@@ -165,7 +171,10 @@ export type EnemyId =
   | "terrorWolf"
   | "bloodyBat"
   | "evilWitch"
-  | "skeletonArcher";
+  | "skeletonArcher"
+  | "skeletonCat"
+  | "skeletonWarrior"
+  | "necromancer";
 
 export type BossId = "demon" | "frostGuardian";
 

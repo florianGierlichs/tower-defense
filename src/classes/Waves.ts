@@ -11,6 +11,9 @@ import { BloodyBat } from "./enemies/BloodyBat";
 import { EvilWitch } from "./enemies/EvilWitch";
 import { SkeletonArcher } from "./enemies/SkeletonArcher";
 import { FrostGuardian } from "./bosses/FrostGuardian";
+import { SkeletonCat } from "./enemies/SkeletonCat";
+import { SkeletonWarrior } from "./enemies/SkeletonWarrior";
+import { Necromancer } from "./enemies/Necromancer";
 
 export class Waves {
   waveIndex = 0;
@@ -87,6 +90,24 @@ export class Waves {
       id: SkeletonArcher.config.id,
       className: SkeletonArcher,
       config: SkeletonArcher.config,
+      unitCount: 20,
+    },
+    {
+      id: SkeletonCat.config.id,
+      className: SkeletonCat,
+      config: SkeletonCat.config,
+      unitCount: 20,
+    },
+    {
+      id: SkeletonWarrior.config.id,
+      className: SkeletonWarrior,
+      config: SkeletonWarrior.config,
+      unitCount: 20,
+    },
+    {
+      id: Necromancer.config.id,
+      className: Necromancer,
+      config: Necromancer.config,
       unitCount: 20,
     },
   ] as const;
