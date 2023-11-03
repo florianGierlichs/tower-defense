@@ -257,11 +257,15 @@ export class Enemy {
 
   private updateAnimationDirection = () => {
     // move up or down
-    if (this.x === this.nodeTarget.x) {
+    if (
+      (this.x - this.nodeTarget.x - 1) * (this.x - this.nodeTarget.x + 1) <=
+      0 // checks if x is between nodeTarget.x - 1 and nodeTarget.x + 1 because of float
+    ) {
       this.animationDirection =
         Math.random() < 0.5
           ? AnimationDirection.RIGHT
           : AnimationDirection.LEFT;
+      return;
     }
 
     // move right
