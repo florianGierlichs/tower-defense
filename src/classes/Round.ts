@@ -6,10 +6,11 @@ import { ModalPopIn } from "./gui/ModalPopIn";
 import { Countdown } from "./gui/Countdown";
 import { Toast } from "./gui/Toast";
 
+const isProd = import.meta.env.PROD;
 export class Round {
   game;
   waveIsScheduled = false;
-  modalLifeTime = 10000;
+  modalLifeTime = isProd ? 10000 : 1000;
 
   constructor(game: Game) {
     this.game = game;
