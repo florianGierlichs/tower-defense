@@ -19,6 +19,7 @@ import skeletonCat from "../../assets/enemy/skeletonCat.png";
 // Boss
 import demon from "../../assets/boss/demon.png";
 import frostGuardian from "../../assets/boss/frostGuardian.png";
+import deathWorm from "../../assets/boss/deathWorm.png";
 
 export class EnemyAssets {
   constructor() {}
@@ -43,6 +44,7 @@ export class EnemyAssets {
       // Boss
       demon: await loadImage(demon),
       frostGuardian: await loadImage(frostGuardian),
+      deathWorm: await loadImage(deathWorm),
     };
   };
 }

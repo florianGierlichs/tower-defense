@@ -19,6 +19,7 @@ import { FrostGuardian } from "../classes/bosses/FrostGuardian";
 import { Necromancer } from "../classes/enemies/Necromancer";
 import { SkeletonCat } from "../classes/enemies/SkeletonCat";
 import { SkeletonWarrior } from "../classes/enemies/SkeletonWarrior";
+import { DeathWorm } from "../classes/bosses/DeathWorm";
 
 export interface Coordinate {
   x: number;
@@ -159,7 +160,7 @@ export type EnemyInstance =
   | SkeletonWarrior
   | SkeletonArcher;
 
-export type BossInstance = Demon | FrostGuardian;
+export type BossInstance = Demon | FrostGuardian | DeathWorm;
 
 export type EnemyId =
   | "skeletonShield"
@@ -176,7 +177,7 @@ export type EnemyId =
   | "skeletonWarrior"
   | "necromancer";
 
-export type BossId = "demon" | "frostGuardian";
+export type BossId = "demon" | "frostGuardian" | "deathWorm";
 
 export interface PathNode {
   x: number;

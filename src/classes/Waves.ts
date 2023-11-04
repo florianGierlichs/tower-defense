@@ -14,6 +14,7 @@ import { FrostGuardian } from "./bosses/FrostGuardian";
 import { SkeletonCat } from "./enemies/SkeletonCat";
 import { SkeletonWarrior } from "./enemies/SkeletonWarrior";
 import { Necromancer } from "./enemies/Necromancer";
+import { DeathWorm } from "./bosses/DeathWorm";
 
 export class Waves {
   waveIndex = 0;
@@ -45,9 +46,9 @@ export class Waves {
       unitCount: 12,
     },
     {
-      id: Demon.config.id,
-      className: Demon,
-      config: Demon.config,
+      id: DeathWorm.config.id,
+      className: DeathWorm,
+      config: DeathWorm.config,
       unitCount: 1,
     },
     {
@@ -109,6 +110,12 @@ export class Waves {
       className: Necromancer,
       config: Necromancer.config,
       unitCount: 20,
+    },
+    {
+      id: Demon.config.id,
+      className: Demon,
+      config: Demon.config,
+      unitCount: 1,
     },
   ] as const;
 

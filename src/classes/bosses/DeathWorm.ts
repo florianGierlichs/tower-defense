@@ -1,35 +1,35 @@
 import { EnemyConfig } from "../../utils/types";
 import { Enemy } from "../enemies/Enemy";
 
-export class Demon extends Enemy {
+export class DeathWorm extends Enemy {
   static readonly config: EnemyConfig = {
-    id: "demon",
-    name: "Demon",
+    id: "deathWorm",
+    name: "Death Worm",
     health: 700,
     speed: 1,
     maxSlowPercentage: 0,
     special: {
-      description: "Chance to spawn minions",
+      description: "Immune to slow effects",
     },
-    sWidth: 110,
-    sHeight: 110,
-    imageScale: 0.8,
+    sWidth: 224,
+    sHeight: 128,
+    imageScale: 0.6,
     imageTranslateCorrection: {
-      x: 15,
-      y: -25,
+      x: 45,
+      y: 0,
     },
     frameConfig: {
       move: {
-        frames: 12,
-        animationIterationCircleTime: 1000,
+        frames: 11,
+        animationIterationCircleTime: 2000,
         flipOffsetFrames: 0,
         animationStartRight: {
           sx: 0,
           sy: 0,
         },
         animationStartLeft: {
-          sx: 1210,
-          sy: 110,
+          sx: 1280,
+          sy: 128,
         },
       },
     },
@@ -37,8 +37,6 @@ export class Demon extends Enemy {
   };
 
   constructor(id: string, x: number, y: number) {
-    super(id, x, y, Demon.config);
+    super(id, x, y, DeathWorm.config);
   }
-
-  // need special, spawn mob on hit taken
 }
