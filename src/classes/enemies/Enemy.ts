@@ -244,7 +244,7 @@ export class Enemy {
     }
   };
 
-  private updateNodeTarget = () => {
+  updateNodeTarget = () => {
     this.nodesIndex++;
     if (this.pathNodes.length === this.nodesIndex) {
       game.playerHealth.reduceHealth();
@@ -311,6 +311,10 @@ export class Enemy {
       game.gold.increaseGoldAfterKillEnemy(this.bountyGold);
       game.towers.resetTowerTarget(this.id);
     }
+  };
+
+  setNodeIndex = (index: number) => {
+    this.nodesIndex = index;
   };
 
   update = () => {

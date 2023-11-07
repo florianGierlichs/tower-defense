@@ -1,5 +1,8 @@
-import { EnemyConfig } from "../../utils/types";
+import shortUUID from "short-uuid";
+import { game } from "../../main";
+import { EnemyConfig, PathNode } from "../../utils/types";
 import { Enemy } from "../enemies/Enemy";
+import { SkeletonGuard } from "../enemies/SkeletonGuard";
 
 export class Demon extends Enemy {
   static readonly config: EnemyConfig = {
@@ -36,9 +39,69 @@ export class Demon extends Enemy {
     bountyGold: 100,
   };
 
+  spawnInFront: boolean = true;
+  lastPosition: {
+    x: number;
+    y: number;
+    nodeTarget: PathNode;
+    nodeIndex: number;
+  } = {
+    x: this.x,
+    y: this.y,
+    nodeTarget: this.nodeTarget,
+    nodeIndex: this.nodesIndex,
+  };
+
   constructor(id: string, x: number, y: number) {
     super(id, x, y, Demon.config);
   }
 
-  // need special, spawn mob on hit taken
+  reduceHealth = (amount: number, _towerSourceId: string) => {
+    // needs % spawn condition
+    // needs front/back condition in the middle of the path
+    // path beginning only front
+    // path end only back
+
+    this.spawnMinionBehind();
+
+    this.currentHealth -= amount;
+    if (this.currentHealth <= 0) {
+      game.enemies.remove(this.id);
+      game.gold.increaseGoldAfterKillEnemy(this.bountyGold);
+      game.towers.resetTowerTarget(this.id);
+    }
+  };
+
+  private spawnMinionBehind = () => {
+    const minion = new SkeletonGuard(
+      shortUUID.generate(),
+      this.lastPosition.x,
+      this.lastPosition.y
+    );
+    minion.setNodeIndex(this.lastPosition.nodeIndex - 1); // -1 because updateNodeTarget increments the index
+    minion.updateNodeTarget();
+    game.enemies.currentEnemiesPush(minion);
+  };
+
+  private calculateLastPosition = () => {
+    if (
+      Math.abs(this.x - this.lastPosition.x) > 64 ||
+      Math.abs(this.y - this.lastPosition.y) > 64
+    ) {
+      this.lastPosition = {
+        x: this.x,
+        y: this.y,
+        nodeTarget: this.nodeTarget,
+        nodeIndex: this.nodesIndex,
+      };
+    }
+  };
+
+  update = () => {
+    this.updateFrames();
+    this.updateSlows();
+    this.move();
+    this.calculateLastPosition();
+    this.draw();
+  };
 }

@@ -23,6 +23,10 @@ export class Enemies {
     this.allEnemiesRemoved = false;
   };
 
+  currentEnemiesPush = (enemy: EnemyInstance | BossInstance) => {
+    this.currentEnemies.push(enemy);
+  };
+
   update = () => {
     this.updateEnemies();
 
