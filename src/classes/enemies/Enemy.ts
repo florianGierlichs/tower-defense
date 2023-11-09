@@ -1,6 +1,7 @@
 import { dom, game, main, tiles } from "../../main";
 import { getAngle } from "../../utils/getAngle";
 import { getRandomFrameIteration } from "../../utils/getRandomFrameIteration";
+import { moveX, moveY } from "../../utils/move";
 import { reachedTarget } from "../../utils/reachedTarget";
 import { timeHasPassed } from "../../utils/timeHasPassed";
 import { AnimationDirection, EnemyConfig, EnemyState } from "../../utils/types";
@@ -215,20 +216,18 @@ export class Enemy {
     // move x
     const restDistanceX = Math.abs(this.nodeTarget.x - this.x);
 
-    if (restDistanceX - currentSpeed < 0) {
-      this.x += restDistanceX * Math.cos((this.angle * Math.PI) / 180);
-    } else {
-      this.x += currentSpeed * Math.cos((this.angle * Math.PI) / 180);
-    }
+    this.x += moveX({
+      distance: restDistanceX - currentSpeed < 0 ? restDistanceX : currentSpeed,
+      angle: this.angle,
+    });
 
     // move y
     const restDistanceY = Math.abs(this.nodeTarget.y - this.y);
 
-    if (restDistanceY - currentSpeed < 0) {
-      this.y += restDistanceY * Math.sin((this.angle * Math.PI) / 180);
-    } else {
-      this.y += currentSpeed * Math.sin((this.angle * Math.PI) / 180);
-    }
+    this.y += moveY({
+      distance: restDistanceY - currentSpeed < 0 ? restDistanceY : currentSpeed,
+      angle: this.angle,
+    });
 
     //reach path node
     if (

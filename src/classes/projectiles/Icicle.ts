@@ -6,6 +6,7 @@ import { reachedTarget } from "../../utils/reachedTarget";
 import { timeHasPassed } from "../../utils/timeHasPassed";
 import { EnemyProjectileId, TowerInstance } from "../../utils/types";
 import { FreezeTower } from "../effects/FreezeTower";
+import { moveX, moveY } from "../../utils/move";
 
 interface IcicleProps {
   id: string;
@@ -121,20 +122,18 @@ export class Icicle {
     // move x
     const restDistanceX = Math.abs(this.targetMiddleX - this.x);
 
-    if (restDistanceX - this.speed < 0) {
-      this.x += restDistanceX * Math.cos((this.angle * Math.PI) / 180);
-    } else {
-      this.x += this.speed * Math.cos((this.angle * Math.PI) / 180);
-    }
+    this.x += moveX({
+      distance: restDistanceX - this.speed < 0 ? restDistanceX : this.speed,
+      angle: this.angle,
+    });
 
     // move y
     const restDistanceY = Math.abs(this.targetMiddleY - this.y);
 
-    if (restDistanceY - this.speed < 0) {
-      this.y += restDistanceY * Math.sin((this.angle * Math.PI) / 180);
-    } else {
-      this.y += this.speed * Math.sin((this.angle * Math.PI) / 180);
-    }
+    this.y += moveY({
+      distance: restDistanceY - this.speed < 0 ? restDistanceY : this.speed,
+      angle: this.angle,
+    });
 
     // check for collision
     if (

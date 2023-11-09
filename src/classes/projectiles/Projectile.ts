@@ -1,5 +1,6 @@
 import { dom } from "../../main";
 import { getAngle } from "../../utils/getAngle";
+import { moveX, moveY } from "../../utils/move";
 import { reachedTarget } from "../../utils/reachedTarget";
 import { Enemy } from "../enemies/Enemy";
 
@@ -69,20 +70,18 @@ export class Projectile {
     // move x
     const restDistanceX = Math.abs(this.targetEnemy.x - this.x);
 
-    if (restDistanceX - this.speed < 0) {
-      this.x += restDistanceX * Math.cos((angle * Math.PI) / 180);
-    } else {
-      this.x += this.speed * Math.cos((angle * Math.PI) / 180);
-    }
+    this.x += moveX({
+      distance: restDistanceX - this.speed < 0 ? restDistanceX : this.speed,
+      angle: angle,
+    });
 
     // move y
     const restDistanceY = Math.abs(this.targetEnemy.y - this.y);
 
-    if (restDistanceY - this.speed < 0) {
-      this.y += restDistanceY * Math.sin((angle * Math.PI) / 180);
-    } else {
-      this.y += this.speed * Math.sin((angle * Math.PI) / 180);
-    }
+    this.y += moveY({
+      distance: restDistanceY - this.speed < 0 ? restDistanceY : this.speed,
+      angle: angle,
+    });
 
     // check for collision
     if (

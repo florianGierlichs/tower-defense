@@ -3,6 +3,7 @@ import { game } from "../../main";
 import { EnemyConfig, PathNode } from "../../utils/types";
 import { Enemy } from "../enemies/Enemy";
 import { SkeletonGuard } from "../enemies/SkeletonGuard";
+import { moveX, moveY } from "../../utils/move";
 
 export class Demon extends Enemy {
   static readonly config: EnemyConfig = {
@@ -89,24 +90,25 @@ export class Demon extends Enemy {
     const restDistanceX = Math.abs(this.nodeTarget.x - this.x);
     const restDistanceY = Math.abs(this.nodeTarget.y - this.y);
 
-    let x;
-    let y;
+    const x =
+      this.x +
+      moveX({
+        distance:
+          restDistanceX - this.spawnMinionDistance < 0
+            ? restDistanceX
+            : this.spawnMinionDistance,
+        angle: this.angle,
+      });
 
-    if (restDistanceX - this.spawnMinionDistance < 0) {
-      x = this.x + restDistanceX * Math.cos((this.angle * Math.PI) / 180);
-    } else {
-      x =
-        this.x +
-        this.spawnMinionDistance * Math.cos((this.angle * Math.PI) / 180);
-    }
-
-    if (restDistanceY - this.spawnMinionDistance < 0) {
-      y = this.y + restDistanceY * Math.sin((this.angle * Math.PI) / 180);
-    } else {
-      y =
-        this.y +
-        this.spawnMinionDistance * Math.sin((this.angle * Math.PI) / 180);
-    }
+    const y =
+      this.y +
+      moveY({
+        distance:
+          restDistanceY - this.spawnMinionDistance < 0
+            ? restDistanceY
+            : this.spawnMinionDistance,
+        angle: this.angle,
+      });
 
     const minion = new SkeletonGuard(shortUUID.generate(), x, y);
 
