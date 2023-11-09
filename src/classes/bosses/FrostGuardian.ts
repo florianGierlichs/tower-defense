@@ -3,6 +3,7 @@ import { game } from "../../main";
 import { EnemyConfig } from "../../utils/types";
 import { Enemy } from "../enemies/Enemy";
 import { Icicle } from "../projectiles/Icicle";
+import { percentageChance } from "../../utils/percentageChance";
 
 export class FrostGuardian extends Enemy {
   static readonly config: EnemyConfig = {
@@ -51,7 +52,7 @@ export class FrostGuardian extends Enemy {
       throw new Error("FrostGuardian.config.special.value is undefined");
     }
 
-    if (Math.random() <= FrostGuardian.config.special.value / 100) {
+    if (percentageChance(FrostGuardian.config.special.value)) {
       this.shootProjectile(towerSourceId);
     }
 

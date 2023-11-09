@@ -4,6 +4,7 @@ import { EnemyConfig, PathNode } from "../../utils/types";
 import { Enemy } from "../enemies/Enemy";
 import { SkeletonGuard } from "../enemies/SkeletonGuard";
 import { moveX, moveY } from "../../utils/move";
+import { percentageChance } from "../../utils/percentageChance";
 
 export class Demon extends Enemy {
   static readonly config: EnemyConfig = {
@@ -14,6 +15,7 @@ export class Demon extends Enemy {
     maxSlowPercentage: 0,
     special: {
       description: "Chance to spawn minions",
+      value: 40,
     },
     sWidth: 110,
     sHeight: 110,
@@ -64,8 +66,14 @@ export class Demon extends Enemy {
     // path beginning only front
     // path end only back
 
-    //this.spawnMinionBehind();
-    this.spawnMinionInFront();
+    if (Demon.config.special?.value === undefined) {
+      throw new Error("Demon.config.special.value is undefined");
+    }
+
+    if (percentageChance(Demon.config.special.value)) {
+      //this.spawnMinionBehind();
+      this.spawnMinionInFront();
+    }
 
     this.currentHealth -= amount;
     if (this.currentHealth <= 0) {
