@@ -39,6 +39,7 @@ export class Demon extends Enemy {
     bountyGold: 100,
   };
 
+  spawnMinionDistance = 80;
   spawnInFront: boolean = true;
   lastPosition: {
     x: number;
@@ -62,7 +63,8 @@ export class Demon extends Enemy {
     // path beginning only front
     // path end only back
 
-    this.spawnMinionBehind();
+    //this.spawnMinionBehind();
+    this.spawnMinionInFront();
 
     this.currentHealth -= amount;
     if (this.currentHealth <= 0) {
@@ -83,10 +85,40 @@ export class Demon extends Enemy {
     game.enemies.currentEnemiesPush(minion);
   };
 
+  private spawnMinionInFront = () => {
+    const restDistanceX = Math.abs(this.nodeTarget.x - this.x);
+    const restDistanceY = Math.abs(this.nodeTarget.y - this.y);
+
+    let x;
+    let y;
+
+    if (restDistanceX - this.spawnMinionDistance < 0) {
+      x = this.x + restDistanceX * Math.cos((this.angle * Math.PI) / 180);
+    } else {
+      x =
+        this.x +
+        this.spawnMinionDistance * Math.cos((this.angle * Math.PI) / 180);
+    }
+
+    if (restDistanceY - this.spawnMinionDistance < 0) {
+      y = this.y + restDistanceY * Math.sin((this.angle * Math.PI) / 180);
+    } else {
+      y =
+        this.y +
+        this.spawnMinionDistance * Math.sin((this.angle * Math.PI) / 180);
+    }
+
+    const minion = new SkeletonGuard(shortUUID.generate(), x, y);
+
+    minion.setNodeIndex(this.nodesIndex - 1); // -1 because updateNodeTarget increments the index
+    minion.updateNodeTarget();
+    game.enemies.currentEnemiesPush(minion);
+  };
+
   private calculateLastPosition = () => {
     if (
-      Math.abs(this.x - this.lastPosition.x) > 64 ||
-      Math.abs(this.y - this.lastPosition.y) > 64
+      Math.abs(this.x - this.lastPosition.x) > this.spawnMinionDistance ||
+      Math.abs(this.y - this.lastPosition.y) > this.spawnMinionDistance
     ) {
       this.lastPosition = {
         x: this.x,
