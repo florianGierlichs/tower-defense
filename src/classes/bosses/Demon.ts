@@ -61,25 +61,34 @@ export class Demon extends Enemy {
   }
 
   reduceHealth = (amount: number, _towerSourceId: string) => {
-    // needs % spawn condition
-    // needs front/back condition in the middle of the path
-    // path beginning only front
-    // path end only back
-
-    if (Demon.config.special?.value === undefined) {
-      throw new Error("Demon.config.special.value is undefined");
-    }
-
-    if (percentageChance(Demon.config.special.value)) {
-      //this.spawnMinionBehind();
-      this.spawnMinionInFront();
-    }
+    this.handleSpawnMinion();
 
     this.currentHealth -= amount;
     if (this.currentHealth <= 0) {
       game.enemies.remove(this.id);
       game.gold.increaseGoldAfterKillEnemy(this.bountyGold);
       game.towers.resetTowerTarget(this.id);
+    }
+  };
+
+  private handleSpawnMinion = () => {
+    if (Demon.config.special?.value === undefined) {
+      throw new Error("Demon.config.special.value is undefined");
+    }
+
+    if (percentageChance(Demon.config.special.value)) {
+      if (this.nodesIndex === 0) {
+        this.spawnMinionInFront();
+        return;
+      }
+
+      if (this.nodesIndex === this.pathNodes.length - 1) {
+        this.spawnMinionBehind();
+        return;
+      }
+
+      this.spawnInFront ? this.spawnMinionInFront() : this.spawnMinionBehind();
+      this.spawnInFront = !this.spawnInFront;
     }
   };
 
