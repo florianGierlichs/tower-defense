@@ -4,7 +4,6 @@ import { Mushroom } from "./enemies/Mushroom";
 import { Goblin } from "./enemies/Goblin";
 import { FireWorm } from "./enemies/FireWorm";
 import { Demon } from "./bosses/Demon";
-import { SkeletonGuard } from "./enemies/SkeletonGuard";
 import { ChainedGolem } from "./enemies/ChainedGolem";
 import { TerrorWolf } from "./enemies/TerrorWolf";
 import { BloodyBat } from "./enemies/BloodyBat";
@@ -52,10 +51,10 @@ export class Waves {
       unitCount: 1,
     },
     {
-      id: SkeletonGuard.config.id,
-      className: SkeletonGuard,
-      config: SkeletonGuard.config,
-      unitCount: 22,
+      id: SkeletonArcher.config.id,
+      className: SkeletonArcher,
+      config: SkeletonArcher.config,
+      unitCount: 20,
     },
     {
       id: ChainedGolem.config.id,
@@ -85,12 +84,6 @@ export class Waves {
       id: EvilWitch.config.id,
       className: EvilWitch,
       config: EvilWitch.config,
-      unitCount: 20,
-    },
-    {
-      id: SkeletonArcher.config.id,
-      className: SkeletonArcher,
-      config: SkeletonArcher.config,
       unitCount: 20,
     },
     {
