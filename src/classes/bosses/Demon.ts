@@ -2,9 +2,9 @@ import shortUUID from "short-uuid";
 import { game } from "../../main";
 import { EnemyConfig, PathNode } from "../../utils/types";
 import { Enemy } from "../enemies/Enemy";
-import { SkeletonGuard } from "../enemies/SkeletonGuard";
 import { moveX, moveY } from "../../utils/move";
 import { percentageChance } from "../../utils/percentageChance";
+import { SkeletonGuardSpawn } from "../enemies/SkeletonGuardSpawn";
 
 export class Demon extends Enemy {
   static readonly config: EnemyConfig = {
@@ -56,6 +56,8 @@ export class Demon extends Enemy {
     nodeIndex: this.nodesIndex,
   };
 
+  spawnedMinions: SkeletonGuardSpawn[] = [];
+
   constructor(id: string, x: number, y: number) {
     super(id, x, y, Demon.config);
   }
@@ -93,14 +95,14 @@ export class Demon extends Enemy {
   };
 
   private spawnMinionBehind = () => {
-    const minion = new SkeletonGuard(
-      shortUUID.generate(),
-      this.lastPosition.x,
-      this.lastPosition.y
-    );
-    minion.setNodeIndex(this.lastPosition.nodeIndex - 1); // -1 because updateNodeTarget increments the index
-    minion.updateNodeTarget();
-    game.enemies.currentEnemiesPush(minion);
+    const minion = new SkeletonGuardSpawn({
+      id: shortUUID.generate(),
+      x: this.lastPosition.x,
+      y: this.lastPosition.y,
+      index: this.lastPosition.nodeIndex,
+      removeSpawn: this.removeSpawnedMinion,
+    });
+    this.spawnedMinionsPush(minion);
   };
 
   private spawnMinionInFront = () => {
@@ -127,11 +129,14 @@ export class Demon extends Enemy {
         angle: this.angle,
       });
 
-    const minion = new SkeletonGuard(shortUUID.generate(), x, y);
-
-    minion.setNodeIndex(this.nodesIndex - 1); // -1 because updateNodeTarget increments the index
-    minion.updateNodeTarget();
-    game.enemies.currentEnemiesPush(minion);
+    const minion = new SkeletonGuardSpawn({
+      id: shortUUID.generate(),
+      x,
+      y,
+      index: this.nodesIndex,
+      removeSpawn: this.removeSpawnedMinion,
+    });
+    this.spawnedMinionsPush(minion);
   };
 
   private calculateLastPosition = () => {
@@ -148,11 +153,26 @@ export class Demon extends Enemy {
     }
   };
 
+  private spawnedMinionsPush = (minion: SkeletonGuardSpawn) => {
+    this.spawnedMinions.push(minion);
+  };
+
+  private updateSpawnedMinions = () => {
+    this.spawnedMinions.forEach((minion) => {
+      minion.update();
+    });
+  };
+
+  removeSpawnedMinion = (id: string) => {
+    this.spawnedMinions = this.spawnedMinions.filter((m) => m.id !== id);
+  };
+
   update = () => {
     this.updateFrames();
     this.updateSlows();
     this.move();
     this.calculateLastPosition();
     this.draw();
+    this.updateSpawnedMinions();
   };
 }

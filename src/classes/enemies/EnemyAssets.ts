@@ -6,6 +6,7 @@ import skeletonShield from "../../assets/enemy/skeletonShield.png";
 import mushroom from "../../assets/enemy/mushroom.png";
 import goblin from "../../assets/enemy/goblin.png";
 import skeletonGuard from "../../assets/enemy/skeletonGuard.png";
+import skeletonGuardSpawn from "../../assets/enemy/skeletonGuardSpawn.png";
 import chainedGolem from "../../assets/enemy/chainedGolem.png";
 import terrorWolf from "../../assets/enemy/terrorWolf.png";
 import bloodyBat from "../../assets/enemy/blooyBat.png";
@@ -31,6 +32,7 @@ export class EnemyAssets {
       mushroom: await loadImage(mushroom),
       goblin: await loadImage(goblin),
       skeletonGuard: await loadImage(skeletonGuard),
+      skeletonGuardSpawn: await loadImage(skeletonGuardSpawn),
       chainedGolem: await loadImage(chainedGolem),
       terrorWolf: await loadImage(terrorWolf),
       bloodyBat: await loadImage(bloodyBat),

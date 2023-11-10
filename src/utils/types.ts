@@ -168,6 +168,7 @@ export type EnemyId =
   | "goblin"
   | "fireWorm"
   | "skeletonGuard"
+  | "skeletonGuardSpawn"
   | "chainedGolem"
   | "terrorWolf"
   | "bloodyBat"
