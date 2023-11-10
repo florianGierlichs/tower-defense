@@ -11,8 +11,8 @@ export class Demon extends Enemy {
     id: "demon",
     name: "Demon",
     health: 700,
-    speed: 1,
-    maxSlowPercentage: 0,
+    speed: 1.5,
+    maxSlowPercentage: 50,
     special: {
       description: "Chance to spawn minions",
       value: 40,
