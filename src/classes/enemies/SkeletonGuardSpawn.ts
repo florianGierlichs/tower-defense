@@ -71,6 +71,8 @@ export class SkeletonGuardSpawn {
 
           minion.setNodeIndex(this.index - 1); // -1 because updateNodeTarget increments the index
           minion.updateNodeTarget();
+          minion.updateAnimationDirection();
+          minion.setImageConfig();
           game.enemies.currentEnemiesPush(minion);
           this.removeSpawn(this.id);
           return false;

@@ -85,7 +85,7 @@ export class Enemy {
     }
   };
 
-  private setImageConfig = () => {
+  setImageConfig = () => {
     const {
       animationStartRight,
       animationStartLeft,
@@ -254,7 +254,7 @@ export class Enemy {
     this.angle = getAngle(this.x, this.y, this.nodeTarget.x, this.nodeTarget.y);
   };
 
-  private updateAnimationDirection = () => {
+  updateAnimationDirection = () => {
     // move up or down
     if (
       (this.x - this.nodeTarget.x - 1) * (this.x - this.nodeTarget.x + 1) <=
