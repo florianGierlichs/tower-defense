@@ -2,7 +2,7 @@
 
 #### Boss wave. Every x wave, spawns a boss that has more health and maybe certain abilities.
 
-- spawn mobs on every hit he takes (could be death animation of the mob reversed)
+- spawn mobs on every hit he takes (could be death animation of the mob reversed) :heavy_check_mark:
 - spawn mobs on every x seconds
 - spawn mobs on death
 - destroy random tower on death
@@ -21,6 +21,11 @@
 - tower which can shoot through multiple enemies
 - tower which dont shot projectiles but cast a spell on the ground :heavy_check_mark:
 - some towers could only available after a condition. e.g. after x waves or after x (Boss)kills
+- support tower which buffs damage or attack speed of x other towers in range
+- strong single target tower
+- aoe slow around tower
+- "sniper" tower which always focus the enemy with the lowest health
+- tower which can gain back player health on kill
 
 #### enemies
 
