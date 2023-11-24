@@ -12,7 +12,7 @@ export class Projectile {
   targetEnemy;
   removeProjectile;
   towerSourceId;
-  speed: number = 20; // todo needs to be dynamic to be reused by different tower types
+  speed;
 
   image: HTMLImageElement;
   width: number;
@@ -23,6 +23,7 @@ export class Projectile {
     x: number,
     y: number,
     damage: number,
+    speed: number,
     {
       img,
       width,
@@ -36,6 +37,7 @@ export class Projectile {
     this.x = x;
     this.y = y;
     this.damage = damage;
+    this.speed = speed;
     this.image = img;
     this.width = width;
     this.height = height;
@@ -44,7 +46,7 @@ export class Projectile {
     this.towerSourceId = towerSourceId;
   }
 
-  private draw = () => {
+  draw = () => {
     const angle = getAngle(
       this.x,
       this.y,
@@ -59,7 +61,7 @@ export class Projectile {
     dom.ctxGame.restore();
   };
 
-  private move = () => {
+  move = () => {
     const angle = getAngle(
       this.x,
       this.y,

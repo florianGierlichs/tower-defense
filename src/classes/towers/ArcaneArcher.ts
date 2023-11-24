@@ -63,6 +63,7 @@ export class ArcaneArcher extends Tower {
   };
 
   id;
+  projectileSpeed = 20;
 
   constructor(id: string, x: number, y: number) {
     super(id, x, y, ArcaneArcher.config);
@@ -79,6 +80,7 @@ export class ArcaneArcher extends Tower {
       this.tileMiddle.x,
       this.tileMiddle.y,
       ArcaneArcher.config.damage,
+      this.projectileSpeed,
       {
         img: this.projectileImg,
         width: this.projectileWidth,
