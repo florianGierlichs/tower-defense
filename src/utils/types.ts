@@ -20,6 +20,8 @@ import { Necromancer } from "../classes/enemies/Necromancer";
 import { SkeletonCat } from "../classes/enemies/SkeletonCat";
 import { SkeletonWarrior } from "../classes/enemies/SkeletonWarrior";
 import { DeathWorm } from "../classes/bosses/DeathWorm";
+import { DemonMage } from "../classes/towers/DemonMage";
+import { Fireball } from "../classes/projectiles/Fireball";
 
 export interface Coordinate {
   x: number;
@@ -119,12 +121,14 @@ export enum TowerId {
   ARCANE_ARCHER = "arcaneArcher",
   FIRE_MAGE = "fireMage",
   Lightning_MAGE = "lightningMage",
+  DEMON_MAGE = "demonMage",
 }
 
 export enum ProjectileId { // todo id does not match projectile class name, dont know if this is a problem
   ARCANE_ARCHER = "arcaneArcherProjectile",
   FIRE_MAGE = "fireMageProjectile",
   LIGHTNING_MAGE = "lightningMageProjectile",
+  DEMON_MAGE = "demonMageProjectile",
 }
 
 export enum EnemyProjectileId {
@@ -133,17 +137,19 @@ export enum EnemyProjectileId {
 
 export enum EffectId {
   FREEZE_TOWER = "freezeTower",
+  FIRE_EXPLOSION = "fireExplosion",
 }
 
 export enum BlueprintId {
   ARCANE_ARCHER = "arcaneArcherBp",
   FIRE_MAGE = "fireMageBp",
   LIGHTNING_MAGE = "lightningMageBp",
+  DEMON_MAGE = "demonMageBp",
 }
 
-export type ProjectileInstance = Projectile | Flame | LightningBolt;
+export type ProjectileInstance = Projectile | Flame | LightningBolt | Fireball;
 
-export type TowerInstance = ArcaneArcher | FireMage | LightningMage;
+export type TowerInstance = ArcaneArcher | FireMage | LightningMage | DemonMage;
 
 export type EnemyInstance =
   | SkeletonShield

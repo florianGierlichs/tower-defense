@@ -4,6 +4,7 @@ import { MenuItemTower } from "./MenuItemTower";
 import { FireMage } from "../towers/FireMage";
 import { ArcaneArcher } from "../towers/ArcaneArcher";
 import { LightningMage } from "../towers/LightningMage";
+import { DemonMage } from "../towers/DemonMage";
 
 export class Menu {
   static readonly towers: readonly MenuTower[] = [
@@ -21,6 +22,11 @@ export class Menu {
       id: FireMage.config.id,
       config: FireMage.config,
       price: 120,
+    },
+    {
+      id: DemonMage.config.id,
+      config: DemonMage.config,
+      price: 100,
     },
   ] as const;
 

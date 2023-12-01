@@ -290,6 +290,16 @@ canvas {
   transform: translate(-50%, 0);
 }
 
+#demonMage {
+  background-image: url("./assets/menu/demonMageMenu.png");
+  background-size: cover;
+
+  height: 160px;
+  width: 160px;
+  bottom: 0;
+  transform: translate(-62%, 0);
+}
+
 #toggle-tiles-info {
   padding: 12px 8px;
   margin: 10px;
@@ -313,6 +323,11 @@ canvas {
 .lightningMage,
 .lightningMage #menu-container {
   cursor: url("./assets/cursor/cursorLightningMage.png") 38 48, auto;
+}
+
+.demonMage,
+.demonMage #menu-container {
+  cursor: url("./assets/cursor/cursorDemonMage.png") 38 48, auto;
 }
 
 #spawn-enemies-container {

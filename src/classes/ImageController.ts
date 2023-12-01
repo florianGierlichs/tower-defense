@@ -18,9 +18,13 @@ import fireMageBpImg from "../assets/towerBlueprint/fireMageBp.png";
 import lightningMageImg from "../assets/tower/lightningMage.png";
 import lightningMageProjectileImg from "../assets/projectiles/lightningMageProjectile.png";
 import lightningMageBpImg from "../assets/towerBlueprint/lightningMageBp.png";
+import demonMageImg from "../assets/tower/demonMage.png";
+import demonMageProjectileImg from "../assets/projectiles/demonMageProjectile.png";
+import demonMageBpImg from "../assets/towerBlueprint/demonMageBp.png";
 import { EnemyAssets } from "./enemies/EnemyAssets";
 import icicleImg from "../assets/projectiles/icicle.png";
 import freezeTowerImg from "../assets/effect/freezeTower.png";
+import fireExplosionImg from "../assets/effect/fireExplosion.png";
 
 const texturesKey = "textures";
 
@@ -40,6 +44,10 @@ export class ImageController {
   lightningMageProjectile: HTMLImageElement | null = null;
   lightningMageBp: HTMLImageElement | null = null;
 
+  demonMage: HTMLImageElement | null = null;
+  demonMageProjectile: HTMLImageElement | null = null;
+  demonMageBp: HTMLImageElement | null = null;
+
   // enemy
   enemyAssets: Record<EnemyId | BossId, HTMLImageElement> | null = null;
 
@@ -48,6 +56,7 @@ export class ImageController {
 
   // effects
   freezeTower: HTMLImageElement | null = null;
+  fireExplosion: HTMLImageElement | null = null;
 
   loadImages = async () => {
     this.textures = await loadImage(texturesImg);
@@ -65,6 +74,10 @@ export class ImageController {
     this.lightningMageProjectile = await loadImage(lightningMageProjectileImg);
     this.lightningMageBp = await loadImage(lightningMageBpImg);
 
+    this.demonMage = await loadImage(demonMageImg);
+    this.demonMageProjectile = await loadImage(demonMageProjectileImg);
+    this.demonMageBp = await loadImage(demonMageBpImg);
+
     // enemy
     this.enemyAssets = await new EnemyAssets().getAssets();
 
@@ -73,6 +86,7 @@ export class ImageController {
 
     // effects
     this.freezeTower = await loadImage(freezeTowerImg);
+    this.fireExplosion = await loadImage(fireExplosionImg);
   };
 
   getImage = (

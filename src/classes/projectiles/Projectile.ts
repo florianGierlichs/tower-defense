@@ -96,7 +96,7 @@ export class Projectile {
     }
   };
 
-  private collide = () => {
+  collide = () => {
     this.removeProjectile(this.id);
     this.targetEnemy.reduceHealth(this.damage, this.towerSourceId);
   };
