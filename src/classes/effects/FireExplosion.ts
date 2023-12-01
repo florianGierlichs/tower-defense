@@ -93,10 +93,6 @@ export class FireExplosion {
       this.sWidth * this.imageScale,
       this.sHeight * this.imageScale
     );
-
-    dom.ctxGame.beginPath();
-    dom.ctxGame.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-    dom.ctxGame.stroke();
   };
 
   private updateFrames = () => {
