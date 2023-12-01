@@ -431,6 +431,7 @@ h2 {
   font-weight: normal;
   display: flex;
   justify-content: space-between;
+  max-width: 180px;
 }
 
 .tower-stats-description {
