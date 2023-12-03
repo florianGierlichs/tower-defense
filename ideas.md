@@ -53,8 +53,11 @@
 
 #### Start screen
 
-- add description of gold increase and bounty decrease :heavy_check_mark:
+- add description of gold increase and bounty decrease
+- add asset credits
+- add link to repo
 
 #### Gameplay
 
 - add a way to gain health back
+- add a way to see enemy stats after enemy spawn info has expired
