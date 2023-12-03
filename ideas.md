@@ -26,6 +26,7 @@
 - aoe slow around tower
 - "sniper" tower which always focus the enemy with the lowest health
 - tower which can gain back player health on kill
+- FireMage could cause burning effect to enemies
 
 #### enemies
 
