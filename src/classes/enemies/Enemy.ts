@@ -306,9 +306,11 @@ export class Enemy {
   reduceHealth = (amount: number, _towerSourceId: string) => {
     this.currentHealth -= amount;
     if (this.currentHealth <= 0) {
-      game.enemies.remove(this.id);
-      game.gold.increaseGoldAfterKillEnemy(this.bountyGold);
-      game.towers.resetTowerTarget(this.id);
+      if (game.enemies.getEnemyById(this.id) !== undefined) {
+        game.gold.increaseGoldAfterKillEnemy(this.bountyGold);
+        game.enemies.remove(this.id);
+        game.towers.resetTowerTarget(this.id);
+      }
     }
   };
 

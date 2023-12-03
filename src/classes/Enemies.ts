@@ -16,6 +16,9 @@ export class Enemies {
     );
   };
 
+  getEnemyById = (id: string) =>
+    this.currentEnemies.find((enemy) => enemy.id === id);
+
   getCurrentEnemies = () => this.currentEnemies;
 
   setCurrentEnemies = (enemies: (EnemyInstance | BossInstance)[]) => {
