@@ -14,7 +14,8 @@ export class DemonMage extends Tower {
   static readonly config: TowerConfig = {
     id: TowerId.DEMON_MAGE,
     name: "Demon Mage",
-    description: "Shoots a magic arrow that deals damage to a single enemy.",
+    description:
+      "Shoots a magic missile that explodes on impact, dealing damage in an area.",
     range: 200,
     attackSpeed: 40,
     damage: 30,
