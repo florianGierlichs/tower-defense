@@ -34,16 +34,6 @@
 - add lifebar to enemies :heavy_check_mark:
 - add hit animation to enemies, with Aoe towers it can be hard to see if you hit an enemy
 
-#### Name asset creators
-
-- https://astrobob.itch.io/arcane-archer
-- https://cainos.itch.io/pixel-art-top-down-basic
-- https://luizmelo.itch.io/monsters-creatures-fantasy
-- https://creativekind.itch.io/
-- https://jesse-m.itch.io/
-- https://oco.itch.io/
-- https://pimen.itch.io/
-
 #### Extend Menu
 
 - add tooltip to towers and show tower stats, like dmg, range, attack speed, etc. :heavy_check_mark:
