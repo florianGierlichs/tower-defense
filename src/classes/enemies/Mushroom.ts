@@ -5,9 +5,9 @@ export class Mushroom extends Enemy {
   static readonly config: EnemyConfig = {
     id: "mushroom",
     name: "Mad Mushroom",
-    health: 30,
+    health: 25,
     speed: 2,
-    maxSlowPercentage: 80,
+    maxSlowPercentage: 60,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1,

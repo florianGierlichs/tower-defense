@@ -7,7 +7,7 @@ export class SkeletonShield extends Enemy {
     name: "Shielded Skeleton",
     health: 10,
     speed: 2,
-    maxSlowPercentage: 50,
+    maxSlowPercentage: 60,
     sWidth: 64,
     sHeight: 64,
     imageScale: 0.8,

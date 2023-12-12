@@ -17,7 +17,7 @@ export class AoeSlow extends Aoe {
 
   private slowEnemiesInsideArea = () => {
     this.getEnemiesInsideArea().forEach((enemy) => {
-      enemy.addSlow(new Slow(30, 2000));
+      enemy.addSlow(new Slow(30, 2000)); // todo slow needs to come from tower
     });
   };
 }

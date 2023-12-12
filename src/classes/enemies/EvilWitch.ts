@@ -5,9 +5,9 @@ export class EvilWitch extends Enemy {
   static readonly config: EnemyConfig = {
     id: "evilWitch",
     name: "Evil Witch",
-    health: 130,
+    health: 240,
     speed: 2,
-    maxSlowPercentage: 50,
+    maxSlowPercentage: 60,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1.3,
@@ -30,7 +30,7 @@ export class EvilWitch extends Enemy {
         },
       },
     },
-    bountyGold: 20,
+    bountyGold: 15,
   };
 
   constructor(id: string, x: number, y: number) {

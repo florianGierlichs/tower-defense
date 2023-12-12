@@ -11,22 +11,22 @@ export class Menu {
     {
       id: ArcaneArcher.config.id,
       config: ArcaneArcher.config,
-      price: 40,
+      price: 40, // todo put to config
     },
     {
       id: LightningMage.config.id,
       config: LightningMage.config,
-      price: 100,
+      price: 120,
     },
     {
       id: FireMage.config.id,
       config: FireMage.config,
-      price: 120,
+      price: 150,
     },
     {
       id: DemonMage.config.id,
       config: DemonMage.config,
-      price: 100,
+      price: 300,
     },
   ] as const;
 

@@ -5,9 +5,9 @@ export class FireWorm extends Enemy {
   static readonly config: EnemyConfig = {
     id: "fireWorm",
     name: "Fire Worm",
-    health: 100,
+    health: 50,
     speed: 2,
-    maxSlowPercentage: 20,
+    maxSlowPercentage: 60,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1,
@@ -30,7 +30,7 @@ export class FireWorm extends Enemy {
         },
       },
     },
-    bountyGold: 15,
+    bountyGold: 5,
   };
 
   constructor(id: string, x: number, y: number) {

@@ -5,9 +5,9 @@ export class BloodyBat extends Enemy {
   static readonly config: EnemyConfig = {
     id: "bloodyBat",
     name: "Bloody Bat",
-    health: 130,
+    health: 200,
     speed: 2,
-    maxSlowPercentage: 50,
+    maxSlowPercentage: 60,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1.2,
@@ -30,7 +30,7 @@ export class BloodyBat extends Enemy {
         },
       },
     },
-    bountyGold: 20,
+    bountyGold: 10,
   };
 
   constructor(id: string, x: number, y: number) {

@@ -11,7 +11,7 @@ export class FrostGuardian extends Enemy {
     name: "Frost Guardian",
     health: 1500,
     speed: 1.5,
-    maxSlowPercentage: 50,
+    maxSlowPercentage: 60,
     special: {
       description: "Chance to freeze tower",
       value: 40,

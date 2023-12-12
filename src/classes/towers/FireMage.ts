@@ -19,7 +19,7 @@ export class FireMage extends Tower {
     }sec. Slow enemies can get multiple damage ticks.`,
     range: 100,
     attackSpeed: 40,
-    damage: 20,
+    damage: 35,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1,

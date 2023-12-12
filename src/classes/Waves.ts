@@ -24,25 +24,25 @@ export class Waves {
       id: SkeletonShield.config.id,
       className: SkeletonShield,
       config: SkeletonShield.config,
-      unitCount: 12,
+      unitCount: 20,
     },
     {
       id: Mushroom.config.id,
       className: Mushroom,
       config: Mushroom.config,
-      unitCount: 12,
+      unitCount: 20,
     },
     {
       id: Goblin.config.id,
       className: Goblin,
       config: Goblin.config,
-      unitCount: 12,
+      unitCount: 20,
     },
     {
       id: FireWorm.config.id,
       className: FireWorm,
       config: FireWorm.config,
-      unitCount: 12,
+      unitCount: 20,
     },
     {
       id: DeathWorm.config.id,
@@ -60,7 +60,7 @@ export class Waves {
       id: ChainedGolem.config.id,
       className: ChainedGolem,
       config: ChainedGolem.config,
-      unitCount: 12,
+      unitCount: 20,
     },
     {
       id: TerrorWolf.config.id,
