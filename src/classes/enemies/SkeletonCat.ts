@@ -5,7 +5,7 @@ export class SkeletonCat extends Enemy {
   static readonly config: EnemyConfig = {
     id: "skeletonCat",
     name: "Skeleton Cat",
-    health: 250,
+    health: 260,
     speed: 2,
     maxSlowPercentage: 60,
     sWidth: 64,

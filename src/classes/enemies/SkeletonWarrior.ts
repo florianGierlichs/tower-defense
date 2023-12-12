@@ -5,7 +5,7 @@ export class SkeletonWarrior extends Enemy {
   static readonly config: EnemyConfig = {
     id: "skeletonWarrior",
     name: "Skeleton Warrior",
-    health: 300,
+    health: 310,
     speed: 1.5,
     maxSlowPercentage: 60,
     sWidth: 64,

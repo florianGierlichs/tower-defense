@@ -5,7 +5,7 @@ export class Necromancer extends Enemy {
   static readonly config: EnemyConfig = {
     id: "necromancer",
     name: "Necromancer",
-    health: 350,
+    health: 360,
     speed: 2,
     maxSlowPercentage: 60,
     sWidth: 64,

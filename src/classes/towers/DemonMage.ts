@@ -18,7 +18,7 @@ export class DemonMage extends Tower {
       "Shoots a magic missile that explodes on impact, dealing damage in an area.",
     range: 200,
     attackSpeed: 40,
-    damage: 50,
+    damage: 45,
     sWidth: 160,
     sHeight: 128,
     imageScale: 0.9,

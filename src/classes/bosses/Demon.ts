@@ -10,7 +10,7 @@ export class Demon extends Enemy {
   static readonly config: EnemyConfig = {
     id: "demon",
     name: "Demon",
-    health: 2000,
+    health: 2500,
     speed: 1.5,
     maxSlowPercentage: 60,
     special: {

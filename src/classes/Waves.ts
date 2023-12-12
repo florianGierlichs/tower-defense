@@ -15,8 +15,6 @@ import { SkeletonWarrior } from "./enemies/SkeletonWarrior";
 import { Necromancer } from "./enemies/Necromancer";
 import { DeathWorm } from "./bosses/DeathWorm";
 
-// enemy should not grow to much linear but more exponential
-// fireMage and demonMage might be to strong
 export class Waves {
   waveIndex = 0;
   wasLastWave = false;

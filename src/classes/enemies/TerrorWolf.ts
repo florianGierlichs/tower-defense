@@ -5,7 +5,7 @@ export class TerrorWolf extends Enemy {
   static readonly config: EnemyConfig = {
     id: "terrorWolf",
     name: "Terror Wolf",
-    health: 160,
+    health: 170,
     speed: 2.5,
     maxSlowPercentage: 60,
     sWidth: 64,

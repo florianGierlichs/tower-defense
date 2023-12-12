@@ -5,7 +5,7 @@ export class EvilWitch extends Enemy {
   static readonly config: EnemyConfig = {
     id: "evilWitch",
     name: "Evil Witch",
-    health: 230,
+    health: 240,
     speed: 2,
     maxSlowPercentage: 60,
     sWidth: 64,

@@ -5,7 +5,7 @@ export class DeathWorm extends Enemy {
   static readonly config: EnemyConfig = {
     id: "deathWorm",
     name: "Death Worm",
-    health: 800,
+    health: 750,
     speed: 1.2,
     maxSlowPercentage: 0,
     special: {
