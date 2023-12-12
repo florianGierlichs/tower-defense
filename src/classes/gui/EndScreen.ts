@@ -39,7 +39,13 @@ export class EndScreen {
     this.playButton.id = "play-again-button";
     this.playButton.classList.add("box-shadow", "play-button");
     this.playButton.innerText = "Play again";
-    this.playButton.addEventListener("click", () => location.reload());
+    this.playButton.addEventListener("click", () => {
+      gtag("event", "click", {
+        event_category: "button",
+        event_label: "Play again",
+      });
+      location.reload();
+    });
 
     this.buttonContainer.appendChild(this.playButton);
 

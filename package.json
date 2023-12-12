@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/gtag.js": "^0.0.18",
     "typescript": "^5.3.2",
     "vite": "^5.0.4"
   },

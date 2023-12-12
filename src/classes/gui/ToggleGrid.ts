@@ -16,5 +16,9 @@ export class ToggleGrid {
 
   private toggleGrid = () => {
     tiles.drawGrid();
+    gtag("event", "click", {
+      event_category: "button",
+      event_label: "toggle grid",
+    });
   };
 }
