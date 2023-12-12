@@ -5,9 +5,9 @@ export class Necromancer extends Enemy {
   static readonly config: EnemyConfig = {
     id: "necromancer",
     name: "Necromancer",
-    health: 10,
-    speed: 1.5,
-    maxSlowPercentage: 50,
+    health: 350,
+    speed: 2,
+    maxSlowPercentage: 60,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1,
@@ -30,7 +30,7 @@ export class Necromancer extends Enemy {
         },
       },
     },
-    bountyGold: 5,
+    bountyGold: 15,
   };
 
   constructor(id: string, x: number, y: number) {

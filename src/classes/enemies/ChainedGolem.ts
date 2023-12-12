@@ -5,9 +5,9 @@ export class ChainedGolem extends Enemy {
   static readonly config: EnemyConfig = {
     id: "chainedGolem",
     name: "Chained Golem",
-    health: 130,
+    health: 180,
     speed: 1.3,
-    maxSlowPercentage: 50,
+    maxSlowPercentage: 60,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1.1,
@@ -30,7 +30,7 @@ export class ChainedGolem extends Enemy {
         },
       },
     },
-    bountyGold: 20,
+    bountyGold: 10,
   };
 
   constructor(id: string, x: number, y: number) {

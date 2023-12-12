@@ -5,9 +5,9 @@ export class TerrorWolf extends Enemy {
   static readonly config: EnemyConfig = {
     id: "terrorWolf",
     name: "Terror Wolf",
-    health: 130,
-    speed: 2.1,
-    maxSlowPercentage: 50,
+    health: 160,
+    speed: 2.5,
+    maxSlowPercentage: 60,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1,
@@ -30,7 +30,7 @@ export class TerrorWolf extends Enemy {
         },
       },
     },
-    bountyGold: 20,
+    bountyGold: 10,
   };
 
   constructor(id: string, x: number, y: number) {

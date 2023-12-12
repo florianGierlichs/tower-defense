@@ -5,9 +5,9 @@ export class Goblin extends Enemy {
   static readonly config: EnemyConfig = {
     id: "goblin",
     name: "Greedy Goblin",
-    health: 40,
+    health: 35,
     speed: 3,
-    maxSlowPercentage: 50,
+    maxSlowPercentage: 60,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1.1,
@@ -30,7 +30,7 @@ export class Goblin extends Enemy {
         },
       },
     },
-    bountyGold: 10,
+    bountyGold: 5,
   };
 
   constructor(id: string, x: number, y: number) {

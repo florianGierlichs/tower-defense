@@ -5,9 +5,9 @@ export class SkeletonArcher extends Enemy {
   static readonly config: EnemyConfig = {
     id: "skeletonArcher",
     name: "Skeleton Archer",
-    health: 130,
+    health: 100,
     speed: 2,
-    maxSlowPercentage: 50,
+    maxSlowPercentage: 60,
     sWidth: 64,
     sHeight: 64,
     imageScale: 1,
@@ -30,7 +30,7 @@ export class SkeletonArcher extends Enemy {
         },
       },
     },
-    bountyGold: 20,
+    bountyGold: 10,
   };
 
   constructor(id: string, x: number, y: number) {

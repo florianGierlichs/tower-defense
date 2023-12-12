@@ -15,6 +15,8 @@ import { SkeletonWarrior } from "./enemies/SkeletonWarrior";
 import { Necromancer } from "./enemies/Necromancer";
 import { DeathWorm } from "./bosses/DeathWorm";
 
+// enemy should not grow to much linear but more exponential
+// fireMage and demonMage might be to strong
 export class Waves {
   waveIndex = 0;
   wasLastWave = false;
@@ -24,25 +26,25 @@ export class Waves {
       id: SkeletonShield.config.id,
       className: SkeletonShield,
       config: SkeletonShield.config,
-      unitCount: 12,
+      unitCount: 20,
     },
     {
       id: Mushroom.config.id,
       className: Mushroom,
       config: Mushroom.config,
-      unitCount: 12,
+      unitCount: 20,
     },
     {
       id: Goblin.config.id,
       className: Goblin,
       config: Goblin.config,
-      unitCount: 12,
+      unitCount: 20,
     },
     {
       id: FireWorm.config.id,
       className: FireWorm,
       config: FireWorm.config,
-      unitCount: 12,
+      unitCount: 20,
     },
     {
       id: DeathWorm.config.id,
@@ -60,7 +62,7 @@ export class Waves {
       id: ChainedGolem.config.id,
       className: ChainedGolem,
       config: ChainedGolem.config,
-      unitCount: 12,
+      unitCount: 20,
     },
     {
       id: TerrorWolf.config.id,

@@ -10,9 +10,9 @@ export class Demon extends Enemy {
   static readonly config: EnemyConfig = {
     id: "demon",
     name: "Demon",
-    health: 700,
+    health: 2000,
     speed: 1.5,
-    maxSlowPercentage: 50,
+    maxSlowPercentage: 60,
     special: {
       description: "Chance to spawn minions",
       value: 40,
@@ -39,7 +39,7 @@ export class Demon extends Enemy {
         },
       },
     },
-    bountyGold: 100,
+    bountyGold: 300,
   };
 
   spawnMinionDistance = 80;
