@@ -248,6 +248,7 @@ export class Enemy {
     if (this.pathNodes.length === this.nodesIndex) {
       game.playerHealth.reduceHealth();
       game.enemies.remove(this.id);
+      game.towers.resetTowerTarget(this.id);
       return;
     }
     this.nodeTarget = this.pathNodes[this.nodesIndex];
