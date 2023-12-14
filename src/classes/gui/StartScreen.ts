@@ -2,6 +2,8 @@ export class StartScreen {
   startScreen;
   startButton;
   buttonCallback;
+  githubLink;
+
   scaleInTransform = [
     { transform: "translate(-50%, -50%) scale(1)" },
     { transform: "translate(-50%, -50%) scale(0.9)" },
@@ -18,12 +20,17 @@ export class StartScreen {
     this.startButton = document.createElement("button");
     this.startButton.id = "start-button";
     this.startButton.classList.add("box-shadow", "play-button");
-    this.startButton.innerHTML = "START";
+    this.startButton.innerText = "START";
     this.startButton.addEventListener("click", () => {
       this.removeStartScreen();
     });
-
     this.startScreen.appendChild(this.startButton);
+
+    this.githubLink = document.createElement("a");
+    this.githubLink.id = "github-link-start-screen";
+    this.githubLink.href = "https://github.com/florianGierlichs/tower-defense";
+    this.githubLink.target = "_blank";
+    this.startScreen.appendChild(this.githubLink);
 
     document.body.appendChild(this.startScreen);
   }
@@ -33,6 +40,10 @@ export class StartScreen {
     setTimeout(() => {
       this.startScreen.remove();
       this.buttonCallback();
+      const githubLink = document.getElementById("github-link");
+      if (githubLink) {
+        githubLink.style.display = "block";
+      }
     }, this.scaleInTiming);
   }
 }

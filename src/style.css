@@ -36,12 +36,27 @@ body {
   transform: translate(-50%, -50%);
   background-image: url("./assets/titleContainer.png");
   background-size: cover;
-  padding: 200px 400px;
   cursor: url("./assets/cursor/CursorWhite.png") 11 6, auto;
+  min-width: 950px;
+  min-height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #start-button {
   font-size: 32px;
+}
+
+#github-link-start-screen {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-image: url("./assets/github-logo.png");
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
 
 .play-button {
@@ -120,6 +135,7 @@ body {
 #title-container {
   margin: 0 0 50px 0;
   text-align: center;
+  position: relative;
 }
 
 #title {
@@ -128,6 +144,19 @@ body {
   padding: 12px 20px;
   background-size: contain;
   font-family: diablo-light;
+}
+
+#github-link {
+  display: none;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  right: 50px;
+  background-image: url("./assets/github-logo.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
 }
 
 #game-container {
