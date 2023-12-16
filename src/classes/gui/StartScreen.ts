@@ -1,3 +1,5 @@
+import { wrapper } from "../../main";
+
 export class StartScreen {
   startScreen;
   startButton;
@@ -32,7 +34,7 @@ export class StartScreen {
     this.githubLink.target = "_blank";
     this.startScreen.appendChild(this.githubLink);
 
-    document.body.appendChild(this.startScreen);
+    wrapper.appendChild(this.startScreen);
   }
 
   private removeStartScreen() {

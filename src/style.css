@@ -16,6 +16,26 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+#wrapper {
+  display: none;
+}
+
+@media screen and (min-width: 1248px) {
+  #wrapper {
+    display: block;
+  }
+}
+
+#mobile {
+  display: block;
+}
+
+@media screen and (min-width: 1248px) {
+  #mobile {
+    display: none;
+  }
+}
+
 #loading-screen {
   color: whitesmoke;
   position: absolute;
@@ -164,11 +184,16 @@ body {
   top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 #gui-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1300px;
 }
 
 #canvas-border {
@@ -200,7 +225,6 @@ canvas {
 #menu-border {
   background-image: url("./assets/borderDark.png");
   width: 192px;
-  margin-left: 50px;
 }
 
 #menu-container {

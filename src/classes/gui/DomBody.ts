@@ -4,7 +4,7 @@ import { MenuTower } from "../../utils/types";
 import { TileGras } from "../tiles/TileGras";
 
 export class DomBody {
-  body;
+  private body;
 
   constructor() {
     const body = document.querySelector<HTMLBodyElement>("body");

@@ -1,3 +1,5 @@
+import { wrapper } from "../../main";
+
 export class LoadingScreen {
   loadingScreen;
 
@@ -6,7 +8,7 @@ export class LoadingScreen {
     this.loadingScreen.id = "loading-screen";
     this.loadingScreen.classList.add("box-shadow");
     this.loadingScreen.innerHTML = "Loading...";
-    document.body.appendChild(this.loadingScreen);
+    wrapper.appendChild(this.loadingScreen);
   }
 
   removeLoadingScreen = () => {

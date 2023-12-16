@@ -11,6 +11,8 @@ export let dom: DomController;
 export let tiles: Tiles;
 export let game: Game;
 
+const wrapper = document.getElementById("wrapper")!;
+
 class Main {
   loadingScreen;
   imageController;
@@ -40,4 +42,4 @@ class Main {
 
 const main = new Main();
 
-export { main };
+export { main, wrapper };

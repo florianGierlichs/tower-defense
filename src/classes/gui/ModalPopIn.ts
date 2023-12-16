@@ -1,4 +1,4 @@
-import { dom } from "../../main";
+import { wrapper } from "../../main";
 
 interface ModalPopInProps {
   children: HTMLElement;
@@ -45,7 +45,7 @@ export class ModalPopIn {
     this.container.appendChild(this.closeButton);
     this.container.appendChild(children);
 
-    dom.body.body.appendChild(this.container);
+    wrapper.appendChild(this.container);
     this.container.animate(this.scaleInTransformIn, this.scaleInTiming);
 
     if (lifeTime) {

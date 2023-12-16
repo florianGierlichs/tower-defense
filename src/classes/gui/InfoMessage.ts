@@ -1,3 +1,5 @@
+import { wrapper } from "../../main";
+
 export class InfoMessage {
   element;
 
@@ -15,7 +17,7 @@ export class InfoMessage {
     this.element = document.createElement("h2");
     this.element.id = "info-message";
     this.element.innerHTML = text;
-    document.body.appendChild(this.element);
+    wrapper.appendChild(this.element);
     this.element.animate(this.scaleInTransformIn, this.scaleInTiming);
 
     setTimeout(() => {

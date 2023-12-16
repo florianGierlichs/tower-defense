@@ -1,3 +1,5 @@
+import { wrapper } from "../../main";
+
 interface ToastProps {
   children: HTMLElement;
 }
@@ -23,7 +25,7 @@ export class Toast {
 
     this.container.appendChild(children);
 
-    document.body.appendChild(this.container);
+    wrapper.appendChild(this.container);
 
     this.container.animate(this.scaleInTransformIn, this.scaleInTimingIn);
   }

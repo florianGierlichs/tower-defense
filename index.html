@@ -21,38 +21,43 @@
     <title>Hero Tower Defense</title>
   </head>
   <body>
-    <div id="app">
-      <div id="background">
-        <div id="title-container">
-          <h1 id="title" class="box-shadow">
-            <span class="font-effect-fire-animation-1">H</span>
-            <span class="font-effect-fire-animation-4">e</span>
-            <span class="font-effect-fire-animation-3">r</span>
-            <span class="font-effect-fire-animation-2">o</span>
-            <span>&nbsp;</span>
-            <span class="font-effect-fire-animation-1">T</span>
-            <span class="font-effect-fire-animation-5">o</span>
-            <span class="font-effect-fire-animation-1">w</span>
-            <span class="font-effect-fire-animation-4">e</span>
-            <span class="font-effect-fire-animation-3">r</span>
-            <span>&nbsp;</span>
-            <span class="font-effect-fire-animation-2">D</span>
-            <span class="font-effect-fire-animation-3">e</span>
-            <span class="font-effect-fire-animation-5">f</span>
-            <span class="font-effect-fire-animation-1">e</span>
-            <span class="font-effect-fire-animation-4">n</span>
-            <span class="font-effect-fire-animation-2">s</span>
-            <span class="font-effect-fire-animation-3">e</span>
-          </h1>
-          <a
-            id="github-link"
-            href="https://github.com/florianGierlichs/tower-defense"
-            target="_blank"
-          ></a>
+    <div id="wrapper">
+      <div id="app">
+        <div id="background">
+          <div id="title-container">
+            <h1 id="title" class="box-shadow">
+              <span class="font-effect-fire-animation-1">H</span>
+              <span class="font-effect-fire-animation-4">e</span>
+              <span class="font-effect-fire-animation-3">r</span>
+              <span class="font-effect-fire-animation-2">o</span>
+              <span>&nbsp;</span>
+              <span class="font-effect-fire-animation-1">T</span>
+              <span class="font-effect-fire-animation-5">o</span>
+              <span class="font-effect-fire-animation-1">w</span>
+              <span class="font-effect-fire-animation-4">e</span>
+              <span class="font-effect-fire-animation-3">r</span>
+              <span>&nbsp;</span>
+              <span class="font-effect-fire-animation-2">D</span>
+              <span class="font-effect-fire-animation-3">e</span>
+              <span class="font-effect-fire-animation-5">f</span>
+              <span class="font-effect-fire-animation-1">e</span>
+              <span class="font-effect-fire-animation-4">n</span>
+              <span class="font-effect-fire-animation-2">s</span>
+              <span class="font-effect-fire-animation-3">e</span>
+            </h1>
+            <a
+              id="github-link"
+              href="https://github.com/florianGierlichs/tower-defense"
+              target="_blank"
+            ></a>
+          </div>
+          <div id="game-container"></div>
         </div>
-        <div id="game-container"></div>
+        <button id="toggle-tiles-info">toggle tiles grid info</button>
       </div>
-      <button id="toggle-tiles-info">toggle tiles grid info</button>
+    </div>
+    <div id="mobile">
+      Sorry there is no support for your current screen size :-(
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
