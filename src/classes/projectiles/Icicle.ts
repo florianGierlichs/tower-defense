@@ -7,6 +7,7 @@ import { timeHasPassed } from "../../utils/timeHasPassed";
 import { EnemyProjectileId, TowerInstance } from "../../utils/types";
 import { FreezeTower } from "../effects/FreezeTower";
 import { moveX, moveY } from "../../utils/move";
+import { Obelisk } from "../towers/Obelisk";
 
 interface IcicleProps {
   id: string;
@@ -148,6 +149,7 @@ export class Icicle {
 
   private collide = () => {
     this.removeProjectile(this.id);
+    if (this.target instanceof Obelisk) return; // needs to be changed if more buff towers are added
     this.target.addStun(
       new FreezeTower({
         id: shortUUID.generate(),

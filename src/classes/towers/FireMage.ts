@@ -82,7 +82,7 @@ export class FireMage extends Tower {
       shortUUID.generate(),
       this.tileMiddle.x,
       this.tileMiddle.y,
-      FireMage.config.damage,
+      this.getCurrentDamage(),
       FireMage.config.frameConfig.attack.animationIterationCircleTime,
       this.projectileImg,
       this.currentTarget || this.targetFallbackCoordinates,

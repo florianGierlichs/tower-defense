@@ -1,5 +1,7 @@
-import { MenuTower, TowerInstance } from "../utils/types";
+import { Coordinate, MenuTower, TowerInstance } from "../utils/types";
 import { getTowerInstance } from "../utils/getTowerInstance";
+import { Obelisk } from "./towers/Obelisk";
+import { getDistance } from "../utils/getDistance";
 
 export class Towers {
   towers: TowerInstance[] = [];
@@ -12,6 +14,7 @@ export class Towers {
 
   resetTowerTarget = (enemyId: string) => {
     this.towers.forEach((tower) => {
+      if (tower instanceof Obelisk) return; // needs to be changed if more buff towers are added
       if (tower.currentTarget?.id === enemyId) {
         tower.removeTarget();
       }
@@ -32,6 +35,14 @@ export class Towers {
 
   hideTowerRange = () => {
     this.towers.forEach((tower) => tower.setShowRange(false));
+  };
+
+  getTowersInRange = (coordinate: Coordinate) => {
+    const towersInRange = this.towers.filter((tower) => {
+      const distance = getDistance(coordinate, tower.tileMiddle);
+      return distance < tower.range;
+    });
+    return towersInRange;
   };
 
   update = () => {

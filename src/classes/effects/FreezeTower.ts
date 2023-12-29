@@ -1,6 +1,7 @@
 import { dom, main } from "../../main";
 import { timeHasPassed } from "../../utils/timeHasPassed";
 import { EffectId, TowerInstance } from "../../utils/types";
+import { Obelisk } from "../towers/Obelisk";
 
 interface FreezeTowerProps {
   id: string;
@@ -37,6 +38,8 @@ export class FreezeTower {
     this.image = main.imageController.getImage(EffectId.FREEZE_TOWER);
 
     setTimeout(() => {
+      if (this.target instanceof Obelisk) return; // needs to be changed if more buff towers are added
+
       this.target.resetAfterStun();
     }, this.duration);
   }

@@ -5,6 +5,7 @@ import { FireMage } from "../towers/FireMage";
 import { ArcaneArcher } from "../towers/ArcaneArcher";
 import { LightningMage } from "../towers/LightningMage";
 import { DemonMage } from "../towers/DemonMage";
+import { Obelisk } from "../towers/Obelisk";
 
 export class Menu {
   static readonly towers: readonly MenuTower[] = [
@@ -27,6 +28,11 @@ export class Menu {
       id: DemonMage.config.id,
       config: DemonMage.config,
       price: 300,
+    },
+    {
+      id: Obelisk.config.id,
+      config: Obelisk.config,
+      price: 100,
     },
   ] as const;
 

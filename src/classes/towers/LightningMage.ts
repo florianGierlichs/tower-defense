@@ -79,7 +79,7 @@ export class LightningMage extends Tower {
       shortUUID.generate(),
       this.tileMiddle.x,
       this.tileMiddle.y,
-      LightningMage.config.damage,
+      this.getCurrentDamage(),
       this.projectileImg,
       this.currentTarget || this.targetFallbackCoordinates,
       this.removeProjectile,

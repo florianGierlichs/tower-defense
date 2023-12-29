@@ -84,7 +84,7 @@ export class DemonMage extends Tower {
       id: shortUUID.generate(),
       x: this.tileMiddle.x + this.getProjectileStartPositionX(),
       y: this.tileMiddle.y,
-      damage: DemonMage.config.damage,
+      damage: this.getCurrentDamage(),
       speed: this.projectileSpeed,
       imgConfig: {
         img: this.projectileImg,

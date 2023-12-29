@@ -21,6 +21,8 @@ import lightningMageBpImg from "../assets/towerBlueprint/lightningMageBp.png";
 import demonMageImg from "../assets/tower/demonMage.png";
 import demonMageProjectileImg from "../assets/projectiles/demonMageProjectile.png";
 import demonMageBpImg from "../assets/towerBlueprint/demonMageBp.png";
+import obeliskImg from "../assets/tower/obelisk.png";
+import obeliskBpImg from "../assets/towerBlueprint/demonMageBp.png";
 import { EnemyAssets } from "./enemies/EnemyAssets";
 import icicleImg from "../assets/projectiles/icicle.png";
 import freezeTowerImg from "../assets/effect/freezeTower.png";
@@ -47,6 +49,9 @@ export class ImageController {
   demonMage: HTMLImageElement | null = null;
   demonMageProjectile: HTMLImageElement | null = null;
   demonMageBp: HTMLImageElement | null = null;
+
+  obelisk: HTMLImageElement | null = null;
+  obeliskBp: HTMLImageElement | null = null;
 
   // enemy
   enemyAssets: Record<EnemyId | BossId, HTMLImageElement> | null = null;
@@ -77,6 +82,9 @@ export class ImageController {
     this.demonMage = await loadImage(demonMageImg);
     this.demonMageProjectile = await loadImage(demonMageProjectileImg);
     this.demonMageBp = await loadImage(demonMageBpImg);
+
+    this.obelisk = await loadImage(obeliskImg);
+    this.obeliskBp = await loadImage(obeliskBpImg);
 
     // enemy
     this.enemyAssets = await new EnemyAssets().getAssets();

@@ -5,6 +5,7 @@ import { Enemy } from "../enemies/Enemy";
 import { getTileMiddle } from "../../utils/getTileMiddle";
 import {
   AnimationDirection,
+  Buff,
   FrameConfig,
   ProjectileInstance,
   TowerConfig,
@@ -24,6 +25,8 @@ export class Tower {
   x;
   y;
   tileMiddle;
+  damage;
+  damageMultipliers: number[] = [];
   range;
   attackSpeed; // attacks per minute
   attackSpeedThrottleTime;
@@ -47,6 +50,7 @@ export class Tower {
   // data
   projectiles: ProjectileInstance[] = [];
   stunns: FreezeTower[] = [];
+  buffs = new Set<Buff>([]);
 
   // states
   state = TowerState.IDLE;
@@ -72,6 +76,7 @@ export class Tower {
     this.x = x;
     this.y = y;
     this.tileMiddle = getTileMiddle({ x, y });
+    this.damage = config.damage;
     this.range = config.range;
     this.attackSpeed = config.attackSpeed;
     this.attackSpeedThrottleTime = (60 / this.attackSpeed) * 1000;
@@ -369,6 +374,38 @@ export class Tower {
     });
   };
 
+  addBuffId = (buff: Buff) => {
+    this.buffs.add(buff);
+  };
+
+  removeBuffId = (buff: Buff) => {
+    this.buffs.delete(buff);
+  };
+
+  addDamageBuffMultiplier = (value: number) => {
+    this.damageMultipliers.push(value);
+  };
+
+  removeDamageBuffMultiplier = (value: number) => {
+    const index = this.damageMultipliers.indexOf(value);
+    if (index > -1) {
+      this.damageMultipliers.splice(index, 1);
+    } else {
+      throw new Error("Buff multiplier not found");
+    }
+  };
+
+  getCurrentDamage = () => {
+    if (this.damageMultipliers.length === 0) {
+      return this.damage;
+    }
+    const currentDamage =
+      this.damage * this.damageMultipliers.reduce((a, b) => a + b, 0);
+    // I think this only works if the damageMultipliers are all positive
+    // a debuff like damage x 0.5 would not work
+    return currentDamage;
+  };
+
   update({ shootAtFrame, getProjectile, cancelProjectile }: TowerUpdateProps) {
     if (this.state === TowerState.STUNNED) {
       this.drawImg();
@@ -377,22 +414,22 @@ export class Tower {
       } else {
         this.updateProjectiles();
       }
-    }
-
-    if (this.state === TowerState.ATTACK) {
+    } else {
       this.updateFrames();
-      this.attackAnimation();
-      this.shootAtAttackAnimationFrame(shootAtFrame, getProjectile);
-      this.updateProjectiles();
-    }
 
-    if (this.state === TowerState.IDLE) {
-      this.updateFrames();
-      this.idleAnimation();
-      if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
-        this.checkAndSetClosestEnemyInRange();
+      if (this.state === TowerState.ATTACK) {
+        this.attackAnimation();
+        this.shootAtAttackAnimationFrame(shootAtFrame, getProjectile);
+        this.updateProjectiles();
       }
-      this.updateProjectiles();
+
+      if (this.state === TowerState.IDLE) {
+        this.idleAnimation();
+        if (timeHasPassed(this.lastAttack, this.attackSpeedThrottleTime)) {
+          this.checkAndSetClosestEnemyInRange();
+        }
+        this.updateProjectiles();
+      }
     }
 
     if (this.showRange) {

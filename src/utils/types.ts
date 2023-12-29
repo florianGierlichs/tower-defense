@@ -22,6 +22,7 @@ import { SkeletonWarrior } from "../classes/enemies/SkeletonWarrior";
 import { DeathWorm } from "../classes/bosses/DeathWorm";
 import { DemonMage } from "../classes/towers/DemonMage";
 import { Fireball } from "../classes/projectiles/Fireball";
+import { Obelisk } from "../classes/towers/Obelisk";
 
 export interface Coordinate {
   x: number;
@@ -122,6 +123,7 @@ export enum TowerId {
   FIRE_MAGE = "fireMage",
   Lightning_MAGE = "lightningMage",
   DEMON_MAGE = "demonMage",
+  OBELISK = "obelisk",
 }
 
 export enum ProjectileId { // todo id does not match projectile class name, dont know if this is a problem
@@ -145,11 +147,17 @@ export enum BlueprintId {
   FIRE_MAGE = "fireMageBp",
   LIGHTNING_MAGE = "lightningMageBp",
   DEMON_MAGE = "demonMageBp",
+  OBELISK = "obeliskBp",
 }
 
 export type ProjectileInstance = Projectile | Flame | LightningBolt | Fireball;
 
-export type TowerInstance = ArcaneArcher | FireMage | LightningMage | DemonMage;
+export type TowerInstance =
+  | ArcaneArcher
+  | FireMage
+  | LightningMage
+  | DemonMage
+  | Obelisk;
 
 export type EnemyInstance =
   | SkeletonShield
@@ -197,3 +205,7 @@ export enum ResultType {
 }
 
 export type Result = ResultType;
+
+export enum Buff {
+  OBELISK_BUFF = "obeliskBuff",
+}

@@ -4,6 +4,7 @@ import { TowerId } from "./types";
 import { FireMage } from "../classes/towers/FireMage";
 import { LightningMage } from "../classes/towers/LightningMage";
 import { DemonMage } from "../classes/towers/DemonMage";
+import { Obelisk } from "../classes/towers/Obelisk";
 
 export const getTowerInstance = (towerId: TowerId, x: number, y: number) => {
   switch (towerId) {
@@ -15,6 +16,8 @@ export const getTowerInstance = (towerId: TowerId, x: number, y: number) => {
       return new LightningMage(shortUUID.generate(), x, y);
     case TowerId.DEMON_MAGE:
       return new DemonMage(shortUUID.generate(), x, y);
+    case TowerId.OBELISK:
+      return new Obelisk({ id: shortUUID.generate(), x, y });
     default:
       throw new Error("Tower not found");
   }
