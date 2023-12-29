@@ -15,13 +15,13 @@ export class Menu {
       price: 40, // todo put to config
     },
     {
-      id: LightningMage.config.id,
-      config: LightningMage.config,
-      price: 120,
-    },
-    {
       id: Obelisk.config.id,
       config: Obelisk.config,
+      price: 100,
+    },
+    {
+      id: LightningMage.config.id,
+      config: LightningMage.config,
       price: 120,
     },
     {
