@@ -22,7 +22,7 @@ import demonMageImg from "../assets/tower/demonMage.png";
 import demonMageProjectileImg from "../assets/projectiles/demonMageProjectile.png";
 import demonMageBpImg from "../assets/towerBlueprint/demonMageBp.png";
 import obeliskImg from "../assets/tower/obelisk.png";
-import obeliskBpImg from "../assets/towerBlueprint/demonMageBp.png";
+import obeliskBpImg from "../assets/towerBlueprint/obeliskBp.png";
 import { EnemyAssets } from "./enemies/EnemyAssets";
 import icicleImg from "../assets/projectiles/icicle.png";
 import freezeTowerImg from "../assets/effect/freezeTower.png";

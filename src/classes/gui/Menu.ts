@@ -20,6 +20,11 @@ export class Menu {
       price: 120,
     },
     {
+      id: Obelisk.config.id,
+      config: Obelisk.config,
+      price: 120,
+    },
+    {
       id: FireMage.config.id,
       config: FireMage.config,
       price: 150,
@@ -28,11 +33,6 @@ export class Menu {
       id: DemonMage.config.id,
       config: DemonMage.config,
       price: 300,
-    },
-    {
-      id: Obelisk.config.id,
-      config: Obelisk.config,
-      price: 100,
     },
   ] as const;
 

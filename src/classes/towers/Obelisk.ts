@@ -12,6 +12,8 @@ import {
 import { ObeliskBuff } from "../effects/ObeliskBuff";
 import { findRandomTower } from "../../utils/findRandomTower";
 import { filterUnbuffedTowers } from "../../utils/filterUnbuffedTowers";
+import { getTranslatedCanvasDestination } from "../../utils/getTranslatedCanvasDestination";
+import { filterTowersInRange } from "../../utils/filterTowersInRange";
 
 interface ObeliskProps {
   id: string;
@@ -23,16 +25,17 @@ export class Obelisk {
   static readonly config: TowerConfig = {
     id: TowerId.OBELISK,
     name: "Obelisk",
-    description: "todo",
-    range: 150,
+    description:
+      "Amplifies the damage of up to three towers by 20% for 10 seconds.",
+    range: 130,
     attackSpeed: 20,
-    damage: 0,
+    damage: 20, // used as percentage to calculate damage multiplier
     sWidth: 200,
     sHeight: 400,
     imageScale: 0.17,
     imageTranslateCorrection: {
-      x: 14,
-      y: -5,
+      x: -70,
+      y: -170,
     },
     frameConfig: {
       idle: {
@@ -65,7 +68,7 @@ export class Obelisk {
     },
     cancelAttackAnimantionAllowed: false, // not used, only for type checking because of lazyness
     projectile: {
-      id: ProjectileId.LIGHTNING_MAGE,
+      id: ProjectileId.LIGHTNING_MAGE, // not used, only for type checking because of lazyness
       width: 40,
       height: 5,
     },
@@ -91,8 +94,17 @@ export class Obelisk {
   sHeight = Obelisk.config.sHeight;
   dWidth = this.sWidth * this.imageScale;
   dHeight = this.sHeight * this.imageScale;
-  imageTranslateX = Obelisk.config.imageTranslateCorrection.x;
-  imageTranslateY = Obelisk.config.imageTranslateCorrection.y;
+
+  imageTranslateX = getTranslatedCanvasDestination({
+    imageScale: this.imageScale,
+    sourceSize: this.sWidth,
+    translateCorrection: Obelisk.config.imageTranslateCorrection.x,
+  });
+  imageTranslateY = getTranslatedCanvasDestination({
+    imageScale: this.imageScale,
+    sourceSize: this.sHeight,
+    translateCorrection: Obelisk.config.imageTranslateCorrection.y,
+  });
 
   frameIteration = 0;
   frames = Obelisk.config.frameConfig.idle.frames;
@@ -208,6 +220,16 @@ export class Obelisk {
     });
   };
 
+  private findRandomUnbuffedTowerInRange = () => {
+    const towers = filterTowersInRange({
+      towers: game.towers.getAllTowers(),
+      center: this.tileMiddle,
+      range: this.range,
+    });
+
+    return findRandomTower(filterUnbuffedTowers(towers));
+  };
+
   update() {
     this.updateFrames();
     this.drawImg();
@@ -216,10 +238,7 @@ export class Obelisk {
       this.currentBuffs.length < this.maxBuffs &&
       timeHasPassed(this.lastBuff, this.buffSpeedThrottleTime)
     ) {
-      const tower = findRandomTower(
-        filterUnbuffedTowers(game.towers.getTowersInRange(this.tileMiddle))
-      );
-
+      const tower = this.findRandomUnbuffedTowerInRange();
       if (tower) {
         this.addBuff(tower);
       }

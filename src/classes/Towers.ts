@@ -1,7 +1,6 @@
-import { Coordinate, MenuTower, TowerInstance } from "../utils/types";
+import { MenuTower, TowerInstance } from "../utils/types";
 import { getTowerInstance } from "../utils/getTowerInstance";
 import { Obelisk } from "./towers/Obelisk";
-import { getDistance } from "../utils/getDistance";
 
 export class Towers {
   towers: TowerInstance[] = [];
@@ -33,16 +32,12 @@ export class Towers {
     return this.towers.find((tower) => tower.id === id);
   };
 
-  hideTowerRange = () => {
-    this.towers.forEach((tower) => tower.setShowRange(false));
+  getAllTowers = () => {
+    return this.towers;
   };
 
-  getTowersInRange = (coordinate: Coordinate) => {
-    const towersInRange = this.towers.filter((tower) => {
-      const distance = getDistance(coordinate, tower.tileMiddle);
-      return distance < tower.range;
-    });
-    return towersInRange;
+  hideTowerRange = () => {
+    this.towers.forEach((tower) => tower.setShowRange(false));
   };
 
   update = () => {

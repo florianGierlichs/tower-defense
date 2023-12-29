@@ -11,7 +11,7 @@ export class ObeliskBuff {
   target;
   duration = 10000;
   start;
-  damageMultiplier = 1.5;
+  damageMultiplier = 1.2;
 
   // private image: HTMLImageElement;
   // private sWidth = 32;
