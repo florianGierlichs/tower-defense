@@ -140,6 +140,7 @@ export enum EnemyProjectileId {
 export enum EffectId {
   FREEZE_TOWER = "freezeTower",
   FIRE_EXPLOSION = "fireExplosion",
+  ELECTRIFIED = "electrified",
 }
 
 export enum BlueprintId {

@@ -65,6 +65,7 @@ export class Tower {
   frames: number | null = null;
   flipOffsetFrames: number | null = null;
   lastFrameIteration: number | null = null;
+  drawImgBackground: (() => void) | null = null;
 
   // dynamic attack values
   lastAttack: number | null = null;
@@ -177,6 +178,9 @@ export class Tower {
   };
 
   private drawImg = () => {
+    if (this.drawImgBackground) {
+      this.drawImgBackground();
+    }
     if (this.sX !== null && this.sY !== null) {
       dom.ctxGame.drawImage(
         this.image,

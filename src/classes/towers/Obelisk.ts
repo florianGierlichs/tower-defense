@@ -210,8 +210,6 @@ export class Obelisk {
   };
 
   private updateBuffs = () => {
-    this.currentBuffs.forEach((buff) => buff.update());
-
     const now = performance.now();
     this.currentBuffs.forEach((buff) => {
       if (now - buff.start >= buff.duration) {
