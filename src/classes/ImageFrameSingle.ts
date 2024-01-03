@@ -1,47 +1,53 @@
-import { dom, main } from "../../main";
-import { timeHasPassed } from "../../utils/timeHasPassed";
-import { EffectId, TowerInstance } from "../../utils/types";
-import { Obelisk } from "../towers/Obelisk";
+import { dom } from "../main";
+import { timeHasPassed } from "../utils/timeHasPassed";
+import { TowerInstance } from "../utils/types";
 
-interface FreezeTowerProps {
-  id: string;
+interface ImageFrameSingleProps {
+  image: HTMLImageElement;
+  frames: number;
+  animationIterationCircleTime: number;
+  sWidth: number;
+  sHeight: number;
+  imageScale: number;
+  imageTranslateCorrection: { x: number; y: number };
   target: TowerInstance;
 }
 
-export class FreezeTower {
-  id;
-  private target;
-  duration = 2500;
-  freezeStart;
+export class ImageFrameSingle {
+  image;
+  frames;
+  animationIterationCircleTime;
+  sWidth;
+  sHeight;
+  imageScale;
+  imageTranslateCorrection;
+  target;
 
-  private image: HTMLImageElement;
-  private sWidth = 32;
-  private sHeight = 32;
-  private imageScale = 1.5;
-  private imageTranslateCorrection = {
-    x: (64 - this.sWidth * this.imageScale) / 2,
-    y: 0,
-  };
-
-  // frames
   frameIteration = 0;
-  frames = 15;
   sX: number | null = null;
-  frameIterationThrottleTime = this.duration / this.frames;
+  frameIterationThrottleTime;
   lastFrameIteration: number | null = null;
 
-  constructor({ id, target }: FreezeTowerProps) {
-    this.id = id;
+  constructor({
+    image,
+    frames,
+    animationIterationCircleTime,
+    sWidth,
+    sHeight,
+    imageScale,
+    imageTranslateCorrection,
+    target,
+  }: ImageFrameSingleProps) {
+    this.image = image;
+    this.frames = frames;
+    this.animationIterationCircleTime = animationIterationCircleTime;
+    this.sWidth = sWidth;
+    this.sHeight = sHeight;
+    this.imageScale = imageScale;
+    this.imageTranslateCorrection = imageTranslateCorrection;
+    this.frameIterationThrottleTime =
+      this.animationIterationCircleTime / this.frames;
     this.target = target;
-    this.freezeStart = performance.now();
-
-    this.image = main.imageController.getImage(EffectId.FREEZE_TOWER);
-
-    setTimeout(() => {
-      if (this.target instanceof Obelisk) return; // needs to be changed if more buff towers are added
-
-      this.target.resetAfterStun();
-    }, this.duration);
   }
 
   private setFrameIteration = () => {
@@ -54,21 +60,17 @@ export class FreezeTower {
 
   private draw = () => {
     if (this.sX === null) {
-      throw new Error("sX or sY is null");
-    }
-
-    if (this.frameIteration === this.frames) {
-      throw new Error("frameIteration is equal to frames");
+      throw new Error("sX is null");
     }
 
     dom.ctxGame.drawImage(
       this.image,
       this.sX,
-      0,
+      0, // sY
       this.sWidth,
       this.sHeight,
       this.target.x + this.imageTranslateCorrection.x,
-      this.target.y,
+      this.target.y + this.imageTranslateCorrection.y,
       this.sWidth * this.imageScale,
       this.sHeight * this.imageScale
     );

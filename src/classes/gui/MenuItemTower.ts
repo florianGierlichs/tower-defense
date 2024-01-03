@@ -1,5 +1,6 @@
 import { dom } from "../../main";
-import { MenuTower } from "../../utils/types";
+import { MenuTower, TowerId } from "../../utils/types";
+import { BuffTowerStatsScreen } from "./BuffTowerStatsScreen";
 import { TowerStatsScreen } from "./TowerStatsScreen";
 
 export class MenuItemTower {
@@ -36,7 +37,11 @@ export class MenuItemTower {
     this.container.appendChild(this.element);
     dom.menuContainer.addChildToMenuTowersContainer(this.container);
 
-    this.stats = new TowerStatsScreen(this.tower);
+    if (tower.config.id === TowerId.OBELISK) {
+      this.stats = new BuffTowerStatsScreen(this.tower);
+    } else {
+      this.stats = new TowerStatsScreen(this.tower);
+    }
   }
 
   private clickHandler = () => {

@@ -79,7 +79,7 @@ export class ArcaneArcher extends Tower {
       shortUUID.generate(),
       this.tileMiddle.x,
       this.tileMiddle.y,
-      ArcaneArcher.config.damage,
+      this.getCurrentDamage(),
       this.projectileSpeed,
       {
         img: this.projectileImg,

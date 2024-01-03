@@ -353,6 +353,16 @@ canvas {
   transform: translate(-62%, 0);
 }
 
+#obelisk {
+  background-image: url("./assets/menu/obeliskMenu.png");
+  background-size: cover;
+
+  height: 80px;
+  width: 30px;
+  bottom: 0;
+  transform: translate(-50%, 0);
+}
+
 #toggle-tiles-info {
   padding: 12px 8px;
   margin: 10px;
@@ -381,6 +391,11 @@ canvas {
 .demonMage,
 .demonMage #menu-container {
   cursor: url("./assets/cursor/cursorDemonMage.png") 38 48, auto;
+}
+
+.obelisk,
+.obelisk #menu-container {
+  cursor: url("./assets/cursor/cursorObelisk.png") 38 48, auto;
 }
 
 #spawn-enemies-container {

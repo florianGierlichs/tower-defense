@@ -1,5 +1,6 @@
 import { MenuTower, TowerInstance } from "../utils/types";
 import { getTowerInstance } from "../utils/getTowerInstance";
+import { Obelisk } from "./towers/Obelisk";
 
 export class Towers {
   towers: TowerInstance[] = [];
@@ -12,6 +13,7 @@ export class Towers {
 
   resetTowerTarget = (enemyId: string) => {
     this.towers.forEach((tower) => {
+      if (tower instanceof Obelisk) return; // needs to be changed if more buff towers are added
       if (tower.currentTarget?.id === enemyId) {
         tower.removeTarget();
       }
@@ -28,6 +30,10 @@ export class Towers {
 
   getTowerById = (id: string) => {
     return this.towers.find((tower) => tower.id === id);
+  };
+
+  getAllTowers = () => {
+    return this.towers;
   };
 
   hideTowerRange = () => {

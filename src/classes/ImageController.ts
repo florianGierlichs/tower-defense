@@ -21,10 +21,14 @@ import lightningMageBpImg from "../assets/towerBlueprint/lightningMageBp.png";
 import demonMageImg from "../assets/tower/demonMage.png";
 import demonMageProjectileImg from "../assets/projectiles/demonMageProjectile.png";
 import demonMageBpImg from "../assets/towerBlueprint/demonMageBp.png";
+import obeliskImg from "../assets/tower/obelisk.png";
+import obeliskBpImg from "../assets/towerBlueprint/obeliskBp.png";
 import { EnemyAssets } from "./enemies/EnemyAssets";
 import icicleImg from "../assets/projectiles/icicle.png";
 import freezeTowerImg from "../assets/effect/freezeTower.png";
 import fireExplosionImg from "../assets/effect/fireExplosion.png";
+import electrifiedImg from "../assets/effect/electrified.png";
+import electrifyImg from "../assets/effect/electrify.png";
 
 const texturesKey = "textures";
 
@@ -48,6 +52,9 @@ export class ImageController {
   demonMageProjectile: HTMLImageElement | null = null;
   demonMageBp: HTMLImageElement | null = null;
 
+  obelisk: HTMLImageElement | null = null;
+  obeliskBp: HTMLImageElement | null = null;
+
   // enemy
   enemyAssets: Record<EnemyId | BossId, HTMLImageElement> | null = null;
 
@@ -57,6 +64,8 @@ export class ImageController {
   // effects
   freezeTower: HTMLImageElement | null = null;
   fireExplosion: HTMLImageElement | null = null;
+  electrified: HTMLImageElement | null = null;
+  electrify: HTMLImageElement | null = null;
 
   loadImages = async () => {
     this.textures = await loadImage(texturesImg);
@@ -78,6 +87,9 @@ export class ImageController {
     this.demonMageProjectile = await loadImage(demonMageProjectileImg);
     this.demonMageBp = await loadImage(demonMageBpImg);
 
+    this.obelisk = await loadImage(obeliskImg);
+    this.obeliskBp = await loadImage(obeliskBpImg);
+
     // enemy
     this.enemyAssets = await new EnemyAssets().getAssets();
 
@@ -87,6 +99,8 @@ export class ImageController {
     // effects
     this.freezeTower = await loadImage(freezeTowerImg);
     this.fireExplosion = await loadImage(fireExplosionImg);
+    this.electrified = await loadImage(electrifiedImg);
+    this.electrify = await loadImage(electrifyImg);
   };
 
   getImage = (

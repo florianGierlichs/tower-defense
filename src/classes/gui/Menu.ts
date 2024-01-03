@@ -5,6 +5,7 @@ import { FireMage } from "../towers/FireMage";
 import { ArcaneArcher } from "../towers/ArcaneArcher";
 import { LightningMage } from "../towers/LightningMage";
 import { DemonMage } from "../towers/DemonMage";
+import { Obelisk } from "../towers/Obelisk";
 
 export class Menu {
   static readonly towers: readonly MenuTower[] = [
@@ -12,6 +13,11 @@ export class Menu {
       id: ArcaneArcher.config.id,
       config: ArcaneArcher.config,
       price: 40, // todo put to config
+    },
+    {
+      id: Obelisk.config.id,
+      config: Obelisk.config,
+      price: 100,
     },
     {
       id: LightningMage.config.id,
