@@ -400,13 +400,15 @@ export class Tower {
   };
 
   getCurrentDamage = () => {
+    let currentDamage;
     if (this.damageMultipliers.length === 0) {
-      return this.damage;
+      currentDamage = this.damage;
+    } else {
+      currentDamage =
+        this.damage * this.damageMultipliers.reduce((a, b) => a + b, 0);
+      // I think this only works if the damageMultipliers are all positive
+      // a debuff like damage x 0.5 would not work
     }
-    const currentDamage =
-      this.damage * this.damageMultipliers.reduce((a, b) => a + b, 0);
-    // I think this only works if the damageMultipliers are all positive
-    // a debuff like damage x 0.5 would not work
     return currentDamage;
   };
 

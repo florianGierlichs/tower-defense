@@ -192,7 +192,7 @@ export class Obelisk {
 
   private addBuff = (tower: TowerInstance) => {
     this.currentBuffs.push(
-      new ObeliskBuff({ id: shortUUID.generate(), target: tower })
+      new ObeliskBuff({ id: shortUUID.generate(), target: tower, source: this })
     );
     this.lastBuff = performance.now();
   };
@@ -215,6 +215,7 @@ export class Obelisk {
       if (now - buff.start >= buff.duration) {
         this.removeBuff(buff.target);
       }
+      buff.update();
     });
   };
 

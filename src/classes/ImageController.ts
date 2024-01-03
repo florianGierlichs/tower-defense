@@ -28,6 +28,7 @@ import icicleImg from "../assets/projectiles/icicle.png";
 import freezeTowerImg from "../assets/effect/freezeTower.png";
 import fireExplosionImg from "../assets/effect/fireExplosion.png";
 import electrifiedImg from "../assets/effect/electrified.png";
+import electrifyImg from "../assets/effect/electrify.png";
 
 const texturesKey = "textures";
 
@@ -64,6 +65,7 @@ export class ImageController {
   freezeTower: HTMLImageElement | null = null;
   fireExplosion: HTMLImageElement | null = null;
   electrified: HTMLImageElement | null = null;
+  electrify: HTMLImageElement | null = null;
 
   loadImages = async () => {
     this.textures = await loadImage(texturesImg);
@@ -98,6 +100,7 @@ export class ImageController {
     this.freezeTower = await loadImage(freezeTowerImg);
     this.fireExplosion = await loadImage(fireExplosionImg);
     this.electrified = await loadImage(electrifiedImg);
+    this.electrify = await loadImage(electrifyImg);
   };
 
   getImage = (
